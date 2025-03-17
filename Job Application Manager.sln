@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job Application Manager", "Job Application Manager.csproj", "{91620CBB-1090-4BF5-AE03-C7050B7CC81A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91620CBB-1090-4BF5-AE03-C7050B7CC81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91620CBB-1090-4BF5-AE03-C7050B7CC81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91620CBB-1090-4BF5-AE03-C7050B7CC81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91620CBB-1090-4BF5-AE03-C7050B7CC81A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2E6A973-CCE0-4A0F-AF7C-E07B90D6E8D0}
+	EndGlobalSection
+EndGlobal
