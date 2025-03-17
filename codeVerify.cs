@@ -123,7 +123,7 @@ namespace Job_Application_Manager
                     client.UseDefaultCredentials = false;
 
                     // Use App Password instead of real password
-                    client.Credentials = new NetworkCredential("jobhuntapp2000@gmail.com", password); 
+                    client.Credentials = new NetworkCredential("jobhuntapp2000@gmail.com", password);
 
                     try
                     {
@@ -152,7 +152,7 @@ namespace Job_Application_Manager
 
         private void verifyCode_Click(object sender, EventArgs e)
         {
-            if(sentCode.Text == randomCode)
+            if (sentCode.Text == randomCode)
             {
                 if (changePasswordInstance == null || changePasswordInstance.IsDisposed)
                 {
@@ -171,6 +171,13 @@ namespace Job_Application_Manager
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
+        }
+
+        private void siticoneCloseButton1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LogInForm loginForm = new LogInForm();
+            loginForm.Show();
         }
     }
 }

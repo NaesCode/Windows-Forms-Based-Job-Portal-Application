@@ -54,7 +54,8 @@ namespace Job_Application_Manager
 
         private void mainApp_Load(object sender, EventArgs e)
         {
-
+            this.Size = new Size(1095, 659); //or 700
+            this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
         }
 
         private void MenuBttn_Click(object sender, EventArgs e)
@@ -106,7 +107,6 @@ namespace Job_Application_Manager
                 this.WindowState = FormWindowState.Maximized;
             else
                 this.WindowState = FormWindowState.Normal;
-            this.Size = new Size(1095, 659);
         }
 
         private void minimButton2_Click_1(object sender, EventArgs e)

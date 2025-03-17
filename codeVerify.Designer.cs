@@ -49,6 +49,7 @@
             logoPanel = new Panel();
             brandName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             Logo1 = new PictureBox();
+            siticoneCloseButton1 = new SiticoneNetCoreUI.SiticoneCloseButton();
             guna2CustomGradientPanel1.SuspendLayout();
             logoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Logo1).BeginInit();
@@ -56,6 +57,7 @@
             // 
             // guna2CustomGradientPanel1
             // 
+            guna2CustomGradientPanel1.Controls.Add(siticoneCloseButton1);
             guna2CustomGradientPanel1.Controls.Add(label2);
             guna2CustomGradientPanel1.Controls.Add(verifyCode);
             guna2CustomGradientPanel1.Controls.Add(sentCode);
@@ -211,6 +213,20 @@
             Logo1.TabIndex = 11;
             Logo1.TabStop = false;
             // 
+            // siticoneCloseButton1
+            // 
+            siticoneCloseButton1.BackColor = Color.Transparent;
+            siticoneCloseButton1.CountdownFont = new Font("Segoe UI", 9F);
+            siticoneCloseButton1.Cursor = Cursors.Default;
+            siticoneCloseButton1.EnableSound = false;
+            siticoneCloseButton1.Location = new Point(551, 0);
+            siticoneCloseButton1.Name = "siticoneCloseButton1";
+            siticoneCloseButton1.Size = new Size(32, 32);
+            siticoneCloseButton1.TabIndex = 33;
+            siticoneCloseButton1.Text = "siticoneCloseButton1";
+            siticoneCloseButton1.TooltipText = "Close button";
+            siticoneCloseButton1.Click += siticoneCloseButton1_Click;
+            // 
             // codeVerify
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -242,5 +258,6 @@
         private Label label2;
         private Guna.UI2.WinForms.Guna2Button verifyCode;
         private Guna.UI2.WinForms.Guna2TextBox sentCode;
+        private SiticoneNetCoreUI.SiticoneCloseButton siticoneCloseButton1;
     }
 }
