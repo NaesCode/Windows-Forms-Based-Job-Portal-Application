@@ -1,6 +1,6 @@
 ﻿namespace Job_Application_Manager
 {
-    partial class mainApp
+    partial class CompanyDashB
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainApp));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompanyDashB));
             panel1 = new Panel();
             controlBarPanel1 = new Panel();
             controlBarPanel2 = new Panel();
@@ -135,6 +135,7 @@
             minimButton1.CornerRadiusBottomRight = 0;
             minimButton1.CornerRadiusTopLeft = 0;
             minimButton1.CornerRadiusTopRight = 0;
+            minimButton1.Cursor = Cursors.SizeAll;
             minimButton1.CustomCursor = Cursors.Default;
             minimButton1.DisabledTextColor = Color.FromArgb(150, 150, 150);
             minimButton1.EnableLongPress = false;
@@ -318,7 +319,7 @@
             BoardViewBttn.FlatStyle = FlatStyle.Flat;
             BoardViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BoardViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            BoardViewBttn.IconChar = FontAwesome.Sharp.IconChar.Square;
+            BoardViewBttn.IconChar = FontAwesome.Sharp.IconChar.SquareArrowUpRight;
             BoardViewBttn.IconColor = Color.White;
             BoardViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BoardViewBttn.IconSize = 30;
@@ -327,8 +328,8 @@
             BoardViewBttn.Padding = new Padding(15, 0, 0, 0);
             BoardViewBttn.Size = new Size(202, 60);
             BoardViewBttn.TabIndex = 7;
-            BoardViewBttn.Tag = "Board";
-            BoardViewBttn.Text = "     Board";
+            BoardViewBttn.Tag = "Job Posts";
+            BoardViewBttn.Text = "     Job Posts";
             BoardViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             BoardViewBttn.UseVisualStyleBackColor = false;
             BoardViewBttn.Click += BoardViewBttn_Click;
@@ -344,7 +345,7 @@
             TableViewBttn.FlatStyle = FlatStyle.Flat;
             TableViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TableViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.Table;
+            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.Add;
             TableViewBttn.IconColor = Color.White;
             TableViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             TableViewBttn.IconSize = 30;
@@ -354,7 +355,7 @@
             TableViewBttn.Size = new Size(202, 60);
             TableViewBttn.TabIndex = 6;
             TableViewBttn.Tag = "Table";
-            TableViewBttn.Text = "     Table";
+            TableViewBttn.Text = "     Add Job";
             TableViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             TableViewBttn.UseVisualStyleBackColor = false;
             TableViewBttn.Click += TableViewBttn_Click;
@@ -620,7 +621,7 @@
             menuBarPanel1.Size = new Size(202, 657);
             menuBarPanel1.TabIndex = 0;
             // 
-            // mainApp
+            // CompanyDashB
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -631,7 +632,7 @@
             Controls.Add(menuBarPanel0);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "mainApp";
+            Name = "CompanyDashB";
             Text = "Form3";
             Load += mainApp_Load;
             panel1.ResumeLayout(false);

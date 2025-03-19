@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 
 namespace Job_Application_Manager
 {
-    public partial class mainApp : Form
+    public partial class CompanyDashB: Form
     {
         private UserControl? currentChildForm;
-        public mainApp()
+        public CompanyDashB()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -120,7 +120,7 @@ namespace Job_Application_Manager
         private void TableViewBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            currentChildForm = new TableView();
+            currentChildForm = new JobPosting();
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
             desktopPanel.Tag = currentChildForm;

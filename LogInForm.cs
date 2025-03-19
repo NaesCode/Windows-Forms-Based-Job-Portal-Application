@@ -1,5 +1,6 @@
 using System.Data.OleDb;
 using System.Data;
+using Microsoft.VisualBasic.Logging;
 
 namespace Job_Application_Manager
 {
@@ -7,14 +8,48 @@ namespace Job_Application_Manager
     {
         DatabaseSupport dbSupport = new DatabaseSupport();
 
-        private registerForm? registerFormInstance;
+        private AccountTypeReg? accountTypeFormInstance;
         private mainApp? mainAppFormInstance;
+        private CompanyDashB? companyDashB;
         private codeVerify? codeVerifyInstance;
         private bool valid;
         public LogInForm()
         {
             InitializeComponent();
         }
+
+        private void LogInForm_Load(object sender, EventArgs e)
+        {
+            JobHunterCheckbox.CheckedChanged += Checkbox_CheckedChanged;
+            CompanyCheckbox.CheckedChanged += Checkbox_CheckedChanged;
+            AdminCheckBox.CheckedChanged += Checkbox_CheckedChanged;
+
+            //Initial check
+            Checkbox_CheckedChanged(sender, e);
+        }
+
+        private void Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            bool anyChecked = CompanyCheckbox.Checked || JobHunterCheckbox.Checked || AdminCheckBox.Checked;
+            UserName.Enabled = anyChecked;
+            UserPassword.Enabled = anyChecked;
+            forgotPassBttn.Enabled = anyChecked;
+            LogInButton.Enabled = anyChecked;
+
+            if(CompanyCheckbox.Checked == true)
+            {
+                textBox3.Text = "Company Email:";
+                textBox3.Size = new Size(120, 20);
+                UserName.Size = new Size(251, 23);
+                UserName.Location = new Point(568, 223);
+            }
+            else
+            {
+                textBox3.Text = "Username:";
+                UserName.Location = new Point(527, 223);
+            }
+        }
+
         private void guna2Button4_Click(object sender, EventArgs e) //can be removed
         {
             dbSupport.checkConnection();
@@ -22,14 +57,14 @@ namespace Job_Application_Manager
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            if (registerFormInstance == null || registerFormInstance.IsDisposed)
+            if (accountTypeFormInstance == null || accountTypeFormInstance.IsDisposed)
             {
-                registerFormInstance = new registerForm();
-                registerFormInstance.Show();
+                accountTypeFormInstance = new AccountTypeReg();
+                accountTypeFormInstance.Show();
             }
             else
             {
-                registerFormInstance.BringToFront();
+                accountTypeFormInstance.BringToFront();
             }
         }
 
@@ -37,30 +72,57 @@ namespace Job_Application_Manager
         {
             string username = UserName.Text;
             string password = UserPassword.Text;
+            string Cemail = UserName.Text;
+
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please input your username and password before logging in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                valid = dbSupport.AuthenticateUser(username, password);
-                if (valid)
+                if (JobHunterCheckbox.Checked == true)
                 {
-                    //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (mainAppFormInstance == null || mainAppFormInstance.IsDisposed)
+                    valid = dbSupport.AuthenticateHunter(username, password);
+                    if (valid)
                     {
-                        mainAppFormInstance = new mainApp();
-                        mainAppFormInstance.Show();
-                        this.Hide();
+                        if (mainAppFormInstance == null || mainAppFormInstance.IsDisposed)
+                        {
+                            mainAppFormInstance = new mainApp();
+                            mainAppFormInstance.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            mainAppFormInstance.BringToFront();
+                        }
                     }
                     else
                     {
-                        mainAppFormInstance.BringToFront();
+                        MessageBox.Show("Log -in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
+
+                else if (CompanyCheckbox.Checked == true)
                 {
-                    MessageBox.Show("Log-in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valid = dbSupport.AuthenticateCompany(Cemail, password);
+                    if (valid)
+                    {
+                        //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (companyDashB == null || companyDashB.IsDisposed)
+                        {
+                            companyDashB = new CompanyDashB();
+                            companyDashB.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            companyDashB.BringToFront();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Log-in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -80,7 +142,7 @@ namespace Job_Application_Manager
             UserPassword.UseSystemPasswordChar = false;
         }
 
-        private void forgotPassButton_Click(object sender, EventArgs e)
+        private void forgotPassBttn_Click(object sender, EventArgs e)
         {
             if (codeVerifyInstance == null || codeVerifyInstance.IsDisposed)
             {

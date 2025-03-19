@@ -78,7 +78,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.IndianRed;
-            label1.Location = new Point(1072, 9);
+            label1.Location = new Point(65, 9);
             label1.Name = "label1";
             label1.Size = new Size(63, 19);
             label1.TabIndex = 0;
@@ -89,7 +89,7 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(403, 9);
+            label4.Location = new Point(547, 9);
             label4.Name = "label4";
             label4.Size = new Size(92, 19);
             label4.TabIndex = 3;
@@ -100,7 +100,7 @@
             label7.Anchor = AnchorStyles.None;
             label7.AutoSize = true;
             label7.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(586, 9);
+            label7.Location = new Point(722, 9);
             label7.Name = "label7";
             label7.Size = new Size(76, 19);
             label7.TabIndex = 9;
@@ -111,7 +111,7 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(53, 9);
+            label2.Location = new Point(226, 9);
             label2.Name = "label2";
             label2.Size = new Size(65, 19);
             label2.TabIndex = 1;
@@ -122,7 +122,7 @@
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(227, 9);
+            label3.Location = new Point(388, 9);
             label3.Name = "label3";
             label3.Size = new Size(68, 19);
             label3.TabIndex = 2;
@@ -133,7 +133,7 @@
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(752, 9);
+            label5.Location = new Point(899, 9);
             label5.Name = "label5";
             label5.Size = new Size(55, 19);
             label5.TabIndex = 4;
@@ -144,7 +144,7 @@
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(908, 9);
+            label6.Location = new Point(1058, 9);
             label6.Name = "label6";
             label6.Size = new Size(75, 19);
             label6.TabIndex = 5;

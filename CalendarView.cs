@@ -21,52 +21,58 @@ namespace Job_Application_Manager
 
         private void CalendarView_Load(object sender, EventArgs e)
         {
-            showDays(DateTime.Now.Month, DateTime.Now.Year);
+            ShowDays(DateTime.Now.Month, DateTime.Now.Year);
         }
 
-        private void showDays(int month, int year)
+        private void ShowDays(int month, int year)
         {
+            flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel1.Controls.Clear();
+
             _year = year;
             _month = month;
 
-            string monthName = new DateTimeFormatInfo().GetMonthName(month);
-            MonthLabel.Text = monthName.ToUpper() + " " + year;
+            // Display month and year
+            MonthLabel.Text = $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month).ToUpper()} {year}";
+
+            // Calculate starting day and total days in the month
             DateTime startOfTheMonth = new DateTime(year, month, 1);
-            int day = DateTime.DaysInMonth(year, month);
-            int week = Convert.ToInt32(startOfTheMonth.DayOfWeek.ToString("d"));
-            for (int i = 1; i < week; i++)
+            int totalDaysInMonth = DateTime.DaysInMonth(year, month);
+            int startDayOfWeek = (int)startOfTheMonth.DayOfWeek;
+
+            // Add empty placeholders for previous month days
+            for (int i = 0; i < startDayOfWeek; i++)
             {
-                calendarDays dayControl = new calendarDays("");
-                flowLayoutPanel1.Controls.Add(dayControl);
+                flowLayoutPanel1.Controls.Add(new calendarDays(string.Empty));
             }
-            for (int i = 1; i <= day; i++)
+
+            // Add actual day controls
+            for (int i = 1; i <= totalDaysInMonth; i++)
             {
-                calendarDays dayControl = new calendarDays(i + "");
-                flowLayoutPanel1.Controls.Add(dayControl);
+                flowLayoutPanel1.Controls.Add(new calendarDays(i.ToString()));
             }
+
+            flowLayoutPanel1.ResumeLayout();
         }
 
         private void nextMonth_Click(object sender, EventArgs e)
         {
-            _month += 1;
-            if (_month > 12)
+            if (++_month > 12)
             {
                 _month = 1;
-                _year += 1;
+                _year++;
             }
-            showDays(_month, _year);
+            ShowDays(_month, _year);
         }
 
         private void prevMonth_Click(object sender, EventArgs e)
         {
-            _month -= 1;
-            if (_month < 1)
+            if (--_month < 1)
             {
                 _month = 12;
-                _year -= 1;
+                _year--;
             }
-            showDays(_month, _year);
+            ShowDays(_month, _year);
         }
     }
 }

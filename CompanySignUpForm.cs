@@ -12,10 +12,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Job_Application_Manager
 {
-    public partial class registerForm : Form
+    public partial class CompanySignUp : Form
     {
         DatabaseSupport dbSupport = new DatabaseSupport();
-        public registerForm()
+        public CompanySignUp()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace Job_Application_Manager
             dbSupport.checkConnection();
         }
 
-        private void registerButton2_Click(object sender, EventArgs e)
+        private void signUpButton_Click(object sender, EventArgs e)
         {
             string confPass = ConfirmPass.Text;
             try
@@ -35,7 +35,7 @@ namespace Job_Application_Manager
                     if (UserPassword.Text.Length < 8)
                         throw new Exception("Password must be atleast 8 characters.Try again");
 
-                    dbSupport.registerData(UserEmail.Text, UserName.Text, UserPassword.Text);
+                    dbSupport.registerCompanyData(UserEmail.Text, UserName.Text, UserPassword.Text);
 
                     MessageBox.Show("You are now registered!");
                     this.DialogResult = DialogResult.OK;

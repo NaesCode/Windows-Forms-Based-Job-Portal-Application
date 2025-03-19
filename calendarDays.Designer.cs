@@ -58,10 +58,10 @@
             // Day
             // 
             Day.AutoSize = true;
-            Day.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Day.Location = new Point(115, 14);
+            Day.Font = new Font("Bahnschrift", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Day.Location = new Point(97, 19);
             Day.Name = "Day";
-            Day.Size = new Size(27, 19);
+            Day.Size = new Size(36, 25);
             Day.TabIndex = 0;
             Day.Text = "00";
             // 

@@ -11,51 +11,41 @@ using System.Windows.Forms;
 namespace Job_Application_Manager
 {
     public partial class calendarDays : UserControl
-    {
-        string _day, date, weekday;
+    { 
+        private int dayNumber;
+        private DateTime date;
         public calendarDays(string day)
         {
             InitializeComponent();
-            _day = day;
-            Day.Text = _day;
+
+            // Initialize day number
+            if (int.TryParse(day, out dayNumber) && dayNumber > 0)
+            {
+                date = new DateTime(CalendarView._year, CalendarView._month, dayNumber);
+                Day.Text = day;
+            }
+            else
+            {
+                Day.Text = "";
+            }
+
             checkBox1.Hide();
-            date =  CalendarView._month + "-" + _day + "-" + CalendarView._year;
+            Sundays();
 
         }
 
         private void Sundays()
         {
-            try
+            if (date.DayOfWeek == DayOfWeek.Sunday)
             {
-                DateTime day = DateTime.Parse(date);
-                weekday = day.ToString("ddd");
-                if (weekday == "Sunday")
-                {
-                    Day.ForeColor = Color.IndianRed;
-                }
-                else
-                {
-                    Day.ForeColor = Color.Black;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                Day.ForeColor = Color.IndianRed;
             }
         }
 
         private void panel1_Click(object sender, EventArgs e)
         {
-            if(checkBox1.Checked == false)
-            {
-                checkBox1.Checked = true;
-                this.BackColor = Color.FromArgb(255, 255, 192);
-            }
-            else
-            {
-                checkBox1.Checked = false;
-                this.BackColor = Color.FromArgb(255, 255, 255);
-            }
+            checkBox1.Checked = !checkBox1.Checked;
+            this.BackColor = checkBox1.Checked ? Color.FromArgb(255, 255, 192) : Color.White;
         }
     }
 }

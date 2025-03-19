@@ -29,7 +29,7 @@ namespace Job_Application_Manager
             myConn.Close();
         }
 
-        internal void registerData(string Email, string Username, string Password)
+        internal void registerJobHunterData(string Email, string Username, string Password)
         {
             myConn = new OleDbConnection(connectionString);
             myConn.Open();
@@ -46,7 +46,24 @@ namespace Job_Application_Manager
             //int userID = Convert.ToInt32(cmd.ExecuteScalar());
         }
 
-        internal bool AuthenticateUser(string username, string password)
+        internal void registerCompanyData(string Email, string Username, string Password)
+        {
+            myConn = new OleDbConnection(connectionString);
+            myConn.Open();
+
+            string registerQuery = "INSERT INTO CompanyAccounts (CompanyEmail, CompanyName, [Password]) values (?, ?, ?)";
+            cmd = new OleDbCommand(registerQuery, myConn);
+            cmd.Parameters.AddWithValue("?", Email);
+            cmd.Parameters.AddWithValue("?", Username);
+            cmd.Parameters.AddWithValue("?", Password);
+            cmd.ExecuteNonQuery();
+            myConn.Close();
+
+            //cmd = new OleDbCommand("SELECT MAX(ID) FROM AccountReg_Details", myConn); //Gets last inserted StudentID and uses it to the other tables
+            //int userID = Convert.ToInt32(cmd.ExecuteScalar());
+        }
+
+        internal bool AuthenticateHunter(string username, string password)
         {
             string query = "SELECT * FROM [Log-In_Query] WHERE Username = ? AND [Password] = ?";
 
@@ -55,6 +72,29 @@ namespace Job_Application_Manager
             {
                 cmd.Parameters.AddWithValue("?", username);
                 cmd.Parameters.AddWithValue("?", password);
+                try
+                {
+                    myConn.Open();
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    return reader.HasRows;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        internal bool AuthenticateCompany(string email, string password)
+        {
+            string query = "SELECT * FROM [Log-InCompany_Query] WHERE CompanyEmail = ? AND [Password] = ?";
+
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.Add(new OleDbParameter("?", OleDbType.VarChar)).Value = email;
+                cmd.Parameters.Add(new OleDbParameter("?", OleDbType.VarChar)).Value = password;
                 try
                 {
                     myConn.Open();

@@ -19,6 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="CompanyDashB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AccountTypeReg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CompanySignUpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
