@@ -9,10 +9,13 @@ namespace Job_Application_Manager
         DatabaseSupport dbSupport = new DatabaseSupport();
 
         private AccountTypeReg? accountTypeFormInstance;
-        private mainApp? mainAppFormInstance;
-        private CompanyDashB? companyDashB;
+        private JobHunterDashB? jobHunterDashBForm;
+        private CompanyDashB? companyDashBForm;
+        private AdminDashB adminDashBForm;
         private codeVerify? codeVerifyInstance;
         private bool valid;
+        private int companyID;
+        private int hunterID;
         public LogInForm()
         {
             InitializeComponent();
@@ -41,12 +44,13 @@ namespace Job_Application_Manager
                 textBox3.Text = "Company Email:";
                 textBox3.Size = new Size(120, 20);
                 UserName.Size = new Size(251, 23);
-                UserName.Location = new Point(568, 223);
+                UserName.Location = new Point(568, 244);
             }
             else
             {
                 textBox3.Text = "Username:";
-                UserName.Location = new Point(527, 223);
+                UserName.Size = new Size(275, 23);
+                UserName.Location = new Point(527, 244);
             }
         }
 
@@ -83,17 +87,18 @@ namespace Job_Application_Manager
                 if (JobHunterCheckbox.Checked == true)
                 {
                     valid = dbSupport.AuthenticateHunter(username, password);
+                    hunterID = dbSupport.getHunterID(username);
                     if (valid)
                     {
-                        if (mainAppFormInstance == null || mainAppFormInstance.IsDisposed)
+                        if (jobHunterDashBForm == null || jobHunterDashBForm.IsDisposed)
                         {
-                            mainAppFormInstance = new mainApp();
-                            mainAppFormInstance.Show();
+                            jobHunterDashBForm = new JobHunterDashB(hunterID);
+                            jobHunterDashBForm.Show();
                             this.Hide();
                         }
                         else
                         {
-                            mainAppFormInstance.BringToFront();
+                            jobHunterDashBForm.BringToFront();
                         }
                     }
                     else
@@ -105,18 +110,43 @@ namespace Job_Application_Manager
                 else if (CompanyCheckbox.Checked == true)
                 {
                     valid = dbSupport.AuthenticateCompany(Cemail, password);
+                    companyID = dbSupport.getCompanyID(Cemail);
                     if (valid)
                     {
                         //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        if (companyDashB == null || companyDashB.IsDisposed)
+                        if (companyDashBForm == null || companyDashBForm.IsDisposed)
                         {
-                            companyDashB = new CompanyDashB();
-                            companyDashB.Show();
+                            companyDashBForm = new CompanyDashB(companyID);
+                            companyDashBForm.Show();
                             this.Hide();
                         }
                         else
                         {
-                            companyDashB.BringToFront();
+                            companyDashBForm.BringToFront();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Log-in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                else if (AdminCheckBox.Checked == true)
+                {
+                    valid = dbSupport.AuthenticateAdmin(username, password);
+                    //companyID = dbSupport.getCompanyID(Cemail);
+                    if (valid)
+                    {
+                        //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (adminDashBForm == null || adminDashBForm.IsDisposed)
+                        {
+                            adminDashBForm = new AdminDashB();
+                            adminDashBForm.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            adminDashBForm.BringToFront();
                         }
                     }
                     else

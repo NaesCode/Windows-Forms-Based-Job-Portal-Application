@@ -11,10 +11,11 @@ using System.Runtime.InteropServices;
 
 namespace Job_Application_Manager
 {
-    public partial class mainApp : Form
+    public partial class AdminDashB : Form
     {
         private UserControl? currentChildForm;
-        public mainApp()
+        GenCompanyInfoTable? genCompanyInfoTable;
+        public AdminDashB()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -52,7 +53,7 @@ namespace Job_Application_Manager
             }
         }
 
-        private void mainApp_Load(object sender, EventArgs e)
+        private void adminDashB_Load(object sender, EventArgs e)
         {
             this.Size = new Size(1095, 659); //or 700
             this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
@@ -120,10 +121,11 @@ namespace Job_Application_Manager
         private void TableViewBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            currentChildForm = new TableView();
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.Tag = currentChildForm;
+            genCompanyInfoTable = new GenCompanyInfoTable();
+            genCompanyInfoTable.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(genCompanyInfoTable);
+            genCompanyInfoTable.LoadData();
+            desktopPanel.Tag = genCompanyInfoTable;
             desktopPanel.AutoScroll = true;
         }
 

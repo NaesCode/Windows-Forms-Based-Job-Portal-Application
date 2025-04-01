@@ -11,23 +11,20 @@ using System.Runtime.InteropServices;
 
 namespace Job_Application_Manager
 {
-    public partial class CompanyDashB : Form
+    public partial class JobHunterDashB : Form
     {
         private UserControl? currentChildForm;
-        private int companyUserID;
+        Job_Hunt? jobHuntForm;
+        JobHunterProfile? jobHunterProfileForm;
 
-        ValidateCompanyForm? validateCompanyForm;
-        JobPostings? jobPostingsForm;
-        JobApplicants? jobApplicantsForm; 
+        private int hunterID;
 
-        DatabaseSupport dbSupport = new DatabaseSupport();
-
-        public CompanyDashB(int companyID)
+        public JobHunterDashB(int hunterID)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.Sizable;
-            companyUserID = companyID;
+            this.hunterID = hunterID;
         }
 
         // Windows API to enable snapping
@@ -60,51 +57,10 @@ namespace Job_Application_Manager
             }
         }
 
-        private async void CompanyDashB_Load(object sender, EventArgs e)
+        private void JobHuntDashB_Load(object sender, EventArgs e)
         {
             this.Size = new Size(1095, 659); //or 700
             this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
-
-            string? approvalStatus = dbSupport.getApprovalStatus(companyUserID);
-
-            if(approvalStatus == "APPROVED")
-            {
-                AddJobBttn.Enabled = true;
-            }
-            else
-            {
-                validateCompanyForm = new ValidateCompanyForm(companyUserID);
-
-                await Task.Delay(1000);
-
-                validateCompanyForm.Opacity = 0;
-                // Disable the main form to simulate modal behavior
-                this.Enabled = false;
-
-                // Start the form and animate it
-                validateCompanyForm.Show();
-
-                System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer();
-                fadeTimer.Interval = 50; // Adjust for smoother animation
-                fadeTimer.Tick += (s, ev) =>
-                {
-                    if (validateCompanyForm.Opacity < 1)
-                    {
-                        validateCompanyForm.Opacity += 0.05; // Smooth fade
-                    }
-                    else
-                    {
-                        fadeTimer.Stop();
-                    }
-                };
-                fadeTimer.Start();
-
-                // Wait for the form to close using FormClosed event
-                validateCompanyForm.FormClosed += (s, ev) =>
-                {
-                    this.Enabled = true; // Re-enable main form
-                };
-            }
         }
 
         private void MenuBttn_Click(object sender, EventArgs e)
@@ -145,23 +101,23 @@ namespace Job_Application_Manager
             }
         }
 
-        private void AdjustJobApplicantsViewPanel_Size()
+        private void adjustJobPostPanelSize()
         {
             foreach (Control control in desktopPanel.Controls)
             {
                 // Check if it's a Job_Hunt and contains a FlowLayoutPanel
-                if (control is JobApplicants jobApplicantControl)
+                if (control is Job_Hunt jobHuntControl)
                 {
-                    foreach (Control innerControl in jobApplicantControl.Controls)
+                    foreach (Control innerControl in jobHuntControl.Controls)
                     {
                         if (innerControl is FlowLayoutPanel flowLayoutPanel)
                         {
                             // Iterate through JobPostPanel inside the FlowLayoutPanel
                             foreach (Control panelControl in flowLayoutPanel.Controls)
                             {
-                                if (panelControl is ViewApplicants jobApplicants)
+                                if (panelControl is JobPostPanel jobPostPanel)
                                 {
-                                    jobApplicants.Size = new Size(1157, 120);
+                                    jobPostPanel.Size = new Size(878, 117);
                                 }
                             }
                         }
@@ -170,23 +126,23 @@ namespace Job_Application_Manager
             }
         }
 
-        private void InitialJobApplicantsViewPanel_Size()
+        private void initialJobPostPanelSize()
         {
             foreach (Control control in desktopPanel.Controls)
             {
                 // Check if it's a Job_Hunt and contains a FlowLayoutPanel
-                if (control is JobApplicants jobApplicantControl)
+                if (control is Job_Hunt jobHuntControl)
                 {
-                    foreach (Control innerControl in jobApplicantControl.Controls)
+                    foreach (Control innerControl in jobHuntControl.Controls)
                     {
                         if (innerControl is FlowLayoutPanel flowLayoutPanel)
                         {
                             // Iterate through JobPostPanel inside the FlowLayoutPanel
                             foreach (Control panelControl in flowLayoutPanel.Controls)
                             {
-                                if (panelControl is ViewApplicants jobApplicants)
+                                if (panelControl is JobPostPanel jobPostPanel)
                                 {
-                                    jobApplicants.Size = new Size(884, 120);
+                                    jobPostPanel.Size = new Size(593, 117);
                                 }
                             }
                         }
@@ -194,6 +150,8 @@ namespace Job_Application_Manager
                 }
             }
         }
+
+        
 
         private void exitButton1_Click_1(object sender, EventArgs e)
         {
@@ -204,12 +162,12 @@ namespace Job_Application_Manager
         {
             if (this.WindowState == FormWindowState.Normal)
             {
-                AdjustJobApplicantsViewPanel_Size();
+                adjustJobPostPanelSize();
                 this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                InitialJobApplicantsViewPanel_Size();
+                initialJobPostPanelSize();
                 this.WindowState = FormWindowState.Normal;
                 this.Size = new Size(1095, 659);
             }
@@ -223,47 +181,46 @@ namespace Job_Application_Manager
                 this.WindowState = FormWindowState.Minimized;
         }
 
-        private void AddJobBttn_Click(object sender, EventArgs e)
+        private void manageProfileBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            currentChildForm = new JobListing(companyUserID);
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.AutoScroll = true;
+            jobHunterProfileForm = new JobHunterProfile(hunterID);
+            jobHunterProfileForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(jobHunterProfileForm);
+            jobHunterProfileForm.DisplayDetails();
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void jobPostingsBttn_Click(object sender, EventArgs e)
+        private void ApplyJobBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            jobPostingsForm = new JobPostings(companyUserID);
-            jobPostingsForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobPostingsForm);
-            jobPostingsForm.loadData();
-            desktopPanel.Tag = jobPostingsForm;
-            desktopPanel.AutoScroll = true;
-        }
-
-        private void ChartViewBttn_Click(object sender, EventArgs e)
-        {
-            desktopPanel.Controls.Clear();
-            currentChildForm = new ChartView();
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.Tag = currentChildForm;
-            desktopPanel.AutoScroll = true;
-        }
-
-        private void JobApplicantsBttn_Click(object sender, EventArgs e)
-        {
-            desktopPanel.Controls.Clear();
-            jobApplicantsForm = new JobApplicants(companyUserID);
-            jobApplicantsForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobApplicantsForm);
-            jobApplicantsForm.DisplayDetails();
+            jobHuntForm = new Job_Hunt(hunterID);
+            jobHuntForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(jobHuntForm);
+            jobHuntForm.DisplayDetails();
             if (this.WindowState == FormWindowState.Maximized)
-                AdjustJobApplicantsViewPanel_Size();
+                adjustJobPostPanelSize();
+            desktopPanel.Tag = currentChildForm;
+            desktopPanel.AutoScroll = true;
+        }
+
+        private void TableViewBttn_Click(object sender, EventArgs e)
+        {
+            desktopPanel.Controls.Clear();
+            currentChildForm = new TableView();
+            currentChildForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(currentChildForm);
+            desktopPanel.Tag = currentChildForm;
+            desktopPanel.AutoScroll = true;
+        }
+
+        private void ListViewBttn_Click(object sender, EventArgs e)
+        {
+            desktopPanel.Controls.Clear();
+            currentChildForm = new ListView();
+            currentChildForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(currentChildForm);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
@@ -284,5 +241,7 @@ namespace Job_Application_Manager
             LogInForm loginForm = new LogInForm();
             loginForm.Show();
         }
+
+        
     }
 }

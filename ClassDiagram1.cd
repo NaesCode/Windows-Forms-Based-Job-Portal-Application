@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Job_Application_Manager.HunterBaseControl" Collapsed="true">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HunterBaseControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Job_Application_Manager.Job_Hunt" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABBAAECAAAACAAAAAAAAABABAWAAAAA=</HashCode>
+      <FileName>Job-Hunt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Job_Application_Manager.JobPostPanel" Collapsed="true">
+    <Position X="7.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAgABAiAAAAAAAACAIAgCAYAAAAIAAAAAQQAAAQA=</HashCode>
+      <FileName>JobPostPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Job_Application_Manager.JobHunterProfile" Collapsed="true">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAABAAACASABBghACAgAACAoIAGACAAAAIAWBJAAA=</HashCode>
+      <FileName>JobHunterProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

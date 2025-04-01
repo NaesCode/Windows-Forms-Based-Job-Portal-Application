@@ -92,7 +92,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(406, 217);
+            pictureBox2.Location = new Point(406, 238);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(30, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -102,7 +102,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(406, 269);
+            pictureBox3.Location = new Point(406, 290);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(32, 32);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -199,7 +199,7 @@
             // showPassword
             // 
             showPassword.Image = (Image)resources.GetObject("showPassword.Image");
-            showPassword.Location = new Point(808, 273);
+            showPassword.Location = new Point(808, 294);
             showPassword.Name = "showPassword";
             showPassword.Size = new Size(25, 23);
             showPassword.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -232,7 +232,7 @@
             // 
             textBox3.BorderStyle = BorderStyle.None;
             textBox3.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox3.Location = new Point(442, 224);
+            textBox3.Location = new Point(442, 245);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(120, 20);
             textBox3.TabIndex = 23;
@@ -242,7 +242,7 @@
             // 
             textBox4.BorderStyle = BorderStyle.None;
             textBox4.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox4.Location = new Point(442, 276);
+            textBox4.Location = new Point(442, 297);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(81, 20);
             textBox4.TabIndex = 24;
@@ -253,7 +253,7 @@
             UserName.BorderStyle = BorderStyle.FixedSingle;
             UserName.Enabled = false;
             UserName.Font = new Font("Bahnschrift", 9.75F);
-            UserName.Location = new Point(527, 223);
+            UserName.Location = new Point(527, 244);
             UserName.Name = "UserName";
             UserName.Size = new Size(275, 23);
             UserName.TabIndex = 25;
@@ -263,7 +263,7 @@
             UserPassword.BorderStyle = BorderStyle.FixedSingle;
             UserPassword.Enabled = false;
             UserPassword.Font = new Font("Bahnschrift", 9.75F);
-            UserPassword.Location = new Point(527, 273);
+            UserPassword.Location = new Point(527, 294);
             UserPassword.Name = "UserPassword";
             UserPassword.Size = new Size(275, 23);
             UserPassword.TabIndex = 26;
@@ -318,7 +318,7 @@
             LogInButton.IsReadOnly = false;
             LogInButton.IsToggleButton = false;
             LogInButton.IsToggled = false;
-            LogInButton.Location = new Point(406, 357);
+            LogInButton.Location = new Point(406, 378);
             LogInButton.LongPressDurationMS = 1000;
             LogInButton.Name = "LogInButton";
             LogInButton.NormalFontStyle = FontStyle.Regular;
@@ -395,7 +395,7 @@
             signUpButton.IsReadOnly = false;
             signUpButton.IsToggleButton = false;
             signUpButton.IsToggled = false;
-            signUpButton.Location = new Point(583, 411);
+            signUpButton.Location = new Point(583, 432);
             signUpButton.LongPressDurationMS = 1000;
             signUpButton.Name = "signUpButton";
             signUpButton.NormalFontStyle = FontStyle.Regular;
@@ -428,7 +428,7 @@
             // 
             textBox5.BorderStyle = BorderStyle.None;
             textBox5.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox5.Location = new Point(406, 417);
+            textBox5.Location = new Point(406, 438);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(172, 20);
             textBox5.TabIndex = 29;
@@ -490,7 +490,7 @@
             forgotPassBttn.FlatAppearance.BorderSize = 0;
             forgotPassBttn.FlatStyle = FlatStyle.Flat;
             forgotPassBttn.Font = new Font("Bahnschrift", 9F);
-            forgotPassBttn.Location = new Point(693, 309);
+            forgotPassBttn.Location = new Point(693, 330);
             forgotPassBttn.Name = "forgotPassBttn";
             forgotPassBttn.Size = new Size(126, 23);
             forgotPassBttn.TabIndex = 32;

@@ -13,12 +13,18 @@
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.7" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WinForms" Version="2.0.0-rc5.4" />
+    <PackageReference Include="ReaLTaiizor" Version="3.8.1.1" />
     <PackageReference Include="Siticone.NetCore.UI" Version="2025.2.14" />
     <PackageReference Include="Siticone.NetFramework.UI" Version="2025.2.14" />
     <PackageReference Include="System.Data.OleDb" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="JobApplicants.cs" />
+    <Compile Update="JobHunterProfile.cs" />
+    <Compile Update="JobFullDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="CompanyDashB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -28,10 +34,23 @@
     <Compile Update="CompanySignUpForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AdminDashB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ViewApplicants.cs" />
+    <Compile Update="JobPostPreviewPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="GenCompanyInfoTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SetUpProfileForm.cs">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
 

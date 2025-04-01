@@ -1,6 +1,6 @@
 ﻿namespace Job_Application_Manager
 {
-    partial class CompanyDashB
+    partial class JobHunterDashB
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompanyDashB));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JobHunterDashB));
             panel1 = new Panel();
             controlBarPanel1 = new Panel();
             controlBarPanel2 = new Panel();
@@ -37,10 +37,10 @@
             exitButton1 = new FontAwesome.Sharp.IconButton();
             maximButton1 = new FontAwesome.Sharp.IconButton();
             CalendarViewBttn = new FontAwesome.Sharp.IconButton();
-            JobApplicantsBttn = new FontAwesome.Sharp.IconButton();
-            ChartViewBttn = new FontAwesome.Sharp.IconButton();
-            jobPostingsBttn = new FontAwesome.Sharp.IconButton();
-            AddJobBttn = new FontAwesome.Sharp.IconButton();
+            ListViewBttn = new FontAwesome.Sharp.IconButton();
+            manageProfileBttn = new FontAwesome.Sharp.IconButton();
+            ApplyJobBttn = new FontAwesome.Sharp.IconButton();
+            TableViewBttn = new FontAwesome.Sharp.IconButton();
             signOutBttn = new FontAwesome.Sharp.IconButton();
             panel6 = new Panel();
             MenuBttn = new FontAwesome.Sharp.IconButton();
@@ -124,7 +124,6 @@
             minimButton1.CornerRadiusBottomRight = 0;
             minimButton1.CornerRadiusTopLeft = 0;
             minimButton1.CornerRadiusTopRight = 0;
-            minimButton1.Cursor = Cursors.SizeAll;
             minimButton1.CustomCursor = Cursors.Default;
             minimButton1.DisabledTextColor = Color.FromArgb(150, 150, 150);
             minimButton1.EnableLongPress = false;
@@ -245,110 +244,109 @@
             CalendarViewBttn.UseVisualStyleBackColor = false;
             CalendarViewBttn.Click += CalendarViewBttn_Click;
             // 
-            // JobApplicantsBttn
+            // ListViewBttn
             // 
-            JobApplicantsBttn.BackColor = Color.Transparent;
-            JobApplicantsBttn.Dock = DockStyle.Top;
-            JobApplicantsBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
-            JobApplicantsBttn.FlatAppearance.BorderSize = 0;
-            JobApplicantsBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            JobApplicantsBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
-            JobApplicantsBttn.FlatStyle = FlatStyle.Flat;
-            JobApplicantsBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            JobApplicantsBttn.ForeColor = SystemColors.ButtonHighlight;
-            JobApplicantsBttn.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            JobApplicantsBttn.IconColor = Color.White;
-            JobApplicantsBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            JobApplicantsBttn.IconSize = 30;
-            JobApplicantsBttn.Location = new Point(0, 277);
-            JobApplicantsBttn.Name = "JobApplicantsBttn";
-            JobApplicantsBttn.Padding = new Padding(15, 0, 0, 0);
-            JobApplicantsBttn.Size = new Size(202, 60);
-            JobApplicantsBttn.TabIndex = 9;
-            JobApplicantsBttn.Tag = "List";
-            JobApplicantsBttn.Text = "     Applicants";
-            JobApplicantsBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            JobApplicantsBttn.UseVisualStyleBackColor = false;
-            JobApplicantsBttn.Click += JobApplicantsBttn_Click;
+            ListViewBttn.BackColor = Color.Transparent;
+            ListViewBttn.Dock = DockStyle.Top;
+            ListViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
+            ListViewBttn.FlatAppearance.BorderSize = 0;
+            ListViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            ListViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            ListViewBttn.FlatStyle = FlatStyle.Flat;
+            ListViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ListViewBttn.ForeColor = SystemColors.ButtonHighlight;
+            ListViewBttn.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            ListViewBttn.IconColor = Color.White;
+            ListViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ListViewBttn.IconSize = 30;
+            ListViewBttn.Location = new Point(0, 337);
+            ListViewBttn.Name = "ListViewBttn";
+            ListViewBttn.Padding = new Padding(15, 0, 0, 0);
+            ListViewBttn.Size = new Size(202, 60);
+            ListViewBttn.TabIndex = 9;
+            ListViewBttn.Tag = "List";
+            ListViewBttn.Text = "     List";
+            ListViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            ListViewBttn.UseVisualStyleBackColor = false;
+            ListViewBttn.Click += ListViewBttn_Click;
             // 
-            // ChartViewBttn
+            // manageProfileBttn
             // 
-            ChartViewBttn.BackColor = Color.Transparent;
-            ChartViewBttn.Dock = DockStyle.Top;
-            ChartViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
-            ChartViewBttn.FlatAppearance.BorderSize = 0;
-            ChartViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            ChartViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
-            ChartViewBttn.FlatStyle = FlatStyle.Flat;
-            ChartViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ChartViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            ChartViewBttn.IconChar = FontAwesome.Sharp.IconChar.ChartColumn;
-            ChartViewBttn.IconColor = Color.White;
-            ChartViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ChartViewBttn.IconSize = 30;
-            ChartViewBttn.Location = new Point(0, 337);
-            ChartViewBttn.Name = "ChartViewBttn";
-            ChartViewBttn.Padding = new Padding(15, 0, 0, 0);
-            ChartViewBttn.Size = new Size(202, 60);
-            ChartViewBttn.TabIndex = 8;
-            ChartViewBttn.Tag = "Chart";
-            ChartViewBttn.Text = "     Chart";
-            ChartViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            ChartViewBttn.UseVisualStyleBackColor = false;
-            ChartViewBttn.Click += ChartViewBttn_Click;
+            manageProfileBttn.BackColor = Color.Transparent;
+            manageProfileBttn.Dock = DockStyle.Top;
+            manageProfileBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
+            manageProfileBttn.FlatAppearance.BorderSize = 0;
+            manageProfileBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            manageProfileBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            manageProfileBttn.FlatStyle = FlatStyle.Flat;
+            manageProfileBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            manageProfileBttn.ForeColor = SystemColors.ButtonHighlight;
+            manageProfileBttn.IconChar = FontAwesome.Sharp.IconChar.Freebsd;
+            manageProfileBttn.IconColor = Color.White;
+            manageProfileBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            manageProfileBttn.IconSize = 30;
+            manageProfileBttn.Location = new Point(0, 157);
+            manageProfileBttn.Name = "manageProfileBttn";
+            manageProfileBttn.Padding = new Padding(20, 0, 0, 0);
+            manageProfileBttn.Size = new Size(202, 60);
+            manageProfileBttn.TabIndex = 8;
+            manageProfileBttn.Tag = "Chart";
+            manageProfileBttn.Text = "     Profile";
+            manageProfileBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            manageProfileBttn.UseVisualStyleBackColor = false;
+            manageProfileBttn.Click += manageProfileBttn_Click;
             // 
-            // jobPostingsBttn
+            // ApplyJobBttn
             // 
-            jobPostingsBttn.BackColor = Color.Transparent;
-            jobPostingsBttn.Dock = DockStyle.Top;
-            jobPostingsBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
-            jobPostingsBttn.FlatAppearance.BorderSize = 0;
-            jobPostingsBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            jobPostingsBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
-            jobPostingsBttn.FlatStyle = FlatStyle.Flat;
-            jobPostingsBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            jobPostingsBttn.ForeColor = SystemColors.ButtonHighlight;
-            jobPostingsBttn.IconChar = FontAwesome.Sharp.IconChar.SquareArrowUpRight;
-            jobPostingsBttn.IconColor = Color.White;
-            jobPostingsBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            jobPostingsBttn.IconSize = 30;
-            jobPostingsBttn.Location = new Point(0, 217);
-            jobPostingsBttn.Name = "jobPostingsBttn";
-            jobPostingsBttn.Padding = new Padding(15, 0, 0, 0);
-            jobPostingsBttn.Size = new Size(202, 60);
-            jobPostingsBttn.TabIndex = 7;
-            jobPostingsBttn.Tag = "Job Posts";
-            jobPostingsBttn.Text = "     Job Postings";
-            jobPostingsBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            jobPostingsBttn.UseVisualStyleBackColor = false;
-            jobPostingsBttn.Click += jobPostingsBttn_Click;
+            ApplyJobBttn.BackColor = Color.Transparent;
+            ApplyJobBttn.Dock = DockStyle.Top;
+            ApplyJobBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
+            ApplyJobBttn.FlatAppearance.BorderSize = 0;
+            ApplyJobBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            ApplyJobBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            ApplyJobBttn.FlatStyle = FlatStyle.Flat;
+            ApplyJobBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ApplyJobBttn.ForeColor = SystemColors.ButtonHighlight;
+            ApplyJobBttn.IconChar = FontAwesome.Sharp.IconChar.Suitcase;
+            ApplyJobBttn.IconColor = Color.White;
+            ApplyJobBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ApplyJobBttn.IconSize = 30;
+            ApplyJobBttn.Location = new Point(0, 217);
+            ApplyJobBttn.Name = "ApplyJobBttn";
+            ApplyJobBttn.Padding = new Padding(15, 0, 0, 0);
+            ApplyJobBttn.Size = new Size(202, 60);
+            ApplyJobBttn.TabIndex = 7;
+            ApplyJobBttn.Tag = "Board";
+            ApplyJobBttn.Text = "     Apply";
+            ApplyJobBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            ApplyJobBttn.UseVisualStyleBackColor = false;
+            ApplyJobBttn.Click += ApplyJobBttn_Click;
             // 
-            // AddJobBttn
+            // TableViewBttn
             // 
-            AddJobBttn.BackColor = Color.Transparent;
-            AddJobBttn.Dock = DockStyle.Top;
-            AddJobBttn.Enabled = false;
-            AddJobBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
-            AddJobBttn.FlatAppearance.BorderSize = 0;
-            AddJobBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            AddJobBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
-            AddJobBttn.FlatStyle = FlatStyle.Flat;
-            AddJobBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            AddJobBttn.ForeColor = SystemColors.ButtonHighlight;
-            AddJobBttn.IconChar = FontAwesome.Sharp.IconChar.Add;
-            AddJobBttn.IconColor = Color.White;
-            AddJobBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            AddJobBttn.IconSize = 30;
-            AddJobBttn.Location = new Point(0, 157);
-            AddJobBttn.Name = "AddJobBttn";
-            AddJobBttn.Padding = new Padding(15, 0, 0, 0);
-            AddJobBttn.Size = new Size(202, 60);
-            AddJobBttn.TabIndex = 6;
-            AddJobBttn.Tag = "Add Job";
-            AddJobBttn.Text = "     Add Job List";
-            AddJobBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            AddJobBttn.UseVisualStyleBackColor = false;
-            AddJobBttn.Click += AddJobBttn_Click;
+            TableViewBttn.BackColor = Color.Transparent;
+            TableViewBttn.Dock = DockStyle.Top;
+            TableViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
+            TableViewBttn.FlatAppearance.BorderSize = 0;
+            TableViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            TableViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            TableViewBttn.FlatStyle = FlatStyle.Flat;
+            TableViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TableViewBttn.ForeColor = SystemColors.ButtonHighlight;
+            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.Table;
+            TableViewBttn.IconColor = Color.White;
+            TableViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            TableViewBttn.IconSize = 30;
+            TableViewBttn.Location = new Point(0, 277);
+            TableViewBttn.Name = "TableViewBttn";
+            TableViewBttn.Padding = new Padding(15, 0, 0, 0);
+            TableViewBttn.Size = new Size(202, 60);
+            TableViewBttn.TabIndex = 6;
+            TableViewBttn.Tag = "Table";
+            TableViewBttn.Text = "     Track";
+            TableViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            TableViewBttn.UseVisualStyleBackColor = false;
+            TableViewBttn.Click += TableViewBttn_Click;
             // 
             // signOutBttn
             // 
@@ -445,10 +443,10 @@
             menuBarPanel1.BackColor = SystemColors.Desktop;
             menuBarPanel1.Controls.Add(CalendarViewBttn);
             menuBarPanel1.Controls.Add(signOutBttn);
-            menuBarPanel1.Controls.Add(ChartViewBttn);
-            menuBarPanel1.Controls.Add(JobApplicantsBttn);
-            menuBarPanel1.Controls.Add(jobPostingsBttn);
-            menuBarPanel1.Controls.Add(AddJobBttn);
+            menuBarPanel1.Controls.Add(ListViewBttn);
+            menuBarPanel1.Controls.Add(TableViewBttn);
+            menuBarPanel1.Controls.Add(ApplyJobBttn);
+            menuBarPanel1.Controls.Add(manageProfileBttn);
             menuBarPanel1.Controls.Add(panel6);
             menuBarPanel1.Dock = DockStyle.Fill;
             menuBarPanel1.Location = new Point(0, 2);
@@ -456,7 +454,7 @@
             menuBarPanel1.Size = new Size(202, 657);
             menuBarPanel1.TabIndex = 0;
             // 
-            // CompanyDashB
+            // JobHunterDashB
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -466,10 +464,9 @@
             Controls.Add(menuBarPanel0);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CompanyDashB";
-            StartPosition = FormStartPosition.CenterScreen;
+            Name = "JobHunterDashB";
             Text = "Form3";
-            Load += CompanyDashB_Load;
+            Load += JobHuntDashB_Load;
             panel1.ResumeLayout(false);
             controlBarPanel1.ResumeLayout(false);
             controlBarPanel2.ResumeLayout(false);
@@ -486,11 +483,11 @@
         private Panel panel1;
         private PictureBox Logo1;
         private FontAwesome.Sharp.IconButton signOutBttn;
-        private FontAwesome.Sharp.IconButton AddJobBttn;
+        private FontAwesome.Sharp.IconButton TableViewBttn;
         private FontAwesome.Sharp.IconButton CalendarViewBttn;
-        private FontAwesome.Sharp.IconButton JobApplicantsBttn;
-        private FontAwesome.Sharp.IconButton ChartViewBttn;
-        private FontAwesome.Sharp.IconButton jobPostingsBttn;
+        private FontAwesome.Sharp.IconButton ListViewBttn;
+        private FontAwesome.Sharp.IconButton manageProfileBttn;
+        private FontAwesome.Sharp.IconButton ApplyJobBttn;
         private Panel controlBarPanel1;
         private Panel controlBarPanel2;
         private Panel desktopPanel;

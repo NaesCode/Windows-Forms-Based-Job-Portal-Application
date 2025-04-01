@@ -1,6 +1,6 @@
 ﻿namespace Job_Application_Manager
 {
-    partial class mainApp
+    partial class AdminDashB
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainApp));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminDashB));
             panel1 = new Panel();
             controlBarPanel1 = new Panel();
             controlBarPanel2 = new Panel();
@@ -318,17 +318,17 @@
             BoardViewBttn.FlatStyle = FlatStyle.Flat;
             BoardViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BoardViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            BoardViewBttn.IconChar = FontAwesome.Sharp.IconChar.Square;
+            BoardViewBttn.IconChar = FontAwesome.Sharp.IconChar.File;
             BoardViewBttn.IconColor = Color.White;
             BoardViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BoardViewBttn.IconSize = 30;
             BoardViewBttn.Location = new Point(0, 217);
             BoardViewBttn.Name = "BoardViewBttn";
-            BoardViewBttn.Padding = new Padding(15, 0, 0, 0);
+            BoardViewBttn.Padding = new Padding(14, 0, 0, 0);
             BoardViewBttn.Size = new Size(202, 60);
             BoardViewBttn.TabIndex = 7;
             BoardViewBttn.Tag = "Board";
-            BoardViewBttn.Text = "     Board";
+            BoardViewBttn.Text = "     Submitted        Company Files";
             BoardViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             BoardViewBttn.UseVisualStyleBackColor = false;
             BoardViewBttn.Click += BoardViewBttn_Click;
@@ -344,7 +344,7 @@
             TableViewBttn.FlatStyle = FlatStyle.Flat;
             TableViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TableViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.Table;
+            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.Info;
             TableViewBttn.IconColor = Color.White;
             TableViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             TableViewBttn.IconSize = 30;
@@ -354,7 +354,7 @@
             TableViewBttn.Size = new Size(202, 60);
             TableViewBttn.TabIndex = 6;
             TableViewBttn.Tag = "Table";
-            TableViewBttn.Text = "     Table";
+            TableViewBttn.Text = "   General Company Information";
             TableViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             TableViewBttn.UseVisualStyleBackColor = false;
             TableViewBttn.Click += TableViewBttn_Click;
@@ -444,12 +444,12 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
-            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.ForeColor = SystemColors.Desktop;
             label1.Location = new Point(15, 15);
             label1.Name = "label1";
-            label1.Size = new Size(167, 25);
+            label1.Size = new Size(252, 25);
             label1.TabIndex = 1;
-            label1.Text = "DASHBOARD";
+            label1.Text = "ADMIN DASHBOARD";
             // 
             // panel2
             // 
@@ -576,7 +576,7 @@
             // 
             // menuBarPanel3
             // 
-            menuBarPanel3.BackColor = SystemColors.Desktop;
+            menuBarPanel3.BackColor = Color.IndianRed;
             menuBarPanel3.Controls.Add(panel2);
             menuBarPanel3.Controls.Add(panel3);
             menuBarPanel3.Dock = DockStyle.Fill;
@@ -620,7 +620,7 @@
             menuBarPanel1.Size = new Size(202, 657);
             menuBarPanel1.TabIndex = 0;
             // 
-            // mainApp
+            // AdminDashB
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -631,9 +631,9 @@
             Controls.Add(menuBarPanel0);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "mainApp";
+            Name = "AdminDashB";
             Text = "Form3";
-            Load += mainApp_Load;
+            Load += adminDashB_Load;
             panel1.ResumeLayout(false);
             controlBarPanel1.ResumeLayout(false);
             controlBarPanel2.ResumeLayout(false);
