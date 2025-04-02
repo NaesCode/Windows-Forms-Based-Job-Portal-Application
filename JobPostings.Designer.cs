@@ -40,6 +40,7 @@
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             panel4 = new Panel();
+            searchBar = new ReaLTaiizor.Controls.DungeonTextBox();
             companyLogo2 = new SiticoneNetCoreUI.SiticonePictureBox();
             panel5 = new Panel();
             label7 = new Label();
@@ -152,12 +153,32 @@
             // panel4
             // 
             panel4.BackColor = Color.Transparent;
+            panel4.Controls.Add(searchBar);
             panel4.Controls.Add(companyLogo2);
             panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(1003, 0);
+            panel4.Location = new Point(854, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(166, 51);
+            panel4.Size = new Size(315, 51);
             panel4.TabIndex = 1;
+            // 
+            // searchBar
+            // 
+            searchBar.BackColor = Color.Transparent;
+            searchBar.BorderColor = Color.FromArgb(180, 180, 180);
+            searchBar.EdgeColor = Color.White;
+            searchBar.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            searchBar.ForeColor = Color.DimGray;
+            searchBar.Location = new Point(10, 11);
+            searchBar.MaxLength = 32767;
+            searchBar.Multiline = false;
+            searchBar.Name = "searchBar";
+            searchBar.ReadOnly = false;
+            searchBar.Size = new Size(225, 29);
+            searchBar.TabIndex = 4;
+            searchBar.Text = "  Type here to search...";
+            searchBar.TextAlignment = HorizontalAlignment.Left;
+            searchBar.UseSystemPasswordChar = false;
+            searchBar.TextChanged += searchBar_TextChanged;
             // 
             // companyLogo2
             // 
@@ -189,7 +210,7 @@
             companyLogo2.Images = (List<Image>)resources.GetObject("companyLogo2.Images");
             companyLogo2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             companyLogo2.IsCircular = true;
-            companyLogo2.Location = new Point(104, 5);
+            companyLogo2.Location = new Point(255, 6);
             companyLogo2.MaintainAspectRatio = true;
             companyLogo2.Name = "companyLogo2";
             companyLogo2.PlaceholderImage = null;
@@ -215,7 +236,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
             label7.ForeColor = SystemColors.ButtonHighlight;
-            label7.Location = new Point(15, 15);
+            label7.Location = new Point(15, 14);
             label7.Name = "label7";
             label7.Size = new Size(248, 25);
             label7.TabIndex = 1;
@@ -365,5 +386,6 @@
         private DataGridViewTextBoxColumn startingSalary;
         private DataGridViewTextBoxColumn vacantPositions;
         private DataGridViewTextBoxColumn isPosted;
+        private ReaLTaiizor.Controls.DungeonTextBox searchBar;
     }
 }

@@ -21,7 +21,7 @@ namespace Job_Application_Manager
 
         public void LoadData()
         {
-            companyInfoTable.DataSource = dbSupport.getCompanyData();
+            companyInfoTable.DataSource = dbSupport.GetCompanyData();
             string buttonColumnName = "Files";
             if (!companyInfoTable.Columns.Contains(buttonColumnName))
             {
@@ -36,12 +36,12 @@ namespace Job_Application_Manager
 
         private void approveBttn_Click(object sender, EventArgs e)
         {
-            dbSupport.updateCompanyStatus(companyUserID, "APPROVED");
+            dbSupport.UpdateCompanyStatus(companyUserID, "APPROVED");
         }
 
         private void disapproveBttn_Click(object sender, EventArgs e)
         {
-            dbSupport.updateCompanyStatus(companyUserID, "DISAPPROVED");
+            dbSupport.UpdateCompanyStatus(companyUserID, "DISAPPROVED");
         }
 
         private void companyInfoTable_CellClick(object sender, DataGridViewCellEventArgs e)

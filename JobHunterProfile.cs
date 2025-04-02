@@ -12,11 +12,9 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class JobHunterProfile : HunterBaseControl
+    public partial class JobHunterProfile : BaseControl
     {
-        private DatabaseSupport db = new DatabaseSupport();
         private SetUpProfileForm? setUpProfileForm;
-        private byte[]? imageData;
 
         public JobHunterProfile(int ID)
         {
@@ -24,10 +22,20 @@ namespace Job_Application_Manager
             HunterID = ID;
         }
 
+        private void JobHunterProfile_Load(object sender, EventArgs e)
+        {
+            bool isSetUp = dbSupport.GetProfileSetUpStatus(HunterID);
+
+            if (isSetUp == true)
+                setUpBttn.Enabled = false;
+            else
+                setUpBttn.Enabled = true;
+        }
+
         public override void DisplayDetails()
         {
             // Fetch and display profile picture
-            imageData = db.DisplayProfilePicture(HunterID);
+            imageData = dbSupport.DisplayProfilePicture(HunterID);
             if (imageData != null)
             {
                 using (MemoryStream ms = new MemoryStream(imageData))
@@ -37,7 +45,7 @@ namespace Job_Application_Manager
             }
 
             // Fetch and display profile details
-            var profileData = db.GetProfileDetails(HunterID);
+            var profileData = dbSupport.GetProfileDetails(HunterID);
             if (profileData != null)
             {
                 fullName.Text = profileData["Full Name"].ToString();

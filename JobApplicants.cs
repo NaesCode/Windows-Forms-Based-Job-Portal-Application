@@ -11,18 +11,30 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class JobApplicants : HunterBaseControl
+    public partial class JobApplicants : BaseControl
     {
-        private DatabaseSupport dbSupport = new DatabaseSupport();
+        private DataTable? applicantsData;
 
         public JobApplicants(int ID)
         {
             InitializeComponent();
             CompanyID = ID;
+
+            searchBar.TextChanged += searchBar_TextChanged;
         }
 
         public override void DisplayDetails()
         {
+            imageData = dbSupport.DisplayCompanyLogo(CompanyID);
+            if (imageData != null)
+            {
+                using (MemoryStream ms = new MemoryStream(imageData))
+                {
+                    companyLogo.Image = Image.FromStream(ms);
+                    companyLogo.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
+                }
+            }
+
             flowPostsPanel.Controls.Clear();
 
             List<ViewApplicants> jobPosts = dbSupport.GetJobPostApplicants(CompanyID);
@@ -71,7 +83,7 @@ namespace Job_Application_Manager
         private void LoadApplicantsData(int jobPostID)
         {
             applicantsGridView.DataSource = null;
-            DataTable? applicantsData = dbSupport.GetGeneralApplicantDetails(jobPostID);
+            applicantsData = dbSupport.GetGeneralApplicantDetails(jobPostID);
             applicantsGridView.DataSource = applicantsData;
             string buttonColumnName = "Files";
             if (!applicantsGridView.Columns.Contains(buttonColumnName))
@@ -118,6 +130,44 @@ namespace Job_Application_Manager
         private void shortlistBttn_Click(object sender, EventArgs e)
         {
             dbSupport.UpdateApplicationStatus(HunterID, "OFFER EXTENDED");
+        }
+
+        private void searchBar_TextChanged(object? sender, EventArgs e)
+        {
+            string searchKey = searchBar.Text.Trim();
+            if (string.IsNullOrEmpty(searchKey))
+            {
+                if (applicantsData != null)
+                {
+                    applicantsData.DefaultView.RowFilter = "";
+                }
+            }
+            else if (int.TryParse(searchKey, out int result)) //If the search key is an Application ID number or User ID number
+            {
+                FilterApplicantsByID(result);
+            }
+            else
+            {
+                FilterApplicants(searchKey);
+            }
+        }
+
+        private void FilterApplicants(string filter)
+        {
+            if (applicantsData != null)
+            {
+                string filterExpression = string.Format("[Full Name] LIKE '%{0}%' OR [Status] LIKE '%{0}%'", filter.Replace("'", "''"));
+                applicantsData.DefaultView.RowFilter = filterExpression;
+            }
+        }
+
+        private void FilterApplicantsByID(int filter)
+        {
+            if (applicantsData != null)
+            {
+                string filterExpression = string.Format("[Application ID] = {0} OR [UserID] = {0}", filter);
+                applicantsData.DefaultView.RowFilter = filterExpression;
+            }
         }
     }
 }

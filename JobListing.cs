@@ -40,7 +40,7 @@ namespace Job_Application_Manager
 
             try
             {
-                dbSupport.insertJobPostData(companyUserID, CompanyName.Text, JobTitle.Text, JobType.Text, JobCategory.Text, Industry.Text,
+                dbSupport.InsertJobPostData(companyUserID, CompanyName.Text, JobTitle.Text, JobType.Text, JobCategory.Text, Industry.Text,
                                         JobLocation.Text, WorkMode.Text, startingSalary.Text, JobDescription.Text, ApplicationDetails.Text, jobVacancy, deadline, isPosted);
             }
             catch (Exception ex)

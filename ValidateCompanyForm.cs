@@ -12,7 +12,7 @@ namespace Job_Application_Manager
 {
     public partial class ValidateCompanyForm : Form
     {
-        DatabaseSupport db = new DatabaseSupport();
+        DatabaseSupport dbSupport = new DatabaseSupport();
         private int companyUserID;
         public ValidateCompanyForm(int companyUserID)
         {
@@ -46,7 +46,7 @@ namespace Job_Application_Manager
             byte[]? birrBytes = File.ReadAllBytes(BIRR.Tag.ToString());
             byte[]? mpBytes = File.ReadAllBytes(MP.Tag.ToString());
 
-            db.insertValidationData(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text,
+            dbSupport.InsertValidationData(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text,
                                     companyLogo.Tag.ToString(), logoBytes, COR.Tag.ToString(), corBytes, BIRR.Tag.ToString(), birrBytes, MP.Tag.ToString(), mpBytes, currentDate, status);
 
             this.DialogResult = DialogResult.OK;

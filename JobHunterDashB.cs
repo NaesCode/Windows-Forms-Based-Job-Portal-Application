@@ -13,11 +13,12 @@ namespace Job_Application_Manager
 {
     public partial class JobHunterDashB : Form
     {
-        private UserControl? currentChildForm;
-        Job_Hunt? jobHuntForm;
-        JobHunterProfile? jobHunterProfileForm;
+        private BaseControl? currentChildForm;
+        private SetUpProfileForm? setUpProfileForm;
 
         private int hunterID;
+
+        private DatabaseSupport dbSupport = new DatabaseSupport();
 
         public JobHunterDashB(int hunterID)
         {
@@ -57,10 +58,52 @@ namespace Job_Application_Manager
             }
         }
 
-        private void JobHuntDashB_Load(object sender, EventArgs e)
+        private async void JobHuntDashB_Load(object sender, EventArgs e)
         {
             this.Size = new Size(1095, 659); //or 700
             this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+
+            bool? isSetUp = dbSupport.GetProfileSetUpStatus(hunterID);
+
+            if(isSetUp == true)
+            {
+                ApplyJobBttn.Enabled = true;
+            }
+            else
+            {
+                setUpProfileForm = new SetUpProfileForm(hunterID);
+
+                await Task.Delay(1000);
+
+                setUpProfileForm.Opacity = 0;
+                // Disable the main form to simulate modal behavior
+                this.Enabled = false;
+
+                // Start the form and animate it
+                setUpProfileForm.Show();
+
+                System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer();
+                fadeTimer.Interval = 50; // Adjust for smoother animation
+                fadeTimer.Tick += (s, ev) =>
+                {
+                    if (setUpProfileForm.Opacity < 1)
+                    {
+                        setUpProfileForm.Opacity += 0.05; // Smooth fade
+                    }
+                    else
+                    {
+                        fadeTimer.Stop();
+                    }
+                };
+                fadeTimer.Start();
+
+                // Wait for the form to close using FormClosed event
+                setUpProfileForm.FormClosed += (s, ev) =>
+                {
+                    this.Enabled = true; // Re-enable main form
+                };
+            }
+
         }
 
         private void MenuBttn_Click(object sender, EventArgs e)
@@ -153,12 +196,12 @@ namespace Job_Application_Manager
 
         
 
-        private void exitButton1_Click_1(object sender, EventArgs e)
+        private void exitButton1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void maximButton1_Click_1(object sender, EventArgs e)
+        private void maximButton1_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal)
             {
@@ -181,13 +224,13 @@ namespace Job_Application_Manager
                 this.WindowState = FormWindowState.Minimized;
         }
 
-        private void manageProfileBttn_Click(object sender, EventArgs e)
+        private void ProfileViewBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            jobHunterProfileForm = new JobHunterProfile(hunterID);
-            jobHunterProfileForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobHunterProfileForm);
-            jobHunterProfileForm.DisplayDetails();
+            currentChildForm = new JobHunterProfile(hunterID);
+            currentChildForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.DisplayDetails();
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
@@ -195,10 +238,10 @@ namespace Job_Application_Manager
         private void ApplyJobBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            jobHuntForm = new Job_Hunt(hunterID);
-            jobHuntForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobHuntForm);
-            jobHuntForm.DisplayDetails();
+            currentChildForm = new Job_Hunt(hunterID);
+            currentChildForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.DisplayDetails();
             if (this.WindowState == FormWindowState.Maximized)
                 adjustJobPostPanelSize();
             desktopPanel.Tag = currentChildForm;
@@ -208,9 +251,10 @@ namespace Job_Application_Manager
         private void TableViewBttn_Click(object sender, EventArgs e)
         {
             desktopPanel.Controls.Clear();
-            currentChildForm = new TableView();
+            currentChildForm = new TrackApplications(hunterID);
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.DisplayDetails();
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }

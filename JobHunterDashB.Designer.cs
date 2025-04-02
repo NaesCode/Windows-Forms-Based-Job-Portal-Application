@@ -38,7 +38,7 @@
             maximButton1 = new FontAwesome.Sharp.IconButton();
             CalendarViewBttn = new FontAwesome.Sharp.IconButton();
             ListViewBttn = new FontAwesome.Sharp.IconButton();
-            manageProfileBttn = new FontAwesome.Sharp.IconButton();
+            ProfileViewBttn = new FontAwesome.Sharp.IconButton();
             ApplyJobBttn = new FontAwesome.Sharp.IconButton();
             TableViewBttn = new FontAwesome.Sharp.IconButton();
             signOutBttn = new FontAwesome.Sharp.IconButton();
@@ -196,7 +196,7 @@
             exitButton1.TabIndex = 10;
             exitButton1.Text = "X";
             exitButton1.UseVisualStyleBackColor = true;
-            exitButton1.Click += exitButton1_Click_1;
+            exitButton1.Click += exitButton1_Click;
             // 
             // maximButton1
             // 
@@ -216,7 +216,7 @@
             maximButton1.TabIndex = 9;
             maximButton1.Text = "[ ^ ]";
             maximButton1.UseVisualStyleBackColor = false;
-            maximButton1.Click += maximButton1_Click_1;
+            maximButton1.Click += maximButton1_Click;
             // 
             // CalendarViewBttn
             // 
@@ -270,36 +270,37 @@
             ListViewBttn.UseVisualStyleBackColor = false;
             ListViewBttn.Click += ListViewBttn_Click;
             // 
-            // manageProfileBttn
+            // ProfileViewBttn
             // 
-            manageProfileBttn.BackColor = Color.Transparent;
-            manageProfileBttn.Dock = DockStyle.Top;
-            manageProfileBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
-            manageProfileBttn.FlatAppearance.BorderSize = 0;
-            manageProfileBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            manageProfileBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
-            manageProfileBttn.FlatStyle = FlatStyle.Flat;
-            manageProfileBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            manageProfileBttn.ForeColor = SystemColors.ButtonHighlight;
-            manageProfileBttn.IconChar = FontAwesome.Sharp.IconChar.Freebsd;
-            manageProfileBttn.IconColor = Color.White;
-            manageProfileBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            manageProfileBttn.IconSize = 30;
-            manageProfileBttn.Location = new Point(0, 157);
-            manageProfileBttn.Name = "manageProfileBttn";
-            manageProfileBttn.Padding = new Padding(20, 0, 0, 0);
-            manageProfileBttn.Size = new Size(202, 60);
-            manageProfileBttn.TabIndex = 8;
-            manageProfileBttn.Tag = "Chart";
-            manageProfileBttn.Text = "     Profile";
-            manageProfileBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            manageProfileBttn.UseVisualStyleBackColor = false;
-            manageProfileBttn.Click += manageProfileBttn_Click;
+            ProfileViewBttn.BackColor = Color.Transparent;
+            ProfileViewBttn.Dock = DockStyle.Top;
+            ProfileViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
+            ProfileViewBttn.FlatAppearance.BorderSize = 0;
+            ProfileViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            ProfileViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            ProfileViewBttn.FlatStyle = FlatStyle.Flat;
+            ProfileViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ProfileViewBttn.ForeColor = SystemColors.ButtonHighlight;
+            ProfileViewBttn.IconChar = FontAwesome.Sharp.IconChar.Freebsd;
+            ProfileViewBttn.IconColor = Color.White;
+            ProfileViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ProfileViewBttn.IconSize = 30;
+            ProfileViewBttn.Location = new Point(0, 157);
+            ProfileViewBttn.Name = "ProfileViewBttn";
+            ProfileViewBttn.Padding = new Padding(20, 0, 0, 0);
+            ProfileViewBttn.Size = new Size(202, 60);
+            ProfileViewBttn.TabIndex = 8;
+            ProfileViewBttn.Tag = "Chart";
+            ProfileViewBttn.Text = "     Profile";
+            ProfileViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            ProfileViewBttn.UseVisualStyleBackColor = false;
+            ProfileViewBttn.Click += ProfileViewBttn_Click;
             // 
             // ApplyJobBttn
             // 
             ApplyJobBttn.BackColor = Color.Transparent;
             ApplyJobBttn.Dock = DockStyle.Top;
+            ApplyJobBttn.Enabled = false;
             ApplyJobBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
             ApplyJobBttn.FlatAppearance.BorderSize = 0;
             ApplyJobBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
@@ -446,7 +447,7 @@
             menuBarPanel1.Controls.Add(ListViewBttn);
             menuBarPanel1.Controls.Add(TableViewBttn);
             menuBarPanel1.Controls.Add(ApplyJobBttn);
-            menuBarPanel1.Controls.Add(manageProfileBttn);
+            menuBarPanel1.Controls.Add(ProfileViewBttn);
             menuBarPanel1.Controls.Add(panel6);
             menuBarPanel1.Dock = DockStyle.Fill;
             menuBarPanel1.Location = new Point(0, 2);
@@ -486,7 +487,7 @@
         private FontAwesome.Sharp.IconButton TableViewBttn;
         private FontAwesome.Sharp.IconButton CalendarViewBttn;
         private FontAwesome.Sharp.IconButton ListViewBttn;
-        private FontAwesome.Sharp.IconButton manageProfileBttn;
+        private FontAwesome.Sharp.IconButton ProfileViewBttn;
         private FontAwesome.Sharp.IconButton ApplyJobBttn;
         private Panel controlBarPanel1;
         private Panel controlBarPanel2;

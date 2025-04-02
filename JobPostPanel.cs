@@ -10,11 +10,10 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class JobPostPanel : HunterBaseControl
+    public partial class JobPostPanel : BaseControl
     {
         private int JobPostID;
-        private byte[]? companyLogo;
-        public JobPostPanel(int postID, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, byte[]? logo, int hunterID)
+        public JobPostPanel(int postID, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, byte[]? companyLogo, int hunterID)
         {
             InitializeComponent();
             JobPostID = postID;
@@ -26,10 +25,10 @@ namespace Job_Application_Manager
             workModeLabel.Text = "( " + workMode + " )";
             initialSalaryLabel.Text = salary + ".00 / Month";
             vacancyLabel.Text = vacancy.ToString() + " Available Pos.";
-            companyLogo = logo;
-            if (companyLogo != null)
+            imageData = companyLogo;
+            if (imageData != null)
             {
-                using (MemoryStream ms = new MemoryStream(companyLogo))
+                using (MemoryStream ms = new MemoryStream(imageData))
                 {
                     companyLogoPic.Image = Image.FromStream(ms);
                 }
@@ -39,7 +38,7 @@ namespace Job_Application_Manager
         private void jobTitleBttn_Click(object sender, EventArgs e)
         {
             JobFullDetails jobDetails = new JobFullDetails(JobPostID, HunterID);
-            jobDetails.LoadJobDetails(companyLogo);
+            jobDetails.LoadJobDetails(imageData);
             jobDetails.ShowDialog();
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Job_Application_Manager
 {
-    partial class Job_Hunt
+    partial class TrackApplications
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Job_Hunt));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrackApplications));
+            panel1 = new Panel();
+            ApplicationsTable = new ReaLTaiizor.Controls.PoisonDataGridView();
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             panel2 = new Panel();
@@ -36,24 +41,71 @@
             profilePicture = new SiticoneNetCoreUI.SiticonePictureBox();
             panel3 = new Panel();
             label1 = new Label();
-            flowPostsPanel = new FlowLayoutPanel();
-            panel1 = new Panel();
-            panel4 = new Panel();
-            panel6 = new Panel();
-            panel7 = new Panel();
-            label3 = new Label();
-            panel5 = new Panel();
-            label2 = new Label();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ApplicationsTable).BeginInit();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            panel1.SuspendLayout();
-            panel4.SuspendLayout();
-            panel6.SuspendLayout();
-            panel7.SuspendLayout();
-            panel5.SuspendLayout();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ButtonHighlight;
+            panel1.Controls.Add(ApplicationsTable);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 55);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 0, 8, 0);
+            panel1.Size = new Size(893, 549);
+            panel1.TabIndex = 0;
+            // 
+            // ApplicationsTable
+            // 
+            ApplicationsTable.AllowUserToAddRows = false;
+            ApplicationsTable.AllowUserToResizeRows = false;
+            ApplicationsTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ApplicationsTable.BackgroundColor = Color.FromArgb(255, 255, 255);
+            ApplicationsTable.BorderStyle = BorderStyle.None;
+            ApplicationsTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            ApplicationsTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Desktop;
+            dataGridViewCellStyle1.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle1.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ApplicationsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            ApplicationsTable.ColumnHeadersHeight = 35;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            ApplicationsTable.DefaultCellStyle = dataGridViewCellStyle2;
+            ApplicationsTable.Dock = DockStyle.Fill;
+            ApplicationsTable.EnableHeadersVisualStyles = false;
+            ApplicationsTable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            ApplicationsTable.GridColor = Color.FromArgb(255, 255, 255);
+            ApplicationsTable.Location = new Point(0, 0);
+            ApplicationsTable.Name = "ApplicationsTable";
+            ApplicationsTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(0, 174, 219);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 198, 247);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            ApplicationsTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            ApplicationsTable.RowHeadersVisible = false;
+            ApplicationsTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            ApplicationsTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ApplicationsTable.Size = new Size(885, 549);
+            ApplicationsTable.TabIndex = 14;
             // 
             // menuBarPanel2
             // 
@@ -62,8 +114,8 @@
             menuBarPanel2.Location = new Point(0, 0);
             menuBarPanel2.Name = "menuBarPanel2";
             menuBarPanel2.Padding = new Padding(0, 2, 0, 2);
-            menuBarPanel2.Size = new Size(890, 55);
-            menuBarPanel2.TabIndex = 9;
+            menuBarPanel2.Size = new Size(893, 55);
+            menuBarPanel2.TabIndex = 10;
             // 
             // menuBarPanel3
             // 
@@ -73,7 +125,7 @@
             menuBarPanel3.Dock = DockStyle.Fill;
             menuBarPanel3.Location = new Point(0, 2);
             menuBarPanel3.Name = "menuBarPanel3";
-            menuBarPanel3.Size = new Size(890, 51);
+            menuBarPanel3.Size = new Size(893, 51);
             menuBarPanel3.TabIndex = 0;
             // 
             // panel2
@@ -82,9 +134,9 @@
             panel2.Controls.Add(searchBar);
             panel2.Controls.Add(profilePicture);
             panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(558, 0);
+            panel2.Location = new Point(588, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(332, 51);
+            panel2.Size = new Size(305, 51);
             panel2.TabIndex = 1;
             // 
             // searchBar
@@ -94,13 +146,13 @@
             searchBar.EdgeColor = Color.White;
             searchBar.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             searchBar.ForeColor = Color.DimGray;
-            searchBar.Location = new Point(10, 11);
+            searchBar.Location = new Point(25, 11);
             searchBar.MaxLength = 32767;
             searchBar.Multiline = false;
             searchBar.Name = "searchBar";
             searchBar.ReadOnly = false;
-            searchBar.Size = new Size(241, 29);
-            searchBar.TabIndex = 4;
+            searchBar.Size = new Size(208, 29);
+            searchBar.TabIndex = 3;
             searchBar.Text = "  Type here to search...";
             searchBar.TextAlignment = HorizontalAlignment.Left;
             searchBar.UseSystemPasswordChar = false;
@@ -136,7 +188,7 @@
             profilePicture.Images = (List<Image>)resources.GetObject("profilePicture.Images");
             profilePicture.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             profilePicture.IsCircular = true;
-            profilePicture.Location = new Point(268, 5);
+            profilePicture.Location = new Point(250, 5);
             profilePicture.MaintainAspectRatio = true;
             profilePicture.Name = "profilePicture";
             profilePicture.PlaceholderImage = null;
@@ -146,7 +198,6 @@
             profilePicture.Size = new Size(40, 40);
             profilePicture.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
             profilePicture.TabIndex = 0;
-            profilePicture.Text = "siticonePictureBox1";
             // 
             // panel3
             // 
@@ -155,7 +206,7 @@
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(496, 51);
+            panel3.Size = new Size(555, 51);
             panel3.TabIndex = 2;
             // 
             // label1
@@ -163,137 +214,40 @@
             label1.AutoSize = true;
             label1.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(15, 15);
+            label1.Location = new Point(15, 14);
             label1.Name = "label1";
             label1.Size = new Size(167, 25);
             label1.TabIndex = 1;
             label1.Text = "DASHBOARD";
             // 
-            // flowPostsPanel
-            // 
-            flowPostsPanel.AutoScroll = true;
-            flowPostsPanel.BackColor = Color.LightSlateGray;
-            flowPostsPanel.Dock = DockStyle.Fill;
-            flowPostsPanel.FlowDirection = FlowDirection.TopDown;
-            flowPostsPanel.Location = new Point(0, 55);
-            flowPostsPanel.Name = "flowPostsPanel";
-            flowPostsPanel.Size = new Size(600, 604);
-            flowPostsPanel.TabIndex = 10;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ButtonHighlight;
-            panel1.Controls.Add(panel4);
-            panel1.Dock = DockStyle.Right;
-            panel1.Location = new Point(600, 55);
-            panel1.Name = "panel1";
-            panel1.Padding = new Padding(3, 0, 3, 3);
-            panel1.Size = new Size(290, 604);
-            panel1.TabIndex = 11;
-            // 
-            // panel4
-            // 
-            panel4.AutoSize = true;
-            panel4.BackColor = SystemColors.Desktop;
-            panel4.Controls.Add(panel6);
-            panel4.Controls.Add(panel5);
-            panel4.Dock = DockStyle.Fill;
-            panel4.ForeColor = SystemColors.ButtonHighlight;
-            panel4.Location = new Point(3, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(284, 601);
-            panel4.TabIndex = 0;
-            // 
-            // panel6
-            // 
-            panel6.Controls.Add(panel7);
-            panel6.Dock = DockStyle.Bottom;
-            panel6.Location = new Point(0, 308);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(284, 293);
-            panel6.TabIndex = 2;
-            // 
-            // panel7
-            // 
-            panel7.BackColor = Color.FromArgb(64, 64, 64);
-            panel7.Controls.Add(label3);
-            panel7.Dock = DockStyle.Top;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(284, 34);
-            panel7.TabIndex = 2;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(9, 7);
-            label3.Name = "label3";
-            label3.Size = new Size(54, 19);
-            label3.TabIndex = 0;
-            label3.Text = "Saved";
-            // 
-            // panel5
-            // 
-            panel5.BackColor = Color.FromArgb(64, 64, 64);
-            panel5.Controls.Add(label2);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(284, 34);
-            panel5.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(9, 7);
-            label2.Name = "label2";
-            label2.Size = new Size(213, 19);
-            label2.TabIndex = 0;
-            label2.Text = "Notifications and Reminders";
-            // 
-            // Job_Hunt
+            // TrackApplications
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(flowPostsPanel);
             Controls.Add(panel1);
             Controls.Add(menuBarPanel2);
-            Name = "Job_Hunt";
-            Size = new Size(890, 659);
+            Name = "TrackApplications";
+            Size = new Size(893, 604);
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ApplicationsTable).EndInit();
             menuBarPanel2.ResumeLayout(false);
             menuBarPanel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel6.ResumeLayout(false);
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
+        private Panel panel1;
+        private ReaLTaiizor.Controls.PoisonDataGridView ApplicationsTable;
         private Panel menuBarPanel2;
         private Panel menuBarPanel3;
         private Panel panel2;
         private SiticoneNetCoreUI.SiticonePictureBox profilePicture;
         private Panel panel3;
         private Label label1;
-        private FlowLayoutPanel flowPostsPanel;
-        private Panel panel1;
-        private Panel panel4;
-        private Panel panel6;
-        private Panel panel7;
-        private Label label3;
-        private Panel panel5;
-        private Label label2;
         private ReaLTaiizor.Controls.DungeonTextBox searchBar;
     }
 }

@@ -12,7 +12,7 @@ namespace Job_Application_Manager
 {
     public partial class SetUpProfileForm : Form
     {
-        DatabaseSupport db = new DatabaseSupport();
+        DatabaseSupport dbSupport = new DatabaseSupport();
         private int hunterID;
         private string? Degree = null;
         private string? University = null;
@@ -54,7 +54,7 @@ namespace Job_Application_Manager
 
             try
             {
-                db.insertHunterProfileDetails(hunterID, fullName.Text, BirthDate, gender, contactNumber.Text, hunterEmail.Text, hunterAddress.Text, hunterNationality.Text, educAttainment.Text, Degree, University,
+                dbSupport.InsertHunterProfileDetails(hunterID, fullName.Text, BirthDate, gender, contactNumber.Text, hunterEmail.Text, hunterAddress.Text, hunterNationality.Text, educAttainment.Text, Degree, University,
                                           pfpBytes, ProfilePicture.Tag.ToString(), resumeBytes, resumeDocx.Tag.ToString(), coverLetterBytes, coverLetter.Tag.ToString(), portfolioBytes, portfolioPath, portfolioUrl, currentDate, isSetUp);
             }
             catch (Exception ex)

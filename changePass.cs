@@ -36,7 +36,7 @@ namespace Job_Application_Manager
                     if (UserPassword.Text.Length < 8)
                         throw new Exception("Password must be atleast 8 characters.Try again");
 
-                    dbSupport.changePassword(UserPassword.Text, UserEmail);
+                    dbSupport.ChangePassword(UserPassword.Text, UserEmail);
 
                     MessageBox.Show("Password changed!");
                     this.DialogResult = DialogResult.OK;

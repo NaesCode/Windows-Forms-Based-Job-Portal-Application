@@ -396,6 +396,7 @@
             Controls.Add(menuBarPanel2);
             Name = "JobHunterProfile";
             Size = new Size(890, 569);
+            Load += JobHunterProfile_Load;
             menuBarPanel2.ResumeLayout(false);
             menuBarPanel3.ResumeLayout(false);
             panel3.ResumeLayout(false);

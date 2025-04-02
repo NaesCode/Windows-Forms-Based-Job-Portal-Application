@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class ListView : UserControl
+    public partial class ListView : BaseControl
     {
         public ListView()
         {

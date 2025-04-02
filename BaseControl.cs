@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Job_Application_Manager
 {
-    public class HunterBaseControl : UserControl
+    public class BaseControl : UserControl
     {
         public int HunterID { get; set; }
         public int CompanyID { get; set; }
+
+        public byte[]? imageData { get; set;}
+
+        internal DatabaseSupport dbSupport = new DatabaseSupport();
 
         public virtual void DisplayDetails() { }
     }

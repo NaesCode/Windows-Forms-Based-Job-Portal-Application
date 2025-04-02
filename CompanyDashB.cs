@@ -20,7 +20,7 @@ namespace Job_Application_Manager
         JobPostings? jobPostingsForm;
         JobApplicants? jobApplicantsForm; 
 
-        DatabaseSupport dbSupport = new DatabaseSupport();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
 
         public CompanyDashB(int companyID)
         {
@@ -65,7 +65,7 @@ namespace Job_Application_Manager
             this.Size = new Size(1095, 659); //or 700
             this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
 
-            string? approvalStatus = dbSupport.getApprovalStatus(companyUserID);
+            string? approvalStatus = dbSupport.GetApprovalStatus(companyUserID);
 
             if(approvalStatus == "APPROVED")
             {
@@ -240,7 +240,7 @@ namespace Job_Application_Manager
             jobPostingsForm = new JobPostings(companyUserID);
             jobPostingsForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(jobPostingsForm);
-            jobPostingsForm.loadData();
+            jobPostingsForm.DisplayDetails();
             desktopPanel.Tag = jobPostingsForm;
             desktopPanel.AutoScroll = true;
         }

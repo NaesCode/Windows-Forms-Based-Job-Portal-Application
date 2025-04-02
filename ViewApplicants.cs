@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class ViewApplicants : HunterBaseControl //d pani sure nga inheritance
+    public partial class ViewApplicants : BaseControl //d pani sure nga inheritance
     {
         public int JobPostID { get; private set; }
         private byte[]? companyLogo;

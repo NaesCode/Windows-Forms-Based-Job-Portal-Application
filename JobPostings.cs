@@ -10,26 +10,38 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class JobPostings : UserControl
+    public partial class JobPostings : BaseControl
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
-        private int companyUserID;
+        private DataTable? jobList;
+
         private int indexRow;
         private bool IsPosted = false;
         public JobPostings(int companyID)
         {
             InitializeComponent();
-            companyUserID = companyID;
+            CompanyID = companyID;
+
+            searchBar.TextChanged += searchBar_TextChanged;
         }
 
-        public void loadData()
+        public override void DisplayDetails()
         {
-            DataTable? dt = dbSupport.getCompanyJobList(companyUserID);
+            imageData = dbSupport.DisplayCompanyLogo(CompanyID);
+            if (imageData != null)
+            {
+                using (MemoryStream ms = new MemoryStream(imageData))
+                {
+                    companyLogo2.Image = Image.FromStream(ms);
+                    companyLogo2.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
+                }
+            }
 
-            if (dt != null)
+            jobList = dbSupport.GetCompanyJobList(CompanyID);
+
+            if (jobList != null)
             {
                 jobEntriesTable.Rows.Clear();
-                foreach (DataRow row in dt.Rows)
+                foreach (DataRow row in jobList.Rows)
                 {
                     jobEntriesTable.Rows.Add(
                         row["CompanyName"],
@@ -53,7 +65,7 @@ namespace Job_Application_Manager
         private void postJobBttn_Click(object sender, EventArgs e)
         {
             IsPosted = true;
-            dbSupport.IsPostedStatus(companyUserID, IsPosted);
+            dbSupport.UpdateIsPostedStatus(CompanyID, IsPosted);
             if (indexRow >= 0)
             {
                 DataGridViewRow row = jobEntriesTable.Rows[indexRow];
@@ -64,10 +76,100 @@ namespace Job_Application_Manager
                 string? workMode = row.Cells[4].Value.ToString();
                 string? salary = row.Cells[5].Value.ToString();
                 int? vacancy = Convert.ToInt32(row.Cells[6].Value);
-                byte[]? imageData = dbSupport.DisplayCompanyLogo(companyUserID);
+                byte[]? imageData = dbSupport.DisplayCompanyLogo(CompanyID);
                 flowLayoutPanel1.Controls.Add(new JobPostPreviewPanel(companyName, jobTitle, jobType, location, workMode, salary, vacancy, imageData));
             }
-            loadData();
+            DisplayDetails();
+        }
+
+        private void searchBar_TextChanged(object? sender, EventArgs e)
+        {
+            string searchKey = searchBar.Text.Trim();
+            if (string.IsNullOrEmpty(searchKey))
+            {
+                if (jobList != null)
+                {
+                    jobList.DefaultView.RowFilter = "";
+                    if (jobList != null)
+                    {
+                        jobEntriesTable.Rows.Clear();
+                        foreach (DataRow row in jobList.DefaultView.ToTable().Rows)
+                        {
+                            jobEntriesTable.Rows.Add(
+                                row["CompanyName"],
+                                row["JobTitle"],
+                                row["JobType"],
+                                row["Location"],
+                                row["Work Mode"],
+                                row["StartingSalary"],
+                                row["Vacancy"],
+                                row["IsPosted"]
+                            );
+                        }
+                    }
+                }
+            }
+            else if (int.TryParse(searchKey, out int result)) //If the search key is an Application ID number or User ID number
+            {
+                FilterApplicantsByID(result);
+            }
+            else
+            {
+                FilterApplicants(searchKey);
+            }
+        }
+
+        private void FilterApplicants(string filter)
+        {
+            if (jobList != null)
+            {
+                string filterExpression = string.Format("[CompanyName] LIKE '%{0}%' OR [JobTitle] LIKE '%{0}%' OR [JobType] LIKE '%{0}%' OR [Location] LIKE '%{0}%' OR " +
+                                                        "[Work Mode] LIKE '%{0}%' OR [StartingSalary] LIKE '%{0}%'", filter.Replace("'", "''"));
+                jobList.DefaultView.RowFilter = filterExpression;
+                if (jobList != null)
+                {
+                    jobEntriesTable.Rows.Clear();
+                    foreach (DataRow row in jobList.DefaultView.ToTable().Rows)
+                    {
+                        jobEntriesTable.Rows.Add(
+                            row["CompanyName"],
+                            row["JobTitle"],
+                            row["JobType"],
+                            row["Location"],
+                            row["Work Mode"],
+                            row["StartingSalary"],
+                            row["Vacancy"],
+                            row["IsPosted"]
+                        );
+                    }
+                }
+            }
+        }
+
+        private void FilterApplicantsByID(int filter)
+        {
+            if (jobList != null)
+            {
+                string filterExpression = string.Format("[Vacancy] = {0}", filter);
+                jobList.DefaultView.RowFilter = filterExpression;
+                if (jobList != null)
+                {
+                    jobEntriesTable.Rows.Clear();
+                    foreach (DataRow row in jobList.DefaultView.ToTable().Rows)
+                    {
+                        jobEntriesTable.Rows.Add(
+                            row["CompanyName"],
+                            row["JobTitle"],
+                            row["JobType"],
+                            row["Location"],
+                            row["Work Mode"],
+                            row["StartingSalary"],
+                            row["Vacancy"],
+                            row["IsPosted"]
+                        );
+                    }
+                }
+            }
         }
     }
 }

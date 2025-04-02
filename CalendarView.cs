@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class CalendarView : UserControl
+    public partial class CalendarView : BaseControl
     {
         public static int _year, _month;
         public CalendarView()
