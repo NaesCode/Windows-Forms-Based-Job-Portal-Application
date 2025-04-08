@@ -101,7 +101,6 @@ namespace Job_Application_Manager
                 setUpProfileForm.FormClosed += (s, ev) =>
                 {
                     this.Enabled = true; // Re-enable main form
-                    ApplyJobBttn.Enabled = true;
                 };
             }
 
