@@ -6,16 +6,17 @@ namespace Job_Application_Manager
 {
     public partial class LogInForm : Form
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
 
         private AccountTypeReg? accountTypeFormInstance;
         private JobHunterDashB? jobHunterDashBForm;
         private CompanyDashB? companyDashBForm;
-        private AdminDashB adminDashBForm;
+        private AdminDashB? adminDashBForm;
         private codeVerify? codeVerifyInstance;
         private bool valid;
         private int companyID;
         private int hunterID;
+
         public LogInForm()
         {
             InitializeComponent();
@@ -29,6 +30,15 @@ namespace Job_Application_Manager
 
             //Initial check
             Checkbox_CheckedChanged(sender, e);
+        }
+
+        private void Control_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                LogInButton_Click(sender, e);
+            }
         }
 
         private void Checkbox_CheckedChanged(object sender, EventArgs e)
@@ -72,7 +82,7 @@ namespace Job_Application_Manager
             }
         }
 
-        private void LogInButton_Click_1(object sender, EventArgs e)
+        private void LogInButton_Click(object sender, EventArgs e)
         {
             string username = UserName.Text;
             string password = UserPassword.Text;
@@ -80,7 +90,7 @@ namespace Job_Application_Manager
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Please input your username and password before logging in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill in all required fields correctly.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -92,9 +102,10 @@ namespace Job_Application_Manager
                     {
                         if (jobHunterDashBForm == null || jobHunterDashBForm.IsDisposed)
                         {
+                            this.Hide();
                             jobHunterDashBForm = new JobHunterDashB(hunterID);
                             jobHunterDashBForm.Show();
-                            this.Hide();
+                            jobHunterDashBForm.BringToFront();
                         }
                         else
                         {
@@ -116,9 +127,10 @@ namespace Job_Application_Manager
                         //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (companyDashBForm == null || companyDashBForm.IsDisposed)
                         {
+                            this.Hide();
                             companyDashBForm = new CompanyDashB(companyID);
                             companyDashBForm.Show();
-                            this.Hide();
+                            companyDashBForm.BringToFront();
                         }
                         else
                         {
@@ -140,9 +152,10 @@ namespace Job_Application_Manager
                         //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (adminDashBForm == null || adminDashBForm.IsDisposed)
                         {
+                            this.Hide();
                             adminDashBForm = new AdminDashB();
                             adminDashBForm.Show();
-                            this.Hide();
+                            adminDashBForm.BringToFront();
                         }
                         else
                         {

@@ -19,6 +19,7 @@ using System.Net;
 using System.Windows.Documents;
 using System.Runtime.ConstrainedExecution;
 using static QRCoder.PayloadGenerator;
+using System.Xml.Linq;
 
 namespace Job_Application_Manager
 {
@@ -200,13 +201,13 @@ namespace Job_Application_Manager
 
         public byte[]? DisplayCompanyLogo(int companyId)
         {
-            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            using (myConn = new OleDbConnection(connectionString))
             {
-                conn.Open();
+                myConn.Open();
                 string logoQuery = "SELECT [Logo Data] FROM [Company Documents Binary Data] WHERE [companyUserID] = ? AND " +
                                "[Logo DataType] IN ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp')";
 
-                using (OleDbCommand cmd = new OleDbCommand(logoQuery, conn))
+                using (cmd = new OleDbCommand(logoQuery, myConn))
                 {
                     cmd.Parameters.AddWithValue("?", companyId);
                     using (OleDbDataReader reader = cmd.ExecuteReader())
@@ -228,12 +229,12 @@ namespace Job_Application_Manager
 
         public byte[]? DisplayProfilePicture(int hunterID)
         {
-            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            using (myConn = new OleDbConnection(connectionString))
             {
-                conn.Open();
+                myConn.Open();
                 string query = "SELECT [Pfp Data] FROM [JobHunter Documents Binary Data] WHERE [userID] = ? AND " +
                                "[Pfp FileType] IN ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp')";
-                using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                using (cmd = new OleDbCommand(query, myConn))
                 {
                     cmd.Parameters.AddWithValue("?", hunterID);
                     using (OleDbDataReader reader = cmd.ExecuteReader())
@@ -450,13 +451,48 @@ namespace Job_Application_Manager
 
         internal void UpdateIsPostedStatus(int companyUserID, bool status)
         {
-            string isPostedQuery = "UPDATE [Job Postings] SET [IsPosted] = ? WHERE [companyUserID] = ?";
+            using (OleDbConnection myConn = new OleDbConnection(connectionString))
+            {
+                try
+                {
+                    myConn.Open();
+                    string isPostedQuery = "UPDATE [Job Postings] SET [IsPosted] = ? WHERE [companyUserID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(isPostedQuery, myConn))
+                    {
+                        cmd.Parameters.AddWithValue("?", status);
+                        cmd.Parameters.AddWithValue("?", companyUserID);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            MessageBox.Show("No rows updated. Check if companyUserID exists.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void UpdateJobPost(int? PostID, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, bool? isPosted, DateTime closing)
+        {
+            string isPostedQuery = "UPDATE [Job Postings] SET [JobTitle] = ?, [JobType] = ?, [Location] = ?, [Work Mode] = ?, [StartingSalary] = ?, [Vacancy] = ?, [IsPosted] = ?, [Application Deadline] = ? WHERE [PostID] = ?";
 
             using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(isPostedQuery, myConn))
             {
-                cmd.Parameters.AddWithValue("?", status);
-                cmd.Parameters.AddWithValue("?", companyUserID);
+                cmd.Parameters.AddWithValue("?", jobTitle);
+                cmd.Parameters.AddWithValue("?", jobType);
+                cmd.Parameters.AddWithValue("?", location);
+                cmd.Parameters.AddWithValue("?", workMode);
+                cmd.Parameters.AddWithValue("?", salary);
+                cmd.Parameters.AddWithValue("?", vacancy);
+                cmd.Parameters.AddWithValue("?", isPosted);
+                cmd.Parameters.Add("?", OleDbType.Date).Value = closing;
+                cmd.Parameters.AddWithValue("?", PostID);
                 try
                 {
                     myConn.Open();
@@ -469,9 +505,30 @@ namespace Job_Application_Manager
             }
         }
 
+        internal void DeleteJobPost(int postID)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string deletePostQuery = "DELETE FROM [Job Postings] WHERE [PostID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(deletePostQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", postID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         internal List<ViewApplicants> GetJobPostApplicants(int companyID) //For Companies...Fetches Job Posts data to display current company's own posts, only to get applicants
         {
-            List<ViewApplicants> jobPostPanels = new List<ViewApplicants>();
+            List<ViewApplicants> jobPostApplicants = new List<ViewApplicants>();
             bool isPosted = true;
 
             using (OleDbConnection conn = new OleDbConnection(connectionString))
@@ -487,7 +544,7 @@ namespace Job_Application_Manager
                     {
                         if (!reader.HasRows)
                         {
-                            return jobPostPanels; // Return empty if no data
+                            return jobPostApplicants; // Return empty if no data
                         }
 
                         while (reader.Read())
@@ -507,12 +564,12 @@ namespace Job_Application_Manager
                             {
                                 Size = new Size(593, 117)
                             };
-                            jobPostPanels.Add(jobPostPanel);
+                            jobPostApplicants.Add(jobPostPanel);
                         }
                     }
                 }
             }
-            return jobPostPanels;
+            return jobPostApplicants;
         }
 
         internal DataTable? GetGeneralApplicantDetails(int postID)
@@ -520,7 +577,7 @@ namespace Job_Application_Manager
             try
             {
                 using (OleDbConnection conn = new OleDbConnection(connectionString))
-                using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [General_Applicant_Information] WHERE [JobPostID] = ?", conn))
+                using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [General_Applicant_Information] WHERE [PostID] = ?", conn))
                 {
                     cmd.Parameters.AddWithValue("?", postID);
                     using (OleDbDataAdapter adapter = new OleDbDataAdapter(cmd))
@@ -782,8 +839,8 @@ namespace Job_Application_Manager
                         cmd.Parameters.AddWithValue("?", hunterID);
                         cmd.Parameters.Add("?", OleDbType.VarBinary).Value = pfpData;
                         cmd.Parameters.Add("?", OleDbType.VarBinary).Value = resumeData;
-                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = letterData;
-                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = portfolioData;
+                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = letterData != null ? letterData : DBNull.Value;
+                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = portfolioData != null ? portfolioData : DBNull.Value;
                         cmd.Parameters.AddWithValue("?", pfpFileType);
                         cmd.Parameters.Add("?", OleDbType.Date).Value = currentDate;
                         cmd.ExecuteNonQuery();
@@ -851,6 +908,122 @@ namespace Job_Application_Manager
             return false;
         }
 
+        internal void UpdateHunterProfileDetails(int hunterID, string name, DateTime bday, string gender, string number, string email, string address, string nationality, string education, string? degree, string univ,
+                                                 byte[]? pfpData, string pfpFilePath, byte[]? resumeData, string resumeFilePath, byte[]? letterData, string? letterFilePath, byte[]? portfolioData,
+                                                 string? portfolioFilePath, string? website, DateTime currentDate)
+        {
+            int rowsAffected = 0;
+            string pfpFileName = Path.GetFileName(pfpFilePath);
+            string resumeFileName = Path.GetFileName(resumeFilePath);
+            string? letterFileName = letterFilePath != null ? Path.GetFileName(letterFilePath) : "N/A";
+            string? portfolioFileName = portfolioFilePath != null ? Path.GetFileName(portfolioFilePath) : "N/A";
+
+            string websiteUrl = website != null ? website : "N/A";
+
+            string pfpFileType = Path.GetExtension(pfpFilePath);
+
+            try
+            {
+                using (OleDbConnection myConn = new OleDbConnection(connectionString))
+                {
+                    myConn.Open();
+
+                    string profileQuery = "UPDATE [JobHunter Profile Information] SET [Full Name] = ?, [Date of Birth] = ?, [Gender] = ?, [Contact Number] = ?, [Email] = ?, [Address] = ?, [Nationality] = ?, [Education] = ?, [Degree] = ?, [University / Institution] = ? WHERE [userID] = ?";
+
+                    using (OleDbCommand cmd = new OleDbCommand(profileQuery, myConn))
+                    {
+                        cmd.Parameters.AddWithValue("?", name);
+                        cmd.Parameters.Add("?", OleDbType.Date).Value = bday;
+                        cmd.Parameters.AddWithValue("?", gender);
+                        cmd.Parameters.AddWithValue("?", number);
+                        cmd.Parameters.AddWithValue("?", email);
+                        cmd.Parameters.AddWithValue("?", address);
+                        cmd.Parameters.AddWithValue("?", nationality);
+                        cmd.Parameters.AddWithValue("?", education);
+                        cmd.Parameters.AddWithValue("?", degree);
+                        cmd.Parameters.AddWithValue("?", univ);
+                        cmd.Parameters.AddWithValue("?", hunterID);
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            MessageBox.Show("No rows updated. Check if HunterID exists.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+
+                    string filesQuery = "UPDATE [JobHunter Supporting Documents] SET [Profile Picture] = ?, [Resume/CV] = ?, [Cover Letter] = ?, [Personal Portfolio] = ?, [Website] = ? WHERE [userID] = ?";
+
+                    using (OleDbCommand cmd = new OleDbCommand(filesQuery, myConn))
+                    {
+                        cmd.Parameters.AddWithValue("?", pfpFileName);
+                        cmd.Parameters.AddWithValue("?", resumeFileName);
+                        cmd.Parameters.AddWithValue("?", letterFileName);
+                        cmd.Parameters.AddWithValue("?", portfolioFileName);
+                        cmd.Parameters.AddWithValue("?", websiteUrl);
+                        cmd.Parameters.AddWithValue("?", hunterID);
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            MessageBox.Show("No rows updated. Check if HunterID exists.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+
+                    string filesDataQuery = "UPDATE [JobHunter Documents Binary Data] SET [Pfp Data] = ?, [Resume Data] = ?, [CoverLetter Data] = ?, [Portfolio Data] = ?, [Pfp FileType] = ?, [Date Uploaded] = ? WHERE [userID] = ?";
+
+                    using (OleDbCommand cmd = new OleDbCommand(filesDataQuery, myConn))
+                    {
+                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = pfpData;
+                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = resumeData;
+                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = letterData != null ? letterData : DBNull.Value;
+                        cmd.Parameters.Add("?", OleDbType.VarBinary).Value = portfolioData != null ? portfolioData : DBNull.Value;
+                        cmd.Parameters.AddWithValue("?", pfpFileType);
+                        cmd.Parameters.Add("?", OleDbType.Date).Value = currentDate;
+                        cmd.Parameters.AddWithValue("?", hunterID);
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            MessageBox.Show("No rows updated. Check if HunterID exists.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+
+                    MessageBox.Show("Profile data updated successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        internal void UpdateProfileBio(int hunterID, string text)
+        {
+            try
+            {
+                using (OleDbConnection myConn = new OleDbConnection(connectionString))
+                {
+                    myConn.Open();
+
+                    string profileQuery = "UPDATE [JobHunter Profile Information] SET [Bio] = ? WHERE [userID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(profileQuery, myConn))
+                    {
+                        cmd.Parameters.AddWithValue("?", text);
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Profile bio updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         internal List<JobPostPanel> GetJobPosts(int hunterID) //For JobHunters...fetches Job Posts data for Job Applications
         {
             List<JobPostPanel> jobPostPanels = new List<JobPostPanel>();
@@ -884,11 +1057,12 @@ namespace Job_Application_Manager
                             byte[]? logo = reader.IsDBNull(logoIndex) ? null : (byte[])reader[logoIndex];
                             int postID = reader.GetInt32(10);
 
-                            string tag = companyName + "-" + jobTitle + "-" + jobType + "-" + location + "-" + workMode;
+                            var tag = new List<string> { companyName, jobTitle, jobType, location, workMode, vacancy.ToString() };
+
 
                             var jobPostPanelTemp = new JobPostPanel(postID, companyName, jobTitle, jobType, location, workMode, startingSalary, vacancy, logo, hunterID)
                             {
-                                Size = new Size(593, 117)
+                                Size = new Size(577, 117)
                             };
                             jobPostPanelTemp.Tag = tag;
                             jobPostPanels.Add(jobPostPanelTemp);
@@ -1015,6 +1189,28 @@ namespace Job_Application_Manager
             {
                 MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
+        }
+
+        internal void DeleteJobApplication(int applicationID)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string deletePostQuery = "DELETE FROM [Job Applicants] WHERE [Application ID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(deletePostQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", applicationID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Application deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting application: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -13,12 +13,15 @@ namespace Job_Application_Manager
 {
     public partial class CompanyDashB : Form
     {
-        private UserControl? currentChildForm;
+        private Control? currentDisplayedForm = null;
+
+        private BaseControl? currentChildForm;
         private int companyUserID;
 
         ValidateCompanyForm? validateCompanyForm;
-        JobPostings? jobPostingsForm;
-        JobApplicants? jobApplicantsForm; 
+        JobListing? jobListingForm;
+        ChartView? chartViewForm;
+
 
         private DatabaseSupport dbSupport = new DatabaseSupport();
 
@@ -145,7 +148,7 @@ namespace Job_Application_Manager
             }
         }
 
-        private void AdjustJobApplicantsViewPanel_Size()
+        private void AdjustJobApplicantsViewPanel_Size(int width, int height)
         {
             foreach (Control control in desktopPanel.Controls)
             {
@@ -161,32 +164,7 @@ namespace Job_Application_Manager
                             {
                                 if (panelControl is ViewApplicants jobApplicants)
                                 {
-                                    jobApplicants.Size = new Size(1157, 120);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void InitialJobApplicantsViewPanel_Size()
-        {
-            foreach (Control control in desktopPanel.Controls)
-            {
-                // Check if it's a Job_Hunt and contains a FlowLayoutPanel
-                if (control is JobApplicants jobApplicantControl)
-                {
-                    foreach (Control innerControl in jobApplicantControl.Controls)
-                    {
-                        if (innerControl is FlowLayoutPanel flowLayoutPanel)
-                        {
-                            // Iterate through JobPostPanel inside the FlowLayoutPanel
-                            foreach (Control panelControl in flowLayoutPanel.Controls)
-                            {
-                                if (panelControl is ViewApplicants jobApplicants)
-                                {
-                                    jobApplicants.Size = new Size(884, 120);
+                                    jobApplicants.Size = new Size(width, height);
                                 }
                             }
                         }
@@ -204,12 +182,12 @@ namespace Job_Application_Manager
         {
             if (this.WindowState == FormWindowState.Normal)
             {
-                AdjustJobApplicantsViewPanel_Size();
+                AdjustJobApplicantsViewPanel_Size(1157, 120);
                 this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                InitialJobApplicantsViewPanel_Size();
+                AdjustJobApplicantsViewPanel_Size(884, 120);
                 this.WindowState = FormWindowState.Normal;
                 this.Size = new Size(1095, 659);
             }
@@ -225,56 +203,80 @@ namespace Job_Application_Manager
 
         private void AddJobBttn_Click(object sender, EventArgs e)
         {
+            if (jobListingForm == null || jobListingForm.IsDisposed)
+                jobListingForm = new JobListing(companyUserID);
+
+            if (currentDisplayedForm == jobListingForm)
+                return;
+
             desktopPanel.Controls.Clear();
-            currentChildForm = new JobListing(companyUserID);
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.AutoScroll = true;
-            desktopPanel.Tag = currentChildForm;
+
+            jobListingForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(jobListingForm);
+            currentDisplayedForm = jobListingForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void jobPostingsBttn_Click(object sender, EventArgs e)
         {
+            if (currentDisplayedForm is JobPostings)
+                return;
+
             desktopPanel.Controls.Clear();
-            jobPostingsForm = new JobPostings(companyUserID);
-            jobPostingsForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobPostingsForm);
-            jobPostingsForm.DisplayDetails();
-            desktopPanel.Tag = jobPostingsForm;
+
+            currentChildForm = new JobPostings(companyUserID);
+            currentChildForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.DisplayDetails();
+
+            currentDisplayedForm = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void ChartViewBttn_Click(object sender, EventArgs e)
         {
+            if (currentDisplayedForm == chartViewForm)
+                return;
+
             desktopPanel.Controls.Clear();
-            currentChildForm = new ChartView();
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.Tag = currentChildForm;
+
+            if (chartViewForm == null || chartViewForm.IsDisposed)
+                chartViewForm = new ChartView();
+
+            chartViewForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(chartViewForm);
+            currentDisplayedForm = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void JobApplicantsBttn_Click(object sender, EventArgs e)
         {
+            if (currentDisplayedForm is JobApplicants)
+                return;
+
             desktopPanel.Controls.Clear();
-            jobApplicantsForm = new JobApplicants(companyUserID);
-            jobApplicantsForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobApplicantsForm);
-            jobApplicantsForm.DisplayDetails();
+
+            currentChildForm = new JobApplicants(companyUserID);
+            currentChildForm.Dock = DockStyle.Fill;
+            desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.DisplayDetails();
             if (this.WindowState == FormWindowState.Maximized)
-                AdjustJobApplicantsViewPanel_Size();
-            desktopPanel.Tag = currentChildForm;
+                AdjustJobApplicantsViewPanel_Size(1157, 120);
+            currentDisplayedForm = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void CalendarViewBttn_Click(object sender, EventArgs e)
         {
+            if (currentDisplayedForm is CalendarView)
+                return;
+
             desktopPanel.Controls.Clear();
+
             currentChildForm = new CalendarView();
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.Tag = currentChildForm;
+            currentDisplayedForm = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 

@@ -16,6 +16,11 @@ namespace Job_Application_Manager
         public JobPostPanel(int postID, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, byte[]? companyLogo, int hunterID)
         {
             InitializeComponent();
+            foreach (Label control in this.Controls.OfType<Label>())
+            {
+                control.Text = "";
+            }
+            
             JobPostID = postID;
             HunterID = hunterID;
             companyNameLabel.Text = companyName;

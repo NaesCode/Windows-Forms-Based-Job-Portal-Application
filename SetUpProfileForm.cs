@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,17 +13,57 @@ namespace Job_Application_Manager
 {
     public partial class SetUpProfileForm : Form
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
         private int hunterID;
         private string? Degree = null;
         private string? University = null;
         private string? websiteLink = null;
+        private byte[]? imageData = null;
+        private Dictionary<string, object>? profileData;
+
         public SetUpProfileForm(int ID)
         {
             InitializeComponent();
             educAttainment.TextChanged += educAttainment_TextChanged;
             hasWebsite.CheckedChanged += hasWebsite_CheckedChanged;
             this.hunterID = ID;
+        }
+
+        public SetUpProfileForm(Dictionary<string, object>? profileData, int ID)
+        {
+            InitializeComponent();
+            updateBttn.Visible = true;
+            submitBttn.Visible = false;
+            updateBttn.Location = new Point(38, 593);
+            this.profileData = profileData;
+            this.hunterID = ID;
+
+            imageData = dbSupport.DisplayProfilePicture(hunterID);
+            if (imageData != null)
+            {
+                using (MemoryStream ms = new MemoryStream(imageData))
+                {
+                    ProfilePicture.Image = Image.FromStream(ms);
+                }
+            }
+
+            if (profileData != null)
+            {
+                fullName.Text = profileData["Full Name"].ToString();
+                dateOfBirth.Value = (DateTime)profileData["Date of Birth"];
+                foreach (RadioButton control in genderBox.Controls)
+                {
+                    if (control.Text == profileData["Gender"].ToString())
+                        control.Checked = true;
+                }
+                contactNumber.Text = profileData["Contact Number"].ToString();
+                hunterEmail.Text = profileData["Email"].ToString();
+                hunterAddress.Text = profileData["Address"].ToString();
+                hunterNationality.Text = profileData["Nationality"].ToString();
+                educAttainment.Text = profileData["Education"].ToString();
+                degreeEarned.Text = profileData["Degree"].ToString();
+                university.Text = profileData["University / Institution"].ToString();
+            }
         }
 
         private void submitBttn_Click(object sender, EventArgs e)
@@ -44,9 +85,13 @@ namespace Job_Application_Manager
                 return;
             }
 
-            byte[]? pfpBytes = File.ReadAllBytes(ProfilePicture.Tag.ToString());
-            byte[]? resumeBytes = File.ReadAllBytes(resumeDocx.Tag.ToString());
-            byte[]? coverLetterBytes = coverLetter.Tag != null ? File.ReadAllBytes(coverLetter.Tag.ToString()) : null;
+            string? pfpTag = ProfilePicture.Tag.ToString() ?? null;
+            string? resumeTag = resumeDocx.Tag.ToString() ?? null;
+            string? coverLetterTag = coverLetter.Tag?.ToString() ?? null;
+
+            byte[]? pfpBytes = File.ReadAllBytes(pfpTag);
+            byte[]? resumeBytes = File.ReadAllBytes(resumeTag);
+            byte[]? coverLetterBytes = coverLetter.Tag != null ? File.ReadAllBytes(coverLetterTag) : null;
             byte[]? portfolioBytes = portfolio.Tag != null ? File.ReadAllBytes(portfolio.Tag.ToString()) : null;
 
             string? portfolioPath = hasWebsite.Checked ? null : portfolio.Text;
@@ -55,7 +100,7 @@ namespace Job_Application_Manager
             try
             {
                 dbSupport.InsertHunterProfileDetails(hunterID, fullName.Text, BirthDate, gender, contactNumber.Text, hunterEmail.Text, hunterAddress.Text, hunterNationality.Text, educAttainment.Text, Degree, University,
-                                          pfpBytes, ProfilePicture.Tag.ToString(), resumeBytes, resumeDocx.Tag.ToString(), coverLetterBytes, coverLetter.Tag.ToString(), portfolioBytes, portfolioPath, portfolioUrl, currentDate, isSetUp);
+                                          pfpBytes, pfpTag, resumeBytes, resumeTag, coverLetterBytes, coverLetterTag, portfolioBytes, portfolioPath, portfolioUrl, currentDate, isSetUp);
             }
             catch (Exception ex)
             {
@@ -156,7 +201,7 @@ namespace Job_Application_Manager
                 portfolio.Visible = false;
                 portfolioWeb.Location = new Point(469, 493);
                 portfolioWeb.Visible = true;
-                portfolioWeb.TextChanged += (s,e) => url = portfolioWeb.Text;
+                portfolioWeb.TextChanged += (s, e) => url = portfolioWeb.Text;
                 if (IsValidUrl(url))
                 {
                     string displayText = "Click Here";
@@ -177,6 +222,64 @@ namespace Job_Application_Manager
                 portfolio.Visible = true;
                 portfolioWeb.Visible = false;
             }
+        }
+
+        private void updateBttn_Click(object sender, EventArgs e)
+        {
+            string? gender = null;
+            DateTime BirthDate = dateOfBirth.Value.Date;
+            DateTime currentDate = DateTime.Now;
+
+            foreach (RadioButton control in genderBox.Controls)
+            {
+                if (control.Checked == true)
+                    gender = control.Text;
+            }
+
+            if (ProfilePicture.Tag == null || resumeDocx.Tag == null)
+            {
+                MessageBox.Show("Please upload both a profile picture and a resume.");
+                return;
+            }
+
+            string? pfpTag = ProfilePicture.Tag.ToString() ?? null;
+            string? resumeTag = resumeDocx.Tag.ToString() ?? null;
+            string? coverLetterTag = coverLetter.Tag?.ToString() ?? null;
+
+            byte[]? pfpBytes = File.ReadAllBytes(pfpTag);
+            byte[]? resumeBytes = File.ReadAllBytes(resumeTag);
+            byte[]? coverLetterBytes = coverLetter.Tag != null ? File.ReadAllBytes(coverLetterTag) : null;
+            byte[]? portfolioBytes = portfolio.Tag != null ? File.ReadAllBytes(portfolio.Tag.ToString()) : null;
+
+            string? portfolioPath = hasWebsite.Checked ? null : portfolio.Text;
+            string? portfolioUrl = hasWebsite.Checked ? portfolioWeb.Text : null;
+
+            try
+            {
+                dbSupport.UpdateHunterProfileDetails(hunterID, fullName.Text, BirthDate, gender, contactNumber.Text, hunterEmail.Text, hunterAddress.Text, hunterNationality.Text, educAttainment.Text, Degree, University,
+                                          pfpBytes, pfpTag, resumeBytes, resumeTag, coverLetterBytes, coverLetterTag, portfolioBytes, portfolioPath, portfolioUrl, currentDate);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Inserting data failed: {ex}");
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+
+        }
+
+        private void deleteLogoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProfilePicture.Image.Dispose();
+            ProfilePicture.Image = null;
+        }
+
+        private void viewLogoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FullPictureView fullPictureForm = new FullPictureView(imageData);
+            fullPictureForm.Show();
         }
     }
 }

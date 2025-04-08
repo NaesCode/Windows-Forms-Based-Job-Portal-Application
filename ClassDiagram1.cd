@@ -1,52 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Job_Application_Manager.BaseControl" Collapsed="true">
-    <Position X="4.25" Y="4.75" Width="1.5" />
+    <Position X="4.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAIAAABAgAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>BaseControl.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Job_Application_Manager.Job_Hunt" Collapsed="true">
-    <Position X="4.25" Y="8.25" Width="1.5" />
+    <Position X="3.25" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAABBAAECAAAACgAAEAAAAgAARAWAAAAA=</HashCode>
       <FileName>Job-Hunt.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Job_Application_Manager.JobPostPanel" Collapsed="true">
-    <Position X="7.75" Y="6.25" Width="1.5" />
+    <Position X="5.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gQAAAgABAiAAAAAAAACAAAgCAYAAAAIAAAAAQQAAAAA=</HashCode>
       <FileName>JobPostPanel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Job_Application_Manager.JobHunterProfile" Collapsed="true">
-    <Position X="1" Y="6.5" Width="1.5" />
+    <Position X="0.5" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAABAAACASABBgBACAgAACAoIAGACAAABIAWBJAAA=</HashCode>
+      <HashCode>IAAAABAAACASABBgBACAgAACAoIAWACAAADIAWBJAAA=</HashCode>
       <FileName>JobHunterProfile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Job_Application_Manager.TrackApplications" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+    <Position X="8.25" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAECAAAAACAAABBAQACAAgACAAAEAAAAAAARAWAAAAA=</HashCode>
       <FileName>TrackApplications.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Job_Application_Manager.JobApplicants" Collapsed="true">
-    <Position X="1.25" Y="1.75" Width="1.5" />
+    <Position X="1.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAmAAABBAAEKAgAACAAAAAAkABAAVAWBAAUI=</HashCode>
       <FileName>JobApplicants.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Job_Application_Manager.JobPostings" Collapsed="true">
-    <Position X="4.25" Y="3" Width="1.5" />
+    <Position X="4.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAMCAACDBACACABABCBIACAQAQACABAWAAAUA=</HashCode>
+      <HashCode>gAAAAAgAMCAACBBACACBBABCBIACAQAUgCARAWAAAUI=</HashCode>
       <FileName>JobPostings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Job_Application_Manager.ViewApplicants" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQAAAgABAiAAAAAAAACAAAgCAYAAAAIAAAAAQQIAAAA=</HashCode>
+      <FileName>ViewApplicants.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

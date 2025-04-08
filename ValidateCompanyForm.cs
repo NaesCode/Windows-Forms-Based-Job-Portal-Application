@@ -39,6 +39,12 @@ namespace Job_Application_Manager
                 return;
             }
 
+            if (companyLogo.Tag == null || COR.Tag == null || BIRR.Tag == null || MP.Tag == null)
+            {
+                MessageBox.Show("Please upload company Logo and submit essential supporting documents for validation process.");
+                return;
+            }
+
             DateTime currentDate = DateTime.Now;
 
             byte[]? logoBytes = File.ReadAllBytes(companyLogo.Tag.ToString());

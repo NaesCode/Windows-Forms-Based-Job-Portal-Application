@@ -50,7 +50,6 @@
             label1 = new Label();
             panel2 = new Panel();
             siticonePictureBox1 = new SiticoneNetCoreUI.SiticonePictureBox();
-            searchBar = new SiticoneNetCoreUI.SiticoneTextBox();
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             desktopPanel = new Panel();
@@ -250,7 +249,7 @@
             CalendarViewBttn.Size = new Size(202, 60);
             CalendarViewBttn.TabIndex = 10;
             CalendarViewBttn.Tag = "Calendar";
-            CalendarViewBttn.Text = "     Calendar";
+            CalendarViewBttn.Text = "     [  ]";
             CalendarViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             CalendarViewBttn.UseVisualStyleBackColor = false;
             CalendarViewBttn.Click += CalendarViewBttn_Click;
@@ -276,7 +275,7 @@
             ListViewBttn.Size = new Size(202, 60);
             ListViewBttn.TabIndex = 9;
             ListViewBttn.Tag = "List";
-            ListViewBttn.Text = "     List";
+            ListViewBttn.Text = "     [  ]";
             ListViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ListViewBttn.UseVisualStyleBackColor = false;
             ListViewBttn.Click += ListViewBttn_Click;
@@ -302,7 +301,7 @@
             ChartViewBttn.Size = new Size(202, 60);
             ChartViewBttn.TabIndex = 8;
             ChartViewBttn.Tag = "Chart";
-            ChartViewBttn.Text = "     Chart";
+            ChartViewBttn.Text = "     [  ]";
             ChartViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ChartViewBttn.UseVisualStyleBackColor = false;
             ChartViewBttn.Click += ChartViewBttn_Click;
@@ -328,7 +327,7 @@
             BoardViewBttn.Size = new Size(202, 60);
             BoardViewBttn.TabIndex = 7;
             BoardViewBttn.Tag = "Board";
-            BoardViewBttn.Text = "     Submitted        Company Files";
+            BoardViewBttn.Text = "     [  ]";
             BoardViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             BoardViewBttn.UseVisualStyleBackColor = false;
             BoardViewBttn.Click += BoardViewBttn_Click;
@@ -455,7 +454,6 @@
             // 
             panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(siticonePictureBox1);
-            panel2.Controls.Add(searchBar);
             panel2.Dock = DockStyle.Right;
             panel2.Location = new Point(585, 0);
             panel2.Name = "panel2";
@@ -503,66 +501,6 @@
             siticonePictureBox1.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
             siticonePictureBox1.TabIndex = 0;
             siticonePictureBox1.Text = "siticonePictureBox1";
-            // 
-            // searchBar
-            // 
-            searchBar.AccessibleDescription = "A customizable text input field.";
-            searchBar.AccessibleName = "Text Box";
-            searchBar.AccessibleRole = AccessibleRole.Text;
-            searchBar.BackColor = Color.Transparent;
-            searchBar.BlinkCount = 3;
-            searchBar.BlinkShadow = false;
-            searchBar.BorderColor1 = Color.Black;
-            searchBar.BorderColor2 = Color.Black;
-            searchBar.BorderFocusColor1 = Color.FromArgb(77, 77, 255);
-            searchBar.BorderFocusColor2 = Color.FromArgb(77, 77, 255);
-            searchBar.BorderSize = 0;
-            searchBar.CanShake = true;
-            searchBar.ContinuousBlink = false;
-            searchBar.CornerRadiusBottomLeft = 15;
-            searchBar.CornerRadiusBottomRight = 15;
-            searchBar.CornerRadiusTopLeft = 15;
-            searchBar.CornerRadiusTopRight = 15;
-            searchBar.CursorBlinkRate = 500;
-            searchBar.CursorColor = Color.Black;
-            searchBar.CursorHeight = 26;
-            searchBar.CursorOffset = 0;
-            searchBar.CursorStyle = SiticoneNetCoreUI.Helpers.DrawingStyle.SiticoneDrawingStyle.Solid;
-            searchBar.CursorWidth = 1;
-            searchBar.DisabledBackColor = Color.WhiteSmoke;
-            searchBar.DisabledBorderColor = Color.LightGray;
-            searchBar.DisabledTextColor = Color.Gray;
-            searchBar.EnableDropShadow = false;
-            searchBar.FillColor1 = Color.White;
-            searchBar.FillColor2 = Color.White;
-            searchBar.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            searchBar.ForeColor = Color.DimGray;
-            searchBar.HoverBorderColor1 = Color.Gray;
-            searchBar.HoverBorderColor2 = Color.Gray;
-            searchBar.IsEnabled = true;
-            searchBar.Location = new Point(15, 7);
-            searchBar.Name = "searchBar";
-            searchBar.PlaceholderColor = Color.Gray;
-            searchBar.PlaceholderText = "Enter text here...";
-            searchBar.ReadOnlyBorderColor1 = Color.LightGray;
-            searchBar.ReadOnlyBorderColor2 = Color.LightGray;
-            searchBar.ReadOnlyFillColor1 = Color.WhiteSmoke;
-            searchBar.ReadOnlyFillColor2 = Color.WhiteSmoke;
-            searchBar.ReadOnlyPlaceholderColor = Color.DarkGray;
-            searchBar.SelectionBackColor = Color.FromArgb(77, 77, 255);
-            searchBar.ShadowAnimationDuration = 1;
-            searchBar.ShadowBlur = 10;
-            searchBar.ShadowColor = Color.FromArgb(15, 0, 0, 0);
-            searchBar.Size = new Size(225, 36);
-            searchBar.SolidBorderColor = Color.LightSlateGray;
-            searchBar.SolidBorderFocusColor = Color.FromArgb(77, 77, 255);
-            searchBar.SolidBorderHoverColor = Color.Gray;
-            searchBar.SolidFillColor = Color.White;
-            searchBar.TabIndex = 0;
-            searchBar.Text = "Type here to search...";
-            searchBar.TextPadding = new Padding(12, 0, 12, 0);
-            searchBar.ValidationErrorMessage = "Invalid input.";
-            searchBar.ValidationFunction = null;
             // 
             // menuBarPanel2
             // 
@@ -673,7 +611,6 @@
         private Panel panel6;
         private Panel menuBarPanel0;
         private Panel menuBarPanel1;
-        private SiticoneNetCoreUI.SiticoneTextBox searchBar;
         private SiticoneNetCoreUI.SiticonePictureBox siticonePictureBox1;
         private Panel panel4;
         private SiticoneNetCoreUI.SiticoneButton minimButton1;

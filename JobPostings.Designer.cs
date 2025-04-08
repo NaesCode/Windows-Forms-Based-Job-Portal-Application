@@ -33,10 +33,9 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel2 = new Panel();
+            deletePostBttn = new FontAwesome.Sharp.IconButton();
             postJobBttn = new FontAwesome.Sharp.IconButton();
             panel1 = new Panel();
-            panel3 = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             panel4 = new Panel();
@@ -46,6 +45,7 @@
             label7 = new Label();
             panel6 = new Panel();
             jobEntriesTable = new ReaLTaiizor.Controls.PoisonDataGridView();
+            postID = new DataGridViewTextBoxColumn();
             companyName = new DataGridViewTextBoxColumn();
             jobTitle = new DataGridViewTextBoxColumn();
             jobType = new DataGridViewTextBoxColumn();
@@ -53,27 +53,50 @@
             workMode = new DataGridViewTextBoxColumn();
             startingSalary = new DataGridViewTextBoxColumn();
             vacantPositions = new DataGridViewTextBoxColumn();
-            isPosted = new DataGridViewTextBoxColumn();
+            postStatus = new DataGridViewTextBoxColumn();
+            applicationDeadline = new DataGridViewTextBoxColumn();
+            panel3 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)jobEntriesTable).BeginInit();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.BackColor = SystemColors.Desktop;
+            panel2.Controls.Add(deletePostBttn);
             panel2.Controls.Add(postJobBttn);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 3);
+            panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(743, 69);
+            panel2.Size = new Size(1164, 72);
             panel2.TabIndex = 0;
+            // 
+            // deletePostBttn
+            // 
+            deletePostBttn.BackColor = Color.LightSlateGray;
+            deletePostBttn.FlatAppearance.BorderSize = 0;
+            deletePostBttn.FlatStyle = FlatStyle.Flat;
+            deletePostBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            deletePostBttn.ForeColor = SystemColors.ButtonHighlight;
+            deletePostBttn.IconChar = FontAwesome.Sharp.IconChar.None;
+            deletePostBttn.IconColor = Color.White;
+            deletePostBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            deletePostBttn.IconSize = 30;
+            deletePostBttn.Location = new Point(162, 15);
+            deletePostBttn.Name = "deletePostBttn";
+            deletePostBttn.Size = new Size(113, 38);
+            deletePostBttn.TabIndex = 1;
+            deletePostBttn.Text = "Delete Post";
+            deletePostBttn.UseVisualStyleBackColor = false;
+            deletePostBttn.Click += deletePostBttn_Click;
             // 
             // postJobBttn
             // 
@@ -100,34 +123,11 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(421, 630);
+            panel1.Location = new Point(0, 630);
             panel1.Name = "panel1";
-            panel1.Padding = new Padding(0, 3, 3, 3);
-            panel1.Size = new Size(748, 77);
+            panel1.Padding = new Padding(0, 0, 3, 3);
+            panel1.Size = new Size(1169, 77);
             panel1.TabIndex = 2;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = SystemColors.ButtonHighlight;
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(flowLayoutPanel1);
-            panel3.Dock = DockStyle.Left;
-            panel3.Location = new Point(0, 55);
-            panel3.Name = "panel3";
-            panel3.Padding = new Padding(3);
-            panel3.Size = new Size(421, 652);
-            panel3.TabIndex = 3;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.BackColor = Color.LightSlateGray;
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(3, 3);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(413, 644);
-            flowLayoutPanel1.TabIndex = 1;
             // 
             // menuBarPanel2
             // 
@@ -247,14 +247,15 @@
             panel6.BackColor = SystemColors.ButtonHighlight;
             panel6.Controls.Add(jobEntriesTable);
             panel6.Dock = DockStyle.Fill;
-            panel6.Location = new Point(421, 55);
+            panel6.Location = new Point(0, 361);
             panel6.Name = "panel6";
             panel6.Padding = new Padding(0, 0, 5, 0);
-            panel6.Size = new Size(748, 575);
+            panel6.Size = new Size(1169, 269);
             panel6.TabIndex = 11;
             // 
             // jobEntriesTable
             // 
+            jobEntriesTable.AllowUserToAddRows = false;
             jobEntriesTable.AllowUserToResizeRows = false;
             jobEntriesTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             jobEntriesTable.BackgroundColor = Color.FromArgb(255, 255, 255);
@@ -270,7 +271,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             jobEntriesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             jobEntriesTable.ColumnHeadersHeight = 35;
-            jobEntriesTable.Columns.AddRange(new DataGridViewColumn[] { companyName, jobTitle, jobType, jobLocation, workMode, startingSalary, vacantPositions, isPosted });
+            jobEntriesTable.Columns.AddRange(new DataGridViewColumn[] { postID, companyName, jobTitle, jobType, jobLocation, workMode, startingSalary, vacantPositions, postStatus, applicationDeadline });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 255);
             dataGridViewCellStyle2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -297,13 +298,19 @@
             jobEntriesTable.RowHeadersVisible = false;
             jobEntriesTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             jobEntriesTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            jobEntriesTable.Size = new Size(743, 575);
+            jobEntriesTable.Size = new Size(1164, 269);
             jobEntriesTable.TabIndex = 14;
             jobEntriesTable.CellClick += jobEntriesTable_CellClick;
+            jobEntriesTable.CellEndEdit += jobEntriesTable_CellEndEdit;
+            // 
+            // postID
+            // 
+            postID.HeaderText = "PostID";
+            postID.Name = "postID";
             // 
             // companyName
             // 
-            companyName.HeaderText = "Name";
+            companyName.HeaderText = "Company";
             companyName.Name = "companyName";
             // 
             // jobTitle
@@ -336,24 +343,52 @@
             vacantPositions.HeaderText = "Vacancy";
             vacantPositions.Name = "vacantPositions";
             // 
-            // isPosted
+            // postStatus
             // 
-            isPosted.HeaderText = "IsPosted";
-            isPosted.Name = "isPosted";
+            postStatus.HeaderText = "IsPosted";
+            postStatus.Name = "postStatus";
+            // 
+            // applicationDeadline
+            // 
+            applicationDeadline.HeaderText = "Closing";
+            applicationDeadline.Name = "applicationDeadline";
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.ButtonHighlight;
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(flowLayoutPanel1);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 55);
+            panel3.Name = "panel3";
+            panel3.Padding = new Padding(0, 3, 3, 3);
+            panel3.Size = new Size(1169, 306);
+            panel3.TabIndex = 12;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.BackColor = Color.LightSlateGray;
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(0, 3);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(1164, 298);
+            flowLayoutPanel1.TabIndex = 1;
+            flowLayoutPanel1.WrapContents = false;
             // 
             // JobPostings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel6);
-            Controls.Add(panel1);
             Controls.Add(panel3);
+            Controls.Add(panel1);
             Controls.Add(menuBarPanel2);
             Name = "JobPostings";
             Size = new Size(1169, 707);
             panel2.ResumeLayout(false);
             panel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
             menuBarPanel2.ResumeLayout(false);
             menuBarPanel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -361,6 +396,7 @@
             panel5.PerformLayout();
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)jobEntriesTable).EndInit();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -368,8 +404,6 @@
         private Panel panel2;
         private FontAwesome.Sharp.IconButton postJobBttn;
         private Panel panel1;
-        private Panel panel3;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Panel menuBarPanel2;
         private Panel menuBarPanel3;
         private Panel panel4;
@@ -377,7 +411,12 @@
         private Panel panel5;
         private Label label7;
         private Panel panel6;
+        private ReaLTaiizor.Controls.DungeonTextBox searchBar;
+        private FontAwesome.Sharp.IconButton deletePostBttn;
         private ReaLTaiizor.Controls.PoisonDataGridView jobEntriesTable;
+        private Panel panel3;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private DataGridViewTextBoxColumn postID;
         private DataGridViewTextBoxColumn companyName;
         private DataGridViewTextBoxColumn jobTitle;
         private DataGridViewTextBoxColumn jobType;
@@ -385,7 +424,7 @@
         private DataGridViewTextBoxColumn workMode;
         private DataGridViewTextBoxColumn startingSalary;
         private DataGridViewTextBoxColumn vacantPositions;
-        private DataGridViewTextBoxColumn isPosted;
-        private ReaLTaiizor.Controls.DungeonTextBox searchBar;
+        private DataGridViewTextBoxColumn postStatus;
+        private DataGridViewTextBoxColumn applicationDeadline;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Job_Application_Manager
 {
-    partial class JobHunterProfile
+    partial class ApplicantProfileView
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,9 +34,7 @@
             label1 = new Label();
             fullName = new Label();
             panel2 = new Panel();
-            setUpBttn = new FontAwesome.Sharp.IconButton();
             profilePic = new PictureBox();
-            editBttn = new FontAwesome.Sharp.IconButton();
             address = new Label();
             birthdate = new Label();
             label7 = new Label();
@@ -78,7 +76,7 @@
             menuBarPanel2.Location = new Point(0, 0);
             menuBarPanel2.Name = "menuBarPanel2";
             menuBarPanel2.Padding = new Padding(0, 2, 0, 2);
-            menuBarPanel2.Size = new Size(890, 55);
+            menuBarPanel2.Size = new Size(874, 55);
             menuBarPanel2.TabIndex = 9;
             // 
             // menuBarPanel3
@@ -88,7 +86,7 @@
             menuBarPanel3.Dock = DockStyle.Fill;
             menuBarPanel3.Location = new Point(0, 2);
             menuBarPanel3.Name = "menuBarPanel3";
-            menuBarPanel3.Size = new Size(890, 51);
+            menuBarPanel3.Size = new Size(874, 51);
             menuBarPanel3.TabIndex = 0;
             // 
             // panel3
@@ -98,7 +96,7 @@
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(208, 51);
+            panel3.Size = new Size(333, 51);
             panel3.TabIndex = 2;
             // 
             // label1
@@ -108,9 +106,9 @@
             label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(15, 15);
             label1.Name = "label1";
-            label1.Size = new Size(184, 25);
+            label1.Size = new Size(248, 25);
             label1.TabIndex = 1;
-            label1.Text = "YOUR PROFILE";
+            label1.Text = "APPLICANT PROFILE";
             // 
             // fullName
             // 
@@ -124,9 +122,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(setUpBttn);
             panel2.Controls.Add(profilePic);
-            panel2.Controls.Add(editBttn);
             panel2.Controls.Add(address);
             panel2.Controls.Add(birthdate);
             panel2.Controls.Add(label7);
@@ -146,24 +142,8 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 55);
             panel2.Name = "panel2";
-            panel2.Size = new Size(890, 335);
+            panel2.Size = new Size(874, 335);
             panel2.TabIndex = 18;
-            // 
-            // setUpBttn
-            // 
-            setUpBttn.BackColor = SystemColors.Control;
-            setUpBttn.FlatStyle = FlatStyle.Flat;
-            setUpBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            setUpBttn.IconChar = FontAwesome.Sharp.IconChar.None;
-            setUpBttn.IconColor = Color.Black;
-            setUpBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            setUpBttn.Location = new Point(652, 215);
-            setUpBttn.Name = "setUpBttn";
-            setUpBttn.Size = new Size(88, 40);
-            setUpBttn.TabIndex = 20;
-            setUpBttn.Text = "Set Up";
-            setUpBttn.UseVisualStyleBackColor = false;
-            setUpBttn.Click += setUpBttn_Click;
             // 
             // profilePic
             // 
@@ -175,27 +155,11 @@
             profilePic.TabIndex = 56;
             profilePic.TabStop = false;
             // 
-            // editBttn
-            // 
-            editBttn.BackColor = SystemColors.Control;
-            editBttn.FlatStyle = FlatStyle.Flat;
-            editBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            editBttn.IconChar = FontAwesome.Sharp.IconChar.None;
-            editBttn.IconColor = Color.Black;
-            editBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            editBttn.Location = new Point(751, 215);
-            editBttn.Name = "editBttn";
-            editBttn.Size = new Size(88, 40);
-            editBttn.TabIndex = 19;
-            editBttn.Text = "Edit";
-            editBttn.UseVisualStyleBackColor = false;
-            editBttn.Click += editBttn_Click;
-            // 
             // address
             // 
             address.AutoSize = true;
             address.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            address.ForeColor = SystemColors.ControlDarkDark;
+            address.ForeColor = SystemColors.Desktop;
             address.Location = new Point(525, 304);
             address.Name = "address";
             address.Size = new Size(69, 19);
@@ -206,7 +170,7 @@
             // 
             birthdate.AutoSize = true;
             birthdate.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            birthdate.ForeColor = SystemColors.ControlDarkDark;
+            birthdate.ForeColor = SystemColors.Desktop;
             birthdate.Location = new Point(525, 269);
             birthdate.Name = "birthdate";
             birthdate.Size = new Size(76, 19);
@@ -257,7 +221,7 @@
             // 
             email.AutoSize = true;
             email.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            email.ForeColor = SystemColors.ControlDarkDark;
+            email.ForeColor = SystemColors.Desktop;
             email.Location = new Point(118, 304);
             email.Name = "email";
             email.Size = new Size(51, 19);
@@ -268,7 +232,7 @@
             // 
             contactNumber.AutoSize = true;
             contactNumber.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            contactNumber.ForeColor = SystemColors.ControlDarkDark;
+            contactNumber.ForeColor = SystemColors.Desktop;
             contactNumber.Location = new Point(185, 269);
             contactNumber.Name = "contactNumber";
             contactNumber.Size = new Size(68, 19);
@@ -397,34 +361,34 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 390);
             panel1.Name = "panel1";
-            panel1.Size = new Size(890, 269);
+            panel1.Size = new Size(874, 290);
             panel1.TabIndex = 19;
             // 
             // BioTextBox
             // 
-            BioTextBox.BackColor = Color.Gainsboro;
+            BioTextBox.BackColor = SystemColors.GradientInactiveCaption;
             BioTextBox.BorderStyle = BorderStyle.None;
-            BioTextBox.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BioTextBox.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BioTextBox.ForeColor = SystemColors.ControlDarkDark;
             BioTextBox.Location = new Point(45, 24);
             BioTextBox.Name = "BioTextBox";
+            BioTextBox.ReadOnly = true;
             BioTextBox.Size = new Size(794, 244);
             BioTextBox.TabIndex = 20;
             BioTextBox.Text = "Say more about yourself here...";
-            BioTextBox.Enter += BioTextBox_Enter;
-            BioTextBox.KeyDown += BioTextBox_KeyDown;
-            BioTextBox.Leave += BioTextBox_Leave;
             // 
-            // JobHunterProfile
+            // ApplicantProfileView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ButtonHighlight;
+            BackColor = Color.LightSteelBlue;
+            ClientSize = new Size(874, 680);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(menuBarPanel2);
-            Name = "JobHunterProfile";
-            Size = new Size(890, 659);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Name = "ApplicantProfileView";
+            StartPosition = FormStartPosition.CenterScreen;
             Load += JobHunterProfile_Load;
             menuBarPanel2.ResumeLayout(false);
             menuBarPanel3.ResumeLayout(false);
@@ -470,8 +434,6 @@
         private Label contactNumber;
         private Label label5;
         private Label label3;
-        private FontAwesome.Sharp.IconButton editBttn;
-        private FontAwesome.Sharp.IconButton setUpBttn;
         private PictureBox profilePic;
         private Panel panel1;
         private RichTextBox BioTextBox;

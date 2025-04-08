@@ -345,6 +345,7 @@
             applicantsGridView.Size = new Size(743, 575);
             applicantsGridView.TabIndex = 13;
             applicantsGridView.CellClick += applicantsGridView_CellClick;
+            applicantsGridView.CellDoubleClick += applicantsGridView_CellDoubleClick;
             // 
             // panel6
             // 

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class CalendarView : BaseControl
+    public partial class CalendarView : BaseControl //dli pani sure nga inheritance
     {
         public static int _year, _month;
         public CalendarView()

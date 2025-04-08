@@ -233,13 +233,13 @@
             CalendarViewBttn.IconColor = Color.White;
             CalendarViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             CalendarViewBttn.IconSize = 30;
-            CalendarViewBttn.Location = new Point(0, 397);
+            CalendarViewBttn.Location = new Point(0, 337);
             CalendarViewBttn.Name = "CalendarViewBttn";
-            CalendarViewBttn.Padding = new Padding(15, 0, 0, 0);
+            CalendarViewBttn.Padding = new Padding(26, 0, 0, 0);
             CalendarViewBttn.Size = new Size(202, 60);
             CalendarViewBttn.TabIndex = 10;
             CalendarViewBttn.Tag = "Calendar";
-            CalendarViewBttn.Text = "     Calendar";
+            CalendarViewBttn.Text = "    Calendar";
             CalendarViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             CalendarViewBttn.UseVisualStyleBackColor = false;
             CalendarViewBttn.Click += CalendarViewBttn_Click;
@@ -259,13 +259,13 @@
             ListViewBttn.IconColor = Color.White;
             ListViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             ListViewBttn.IconSize = 30;
-            ListViewBttn.Location = new Point(0, 337);
+            ListViewBttn.Location = new Point(0, 397);
             ListViewBttn.Name = "ListViewBttn";
             ListViewBttn.Padding = new Padding(15, 0, 0, 0);
             ListViewBttn.Size = new Size(202, 60);
             ListViewBttn.TabIndex = 9;
             ListViewBttn.Tag = "List";
-            ListViewBttn.Text = "     List";
+            ListViewBttn.Text = "       [  ]";
             ListViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ListViewBttn.UseVisualStyleBackColor = false;
             ListViewBttn.Click += ListViewBttn_Click;
@@ -290,7 +290,7 @@
             ProfileViewBttn.Padding = new Padding(20, 0, 0, 0);
             ProfileViewBttn.Size = new Size(202, 60);
             ProfileViewBttn.TabIndex = 8;
-            ProfileViewBttn.Tag = "Chart";
+            ProfileViewBttn.Tag = "Profile";
             ProfileViewBttn.Text = "     Profile";
             ProfileViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ProfileViewBttn.UseVisualStyleBackColor = false;
@@ -317,7 +317,7 @@
             ApplyJobBttn.Padding = new Padding(15, 0, 0, 0);
             ApplyJobBttn.Size = new Size(202, 60);
             ApplyJobBttn.TabIndex = 7;
-            ApplyJobBttn.Tag = "Board";
+            ApplyJobBttn.Tag = "Apply";
             ApplyJobBttn.Text = "     Apply";
             ApplyJobBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ApplyJobBttn.UseVisualStyleBackColor = false;
@@ -343,7 +343,7 @@
             TableViewBttn.Padding = new Padding(15, 0, 0, 0);
             TableViewBttn.Size = new Size(202, 60);
             TableViewBttn.TabIndex = 6;
-            TableViewBttn.Tag = "Table";
+            TableViewBttn.Tag = "Track";
             TableViewBttn.Text = "     Track";
             TableViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             TableViewBttn.UseVisualStyleBackColor = false;
@@ -423,6 +423,8 @@
             // desktopPanel
             // 
             desktopPanel.AutoScroll = true;
+            desktopPanel.BackgroundImage = Properties.Resources.desktop_bgimage1;
+            desktopPanel.BackgroundImageLayout = ImageLayout.Stretch;
             desktopPanel.Dock = DockStyle.Fill;
             desktopPanel.Location = new Point(205, 41);
             desktopPanel.Name = "desktopPanel";
@@ -442,9 +444,9 @@
             // menuBarPanel1
             // 
             menuBarPanel1.BackColor = SystemColors.Desktop;
+            menuBarPanel1.Controls.Add(ListViewBttn);
             menuBarPanel1.Controls.Add(CalendarViewBttn);
             menuBarPanel1.Controls.Add(signOutBttn);
-            menuBarPanel1.Controls.Add(ListViewBttn);
             menuBarPanel1.Controls.Add(TableViewBttn);
             menuBarPanel1.Controls.Add(ApplyJobBttn);
             menuBarPanel1.Controls.Add(ProfileViewBttn);

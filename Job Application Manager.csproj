@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Compile Update="JobApplicants.cs" />
+    <Compile Update="ApplicantProfileView.cs" />
     <Compile Update="JobHunterProfile.cs" />
     <Compile Update="JobFullDetails.cs">
       <SubType>Form</SubType>

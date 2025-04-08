@@ -288,7 +288,7 @@
             ChartViewBttn.IconSize = 30;
             ChartViewBttn.Location = new Point(0, 337);
             ChartViewBttn.Name = "ChartViewBttn";
-            ChartViewBttn.Padding = new Padding(15, 0, 0, 0);
+            ChartViewBttn.Padding = new Padding(5, 0, 0, 0);
             ChartViewBttn.Size = new Size(202, 60);
             ChartViewBttn.TabIndex = 8;
             ChartViewBttn.Tag = "Chart";
@@ -424,6 +424,8 @@
             // desktopPanel
             // 
             desktopPanel.AutoScroll = true;
+            desktopPanel.BackgroundImage = Properties.Resources.desktop_bgimage1;
+            desktopPanel.BackgroundImageLayout = ImageLayout.Stretch;
             desktopPanel.Dock = DockStyle.Fill;
             desktopPanel.Location = new Point(205, 41);
             desktopPanel.Name = "desktopPanel";

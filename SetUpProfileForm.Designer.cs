@@ -83,6 +83,8 @@
             portfolioWeb = new TextBox();
             university = new TextBox();
             univLabel = new TextBox();
+            updateBttn = new FontAwesome.Sharp.IconButton();
+            textBox7 = new TextBox();
             pfpMenuOpt.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -101,13 +103,13 @@
             pfpMenuOpt.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pfpMenuOpt.Items.AddRange(new ToolStripItem[] { uploadLogoToolStripMenuItem, viewLogoToolStripMenuItem, deleteLogoToolStripMenuItem });
             pfpMenuOpt.Name = "logoMenuOpt";
-            pfpMenuOpt.Size = new Size(181, 92);
+            pfpMenuOpt.Size = new Size(160, 70);
             // 
             // uploadLogoToolStripMenuItem
             // 
             uploadLogoToolStripMenuItem.Image = Properties.Resources.upload;
             uploadLogoToolStripMenuItem.Name = "uploadLogoToolStripMenuItem";
-            uploadLogoToolStripMenuItem.Size = new Size(180, 22);
+            uploadLogoToolStripMenuItem.Size = new Size(159, 22);
             uploadLogoToolStripMenuItem.Text = "Upload Picture";
             uploadLogoToolStripMenuItem.Click += uploadLogoToolStripMenuItem_Click;
             // 
@@ -115,15 +117,17 @@
             // 
             viewLogoToolStripMenuItem.Image = Properties.Resources.image;
             viewLogoToolStripMenuItem.Name = "viewLogoToolStripMenuItem";
-            viewLogoToolStripMenuItem.Size = new Size(180, 22);
+            viewLogoToolStripMenuItem.Size = new Size(159, 22);
             viewLogoToolStripMenuItem.Text = "View Picture";
+            viewLogoToolStripMenuItem.Click += viewLogoToolStripMenuItem_Click;
             // 
             // deleteLogoToolStripMenuItem
             // 
             deleteLogoToolStripMenuItem.Image = Properties.Resources.deletePhoto;
             deleteLogoToolStripMenuItem.Name = "deleteLogoToolStripMenuItem";
-            deleteLogoToolStripMenuItem.Size = new Size(180, 22);
+            deleteLogoToolStripMenuItem.Size = new Size(159, 22);
             deleteLogoToolStripMenuItem.Text = "Delete Picture";
+            deleteLogoToolStripMenuItem.Click += deleteLogoToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -360,7 +364,7 @@
             resumeDocx.Location = new Point(469, 345);
             resumeDocx.Multiline = true;
             resumeDocx.Name = "resumeDocx";
-            resumeDocx.Size = new Size(243, 26);
+            resumeDocx.Size = new Size(268, 26);
             resumeDocx.TabIndex = 45;
             // 
             // label
@@ -379,7 +383,7 @@
             coverLetter.Location = new Point(469, 418);
             coverLetter.Multiline = true;
             coverLetter.Name = "coverLetter";
-            coverLetter.Size = new Size(243, 26);
+            coverLetter.Size = new Size(268, 26);
             coverLetter.TabIndex = 47;
             // 
             // textBox22
@@ -398,7 +402,7 @@
             portfolio.Location = new Point(469, 493);
             portfolio.Multiline = true;
             portfolio.Name = "portfolio";
-            portfolio.Size = new Size(243, 26);
+            portfolio.Size = new Size(268, 26);
             portfolio.TabIndex = 49;
             // 
             // browseFileBttn1
@@ -407,7 +411,7 @@
             browseFileBttn1.IconColor = Color.Black;
             browseFileBttn1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             browseFileBttn1.IconSize = 25;
-            browseFileBttn1.Location = new Point(710, 344);
+            browseFileBttn1.Location = new Point(735, 344);
             browseFileBttn1.Name = "browseFileBttn1";
             browseFileBttn1.Size = new Size(31, 27);
             browseFileBttn1.TabIndex = 50;
@@ -420,7 +424,7 @@
             browseFileBttn2.IconColor = Color.Black;
             browseFileBttn2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             browseFileBttn2.IconSize = 25;
-            browseFileBttn2.Location = new Point(710, 417);
+            browseFileBttn2.Location = new Point(735, 417);
             browseFileBttn2.Name = "browseFileBttn2";
             browseFileBttn2.Size = new Size(31, 27);
             browseFileBttn2.TabIndex = 51;
@@ -433,7 +437,7 @@
             browseFileBttn3.IconColor = Color.Black;
             browseFileBttn3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             browseFileBttn3.IconSize = 25;
-            browseFileBttn3.Location = new Point(710, 492);
+            browseFileBttn3.Location = new Point(735, 492);
             browseFileBttn3.Name = "browseFileBttn3";
             browseFileBttn3.Size = new Size(31, 27);
             browseFileBttn3.TabIndex = 52;
@@ -496,7 +500,7 @@
             ProfilePicture.BackColor = SystemColors.ControlDark;
             ProfilePicture.ContextMenuStrip = pfpMenuOpt;
             ProfilePicture.InitialImage = Properties.Resources.research;
-            ProfilePicture.Location = new Point(469, 90);
+            ProfilePicture.Location = new Point(577, 90);
             ProfilePicture.Name = "ProfilePicture";
             ProfilePicture.Size = new Size(189, 152);
             ProfilePicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -604,7 +608,7 @@
             degreeLabel.BorderStyle = BorderStyle.None;
             degreeLabel.Enabled = false;
             degreeLabel.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            degreeLabel.Location = new Point(38, 507);
+            degreeLabel.Location = new Point(33, 506);
             degreeLabel.Name = "degreeLabel";
             degreeLabel.Size = new Size(84, 20);
             degreeLabel.TabIndex = 68;
@@ -641,7 +645,7 @@
             portfolioWeb.Location = new Point(469, 561);
             portfolioWeb.Multiline = true;
             portfolioWeb.Name = "portfolioWeb";
-            portfolioWeb.Size = new Size(243, 26);
+            portfolioWeb.Size = new Size(268, 26);
             portfolioWeb.TabIndex = 72;
             portfolioWeb.Visible = false;
             // 
@@ -660,11 +664,42 @@
             univLabel.BorderStyle = BorderStyle.None;
             univLabel.Enabled = false;
             univLabel.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            univLabel.Location = new Point(38, 549);
+            univLabel.Location = new Point(33, 548);
             univLabel.Name = "univLabel";
             univLabel.Size = new Size(124, 20);
             univLabel.TabIndex = 73;
             univLabel.Text = "Institution/Univ.:";
+            // 
+            // updateBttn
+            // 
+            updateBttn.BackColor = Color.FromArgb(13, 59, 141);
+            updateBttn.FlatAppearance.BorderSize = 0;
+            updateBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            updateBttn.FlatStyle = FlatStyle.Flat;
+            updateBttn.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
+            updateBttn.ForeColor = SystemColors.ButtonHighlight;
+            updateBttn.IconChar = FontAwesome.Sharp.IconChar.None;
+            updateBttn.IconColor = Color.Black;
+            updateBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            updateBttn.Location = new Point(298, 593);
+            updateBttn.Name = "updateBttn";
+            updateBttn.Size = new Size(84, 42);
+            updateBttn.TabIndex = 75;
+            updateBttn.Text = "Update";
+            updateBttn.UseVisualStyleBackColor = false;
+            updateBttn.Visible = false;
+            updateBttn.Click += updateBttn_Click;
+            // 
+            // textBox7
+            // 
+            textBox7.BorderStyle = BorderStyle.None;
+            textBox7.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
+            textBox7.Location = new Point(466, 130);
+            textBox7.Multiline = true;
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(95, 63);
+            textBox7.TabIndex = 76;
+            textBox7.Text = "Logo:\r\n(Right click\r\nfor options)";
             // 
             // SetUpProfileForm
             // 
@@ -672,6 +707,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(859, 659);
+            Controls.Add(textBox7);
+            Controls.Add(updateBttn);
             Controls.Add(university);
             Controls.Add(univLabel);
             Controls.Add(portfolioWeb);
@@ -788,5 +825,7 @@
         private TextBox portfolioWeb;
         private TextBox university;
         private TextBox univLabel;
+        private FontAwesome.Sharp.IconButton updateBttn;
+        private TextBox textBox7;
     }
 }

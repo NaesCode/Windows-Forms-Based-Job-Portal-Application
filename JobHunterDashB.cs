@@ -101,6 +101,7 @@ namespace Job_Application_Manager
                 setUpProfileForm.FormClosed += (s, ev) =>
                 {
                     this.Enabled = true; // Re-enable main form
+                    ApplyJobBttn.Enabled = true;
                 };
             }
 
@@ -115,6 +116,10 @@ namespace Job_Application_Manager
         {
             if (this.menuBarPanel0.Width > 200)
             {
+                if (this.WindowState == FormWindowState.Maximized)
+                    adjustJobPostPanelSize(958, 117);
+                else
+                    adjustJobPostPanelSize(678, 117);
                 menuBarPanel0.Width = 100;
                 Logo1.Visible = false;
                 brandName.Visible = false;
@@ -128,6 +133,10 @@ namespace Job_Application_Manager
             }
             else
             {
+                if (this.WindowState == FormWindowState.Maximized)
+                    adjustJobPostPanelSize(858, 117);
+                else
+                    adjustJobPostPanelSize(578, 117);
                 menuBarPanel0.Width = 202;
                 Logo1.Visible = true;
                 brandName.Visible = true;
@@ -144,7 +153,7 @@ namespace Job_Application_Manager
             }
         }
 
-        private void adjustJobPostPanelSize()
+        private void adjustJobPostPanelSize(int width, int height)
         {
             foreach (Control control in desktopPanel.Controls)
             {
@@ -160,7 +169,7 @@ namespace Job_Application_Manager
                             {
                                 if (panelControl is JobPostPanel jobPostPanel)
                                 {
-                                    jobPostPanel.Size = new Size(878, 117);
+                                    jobPostPanel.Size = new Size(width, height);
                                 }
                             }
                         }
@@ -168,34 +177,6 @@ namespace Job_Application_Manager
                 }
             }
         }
-
-        private void initialJobPostPanelSize()
-        {
-            foreach (Control control in desktopPanel.Controls)
-            {
-                // Check if it's a Job_Hunt and contains a FlowLayoutPanel
-                if (control is Job_Hunt jobHuntControl)
-                {
-                    foreach (Control innerControl in jobHuntControl.Controls)
-                    {
-                        if (innerControl is FlowLayoutPanel flowLayoutPanel)
-                        {
-                            // Iterate through JobPostPanel inside the FlowLayoutPanel
-                            foreach (Control panelControl in flowLayoutPanel.Controls)
-                            {
-                                if (panelControl is JobPostPanel jobPostPanel)
-                                {
-                                    jobPostPanel.Size = new Size(593, 117);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        
-
         private void exitButton1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -205,14 +186,20 @@ namespace Job_Application_Manager
         {
             if (this.WindowState == FormWindowState.Normal)
             {
-                adjustJobPostPanelSize();
                 this.WindowState = FormWindowState.Maximized;
+                if (this.menuBarPanel0.Width > 200)
+                    adjustJobPostPanelSize(858, 117);
+                else
+                    adjustJobPostPanelSize(958, 117);
             }
             else
             {
-                initialJobPostPanelSize();
                 this.WindowState = FormWindowState.Normal;
                 this.Size = new Size(1095, 659);
+                if (this.menuBarPanel0.Width > 200)
+                    adjustJobPostPanelSize(578, 117);
+                else
+                    adjustJobPostPanelSize(678, 117);
             }
         }
 
@@ -226,7 +213,17 @@ namespace Job_Application_Manager
 
         private void ProfileViewBttn_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
+            // If currentChildForm is already a JobHunterProfile and is added, do nothing
+            if (currentChildForm is JobHunterProfile)
+                return;
+
+            // Otherwise, create new profile form
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+                currentChildForm.Dispose();
+            }
+
             currentChildForm = new JobHunterProfile(hunterID);
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
@@ -237,20 +234,36 @@ namespace Job_Application_Manager
 
         private void ApplyJobBttn_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
+            if (currentChildForm is Job_Hunt)
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+                currentChildForm.Dispose();
+            }
+
             currentChildForm = new Job_Hunt(hunterID);
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
             currentChildForm.DisplayDetails();
             if (this.WindowState == FormWindowState.Maximized)
-                adjustJobPostPanelSize();
+            adjustJobPostPanelSize(878, 117);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void TableViewBttn_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
+            if (currentChildForm is TrackApplications)
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+                currentChildForm.Dispose();
+            }
+
             currentChildForm = new TrackApplications(hunterID);
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
@@ -261,7 +274,15 @@ namespace Job_Application_Manager
 
         private void ListViewBttn_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
+            if (currentChildForm is ListView)
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+                currentChildForm.Dispose();
+            }
+
             currentChildForm = new ListView();
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);
@@ -271,7 +292,15 @@ namespace Job_Application_Manager
 
         private void CalendarViewBttn_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
+            if (currentChildForm is ListView)
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+                currentChildForm.Dispose();
+            }
+
             currentChildForm = new CalendarView();
             currentChildForm.Dock = DockStyle.Fill;
             desktopPanel.Controls.Add(currentChildForm);

@@ -683,7 +683,7 @@
             ApplyNowBttn.PressedBackColor = Color.FromArgb(74, 128, 235);
             ApplyNowBttn.PressedFontStyle = FontStyle.Regular;
             ApplyNowBttn.PressTransitionDuration = 150;
-            ApplyNowBttn.ReadOnlyTextColor = Color.FromArgb(100, 100, 100);
+            ApplyNowBttn.ReadOnlyTextColor = Color.LightGray;
             ApplyNowBttn.RippleColor = Color.FromArgb(255, 255, 255);
             ApplyNowBttn.RippleOpacity = 0.3F;
             ApplyNowBttn.RippleRadiusMultiplier = 0.6F;

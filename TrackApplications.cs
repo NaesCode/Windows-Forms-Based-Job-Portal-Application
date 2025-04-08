@@ -13,6 +13,8 @@ namespace Job_Application_Manager
     public partial class TrackApplications : BaseControl
     {
         private DataTable? jobApplication;
+        private int indexRow;
+
         public TrackApplications(int ID)
         {
             InitializeComponent();
@@ -73,6 +75,27 @@ namespace Job_Application_Manager
                 string filterExpression = string.Format("[Application ID] = {0}", filter);
                 jobApplication.DefaultView.RowFilter = filterExpression;
             }
+        }
+
+        private void ApplicationsTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            indexRow = e.RowIndex;
+        }
+
+        private void cancelAppStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = ApplicationsTable.Rows[indexRow];
+                int applicationID = (int)row.Cells[1].Value;
+
+                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete Application#: {applicationID}?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK)
+                {
+                    dbSupport.DeleteJobApplication(applicationID);
+                }
+            }
+            DisplayDetails();
         }
     }
 }

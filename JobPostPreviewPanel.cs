@@ -15,26 +15,30 @@ namespace Job_Application_Manager
         public JobPostPreviewPanel(string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, byte[]? logo)
         {
             InitializeComponent();
+            foreach (Label control in this.Controls.OfType<Label>())
+            {
+                control.Text = "";
+            }
 
-            companyNameLabel.Text = companyName;
-            jobTitleLabel.Text = jobTitle;
-            jobTypeLabel.Text = "( " + jobType + " )";
-            jobLocationLabel.Text = location;
-            workModeLabel.Text = "( " + workMode + " )";
-            initialSalaryLabel.Text = salary + ".00 / Month";
-            vacancyLabel.Text = vacancy.ToString() + " Available Pos.";
+            companyNameLabel.Text = companyName ?? "";
+            jobTitleLabel.Text = (jobTitle?.Trim() ?? "");
+            jobTypeLabel.Text = "( " + (jobType ?? "") + " )";
+            jobLocationLabel.Text = location ?? "";
+            workModeLabel.Text = "( " + (workMode ?? "") + " )";
+            initialSalaryLabel.Text = (salary ?? "0") + ".00 / Month";
+            vacancyLabel.Text = (vacancy?.ToString() ?? "0") + " Available Pos.";
+
             if (logo != null)
             {
+                if (companyLogoPic.Image != null)
+                {
+                    companyLogoPic.Image.Dispose(); 
+                }
                 using (MemoryStream ms = new MemoryStream(logo))
                 {
                     companyLogoPic.Image = Image.FromStream(ms);
                 }
             }
-        }
-
-        private void JobPostPreviewPanel_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

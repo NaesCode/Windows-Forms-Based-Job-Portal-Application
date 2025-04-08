@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -41,12 +42,15 @@
             profilePicture = new SiticoneNetCoreUI.SiticonePictureBox();
             panel3 = new Panel();
             label1 = new Label();
+            applicationOpt = new ContextMenuStrip(components);
+            cancelAppStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ApplicationsTable).BeginInit();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            applicationOpt.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -78,6 +82,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             ApplicationsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             ApplicationsTable.ColumnHeadersHeight = 35;
+            ApplicationsTable.ContextMenuStrip = applicationOpt;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 255);
             dataGridViewCellStyle2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -106,6 +111,7 @@
             ApplicationsTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ApplicationsTable.Size = new Size(885, 549);
             ApplicationsTable.TabIndex = 14;
+            ApplicationsTable.CellClick += ApplicationsTable_CellClick;
             // 
             // menuBarPanel2
             // 
@@ -220,6 +226,22 @@
             label1.TabIndex = 1;
             label1.Text = "DASHBOARD";
             // 
+            // applicationOpt
+            // 
+            applicationOpt.BackColor = SystemColors.ButtonHighlight;
+            applicationOpt.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            applicationOpt.Items.AddRange(new ToolStripItem[] { cancelAppStripMenuItem });
+            applicationOpt.Name = "logoMenuOpt";
+            applicationOpt.Size = new Size(180, 26);
+            // 
+            // cancelAppStripMenuItem
+            // 
+            cancelAppStripMenuItem.Image = Properties.Resources.deletePhoto;
+            cancelAppStripMenuItem.Name = "cancelAppStripMenuItem";
+            cancelAppStripMenuItem.Size = new Size(179, 22);
+            cancelAppStripMenuItem.Text = "Cancel Application";
+            cancelAppStripMenuItem.Click += cancelAppStripMenuItem_Click;
+            // 
             // TrackApplications
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -235,6 +257,7 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            applicationOpt.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -249,5 +272,7 @@
         private Panel panel3;
         private Label label1;
         private ReaLTaiizor.Controls.DungeonTextBox searchBar;
+        private ContextMenuStrip applicationOpt;
+        private ToolStripMenuItem cancelAppStripMenuItem;
     }
 }

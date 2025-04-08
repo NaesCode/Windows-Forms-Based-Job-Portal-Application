@@ -14,6 +14,7 @@ namespace Job_Application_Manager
     public partial class JobApplicants : BaseControl
     {
         private DataTable? applicantsData;
+        private ApplicantProfileView? applicantProfileView;
 
         public JobApplicants(int ID)
         {
@@ -100,7 +101,7 @@ namespace Job_Application_Manager
         private void applicantsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int indexRow = e.RowIndex;
-            if (indexRow > 0)
+            if (indexRow >= 0)
             {
                 DataGridViewRow row = applicantsGridView.Rows[indexRow];
                 HunterID = Convert.ToInt32(row.Cells[2].Value);
@@ -110,6 +111,11 @@ namespace Job_Application_Manager
                     dbSupport.RetrieveApplicantFiles(HunterID);
                 }
             }
+        }
+        private void applicantsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            applicantProfileView = new ApplicantProfileView(HunterID);
+            applicantProfileView.Show();
         }
 
         private void acceptBttn_Click(object sender, EventArgs e)

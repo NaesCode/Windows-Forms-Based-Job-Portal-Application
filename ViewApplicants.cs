@@ -10,10 +10,9 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class ViewApplicants : BaseControl //d pani sure nga inheritance
+    public partial class ViewApplicants : BaseControl
     {
-        public int JobPostID { get; private set; }
-        private byte[]? companyLogo;
+        public int JobPostID;
 
         public event Action<int>? ViewApplicantsClicked; //Defined an event that triggers when the job title button is clicked
 
@@ -28,10 +27,10 @@ namespace Job_Application_Manager
             workModeLabel.Text = "( " + workMode + " )";
             initialSalaryLabel.Text = salary + ".00 / Month";
             vacancyLabel.Text = vacancy.ToString() + " Available Pos.";
-            companyLogo = logo;
-            if (companyLogo != null)
+            imageData = logo;
+            if (imageData != null)
             {
-                using (MemoryStream ms = new MemoryStream(companyLogo))
+                using (MemoryStream ms = new MemoryStream(imageData))
                 {
                     companyLogoPic.Image = Image.FromStream(ms);
                 }

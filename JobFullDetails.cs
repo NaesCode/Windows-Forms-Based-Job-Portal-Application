@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.DataFormats;
+using System.Globalization;
 
 namespace Job_Application_Manager
 {
@@ -16,7 +19,8 @@ namespace Job_Application_Manager
         private int companyPostID;
         private int companyID;
         private int HunterID;
-        DatabaseSupport dbSupport = new DatabaseSupport();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
+        private DateTime currentDate = DateTime.Now; //Used to check for deadlines
 
         public JobFullDetails(int postID, int hunterID)
         {
@@ -94,7 +98,7 @@ namespace Job_Application_Manager
             try
             {
                 // load job details
-                Dictionary<string, object?> jobDetails = dbSupport.GetFullJobDetails(companyPostID);
+                Dictionary<string, object?>? jobDetails = dbSupport.GetFullJobDetails(companyPostID);
 
                 if (jobDetails != null)
                 {
@@ -118,6 +122,7 @@ namespace Job_Application_Manager
                             companyLogo.Image = Image.FromStream(ms);
                         }
                     }
+                    MessageBox.Show($"{applDeadline.Text} \n {currentDate}");
                 }
                 else
                 {
@@ -139,6 +144,16 @@ namespace Job_Application_Manager
                 {
                     throw new Exception("No company data found");
                 }
+
+                string? format = "M/d/yyyy h:mm:ss tt";
+                if (DateTime.TryParseExact(applDeadline.Text, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime closing))
+                {
+                    if(currentDate >= closing) //application deadline is met.
+                    {
+                        ApplyNowBttn.Enabled = false;
+                        ApplyNowBttn.Text = "Position Closed";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -152,6 +167,8 @@ namespace Job_Application_Manager
             DateTime DateApplied = DateTime.Now.Date;
             dbSupport.ApplyForAJob(companyPostID, HunterID, DateApplied, applicationStatus);
             MessageBox.Show("Application sent successfully.");
+            ApplyNowBttn.Text = "Applied";
+            ApplyNowBttn.Enabled = false;
         }
     }
 }

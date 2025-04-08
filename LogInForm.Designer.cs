@@ -257,6 +257,7 @@
             UserName.Name = "UserName";
             UserName.Size = new Size(275, 23);
             UserName.TabIndex = 25;
+            UserName.KeyDown += Control_KeyDown;
             // 
             // UserPassword
             // 
@@ -268,6 +269,7 @@
             UserPassword.Size = new Size(275, 23);
             UserPassword.TabIndex = 26;
             UserPassword.UseSystemPasswordChar = true;
+            UserPassword.KeyDown += Control_KeyDown;
             // 
             // LogInButton
             // 
@@ -345,7 +347,7 @@
             LogInButton.TooltipText = null;
             LogInButton.UseAdvancedRendering = true;
             LogInButton.UseParticles = false;
-            LogInButton.Click += LogInButton_Click_1;
+            LogInButton.Click += LogInButton_Click;
             // 
             // signUpButton
             // 

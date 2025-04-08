@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
+using ReaLTaiizor.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,29 +13,21 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class JobHunterProfile : BaseControl
+    public partial class ApplicantProfileView : Form
     {
-        private SetUpProfileForm? setUpProfileForm;
+        private DatabaseSupport dbSupport = new DatabaseSupport();
+        public int HunterID { get; set; }
+        public byte[]? imageData { get; set; }
 
         private Dictionary<string, object>? profileData;
 
-        public JobHunterProfile(int ID)
+        public ApplicantProfileView(int ID)
         {
             InitializeComponent();
             HunterID = ID;
         }
 
         private void JobHunterProfile_Load(object sender, EventArgs e)
-        {
-            bool isSetUp = dbSupport.GetProfileSetUpStatus(HunterID);
-
-            if (isSetUp == true)
-                setUpBttn.Enabled = false;
-            else
-                setUpBttn.Enabled = true;
-        }
-
-        public override void DisplayDetails()
         {
             // Fetch and display profile picture
             imageData = dbSupport.DisplayProfilePicture(HunterID);
@@ -60,53 +53,7 @@ namespace Job_Application_Manager
                 birthdate.Text = profileData["Date of Birth"].ToString();
                 address.Text = profileData["Address"].ToString();
                 BioTextBox.Text = profileData["Bio"]?.ToString() ?? "Say more about yourself here...";
-            }
-        }
-
-        private void setUpBttn_Click(object sender, EventArgs e)
-        {
-            setUpProfileForm = new SetUpProfileForm(HunterID);
-            setUpProfileForm.ShowDialog();
-            DisplayDetails();
-        }
-
-        private void editBttn_Click(object sender, EventArgs e)
-        {
-            setUpProfileForm = new SetUpProfileForm(profileData, HunterID);
-            setUpProfileForm.ShowDialog();
-            DisplayDetails();
-        }
-
-        private void BioTextBox_Enter(object sender, EventArgs e)
-        {
-            if (BioTextBox.Text == "Say more about yourself here...")
-            {
-                BioTextBox.Text = "";
                 BioTextBox.ForeColor = SystemColors.Desktop;
-            }
-        }
-
-        private void BioTextBox_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(BioTextBox.Text))
-            {
-                BioTextBox.Text = "Say more about yourself here...";
-                BioTextBox.ForeColor = SystemColors.ControlDarkDark;
-            }
-        }
-
-        private void BioTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (BioTextBox.Text == "Say more about yourself here...")
-            {
-                BioTextBox.Text = null;
-
-            }
-            string? profileBio = BioTextBox.Text;
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                dbSupport.UpdateProfileBio(HunterID, profileBio);
             }
         }
     }
