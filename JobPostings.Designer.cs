@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JobPostings));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             panel2 = new Panel();
-            deletePostBttn = new FontAwesome.Sharp.IconButton();
-            postJobBttn = new FontAwesome.Sharp.IconButton();
+            updatePostBttn = new ReaLTaiizor.Controls.Button();
+            deletePostBttn = new ReaLTaiizor.Controls.Button();
+            postJobBttn = new ReaLTaiizor.Controls.Button();
             panel1 = new Panel();
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             panel4 = new Panel();
+            companyLogo2 = new ReaLTaiizor.Controls.ParrotPictureBox();
             searchBar = new ReaLTaiizor.Controls.DungeonTextBox();
-            companyLogo2 = new SiticoneNetCoreUI.SiticonePictureBox();
             panel5 = new Panel();
             label7 = new Label();
             panel6 = new Panel();
@@ -57,6 +57,7 @@
             applicationDeadline = new DataGridViewTextBoxColumn();
             panel3 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             menuBarPanel2.SuspendLayout();
@@ -66,11 +67,13 @@
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)jobEntriesTable).BeginInit();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.BackColor = SystemColors.Desktop;
+            panel2.Controls.Add(updatePostBttn);
             panel2.Controls.Add(deletePostBttn);
             panel2.Controls.Add(postJobBttn);
             panel2.Dock = DockStyle.Fill;
@@ -79,42 +82,67 @@
             panel2.Size = new Size(1164, 72);
             panel2.TabIndex = 0;
             // 
+            // updatePostBttn
+            // 
+            updatePostBttn.BackColor = Color.Transparent;
+            updatePostBttn.BackgroundImageLayout = ImageLayout.None;
+            updatePostBttn.BorderColor = Color.Transparent;
+            updatePostBttn.EnteredBorderColor = Color.Black;
+            updatePostBttn.EnteredColor = Color.FromArgb(13, 59, 141);
+            updatePostBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            updatePostBttn.Image = null;
+            updatePostBttn.ImageAlign = ContentAlignment.MiddleLeft;
+            updatePostBttn.InactiveColor = Color.LightSlateGray;
+            updatePostBttn.Location = new Point(314, 15);
+            updatePostBttn.Name = "updatePostBttn";
+            updatePostBttn.PressedBorderColor = Color.Transparent;
+            updatePostBttn.PressedColor = Color.FromArgb(13, 59, 141);
+            updatePostBttn.Size = new Size(199, 38);
+            updatePostBttn.TabIndex = 7;
+            updatePostBttn.Text = "Update Post Descriptions";
+            updatePostBttn.TextAlignment = StringAlignment.Center;
+            updatePostBttn.Click += updatePostBttn_Click;
+            // 
             // deletePostBttn
             // 
-            deletePostBttn.BackColor = Color.LightSlateGray;
-            deletePostBttn.FlatAppearance.BorderSize = 0;
-            deletePostBttn.FlatStyle = FlatStyle.Flat;
+            deletePostBttn.BackColor = Color.Transparent;
+            deletePostBttn.BackgroundImageLayout = ImageLayout.None;
+            deletePostBttn.BorderColor = Color.Transparent;
+            deletePostBttn.EnteredBorderColor = Color.Black;
+            deletePostBttn.EnteredColor = Color.Firebrick;
             deletePostBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            deletePostBttn.ForeColor = SystemColors.ButtonHighlight;
-            deletePostBttn.IconChar = FontAwesome.Sharp.IconChar.None;
-            deletePostBttn.IconColor = Color.White;
-            deletePostBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            deletePostBttn.IconSize = 30;
+            deletePostBttn.Image = null;
+            deletePostBttn.ImageAlign = ContentAlignment.MiddleLeft;
+            deletePostBttn.InactiveColor = Color.LightSlateGray;
             deletePostBttn.Location = new Point(162, 15);
             deletePostBttn.Name = "deletePostBttn";
+            deletePostBttn.PressedBorderColor = Color.Transparent;
+            deletePostBttn.PressedColor = Color.Firebrick;
             deletePostBttn.Size = new Size(113, 38);
-            deletePostBttn.TabIndex = 1;
+            deletePostBttn.TabIndex = 6;
             deletePostBttn.Text = "Delete Post";
-            deletePostBttn.UseVisualStyleBackColor = false;
+            deletePostBttn.TextAlignment = StringAlignment.Center;
             deletePostBttn.Click += deletePostBttn_Click;
             // 
             // postJobBttn
             // 
-            postJobBttn.BackColor = Color.LightSlateGray;
-            postJobBttn.FlatAppearance.BorderSize = 0;
-            postJobBttn.FlatStyle = FlatStyle.Flat;
+            postJobBttn.BackColor = Color.Transparent;
+            postJobBttn.BackgroundImageLayout = ImageLayout.None;
+            postJobBttn.BorderColor = Color.Transparent;
+            postJobBttn.EnteredBorderColor = Color.Black;
+            postJobBttn.EnteredColor = Color.FromArgb(35, 168, 109);
             postJobBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            postJobBttn.ForeColor = SystemColors.ButtonHighlight;
-            postJobBttn.IconChar = FontAwesome.Sharp.IconChar.None;
-            postJobBttn.IconColor = Color.White;
-            postJobBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            postJobBttn.IconSize = 30;
-            postJobBttn.Location = new Point(39, 15);
+            postJobBttn.Image = null;
+            postJobBttn.ImageAlign = ContentAlignment.MiddleLeft;
+            postJobBttn.InactiveColor = Color.LightSlateGray;
+            postJobBttn.Location = new Point(33, 15);
             postJobBttn.Name = "postJobBttn";
-            postJobBttn.Size = new Size(81, 38);
-            postJobBttn.TabIndex = 0;
+            postJobBttn.PressedBorderColor = Color.Transparent;
+            postJobBttn.PressedColor = Color.FromArgb(35, 168, 109);
+            postJobBttn.Size = new Size(88, 38);
+            postJobBttn.TabIndex = 5;
             postJobBttn.Text = "Post";
-            postJobBttn.UseVisualStyleBackColor = false;
+            postJobBttn.TextAlignment = StringAlignment.Center;
             postJobBttn.Click += postJobBttn_Click;
             // 
             // panel1
@@ -153,13 +181,36 @@
             // panel4
             // 
             panel4.BackColor = Color.Transparent;
-            panel4.Controls.Add(searchBar);
             panel4.Controls.Add(companyLogo2);
+            panel4.Controls.Add(searchBar);
             panel4.Dock = DockStyle.Right;
             panel4.Location = new Point(854, 0);
             panel4.Name = "panel4";
             panel4.Size = new Size(315, 51);
             panel4.TabIndex = 1;
+            // 
+            // companyLogo2
+            // 
+            companyLogo2.BackColor = Color.Transparent;
+            companyLogo2.BackgroundImageLayout = ImageLayout.Zoom;
+            companyLogo2.ColorLeft = Color.Transparent;
+            companyLogo2.ColorRight = Color.Transparent;
+            companyLogo2.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            companyLogo2.FilterAlpha = 0;
+            companyLogo2.FilterEnabled = false;
+            companyLogo2.Image = Properties.Resources._482748566_677122558084783_2784408297271869644_n;
+            companyLogo2.ImeMode = ImeMode.NoControl;
+            companyLogo2.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            companyLogo2.IsElipse = true;
+            companyLogo2.IsParallax = false;
+            companyLogo2.Location = new Point(255, 6);
+            companyLogo2.Name = "companyLogo2";
+            companyLogo2.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            companyLogo2.Size = new Size(40, 40);
+            companyLogo2.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            companyLogo2.TabIndex = 3;
+            companyLogo2.Text = "parrotPictureBox1";
+            companyLogo2.TextRenderingType = System.Drawing.Text.TextRenderingHint.AntiAlias;
             // 
             // searchBar
             // 
@@ -179,56 +230,18 @@
             searchBar.TextAlignment = HorizontalAlignment.Left;
             searchBar.UseSystemPasswordChar = false;
             searchBar.TextChanged += searchBar_TextChanged;
-            // 
-            // companyLogo2
-            // 
-            companyLogo2.BackColor = Color.Transparent;
-            companyLogo2.BorderColor = Color.Black;
-            companyLogo2.BorderWidth = 1;
-            companyLogo2.Brightness = 1F;
-            companyLogo2.Contrast = 1F;
-            companyLogo2.CornerRadius = 15;
-            companyLogo2.DraggingSpeed = 3.15F;
-            companyLogo2.EnableAsyncLoading = false;
-            companyLogo2.EnableCaching = false;
-            companyLogo2.EnableDragDrop = false;
-            companyLogo2.EnableExtendedImageSources = false;
-            companyLogo2.EnableFilters = false;
-            companyLogo2.EnableFlipping = false;
-            companyLogo2.EnableGlow = false;
-            companyLogo2.EnableHighDpiSupport = false;
-            companyLogo2.EnableMouseInteraction = false;
-            companyLogo2.EnablePlaceholder = false;
-            companyLogo2.EnableRotation = false;
-            companyLogo2.EnableShadow = false;
-            companyLogo2.EnableSlideshow = false;
-            companyLogo2.FlipHorizontal = false;
-            companyLogo2.FlipVertical = false;
-            companyLogo2.Grayscale = false;
-            companyLogo2.Image = (Image)resources.GetObject("companyLogo2.Image");
-            companyLogo2.ImageOpacity = 1F;
-            companyLogo2.Images = (List<Image>)resources.GetObject("companyLogo2.Images");
-            companyLogo2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            companyLogo2.IsCircular = true;
-            companyLogo2.Location = new Point(255, 6);
-            companyLogo2.MaintainAspectRatio = true;
-            companyLogo2.Name = "companyLogo2";
-            companyLogo2.PlaceholderImage = null;
-            companyLogo2.RotationAngle = 0F;
-            companyLogo2.Saturation = 1F;
-            companyLogo2.ShowBorder = true;
-            companyLogo2.Size = new Size(40, 40);
-            companyLogo2.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
-            companyLogo2.TabIndex = 0;
+            searchBar.Enter += searchBar_Enter;
+            searchBar.Leave += searchBar_Leave;
             // 
             // panel5
             // 
             panel5.BackColor = Color.Transparent;
+            panel5.Controls.Add(iconPictureBox1);
             panel5.Controls.Add(label7);
             panel5.Dock = DockStyle.Left;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(555, 51);
+            panel5.Size = new Size(408, 51);
             panel5.TabIndex = 2;
             // 
             // label7
@@ -236,7 +249,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
             label7.ForeColor = SystemColors.ButtonHighlight;
-            label7.Location = new Point(15, 14);
+            label7.Location = new Point(70, 14);
             label7.Name = "label7";
             label7.Size = new Size(248, 25);
             label7.TabIndex = 1;
@@ -262,24 +275,24 @@
             jobEntriesTable.BorderStyle = BorderStyle.None;
             jobEntriesTable.CellBorderStyle = DataGridViewCellBorderStyle.None;
             jobEntriesTable.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Desktop;
-            dataGridViewCellStyle1.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle1.SelectionBackColor = Color.LightSlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(17, 17, 17);
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            jobEntriesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Desktop;
+            dataGridViewCellStyle4.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle4.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            jobEntriesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             jobEntriesTable.ColumnHeadersHeight = 35;
             jobEntriesTable.Columns.AddRange(new DataGridViewColumn[] { postID, companyName, jobTitle, jobType, jobLocation, workMode, startingSalary, vacantPositions, postStatus, applicationDeadline });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlDarkDark;
-            dataGridViewCellStyle2.SelectionBackColor = Color.LightSlateGray;
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            jobEntriesTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle5.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.White;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            jobEntriesTable.DefaultCellStyle = dataGridViewCellStyle5;
             jobEntriesTable.Dock = DockStyle.Fill;
             jobEntriesTable.EnableHeadersVisualStyles = false;
             jobEntriesTable.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -287,14 +300,14 @@
             jobEntriesTable.Location = new Point(0, 0);
             jobEntriesTable.Name = "jobEntriesTable";
             jobEntriesTable.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(0, 174, 219);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 198, 247);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(17, 17, 17);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            jobEntriesTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(0, 174, 219);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(0, 198, 247);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            jobEntriesTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             jobEntriesTable.RowHeadersVisible = false;
             jobEntriesTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             jobEntriesTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -361,7 +374,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 55);
             panel3.Name = "panel3";
-            panel3.Padding = new Padding(0, 3, 3, 3);
+            panel3.Padding = new Padding(0, 0, 3, 3);
             panel3.Size = new Size(1169, 306);
             panel3.TabIndex = 12;
             // 
@@ -371,11 +384,25 @@
             flowLayoutPanel1.BackColor = Color.LightSlateGray;
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(0, 3);
+            flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1164, 298);
+            flowLayoutPanel1.Size = new Size(1164, 301);
             flowLayoutPanel1.TabIndex = 1;
             flowLayoutPanel1.WrapContents = false;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.Transparent;
+            iconPictureBox1.ForeColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.Upload;
+            iconPictureBox1.IconColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 40;
+            iconPictureBox1.Location = new Point(21, 7);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(40, 40);
+            iconPictureBox1.TabIndex = 6;
+            iconPictureBox1.TabStop = false;
             // 
             // JobPostings
             // 
@@ -397,22 +424,20 @@
             panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)jobEntriesTable).EndInit();
             panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private Panel panel2;
-        private FontAwesome.Sharp.IconButton postJobBttn;
         private Panel panel1;
         private Panel menuBarPanel2;
         private Panel menuBarPanel3;
         private Panel panel4;
-        private SiticoneNetCoreUI.SiticonePictureBox companyLogo2;
         private Panel panel5;
         private Label label7;
         private Panel panel6;
         private ReaLTaiizor.Controls.DungeonTextBox searchBar;
-        private FontAwesome.Sharp.IconButton deletePostBttn;
         private ReaLTaiizor.Controls.PoisonDataGridView jobEntriesTable;
         private Panel panel3;
         private FlowLayoutPanel flowLayoutPanel1;
@@ -426,5 +451,10 @@
         private DataGridViewTextBoxColumn vacantPositions;
         private DataGridViewTextBoxColumn postStatus;
         private DataGridViewTextBoxColumn applicationDeadline;
+        private ReaLTaiizor.Controls.Button postJobBttn;
+        private ReaLTaiizor.Controls.Button deletePostBttn;
+        private ReaLTaiizor.Controls.Button updatePostBttn;
+        private ReaLTaiizor.Controls.ParrotPictureBox companyLogo2;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

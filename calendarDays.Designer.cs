@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            deleteNote = new FontAwesome.Sharp.IconButton();
             checkBox1 = new CheckBox();
             Day = new Label();
             panel1.SuspendLayout();
@@ -37,14 +38,34 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ButtonHighlight;
+            panel1.Controls.Add(deleteNote);
             panel1.Controls.Add(checkBox1);
             panel1.Controls.Add(Day);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 3);
+            panel1.Location = new Point(5, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(155, 131);
+            panel1.Size = new Size(145, 127);
             panel1.TabIndex = 0;
             panel1.Click += panel1_Click;
+            panel1.DoubleClick += panel1_DoubleClick;
+            // 
+            // deleteNote
+            // 
+            deleteNote.BackColor = SystemColors.ButtonHighlight;
+            deleteNote.FlatAppearance.BorderSize = 0;
+            deleteNote.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
+            deleteNote.FlatStyle = FlatStyle.Flat;
+            deleteNote.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            deleteNote.IconColor = Color.Black;
+            deleteNote.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            deleteNote.IconSize = 20;
+            deleteNote.Location = new Point(11, 90);
+            deleteNote.Name = "deleteNote";
+            deleteNote.Size = new Size(27, 23);
+            deleteNote.TabIndex = 2;
+            deleteNote.UseVisualStyleBackColor = false;
+            deleteNote.Visible = false;
+            deleteNote.Click += deleteNote_Click;
             // 
             // checkBox1
             // 
@@ -71,8 +92,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Name = "calendarDays";
-            Padding = new Padding(3);
-            Size = new Size(161, 137);
+            Padding = new Padding(5);
+            Size = new Size(155, 137);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -83,5 +104,6 @@
         private Panel panel1;
         private Label Day;
         private CheckBox checkBox1;
+        private FontAwesome.Sharp.IconButton deleteNote;
     }
 }

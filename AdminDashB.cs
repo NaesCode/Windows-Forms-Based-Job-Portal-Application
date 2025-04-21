@@ -8,13 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using FontAwesome.Sharp;
 
 namespace Job_Application_Manager
 {
     public partial class AdminDashB : Form
     {
-        private UserControl? currentChildForm;
-        GenCompanyInfoTable? genCompanyInfoTable;
+        private BaseControl? currentChildForm;
+        private GeneralUserInformation? genCompanyInfoTable;
+
+        private IconButton? currentBttn;
+        private Dictionary<string, BaseControl> cachedChildForms = new();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
+
         public AdminDashB()
         {
             InitializeComponent();
@@ -88,12 +94,47 @@ namespace Job_Application_Manager
                 MenuBttn.Location = new Point(135, 20);
                 foreach (Button menuButton in menuBarPanel1.Controls.OfType<Button>())
                 {
-                    menuButton.Text = "     " + menuButton.Tag?.ToString();
-                    menuButton.ImageAlign = ContentAlignment.MiddleCenter;
-                    menuButton.TextAlign = ContentAlignment.MiddleLeft;
-                    menuButton.Padding = new Padding(15);
+                    switch(menuButton.Name)
+                    {
+                        case "GeneralCompanyInfo":
+                            menuButton.Text = menuButton.Tag?.ToString();
+                            menuButton.ImageAlign = ContentAlignment.MiddleCenter;
+                            menuButton.TextAlign = ContentAlignment.MiddleCenter;
+                            menuButton.Padding = new Padding(15, 0, 0, 0);
+                            break;
+
+                        case "UpdateCompanyRequests":
+                            menuButton.Text = menuButton.Tag?.ToString();
+                            menuButton.ImageAlign = ContentAlignment.MiddleCenter;
+                            menuButton.TextAlign = ContentAlignment.MiddleCenter;
+                            menuButton.Padding = new Padding(15, 0, 0, 0);
+                            break;
+
+                        case "AllJobHuntersBttn":
+                            menuButton.Text = menuButton.Tag?.ToString();
+                            menuButton.ImageAlign = ContentAlignment.MiddleCenter;
+                            menuButton.TextAlign = ContentAlignment.MiddleCenter;
+                            menuButton.Padding = new Padding(8, 0, 0, 0);
+                            break;
+
+                        case "AnalyticsBttn":
+                            menuButton.Text = menuButton.Tag?.ToString();
+                            menuButton.ImageAlign = ContentAlignment.MiddleCenter;
+                            menuButton.TextAlign = ContentAlignment.MiddleCenter;
+                            menuButton.Padding = new Padding(1, 0, 0, 0);
+                            break;
+
+                        case "SignOutBttn":
+                            menuButton.Text = menuButton.Tag?.ToString();
+                            menuButton.ImageAlign = ContentAlignment.MiddleCenter;
+                            menuButton.TextAlign = ContentAlignment.MiddleCenter;
+                            menuButton.Padding = new Padding(15, 0, 0, 5);
+                            break;
+
+                        default:
+                            break;
+                    }
                 }
-                signOutBttn.Padding = new Padding(15, 0, 0, 5);
             }
         }
 
@@ -118,58 +159,124 @@ namespace Job_Application_Manager
                 this.WindowState = FormWindowState.Minimized;
         }
 
-        private void TableViewBttn_Click(object sender, EventArgs e)
+        private void ActivateButton(object senderBttn)
         {
-            desktopPanel.Controls.Clear();
-            genCompanyInfoTable = new GenCompanyInfoTable();
-            genCompanyInfoTable.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(genCompanyInfoTable);
-            genCompanyInfoTable.LoadData();
-            desktopPanel.Tag = genCompanyInfoTable;
-            desktopPanel.AutoScroll = true;
+            if (currentBttn != senderBttn)
+            {
+                if (currentBttn != null)
+                {
+                    currentBttn.BackColor = SystemColors.Desktop;
+                }
+                currentBttn = (IconButton)senderBttn;
+                currentBttn.BackColor = Color.IndianRed;
+            }
         }
 
-        private void BoardViewBttn_Click(object sender, EventArgs e)
+        private void GeneralCompanyInfo_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
-            currentChildForm = new BoardView();
-            currentChildForm.Dock = DockStyle.Fill;
+            ActivateButton(sender);
+            string key = "Manage Companies";
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
+
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new GeneralUserInformation();
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.LoadDataGrid();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void ChartViewBttn_Click(object sender, EventArgs e)
+        private void UpdateCompanyRequests_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
-            currentChildForm = new ChartView();
-            currentChildForm.Dock = DockStyle.Fill;
+            ActivateButton(sender);
+            string key = "Update Requests";
+
+            if (currentChildForm is UpdateRequests && currentChildForm == cachedChildForms[key])
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
+
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new UpdateRequests();
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
+            desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.LoadDataGrid();
+            desktopPanel.Tag = currentChildForm;
+            desktopPanel.AutoScroll = true;
+        }
+
+        private void AllJobHuntersBttn_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+            string key = "All Job Hunters";
+            bool isForJobHunters = true;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
+
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new GeneralUserInformation(isForJobHunters);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void ListViewBttn_Click(object sender, EventArgs e)
+        private void AnalyticsBttn_Click(object sender, EventArgs e)
         {
-            desktopPanel.Controls.Clear();
-            currentChildForm = new ListView();
-            currentChildForm.Dock = DockStyle.Fill;
+            ActivateButton(sender);
+            string key = "Analytics";
+
+            if (currentChildForm is AdminAnalytics && currentChildForm == cachedChildForms[key])
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
+
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new AdminAnalytics();
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void CalendarViewBttn_Click(object sender, EventArgs e)
-        {
-            desktopPanel.Controls.Clear();
-            currentChildForm = new CalendarView();
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.Tag = currentChildForm;
-            desktopPanel.AutoScroll = true;
-        }
-
-        private void signOutBttn_Click(object sender, EventArgs e)
+        private void SignOutBttn_Click(object sender, EventArgs e)
         {
             this.Hide();
             LogInForm loginForm = new LogInForm();

@@ -20,6 +20,9 @@ using System.Windows.Documents;
 using System.Runtime.ConstrainedExecution;
 using static QRCoder.PayloadGenerator;
 using System.Xml.Linq;
+using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices.JavaScript;
+using ListViewItem = System.Windows.Controls.ListViewItem;
 
 namespace Job_Application_Manager
 {
@@ -27,53 +30,38 @@ namespace Job_Application_Manager
     {
         private string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobApplicationManager_Database.accdb";
 
-        OleDbConnection? myConn;
-        OleDbDataAdapter? da;
-        OleDbCommand? cmd;
-        DataSet? ds;
-        int indexRow;
+        private OleDbConnection? myConn;
+        private OleDbDataAdapter? da;
+        private OleDbCommand? cmd;
 
-        internal void checkConnection() //can be removed
-        {
-            myConn = new OleDbConnection(connectionString);
-            ds = new DataSet();
-            myConn.Open();
-            System.Windows.Forms.MessageBox.Show("Connected successfully!");
-            myConn.Close();
-        }
-
-        internal void registerJobHunterData(string Email, string Username, string Password)
+        internal void registerJobHunterData(string Email, string Username, string Password, string GmailAppPass)
         {
             myConn = new OleDbConnection(connectionString);
             myConn.Open();
 
-            string registerQuery = "INSERT INTO [JobHunter Accounts] (Email, Username, [Password]) values (?, ?, ?)";
+            string registerQuery = "INSERT INTO [JobHunter Accounts] ([Email], [Username], [Password], [Gmail App Password]) values (?, ?, ?, ?)";
             cmd = new OleDbCommand(registerQuery, myConn);
             cmd.Parameters.AddWithValue("?", Email);
             cmd.Parameters.AddWithValue("?", Username);
             cmd.Parameters.AddWithValue("?", Password);
+            cmd.Parameters.AddWithValue("?", GmailAppPass);
             cmd.ExecuteNonQuery();
             myConn.Close();
-
-            //cmd = new OleDbCommand("SELECT MAX(ID) FROM [JobHunter Accounts]", myConn); //Gets last inserted StudentID and uses it to the other tables
-            //int userID = Convert.ToInt32(cmd.ExecuteScalar());
         }
 
-        internal void registerCompanyData(string Email, string Username, string Password)
+        internal void registerCompanyData(string Email, string Username, string Password, string GmailAppPass)
         {
             myConn = new OleDbConnection(connectionString);
             myConn.Open();
 
-            string registerQuery = "INSERT INTO [CompanyAccounts] ([CompanyLog-In_Email], [CompanyName], [Password]) values (?, ?, ?)";
+            string registerQuery = "INSERT INTO [CompanyAccounts] ([CompanyLog-In_Email], [CompanyName], [Password], [Gmail App Password]) values (?, ?, ?, ?)";
             cmd = new OleDbCommand(registerQuery, myConn);
             cmd.Parameters.AddWithValue("?", Email);
             cmd.Parameters.AddWithValue("?", Username);
             cmd.Parameters.AddWithValue("?", Password);
+            cmd.Parameters.AddWithValue("?", GmailAppPass);
             cmd.ExecuteNonQuery();
             myConn.Close();
-
-            //cmd = new OleDbCommand("SELECT MAX(ID) FROM [JobHunter Accounts]", myConn); //Gets last inserted StudentID and uses it to the other tables
-            //int userID = Convert.ToInt32(cmd.ExecuteScalar());
         }
 
         internal bool AuthenticateHunter(string username, string password)
@@ -199,6 +187,106 @@ namespace Job_Application_Manager
             return 0;
         }
 
+        internal string? GetHunterEmail(int hunterID)
+        {
+            using (myConn = new OleDbConnection(connectionString))
+            {
+                myConn.Open();
+                string query = "SELECT [Email] FROM [JobHunter Accounts] WHERE [userID] = ?";
+                using (cmd = new OleDbCommand(query, myConn))
+                {
+                    cmd.Parameters.AddWithValue("?", hunterID);
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader["Email"].ToString();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        internal string? GetCompanyEmail(int companyID)
+        {
+            using (myConn = new OleDbConnection(connectionString))
+            {
+                myConn.Open();
+                string query = "SELECT [CompanyLog-In_Email] FROM [CompanyAccounts] WHERE [companyUserID] = ?";
+                using (cmd = new OleDbCommand(query, myConn))
+                {
+                    cmd.Parameters.AddWithValue("?", companyID);
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader["CompanyLog-In_Email"].ToString();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        internal Dictionary<string, object?> GetCompanyEmailData(int companyID)
+        {
+            Dictionary<string, object?> companyEmailData = new Dictionary<string, object?>();
+
+            string query = "SELECT [CompanyLog-In_Email], [Gmail App Password] FROM [CompanyAccounts] WHERE [companyUserID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", companyID);
+                try
+                {
+                    myConn.Open();
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            companyEmailData["CompanyEmail"] = reader["CompanyLog-In_Email"].ToString();
+                            companyEmailData["GmailAppPassword"] = reader["Gmail App Password"].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return companyEmailData;
+        }
+
+        internal Dictionary<string, object?> GetHunterEmailData(int hunterID)
+        {
+            Dictionary<string, object?> hunterEmailData = new Dictionary<string, object?>();
+
+            string query = "SELECT [Email], [Gmail App Password] FROM [JobHunter Accounts] WHERE [userID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", hunterID);
+                try
+                {
+                    myConn.Open();
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            hunterEmailData["HunterEmail"] = reader["Email"].ToString();
+                            hunterEmailData["GmailAppPassword"] = reader["Gmail App Password"].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return hunterEmailData;
+        }
+
         public byte[]? DisplayCompanyLogo(int companyId)
         {
             using (myConn = new OleDbConnection(connectionString))
@@ -229,12 +317,12 @@ namespace Job_Application_Manager
 
         public byte[]? DisplayProfilePicture(int hunterID)
         {
-            using (myConn = new OleDbConnection(connectionString))
+            using (OleDbConnection myConn = new OleDbConnection(connectionString))
             {
                 myConn.Open();
                 string query = "SELECT [Pfp Data] FROM [JobHunter Documents Binary Data] WHERE [userID] = ? AND " +
                                "[Pfp FileType] IN ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp')";
-                using (cmd = new OleDbCommand(query, myConn))
+                using (OleDbCommand cmd = new OleDbCommand(query, myConn))
                 {
                     cmd.Parameters.AddWithValue("?", hunterID);
                     using (OleDbDataReader reader = cmd.ExecuteReader())
@@ -249,7 +337,7 @@ namespace Job_Application_Manager
             return null;
         }
 
-        internal bool isValidEmail(string email) //Used in code verification for changing passwords
+        internal bool isValidHunterEmail(string email) //Used in code verification for changing passwords..Possible e change
         {
             string query = "SELECT * FROM [JobHunter Accounts] WHERE Email = ?";
 
@@ -271,7 +359,7 @@ namespace Job_Application_Manager
             }
         }
 
-        internal string? GetUserNameByEmail(string email) //Used in code verification for changing passwords
+        internal string? GetHunterNameByEmail(string email) //Used in code verification for changing passwords
         {
             string query = "SELECT Username FROM [JobHunter Accounts] WHERE Email = ?";
 
@@ -298,7 +386,56 @@ namespace Job_Application_Manager
             return null;
         }
 
-        internal void ChangePassword(string newPassword, string? UserEmail)
+        internal bool isValidCompanyEmail(string email) //Used in code verification for changing passwords..Possible e change
+        {
+            string query = "SELECT * FROM [CompanyAccounts] WHERE [CompanyLog-In_Email] = ?";
+
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", email);
+                try
+                {
+                    myConn.Open();
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    return reader.HasRows;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        internal string? GetCompanyNameByEmail(string email) //Used in code verification for changing passwords
+        {
+            string query = "SELECT [CompanyName] FROM [CompanyAccounts] WHERE [CompanyLog-In_Email] = ?";
+
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", email);
+                try
+                {
+                    myConn.Open();
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader["CompanyName"].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return null;
+        }
+
+        internal void ChangeHunterPassword(string newPassword, string? UserEmail)
         {
             if (string.IsNullOrEmpty(UserEmail))
             {
@@ -307,6 +444,25 @@ namespace Job_Application_Manager
             }
 
             string Query = "Update [JobHunter Accounts] Set [Password] = ? Where Email = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(Query, myConn))
+            {
+                myConn.Open();
+                cmd.Parameters.AddWithValue("?", newPassword);
+                cmd.Parameters.AddWithValue("?", UserEmail);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        internal void ChangeCompanyPassword(string newPassword, string? UserEmail)
+        {
+            if (string.IsNullOrEmpty(UserEmail))
+            {
+                MessageBox.Show("Invalid email provided!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string Query = "Update [CompanyAccounts] Set [Password] = ? Where [CompanyLog-In_Email] = ?";
             using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(Query, myConn))
             {
@@ -421,9 +577,6 @@ namespace Job_Application_Manager
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-
-            //cmd = new OleDbCommand("SELECT MAX(ID) FROM [JobHunter Accounts]", myConn); //Gets last inserted StudentID and uses it to the other tables
-            //int userID = Convert.ToInt32(cmd.ExecuteScalar());
         }
 
         internal DataTable? GetCompanyJobList(int companyUserID)
@@ -477,7 +630,7 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void UpdateJobPost(int? PostID, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, bool? isPosted, DateTime closing)
+        internal void UpdateJobPost(int? postID, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, bool? isPosted, DateTime closing)
         {
             string isPostedQuery = "UPDATE [Job Postings] SET [JobTitle] = ?, [JobType] = ?, [Location] = ?, [Work Mode] = ?, [StartingSalary] = ?, [Vacancy] = ?, [IsPosted] = ?, [Application Deadline] = ? WHERE [PostID] = ?";
 
@@ -492,7 +645,29 @@ namespace Job_Application_Manager
                 cmd.Parameters.AddWithValue("?", vacancy);
                 cmd.Parameters.AddWithValue("?", isPosted);
                 cmd.Parameters.Add("?", OleDbType.Date).Value = closing;
-                cmd.Parameters.AddWithValue("?", PostID);
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Job post updated successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating job post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void UpdateJobDescription(int? postID, string? jobDescription)
+        {
+            string isPostedQuery = "UPDATE [Job Postings] SET [Job Description] = ? WHERE [PostID] = ?";
+
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(isPostedQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", jobDescription);
+                cmd.Parameters.AddWithValue("?", postID);
                 try
                 {
                     myConn.Open();
@@ -500,8 +675,125 @@ namespace Job_Application_Manager
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error updating status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error updating job post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        internal void UpdateJobApplicationDetails(int? postID, string? details)
+        {
+            string isPostedQuery = "UPDATE [Job Postings] SET [ApplicationDetails] = ? WHERE [PostID] = ?";
+
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(isPostedQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", details);
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating job post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void UpdateJobVacancy(int postID)
+        {
+            string vacancyQuery = "UPDATE [Job Postings] SET [Vacancy] = Vacancy - 1 WHERE [PostID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(vacancyQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating job post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void RequestUpdateCompanyDetails(int companyUserId, string companyName, string industry, string Address, string website, string contactPerson, string contactPosition, string contactNumber, string contactEmail)
+        {
+            string updateQuery = "INSERT INTO [Update Company Information Requests] ([companyUserID], [Company Name], [Industry], [Company Address], [Company Website], [Contact Person Name], [Contact Person Position], [Contact Number], [Contact Email]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(updateQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", companyUserId);
+                cmd.Parameters.AddWithValue("?", companyName);
+                cmd.Parameters.AddWithValue("?", industry);
+                cmd.Parameters.AddWithValue("?", Address);
+                cmd.Parameters.AddWithValue("?", website);
+                cmd.Parameters.AddWithValue("?", contactPerson);
+                cmd.Parameters.AddWithValue("?", contactPosition);
+                cmd.Parameters.AddWithValue("?", contactNumber);
+                cmd.Parameters.AddWithValue("?", contactEmail);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Update request submitted successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        internal void UpdateCompanyDetails(int companyUserId, string companyName, string industry, string Address, string website, string contactPerson, string contactPosition, string contactNumber, string contactEmail)
+        {
+            string updateQuery = "UPDATE [Company Information Validation] SET [Company Name] = ?, [Industry] = ?, [Company Address] = ?, [Company Website] = ?, [Contact Person Name] = ?, [Contact Person Position] = ?, [Contact Number] = ?, [Contact Email] = ? WHERE [companyUserID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(updateQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", companyName);
+                cmd.Parameters.AddWithValue("?", industry);
+                cmd.Parameters.AddWithValue("?", Address);
+                cmd.Parameters.AddWithValue("?", website);
+                cmd.Parameters.AddWithValue("?", contactPerson);
+                cmd.Parameters.AddWithValue("?", contactPosition);
+                cmd.Parameters.AddWithValue("?", contactNumber);
+                cmd.Parameters.AddWithValue("?", contactEmail);
+                cmd.Parameters.AddWithValue("?", companyUserId);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Company details updated successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        internal void DeleteUpdateRequest(int requestID)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string deleteRequestQuery = "DELETE FROM [Update Company Information Requests] WHERE [RequestID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(deleteRequestQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", requestID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting request: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -523,6 +815,26 @@ namespace Job_Application_Manager
             catch (Exception ex)
             {
                 MessageBox.Show("Error deleting post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        internal void UpdateApplicationStatusForDeleted(int postID, string status)
+        {
+            string query = "UPDATE [Job Applicants] SET [Status] = ? WHERE [JobPostID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", status);
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -552,18 +864,13 @@ namespace Job_Application_Manager
                             string companyName = reader.GetString(1);
                             string jobTitle = reader.GetString(2);
                             string jobType = reader.GetString(3);
-                            string location = reader.GetString(4);
-                            string workMode = reader.GetString(5);
-                            string startingSalary = reader.GetString(6);
-                            int vacancy = reader.GetInt32(7);
+                            string location = reader.GetString(5);
+                            string workMode = reader.GetString(6);
                             int logoIndex = reader.GetOrdinal("Logo Data");
                             byte[]? logo = reader.IsDBNull(logoIndex) ? null : (byte[])reader[logoIndex];
-                            int postID = reader.GetInt32(10);
+                            int postID = reader.GetInt32(11);
 
-                            var jobPostPanel = new ViewApplicants(postID, companyName, jobTitle, jobType, location, workMode, startingSalary, vacancy, logo)
-                            {
-                                Size = new Size(593, 117)
-                            };
+                            var jobPostPanel = new ViewApplicants(postID, companyName, jobTitle, jobType, location, workMode, logo);
                             jobPostApplicants.Add(jobPostPanel);
                         }
                     }
@@ -595,15 +902,16 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void UpdateApplicationStatus(int hunterID, string status)
+        internal void UpdateApplicationStatus(int applicationID, string status, DateTime dateUpdated)
         {
-            string query = "UPDATE [Job Applicants] SET [Status] = ? WHERE [UserID] = ?";
+            string query = "UPDATE [Job Applicants] SET [Status] = ?, [Status Date Updated] = ? WHERE [Application ID] = ?";
 
             using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(query, myConn))
             {
                 cmd.Parameters.AddWithValue("?", status);
-                cmd.Parameters.AddWithValue("?", hunterID);
+                cmd.Parameters.Add("?", OleDbType.Date).Value = dateUpdated;
+                cmd.Parameters.AddWithValue("?", applicationID);
                 try
                 {
                     myConn.Open();
@@ -617,7 +925,7 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void RetrieveApplicantFiles(int hunterID)
+        internal bool RetrieveApplicantFiles(int hunterID)
         {
             string query = "SELECT [Profile Picture], [Resume/CV], [Cover Letter], [Personal Portfolio], [Pfp Data], [Resume Data], [CoverLetter Data], [Portfolio Data] FROM [JobHunter Files_Query] WHERE [userID] = ?";
 
@@ -632,38 +940,61 @@ namespace Job_Application_Manager
                     {
                         if (reader.Read())
                         {
-                            string logoName = reader["Profile Picture"].ToString();
-                            string corName = reader["Resume/CV"].ToString();
-                            string birrName = reader["Cover Letter"].ToString();
-                            string mpName = reader["Personal Portfolio"].ToString();
+                            string profilePic = reader["Profile Picture"].ToString() ?? DBNull.Value.ToString();
+                            string resume = reader["Resume/CV"].ToString() ?? DBNull.Value.ToString();
+                            string coverletter = reader["Cover Letter"].ToString() ?? DBNull.Value.ToString();
+                            string portfolio = reader["Personal Portfolio"].ToString() ?? DBNull.Value.ToString();
 
-                            byte[] logoData = (byte[])reader["Pfp Data"];
-                            byte[] corData = (byte[])reader["Resume Data"];
-                            byte[] birrData = (byte[])reader["CoverLetter Data"];
-                            byte[] mpData = (byte[])reader["Portfolio Data"];
+                            if (coverletter != "N/A" || portfolio != "N/A")
+                            {
+                                byte[]? pfpData = (byte[])reader["Pfp Data"];
+                                byte[]? resumeData = (byte[])reader["Resume Data"];
+                                byte[]? letterData = (byte[])reader["CoverLetter Data"];
+                                byte[]? portfolioData = (byte[])reader["Portfolio Data"];
 
-                            string logoPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{logoName}";
-                            string corPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{corName}";
-                            string birrPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{birrName}";
-                            string mpPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{mpName}";
+                                string pfpPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{profilePic}";
+                                string resumePath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{resume}";
+                                string letterPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{coverletter}";
+                                string portfolioPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{portfolio}";
 
-                            System.IO.File.WriteAllBytes(logoPath, logoData);
-                            System.IO.File.WriteAllBytes(corPath, corData);
-                            System.IO.File.WriteAllBytes(birrPath, birrData);
-                            System.IO.File.WriteAllBytes(mpPath, mpData);
+                                System.IO.File.WriteAllBytes(pfpPath, pfpData);
+                                System.IO.File.WriteAllBytes(resumePath, resumeData);
+                                System.IO.File.WriteAllBytes(letterPath, letterData);
+                                System.IO.File.WriteAllBytes(portfolioPath, portfolioData);
 
-                            MessageBox.Show("Files retrieved successfully!");
+
+                            }
+                            else
+                            {
+                                if (profilePic != "" || resume != "")
+                                {
+                                    byte[]? pfpData = (byte[])reader["Pfp Data"];
+                                    byte[]? resumeData = (byte[])reader["Resume Data"];
+                                    string pfpPath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{profilePic}";
+                                    string resumePath = $"D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobHunter Files\\{resume}";
+                                    System.IO.File.WriteAllBytes(pfpPath, pfpData);
+                                    System.IO.File.WriteAllBytes(resumePath, resumeData);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No files found for the selected applicant.");
+                                    return false;
+                                }
+                            }
                         }
                     }
+                    MessageBox.Show("Files retrieved successfully!");
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error retrieving files: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
         }
 
-        internal DataTable? GetCompanyData() //For admins
+        internal DataTable? GetAllCompanies() //For Admins
         {
             try
             {
@@ -686,7 +1017,7 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void RetrieveFiles(int companyUserID) //For admins
+        internal void RetrieveCompanyFiles(int companyUserID) //For Admins
         {
             string query = "SELECT [Logo], [CORSEC], [BIRR], [Mayor's Permit], [Logo Data], [COR Data], [BIRR Data], [MP Data] FROM [Company Files_Query] WHERE [companyUserID] = ?";
 
@@ -701,10 +1032,10 @@ namespace Job_Application_Manager
                     {
                         if (reader.Read())
                         {
-                            string logoName = reader["Logo"].ToString();
-                            string corName = reader["CORSEC"].ToString();
-                            string birrName = reader["BIRR"].ToString();
-                            string mpName = reader["Mayor's Permit"].ToString();
+                            string? logoName = reader["Logo"].ToString();
+                            string? corName = reader["CORSEC"].ToString();
+                            string? birrName = reader["BIRR"].ToString();
+                            string? mpName = reader["Mayor's Permit"].ToString();
 
                             byte[] logoData = (byte[])reader["Logo Data"];
                             byte[] corData = (byte[])reader["COR Data"];
@@ -732,7 +1063,7 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void UpdateCompanyStatus(int companyUserID, string status) //For admins
+        internal void UpdateCompanyStatus(int companyUserID, string status) //For Admins
         {
             string query = "UPDATE [Company Information Validation] SET [Status] = ? WHERE [companyUserID] = ?";
 
@@ -750,6 +1081,98 @@ namespace Job_Application_Manager
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error updating status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal DataTable? GetUpdateRequests() //For Admins  
+        {
+            string requestQuery = "SELECT * FROM [Update Company Information Requests]";
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    using (OleDbCommand cmd = new OleDbCommand(requestQuery, conn))
+                    {
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            da.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error fetching data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        internal DataTable? GetAllJobHunters() //For Admins
+        {
+            string requestQuery = "SELECT [userID], [Full Name], [Gender], [Email], [Nationality], [Education], [Degree], [University / Institution] FROM [JobHunter Profile Information]";
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    using (OleDbCommand cmd = new OleDbCommand(requestQuery, conn))
+                    {
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            da.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        internal int GetTotalNumberOfCompanies() //For Admins
+        {
+            string query = "SELECT COUNT(*) FROM [Company Information Validation]";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                try
+                {
+                    myConn.Open();
+                    object? result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error retrieving total number of companies: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0;
+                }
+            }
+        }
+
+        internal int GetTotalNumberOfJobHunters()
+        {
+            string query = "SELECT COUNT(*) FROM [JobHunter Profile Information]";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                try
+                {
+                    myConn.Open();
+                    object? result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error retrieving total number of job hunters: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0;
                 }
             }
         }
@@ -781,7 +1204,7 @@ namespace Job_Application_Manager
             return "";
         }
 
-        internal void InsertHunterProfileDetails(int hunterID, string name, DateTime bday, string gender, string number, string email, string address, string nationality, string education, string? degree, string univ,
+        internal void InsertHunterProfileDetails(int hunterID, string name, DateTime bday, string? gender, string number, string email, string address, string nationality, string education, string? degree, string? univ,
                                                  byte[]? pfpData, string pfpFilePath, byte[]? resumeData, string resumeFilePath, byte[]? letterData, string? letterFilePath, byte[]? portfolioData,
                                                  string? portfolioFilePath, string? website, DateTime currentDate, bool isSetUp)
         {
@@ -885,8 +1308,8 @@ namespace Job_Application_Manager
         {
             string query = "SELECT [isSetUp] FROM [JobHunter Profile Information] WHERE [userID] = ?";
 
-            using (myConn = new OleDbConnection(connectionString))
-            using (cmd = new OleDbCommand(query, myConn))
+            using (OleDbConnection myConn = new OleDbConnection(connectionString))
+            using (OleDbCommand cmd = new OleDbCommand(query, myConn))
             {
                 cmd.Parameters.AddWithValue("?", hunterID);
                 try
@@ -908,7 +1331,7 @@ namespace Job_Application_Manager
             return false;
         }
 
-        internal void UpdateHunterProfileDetails(int hunterID, string name, DateTime bday, string gender, string number, string email, string address, string nationality, string education, string? degree, string univ,
+        internal void UpdateHunterProfileDetails(int hunterID, string name, DateTime bday, string? gender, string number, string email, string address, string nationality, string education, string? degree, string? univ,
                                                  byte[]? pfpData, string pfpFilePath, byte[]? resumeData, string resumeFilePath, byte[]? letterData, string? letterFilePath, byte[]? portfolioData,
                                                  string? portfolioFilePath, string? website, DateTime currentDate)
         {
@@ -1024,53 +1447,81 @@ namespace Job_Application_Manager
             }
         }
 
-        internal List<JobPostPanel> GetJobPosts(int hunterID) //For JobHunters...fetches Job Posts data for Job Applications
+        internal List<JobPostData> GetJobPosts(int hunterID) //For JobHunters...fetches Job Posts data for Job Applications
         {
-            List<JobPostPanel> jobPostPanels = new List<JobPostPanel>();
+            List<JobPostData> jobPosts = new();
             bool isPosted = true;
-
-            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM [Job_FrontEnd_Details] WHERE [IsPosted] = ?";
-
-                using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                using (OleDbConnection conn = new(connectionString))
                 {
-                    cmd.Parameters.AddWithValue("?", isPosted);
-                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    conn.Open();
+                    string query = "SELECT * FROM [Job_FrontEnd_Details] WHERE [IsPosted] = ?";
+
+                    using (OleDbCommand cmd = new(query, conn))
                     {
-                        if (!reader.HasRows)
+                        cmd.Parameters.AddWithValue("?", isPosted);
+                        using (OleDbDataReader reader = cmd.ExecuteReader())
                         {
-                            return jobPostPanels; // Return empty if no data
-                        }
-
-                        while (reader.Read())
-                        {
-                            string companyName = reader.GetString(1);
-                            string jobTitle = reader.GetString(2);
-                            string jobType = reader.GetString(3);
-                            string location = reader.GetString(4);
-                            string workMode = reader.GetString(5);
-                            string startingSalary = reader.GetString(6);
-                            int vacancy = reader.GetInt32(7);
-                            int logoIndex = reader.GetOrdinal("Logo Data");
-                            byte[]? logo = reader.IsDBNull(logoIndex) ? null : (byte[])reader[logoIndex];
-                            int postID = reader.GetInt32(10);
-
-                            var tag = new List<string> { companyName, jobTitle, jobType, location, workMode, vacancy.ToString() };
-
-
-                            var jobPostPanelTemp = new JobPostPanel(postID, companyName, jobTitle, jobType, location, workMode, startingSalary, vacancy, logo, hunterID)
+                            while (reader.Read())
                             {
-                                Size = new Size(577, 117)
-                            };
-                            jobPostPanelTemp.Tag = tag;
-                            jobPostPanels.Add(jobPostPanelTemp);
+                                jobPosts.Add(new JobPostData
+                                {
+                                    CompanyName = reader.GetString(1),
+                                    JobTitle = reader.GetString(2),
+                                    JobType = reader.GetString(3),
+                                    Industry = reader.GetString(4),
+                                    Location = reader.GetString(5),
+                                    WorkMode = reader.GetString(6),
+                                    StartingSalary = reader.GetString(7),
+                                    Vacancy = reader.GetInt32(8),
+                                    Logo = reader.IsDBNull(reader.GetOrdinal("Logo Data")) ? null : (byte[])reader["Logo Data"],
+                                    PostID = reader.GetInt32(11),
+                                    Closing = reader.GetDateTime(12).ToString()
+                                });
+                            }
                         }
                     }
                 }
+                return jobPosts;
             }
-            return jobPostPanels;
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error fetching data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return jobPosts;
+            }
+        }
+
+        internal Dictionary<string, object?> GetCompanyDetails(int companyID)
+        {
+            Dictionary<string, object?> jobDetails = new Dictionary<string, object?>();
+            string fullDetailsQuery = "SELECT * FROM [Company Information Validation] WHERE [companyUserID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(fullDetailsQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", companyID);
+                try
+                {
+                    myConn.Open();
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            for (int i = 1; i < reader.FieldCount - 1; i++)
+                            {
+                                string columnName = reader.GetName(i);
+                                object? columnValue = reader.IsDBNull(i) ? null : reader.GetValue(i);
+                                jobDetails[columnName] = columnValue;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error retrieving job details: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return jobDetails;
         }
 
         internal Dictionary<string, object?> GetFullJobDetails(int postID)
@@ -1139,16 +1590,39 @@ namespace Job_Application_Manager
             return jobDetails;
         }
 
-        internal void ApplyForAJob(int postID, int hunterID, DateTime dateApplied, string status)
+        internal bool AleadyAppliedChecker(int postID, int hunterID)
+        {
+            string query = "SELECT * FROM [Job Applicants] WHERE [JobPostID] = ? AND [UserID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", postID);
+                cmd.Parameters.AddWithValue("?", hunterID);
+                try
+                {
+                    myConn.Open();
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    return reader.HasRows;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error checking application: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        internal void ApplyForAJob(int postID, int companyID, int hunterID, DateTime dateApplied, string status)
         {
             try
             {
                 myConn = new OleDbConnection(connectionString);
                 myConn.Open();
 
-                string applyQuery = "INSERT INTO [Job Applicants] ([JobPostID], [UserID], [Application Date], [Status]) values (?, ?, ?, ?)";
+                string applyQuery = "INSERT INTO [Job Applicants] ([JobPostID], [CompanyUserID], [UserID], [Application Date], [Status]) values (?, ?, ?, ?, ?)";
                 cmd = new OleDbCommand(applyQuery, myConn);
                 cmd.Parameters.AddWithValue("?", postID);
+                cmd.Parameters.AddWithValue("?", companyID);
                 cmd.Parameters.AddWithValue("?", hunterID);
                 cmd.Parameters.Add("?", OleDbType.Date).Value = dateApplied;
                 cmd.Parameters.AddWithValue("?", status);
@@ -1161,15 +1635,84 @@ namespace Job_Application_Manager
             }
         }
 
+        internal void SaveJobPost(int postID, int hunterID, string jobTitle)
+        {
+            try
+            {
+                myConn = new OleDbConnection(connectionString);
+                myConn.Open();
+                string saveQuery = "INSERT INTO [Saved Job Posts] ([PostID], [UserID], [JobTitle]) values (?, ?, ?)";
+                cmd = new OleDbCommand(saveQuery, myConn);
+                cmd.Parameters.AddWithValue("?", postID);
+                cmd.Parameters.AddWithValue("?", hunterID);
+                cmd.Parameters.AddWithValue("?", jobTitle);
+                cmd.ExecuteNonQuery();
+                myConn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        internal DataTable? GetSavedJobPosts(int hunterID)
+        {
+            try
+            {
+                using (OleDbConnection myConn = new OleDbConnection(connectionString))
+                {
+                    string query = "SELECT [PostID], [JobTitle] FROM [Saved Job Posts] WHERE [UserID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(query, myConn))
+                    {
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            da.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        internal void DeleteSavedJobPost(int postID, int hunterID)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string deletePostQuery = "DELETE FROM [Saved Job Posts] WHERE [PostID] = ? AND [UserID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(deletePostQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", postID);
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Job post deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting job post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         internal DataTable? GetJobApplications(int hunterID)
         {
             try
             {
                 using (OleDbConnection myConn = new OleDbConnection(connectionString))
                 {
-                    string query = "SELECT [Job Applicants].UserID, [Job Applicants].[Application ID], Job_FrontEnd_Details.CompanyName, Job_FrontEnd_Details.JobTitle, " +
-                        "[Job Applicants].Status, Job_FrontEnd_Details.[Work Mode], [Job Applicants].[Application Date] FROM [Job Applicants] INNER JOIN Job_FrontEnd_Details " +
-                        "ON [Job Applicants].JobPostID = Job_FrontEnd_Details.PostID WHERE [Job Applicants].UserID = ?"; 
+                    string query = "SELECT [Job Applicants].JobPostID, [Job Applicants].[Application ID], Job_FrontEnd_Details.CompanyName, Job_FrontEnd_Details.JobTitle, " +
+                        "[Job Applicants].Status, Job_FrontEnd_Details.[Work Mode], [Job Applicants].[Application Date] FROM[Job Applicants] INNER JOIN Job_FrontEnd_Details " +
+                        "ON[Job Applicants].JobPostID = Job_FrontEnd_Details.PostID WHERE [Job Applicants].UserID = ?";
 
                     using (OleDbCommand cmd = new OleDbCommand(query, myConn))
                     {
@@ -1213,5 +1756,372 @@ namespace Job_Application_Manager
                 MessageBox.Show("Error deleting application: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        internal void InsertEventOrNote(int userID, string eventOrNote, DateTime date, string? userType)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string insertQuery = "INSERT INTO [Hunter Event Plans And Notes] ([UserType], [userID], [EventORNotes], [Date Set]) VALUES (?, ?, ?, ?)";
+                    using (OleDbCommand cmd = new OleDbCommand(insertQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", userType);
+                        cmd.Parameters.AddWithValue("?", userID);
+                        cmd.Parameters.AddWithValue("?", eventOrNote);
+                        cmd.Parameters.Add("?", OleDbType.Date).Value = date;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Event or note added successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding event or note: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        internal string? GetEventOrNote(int userID, DateTime date, string? userType)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string selectQuery = "SELECT [EventORNotes] FROM [Hunter Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(selectQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", userID);
+                        cmd.Parameters.Add("?", OleDbType.Date).Value = date;
+                        cmd.Parameters.AddWithValue("?", userType);
+                        using (OleDbDataReader reader = cmd.ExecuteReader())
+                        {
+                            if(reader.Read())
+                            {
+                                return reader["EventORNotes"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving events or notes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return null;
+        }
+
+        internal bool HasNoted(int userID, DateTime date, string? userType)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string selectQuery = "SELECT COUNT(*) FROM [Hunter Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(selectQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", userID);
+                        cmd.Parameters.Add("?", OleDbType.Date).Value = date;
+                        cmd.Parameters.AddWithValue("?", userType);
+                        object? count = cmd.ExecuteScalar();
+                        return count != null && (int)count > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error checking notes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
+
+        internal void DeleteEventOrNote(int hunterID, DateTime date, string? userType)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connectionString))
+                {
+                    conn.Open();
+                    string deleteQuery = "DELETE FROM [Hunter Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(deleteQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        cmd.Parameters.Add("?", OleDbType.Date).Value = date;
+                        cmd.Parameters.AddWithValue("?", userType);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Event or note deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting event or note: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        //FOR ANALYTICS
+        internal void UpdateNumOfAcceptedApplicants(int postID)
+        {
+            string analyticsQuery = "UPDATE [Job Postings] SET [NumOfAccepted] = NumOfAccepted + 1 WHERE [PostID] = ?";
+            using ( myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(analyticsQuery, myConn))
+            {
+                cmd.Parameters.Add("?", OleDbType.Integer).Value = postID;
+                try
+                {
+                    myConn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        MessageBox.Show("No records were updated. Post ID might be invalid.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void UpdateNumOfRejectedApplicants(int postID)
+        {
+            string analyticsQuery = "UPDATE [Job Postings] SET [NumOfRejected] = NumOfRejected + 1 WHERE [PostID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(analyticsQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void UpdateNumOfCancelledApplications(int postID)
+        {
+            string analyticsQuery = "UPDATE [Job Postings] SET [NumOfCancelled] = NumOfCancelled + 1 WHERE [PostID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(analyticsQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void UpdateTotalNumOFApplicants(int postID)
+        {
+            string analyticsQuery = "UPDATE [Job Postings] SET [TotalApplicants] = TotalApplicants + 1 WHERE [PostID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(analyticsQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal List<JobPostAnalytics> GetJobPostAnalytics(int companyID)
+        {
+            var analyticsList = new List<JobPostAnalytics>();
+
+            string analyticsQuery = "SELECT [Job Postings].JobTitle, [Job Postings].TotalApplicants, [Job Postings].Vacancy, [Job Postings].NumOfAccepted, [Job Postings].NumOfRejected, [Job Postings].NumOfCancelled FROM [Job Postings] WHERE [CompanyUserID] = ?";
+
+            using (var myConn = new OleDbConnection(connectionString))
+            using (var cmd = new OleDbCommand(analyticsQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", companyID);
+                myConn.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        analyticsList.Add(new JobPostAnalytics
+                        {
+                            JobTitle = reader["JobTitle"].ToString(),
+                            TotalApplicants  = reader["TotalApplicants"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TotalApplicants"]),
+                            TargetHires = reader["Vacancy"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Vacancy"]),
+                            NumOfAccepted = reader["NumOfAccepted"] == DBNull.Value ? 0 : Convert.ToInt32(reader["NumOfAccepted"]),
+                            NumOfRejected = reader["NumOfRejected"] == DBNull.Value ? 0 : Convert.ToInt32(reader["NumOfRejected"]),
+                            NumOfCancelled = reader["NumOfCancelled"] == DBNull.Value ? 0 : Convert.ToInt32(reader["NumOfCancelled"])
+                        });
+                    }
+                }
+            }
+            return analyticsList;
+        }
+
+        internal List<TotalMonthlyApplicants> GetTotalMonthlyApplicants(int companyID)
+        {
+            var stats = new List<TotalMonthlyApplicants>();
+
+            string analyticsQuery = @"SELECT Format([Application Date], 'mmm-yyyy') AS [Month], COUNT(*) AS [TotalApplicants] FROM [Job Applicants] WHERE CompanyUserID = ?
+                            GROUP BY Format([Application Date], 'mmm-yyyy') ORDER BY Format([Application Date], 'mmm-yyyy')";
+
+            using (var myConn = new OleDbConnection(connectionString))
+            using (var cmd = new OleDbCommand(analyticsQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", companyID);
+                myConn.Open();
+                using (OleDbDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        stats.Add(new TotalMonthlyApplicants
+                        { 
+                            Month = reader["Month"].ToString(),
+                            TotalApplicants = Convert.ToInt32(reader["TotalApplicants"])
+                        });
+                    }
+                }
+            }
+            return stats;                             
+        }
+
+        internal DataTable? GetRejectedApplications(int hunterID)
+        {
+            try
+            {
+                using (OleDbConnection myConn = new OleDbConnection(connectionString))
+                {
+                    string query = "SELECT  Job_FrontEnd_Details.CompanyName, Job_FrontEnd_Details.JobTitle FROM[Job Applicants] " +
+                        "INNER JOIN Job_FrontEnd_Details ON[Job Applicants].JobPostID = Job_FrontEnd_Details.PostID " +
+                        "WHERE [Job Applicants].UserID = ? AND [Job Applicants].Status = ?";
+
+                    using (OleDbCommand cmd = new OleDbCommand(query, myConn))
+                    {
+                        // Add the hunterID parameter
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        cmd.Parameters.AddWithValue("?", "REJECTED");
+
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            da.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        internal DataTable? GetAcceptedApplications(int hunterID)
+        {
+            try
+            {
+                using (OleDbConnection myConn = new OleDbConnection(connectionString))
+                {
+                    string query = "SELECT  Job_FrontEnd_Details.CompanyName, Job_FrontEnd_Details.JobTitle FROM [Job Applicants] " +
+                        "INNER JOIN Job_FrontEnd_Details ON [Job Applicants].JobPostID = Job_FrontEnd_Details.PostID " +
+                        "WHERE [Job Applicants].UserID = ? AND [Job Applicants].Status = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(query, myConn))
+                    {
+                        // Add the hunterID parameter
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        cmd.Parameters.AddWithValue("?", "ACCEPTED");
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            da.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        internal DataTable? GetPendingApplications(int hunterID)
+        {
+            try
+            {
+                using (OleDbConnection myConn = new OleDbConnection(connectionString))
+                {
+                    string query = "SELECT  Job_FrontEnd_Details.CompanyName, Job_FrontEnd_Details.JobTitle FROM [Job Applicants] " +
+                        "INNER JOIN Job_FrontEnd_Details ON [Job Applicants].JobPostID = Job_FrontEnd_Details.PostID " +
+                        "WHERE [Job Applicants].UserID = ? AND [Job Applicants].Status IN ('APPLIED', 'REVIEWED', 'FOR CONSIDERATION', 'FOR INTERVIEW')";
+                    using (OleDbCommand cmd = new OleDbCommand(query, myConn))
+                    {
+                        // Add the hunterID parameter
+                        cmd.Parameters.AddWithValue("?", hunterID);
+                        using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dataTable = new DataTable();
+                            da.Fill(dataTable);
+                            return dataTable;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+    }
+
+    //DATA TRANSFER OBJECT (DTO) CLASS
+    internal class JobPostData
+    {
+        public int PostID { get; set; }
+        public string? Closing { get; set; }
+        public string? CompanyName { get; set; }
+        public string? JobTitle { get; set; }
+        public string? JobType { get; set; }
+        public string? Industry { get; set; }
+        public string? Location { get; set; }
+        public string? WorkMode { get; set; }
+        public string? StartingSalary { get; set; }
+        public int Vacancy { get; set; }
+        public byte[]? Logo { get; set; }
+    }
+
+    //DATA STRUCTURES FOR ANALYTICS
+    internal class JobPostAnalytics
+    {
+        public string? JobTitle { get; set; }
+        public int TotalApplicants { get; set; }
+        public int TargetHires { get; set; }
+        public int NumOfAccepted { get; set; }
+        public int NumOfRejected { get; set; }
+        public int NumOfCancelled { get; set; }
+    }
+
+    internal class TotalMonthlyApplicants
+    {
+        public int TotalApplicants { get; set; }
+        public string? Month { get; set; }
     }
 }

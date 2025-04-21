@@ -31,10 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountTypeReg));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
-            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -42,7 +39,6 @@
             guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             CancelButton = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             JobHunterAccType = new FontAwesome.Sharp.IconButton();
             CompanyTypeAcc = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
@@ -52,7 +48,6 @@
             // panel1
             // 
             panel1.BackColor = Color.Black;
-            panel1.Controls.Add(guna2HtmlLabel4);
             panel1.Controls.Add(guna2HtmlLabel3);
             panel1.Controls.Add(guna2HtmlLabel1);
             panel1.Controls.Add(guna2HtmlLabel2);
@@ -62,18 +57,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(371, 668);
             panel1.TabIndex = 0;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.AutoSize = false;
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Geoform", 11.9999981F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.ForeColor = SystemColors.HighlightText;
-            guna2HtmlLabel4.Location = new Point(12, 635);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(219, 21);
-            guna2HtmlLabel4.TabIndex = 11;
-            guna2HtmlLabel4.Text = "Project by: Sean Tadiamon\r\n";
             // 
             // guna2HtmlLabel3
             // 
@@ -160,27 +143,10 @@
             CancelButton.Location = new Point(428, 470);
             CancelButton.Name = "CancelButton";
             CancelButton.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            CancelButton.Size = new Size(90, 36);
+            CancelButton.Size = new Size(90, 42);
             CancelButton.TabIndex = 29;
             CancelButton.Text = "Cancel";
             CancelButton.Click += CancelButton_Click;
-            // 
-            // guna2Button4
-            // 
-            guna2Button4.CustomizableEdges = customizableEdges3;
-            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button4.Font = new Font("Segoe UI", 9F);
-            guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(403, 598);
-            guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button4.Size = new Size(65, 45);
-            guna2Button4.TabIndex = 30;
-            guna2Button4.Text = "TEST";
-            guna2Button4.Click += guna2Button4_Click;
             // 
             // JobHunterAccType
             // 
@@ -222,7 +188,6 @@
             ClientSize = new Size(875, 668);
             Controls.Add(CompanyTypeAcc);
             Controls.Add(JobHunterAccType);
-            Controls.Add(guna2Button4);
             Controls.Add(CancelButton);
             Controls.Add(guna2HtmlLabel5);
             Controls.Add(guna2HtmlLabel6);
@@ -239,7 +204,6 @@
         #endregion
 
         private Panel panel1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
@@ -247,7 +211,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2Button CancelButton;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private FontAwesome.Sharp.IconButton JobHunterAccType;
         private FontAwesome.Sharp.IconButton CompanyTypeAcc;
     }

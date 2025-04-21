@@ -16,5 +16,7 @@ namespace Job_Application_Manager
         internal DatabaseSupport dbSupport = new DatabaseSupport();
 
         public virtual void DisplayDetails() { }
+
+        public virtual void LoadDataGrid() { }
     }
 }

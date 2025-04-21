@@ -20,11 +20,6 @@ namespace Job_Application_Manager
             InitializeComponent();
         }
 
-        private void guna2Button4_Click(object sender, EventArgs e)
-        {
-            dbSupport.checkConnection();
-        }
-
         private void signUpButton_Click(object sender, EventArgs e)
         {
             string confPass = ConfirmPass.Text;
@@ -35,9 +30,12 @@ namespace Job_Application_Manager
                     if (UserPassword.Text.Length < 8)
                         throw new Exception("Password must be atleast 8 characters.Try again");
 
-                    dbSupport.registerCompanyData(UserEmail.Text, UserName.Text, UserPassword.Text);
+                    if (GmailAppPass.Text.Length != 19) //includes whitespaces
+                        throw new Exception("App password must be 16 characters. Try again");
 
-                    MessageBox.Show("You are now registered!");
+                    dbSupport.registerCompanyData(UserEmail.Text, UserName.Text, UserPassword.Text, GmailAppPass.Text);
+
+                    MessageBox.Show("Great job! You are now signed up!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -46,13 +44,14 @@ namespace Job_Application_Manager
                     MessageBox.Show("Password didn't match. Try again.");
                     UserPassword.Clear();
                     ConfirmPass.Clear();
+                    return;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                UserPassword.Clear();
-                ConfirmPass.Clear();
+                GmailAppPass.Clear();
+                return;
             }
         }
 
@@ -60,6 +59,12 @@ namespace Job_Application_Manager
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void InstructionBttn_Click(object sender, EventArgs e)
+        {
+            HowToGetAppPass instruction = new HowToGetAppPass();
+            instruction.ShowDialog();
         }
     }
 }

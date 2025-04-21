@@ -37,11 +37,11 @@
             exitButton1 = new FontAwesome.Sharp.IconButton();
             maximButton1 = new FontAwesome.Sharp.IconButton();
             CalendarViewBttn = new FontAwesome.Sharp.IconButton();
-            ListViewBttn = new FontAwesome.Sharp.IconButton();
+            ChartViewBttn = new FontAwesome.Sharp.IconButton();
             ProfileViewBttn = new FontAwesome.Sharp.IconButton();
             ApplyJobBttn = new FontAwesome.Sharp.IconButton();
             TableViewBttn = new FontAwesome.Sharp.IconButton();
-            signOutBttn = new FontAwesome.Sharp.IconButton();
+            SignOutBttn = new FontAwesome.Sharp.IconButton();
             panel6 = new Panel();
             MenuBttn = new FontAwesome.Sharp.IconButton();
             brandName = new Label();
@@ -225,7 +225,7 @@
             CalendarViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
             CalendarViewBttn.FlatAppearance.BorderSize = 0;
             CalendarViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            CalendarViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            CalendarViewBttn.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
             CalendarViewBttn.FlatStyle = FlatStyle.Flat;
             CalendarViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CalendarViewBttn.ForeColor = SystemColors.ButtonHighlight;
@@ -233,42 +233,42 @@
             CalendarViewBttn.IconColor = Color.White;
             CalendarViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             CalendarViewBttn.IconSize = 30;
-            CalendarViewBttn.Location = new Point(0, 337);
+            CalendarViewBttn.Location = new Point(0, 397);
             CalendarViewBttn.Name = "CalendarViewBttn";
-            CalendarViewBttn.Padding = new Padding(26, 0, 0, 0);
+            CalendarViewBttn.Padding = new Padding(24, 0, 0, 0);
             CalendarViewBttn.Size = new Size(202, 60);
             CalendarViewBttn.TabIndex = 10;
-            CalendarViewBttn.Tag = "Calendar";
+            CalendarViewBttn.Tag = "    Calendar";
             CalendarViewBttn.Text = "    Calendar";
             CalendarViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             CalendarViewBttn.UseVisualStyleBackColor = false;
             CalendarViewBttn.Click += CalendarViewBttn_Click;
             // 
-            // ListViewBttn
+            // ChartViewBttn
             // 
-            ListViewBttn.BackColor = Color.Transparent;
-            ListViewBttn.Dock = DockStyle.Top;
-            ListViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
-            ListViewBttn.FlatAppearance.BorderSize = 0;
-            ListViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            ListViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
-            ListViewBttn.FlatStyle = FlatStyle.Flat;
-            ListViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ListViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            ListViewBttn.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            ListViewBttn.IconColor = Color.White;
-            ListViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ListViewBttn.IconSize = 30;
-            ListViewBttn.Location = new Point(0, 397);
-            ListViewBttn.Name = "ListViewBttn";
-            ListViewBttn.Padding = new Padding(15, 0, 0, 0);
-            ListViewBttn.Size = new Size(202, 60);
-            ListViewBttn.TabIndex = 9;
-            ListViewBttn.Tag = "List";
-            ListViewBttn.Text = "       [  ]";
-            ListViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            ListViewBttn.UseVisualStyleBackColor = false;
-            ListViewBttn.Click += ListViewBttn_Click;
+            ChartViewBttn.BackColor = Color.Transparent;
+            ChartViewBttn.Dock = DockStyle.Top;
+            ChartViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
+            ChartViewBttn.FlatAppearance.BorderSize = 0;
+            ChartViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            ChartViewBttn.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
+            ChartViewBttn.FlatStyle = FlatStyle.Flat;
+            ChartViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ChartViewBttn.ForeColor = SystemColors.ButtonHighlight;
+            ChartViewBttn.IconChar = FontAwesome.Sharp.IconChar.ChartSimple;
+            ChartViewBttn.IconColor = Color.White;
+            ChartViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ChartViewBttn.IconSize = 30;
+            ChartViewBttn.Location = new Point(0, 337);
+            ChartViewBttn.Name = "ChartViewBttn";
+            ChartViewBttn.Padding = new Padding(24, 0, 0, 0);
+            ChartViewBttn.Size = new Size(202, 60);
+            ChartViewBttn.TabIndex = 9;
+            ChartViewBttn.Tag = "     Analytics";
+            ChartViewBttn.Text = "     Analytics";
+            ChartViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            ChartViewBttn.UseVisualStyleBackColor = false;
+            ChartViewBttn.Click += ChartViewBttn_Click;
             // 
             // ProfileViewBttn
             // 
@@ -277,20 +277,20 @@
             ProfileViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
             ProfileViewBttn.FlatAppearance.BorderSize = 0;
             ProfileViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            ProfileViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            ProfileViewBttn.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
             ProfileViewBttn.FlatStyle = FlatStyle.Flat;
             ProfileViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ProfileViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            ProfileViewBttn.IconChar = FontAwesome.Sharp.IconChar.Freebsd;
+            ProfileViewBttn.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
             ProfileViewBttn.IconColor = Color.White;
             ProfileViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            ProfileViewBttn.IconSize = 30;
+            ProfileViewBttn.IconSize = 35;
             ProfileViewBttn.Location = new Point(0, 157);
             ProfileViewBttn.Name = "ProfileViewBttn";
-            ProfileViewBttn.Padding = new Padding(20, 0, 0, 0);
+            ProfileViewBttn.Padding = new Padding(15, 0, 0, 0);
             ProfileViewBttn.Size = new Size(202, 60);
             ProfileViewBttn.TabIndex = 8;
-            ProfileViewBttn.Tag = "Profile";
+            ProfileViewBttn.Tag = "     Profile";
             ProfileViewBttn.Text = "     Profile";
             ProfileViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ProfileViewBttn.UseVisualStyleBackColor = false;
@@ -304,7 +304,7 @@
             ApplyJobBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
             ApplyJobBttn.FlatAppearance.BorderSize = 0;
             ApplyJobBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            ApplyJobBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            ApplyJobBttn.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
             ApplyJobBttn.FlatStyle = FlatStyle.Flat;
             ApplyJobBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ApplyJobBttn.ForeColor = SystemColors.ButtonHighlight;
@@ -317,7 +317,7 @@
             ApplyJobBttn.Padding = new Padding(15, 0, 0, 0);
             ApplyJobBttn.Size = new Size(202, 60);
             ApplyJobBttn.TabIndex = 7;
-            ApplyJobBttn.Tag = "Apply";
+            ApplyJobBttn.Tag = "     Apply";
             ApplyJobBttn.Text = "     Apply";
             ApplyJobBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             ApplyJobBttn.UseVisualStyleBackColor = false;
@@ -330,11 +330,11 @@
             TableViewBttn.FlatAppearance.BorderColor = SystemColors.ButtonHighlight;
             TableViewBttn.FlatAppearance.BorderSize = 0;
             TableViewBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
-            TableViewBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(13, 59, 141);
+            TableViewBttn.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
             TableViewBttn.FlatStyle = FlatStyle.Flat;
             TableViewBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TableViewBttn.ForeColor = SystemColors.ButtonHighlight;
-            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.Table;
+            TableViewBttn.IconChar = FontAwesome.Sharp.IconChar.FileCircleCheck;
             TableViewBttn.IconColor = Color.White;
             TableViewBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             TableViewBttn.IconSize = 30;
@@ -343,35 +343,35 @@
             TableViewBttn.Padding = new Padding(15, 0, 0, 0);
             TableViewBttn.Size = new Size(202, 60);
             TableViewBttn.TabIndex = 6;
-            TableViewBttn.Tag = "Track";
+            TableViewBttn.Tag = "     Track";
             TableViewBttn.Text = "     Track";
             TableViewBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
             TableViewBttn.UseVisualStyleBackColor = false;
             TableViewBttn.Click += TableViewBttn_Click;
             // 
-            // signOutBttn
+            // SignOutBttn
             // 
-            signOutBttn.BackColor = Color.Transparent;
-            signOutBttn.Dock = DockStyle.Bottom;
-            signOutBttn.FlatAppearance.BorderSize = 0;
-            signOutBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 128, 128);
-            signOutBttn.FlatStyle = FlatStyle.Flat;
-            signOutBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            signOutBttn.ForeColor = SystemColors.ButtonHighlight;
-            signOutBttn.IconChar = FontAwesome.Sharp.IconChar.SignOut;
-            signOutBttn.IconColor = Color.White;
-            signOutBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            signOutBttn.IconSize = 30;
-            signOutBttn.Location = new Point(0, 601);
-            signOutBttn.Name = "signOutBttn";
-            signOutBttn.Padding = new Padding(15, 0, 0, 5);
-            signOutBttn.Size = new Size(202, 56);
-            signOutBttn.TabIndex = 5;
-            signOutBttn.Tag = "Sign Out";
-            signOutBttn.Text = "     Sign Out";
-            signOutBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
-            signOutBttn.UseVisualStyleBackColor = false;
-            signOutBttn.Click += signOutBttn_Click;
+            SignOutBttn.BackColor = Color.Transparent;
+            SignOutBttn.Dock = DockStyle.Bottom;
+            SignOutBttn.FlatAppearance.BorderSize = 0;
+            SignOutBttn.FlatAppearance.MouseOverBackColor = Color.Firebrick;
+            SignOutBttn.FlatStyle = FlatStyle.Flat;
+            SignOutBttn.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SignOutBttn.ForeColor = SystemColors.ButtonHighlight;
+            SignOutBttn.IconChar = FontAwesome.Sharp.IconChar.SignOut;
+            SignOutBttn.IconColor = Color.White;
+            SignOutBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            SignOutBttn.IconSize = 30;
+            SignOutBttn.Location = new Point(0, 601);
+            SignOutBttn.Name = "SignOutBttn";
+            SignOutBttn.Padding = new Padding(15, 0, 0, 5);
+            SignOutBttn.Size = new Size(202, 56);
+            SignOutBttn.TabIndex = 5;
+            SignOutBttn.Tag = "     Sign Out";
+            SignOutBttn.Text = "     Sign Out";
+            SignOutBttn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            SignOutBttn.UseVisualStyleBackColor = false;
+            SignOutBttn.Click += SignOutBttn_Click;
             // 
             // panel6
             // 
@@ -387,6 +387,7 @@
             // 
             // MenuBttn
             // 
+            MenuBttn.FlatAppearance.MouseOverBackColor = SystemColors.WindowFrame;
             MenuBttn.FlatStyle = FlatStyle.Flat;
             MenuBttn.IconChar = FontAwesome.Sharp.IconChar.Bars;
             MenuBttn.IconColor = SystemColors.ButtonHighlight;
@@ -423,7 +424,7 @@
             // desktopPanel
             // 
             desktopPanel.AutoScroll = true;
-            desktopPanel.BackgroundImage = Properties.Resources.desktop_bgimage1;
+            desktopPanel.BackgroundImage = Properties.Resources.WELCOME_TO_JOB_HUNT;
             desktopPanel.BackgroundImageLayout = ImageLayout.Stretch;
             desktopPanel.Dock = DockStyle.Fill;
             desktopPanel.Location = new Point(205, 41);
@@ -444,9 +445,9 @@
             // menuBarPanel1
             // 
             menuBarPanel1.BackColor = SystemColors.Desktop;
-            menuBarPanel1.Controls.Add(ListViewBttn);
             menuBarPanel1.Controls.Add(CalendarViewBttn);
-            menuBarPanel1.Controls.Add(signOutBttn);
+            menuBarPanel1.Controls.Add(ChartViewBttn);
+            menuBarPanel1.Controls.Add(SignOutBttn);
             menuBarPanel1.Controls.Add(TableViewBttn);
             menuBarPanel1.Controls.Add(ApplyJobBttn);
             menuBarPanel1.Controls.Add(ProfileViewBttn);
@@ -485,10 +486,10 @@
         #endregion
         private Panel panel1;
         private PictureBox Logo1;
-        private FontAwesome.Sharp.IconButton signOutBttn;
+        private FontAwesome.Sharp.IconButton SignOutBttn;
         private FontAwesome.Sharp.IconButton TableViewBttn;
         private FontAwesome.Sharp.IconButton CalendarViewBttn;
-        private FontAwesome.Sharp.IconButton ListViewBttn;
+        private FontAwesome.Sharp.IconButton ChartViewBttn;
         private FontAwesome.Sharp.IconButton ProfileViewBttn;
         private FontAwesome.Sharp.IconButton ApplyJobBttn;
         private Panel controlBarPanel1;

@@ -24,9 +24,9 @@ namespace Job_Application_Manager
             HunterID = ID;
         }
 
-        private void JobHunterProfile_Load(object sender, EventArgs e)
+        private async void JobHunterProfile_Load(object sender, EventArgs e)
         {
-            bool isSetUp = dbSupport.GetProfileSetUpStatus(HunterID);
+            bool isSetUp = await Task.Run(() => dbSupport.GetProfileSetUpStatus(HunterID));
 
             if (isSetUp == true)
                 setUpBttn.Enabled = false;
@@ -34,10 +34,15 @@ namespace Job_Application_Manager
                 setUpBttn.Enabled = true;
         }
 
-        public override void DisplayDetails()
+        public override async void DisplayDetails()
         {
-            // Fetch and display profile picture
-            imageData = dbSupport.DisplayProfilePicture(HunterID);
+            (imageData, profileData) = await Task.Run(() =>
+            {
+                var pfp = dbSupport.DisplayProfilePicture(HunterID);
+                var data = dbSupport.GetProfileDetails(HunterID);
+                return(pfp, data);
+            });
+
             if (imageData != null)
             {
                 using (MemoryStream ms = new MemoryStream(imageData))
@@ -46,8 +51,6 @@ namespace Job_Application_Manager
                 }
             }
 
-            // Fetch and display profile details
-            profileData = dbSupport.GetProfileDetails(HunterID);
             if (profileData != null)
             {
                 fullName.Text = profileData["Full Name"].ToString();

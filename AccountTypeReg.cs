@@ -22,11 +22,6 @@ namespace Job_Application_Manager
             InitializeComponent();
         }
 
-        private void guna2Button4_Click(object sender, EventArgs e)
-        {
-            dbSupport.checkConnection();
-        }
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;

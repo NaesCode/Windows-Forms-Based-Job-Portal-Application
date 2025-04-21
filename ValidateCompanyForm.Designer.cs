@@ -74,6 +74,9 @@
             companyLogo = new PictureBox();
             website = new TextBox();
             textBox5 = new TextBox();
+            textBox7 = new TextBox();
+            requestUpdateBttn = new FontAwesome.Sharp.IconButton();
+            UpdateBttn = new FontAwesome.Sharp.IconButton();
             logoMenuOpt.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -192,30 +195,36 @@
             // 
             // textBox2
             // 
+            textBox2.BackColor = SystemColors.ButtonHighlight;
             textBox2.BorderStyle = BorderStyle.None;
             textBox2.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox2.Location = new Point(74, 90);
             textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
             textBox2.Size = new Size(245, 23);
             textBox2.TabIndex = 23;
             textBox2.Text = "Basic Company Information:\r\n";
             // 
             // textBox3
             // 
+            textBox3.BackColor = SystemColors.ButtonHighlight;
             textBox3.BorderStyle = BorderStyle.None;
             textBox3.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox3.Location = new Point(33, 133);
             textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
             textBox3.Size = new Size(126, 20);
             textBox3.TabIndex = 24;
             textBox3.Text = "Company Name:";
             // 
             // textBox4
             // 
+            textBox4.BackColor = SystemColors.ButtonHighlight;
             textBox4.BorderStyle = BorderStyle.None;
             textBox4.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox4.Location = new Point(33, 173);
             textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
             textBox4.Size = new Size(126, 20);
             textBox4.TabIndex = 25;
             textBox4.Text = "Industry:";
@@ -231,10 +240,12 @@
             // 
             // textBox6
             // 
+            textBox6.BackColor = SystemColors.ButtonHighlight;
             textBox6.BorderStyle = BorderStyle.None;
             textBox6.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox6.Location = new Point(33, 211);
             textBox6.Name = "textBox6";
+            textBox6.ReadOnly = true;
             textBox6.Size = new Size(140, 20);
             textBox6.TabIndex = 27;
             textBox6.Text = "Company Address:";
@@ -250,20 +261,24 @@
             // 
             // textBox8
             // 
+            textBox8.BackColor = SystemColors.ButtonHighlight;
             textBox8.BorderStyle = BorderStyle.None;
             textBox8.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox8.Location = new Point(74, 305);
             textBox8.Name = "textBox8";
+            textBox8.ReadOnly = true;
             textBox8.Size = new Size(213, 23);
             textBox8.TabIndex = 29;
             textBox8.Text = "Contact Person Details:";
             // 
             // textBox9
             // 
+            textBox9.BackColor = SystemColors.ButtonHighlight;
             textBox9.BorderStyle = BorderStyle.None;
             textBox9.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox9.Location = new Point(33, 351);
             textBox9.Name = "textBox9";
+            textBox9.ReadOnly = true;
             textBox9.Size = new Size(58, 20);
             textBox9.TabIndex = 30;
             textBox9.Text = "Name: ";
@@ -279,10 +294,12 @@
             // 
             // textBox11
             // 
+            textBox11.BackColor = SystemColors.ButtonHighlight;
             textBox11.BorderStyle = BorderStyle.None;
             textBox11.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox11.Location = new Point(33, 391);
             textBox11.Name = "textBox11";
+            textBox11.ReadOnly = true;
             textBox11.Size = new Size(70, 20);
             textBox11.TabIndex = 32;
             textBox11.Text = "Position:";
@@ -298,10 +315,12 @@
             // 
             // textBox13
             // 
+            textBox13.BackColor = SystemColors.ButtonHighlight;
             textBox13.BorderStyle = BorderStyle.None;
             textBox13.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox13.Location = new Point(33, 433);
             textBox13.Name = "textBox13";
+            textBox13.ReadOnly = true;
             textBox13.Size = new Size(126, 20);
             textBox13.TabIndex = 34;
             textBox13.Text = "Contact Number:";
@@ -317,10 +336,12 @@
             // 
             // textBox16
             // 
+            textBox16.BackColor = SystemColors.ButtonHighlight;
             textBox16.BorderStyle = BorderStyle.None;
             textBox16.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox16.Location = new Point(33, 474);
             textBox16.Name = "textBox16";
+            textBox16.ReadOnly = true;
             textBox16.Size = new Size(126, 20);
             textBox16.TabIndex = 36;
             textBox16.Text = "Email:\r\n";
@@ -345,7 +366,7 @@
             clearInputsBttn.IconChar = FontAwesome.Sharp.IconChar.None;
             clearInputsBttn.IconColor = Color.Black;
             clearInputsBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            clearInputsBttn.Location = new Point(163, 538);
+            clearInputsBttn.Location = new Point(203, 538);
             clearInputsBttn.Name = "clearInputsBttn";
             clearInputsBttn.Size = new Size(84, 42);
             clearInputsBttn.TabIndex = 59;
@@ -354,20 +375,24 @@
             // 
             // textBox20
             // 
+            textBox20.BackColor = SystemColors.ButtonHighlight;
             textBox20.BorderStyle = BorderStyle.None;
             textBox20.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox20.Location = new Point(512, 271);
             textBox20.Name = "textBox20";
-            textBox20.Size = new Size(213, 23);
+            textBox20.ReadOnly = true;
+            textBox20.Size = new Size(285, 23);
             textBox20.TabIndex = 43;
-            textBox20.Text = "Supporting Documents:";
+            textBox20.Text = "Supporting Documents (in PDFs):";
             // 
             // textBox17
             // 
+            textBox17.BackColor = SystemColors.ButtonHighlight;
             textBox17.BorderStyle = BorderStyle.None;
             textBox17.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox17.Location = new Point(469, 317);
             textBox17.Name = "textBox17";
+            textBox17.ReadOnly = true;
             textBox17.Size = new Size(243, 20);
             textBox17.TabIndex = 44;
             textBox17.Text = "Certificate of Registration (SEC):";
@@ -383,10 +408,12 @@
             // 
             // textBox19
             // 
+            textBox19.BackColor = SystemColors.ButtonHighlight;
             textBox19.BorderStyle = BorderStyle.None;
             textBox19.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox19.Location = new Point(469, 389);
             textBox19.Name = "textBox19";
+            textBox19.ReadOnly = true;
             textBox19.Size = new Size(128, 20);
             textBox19.TabIndex = 46;
             textBox19.Text = "BIR Registration:";
@@ -402,10 +429,12 @@
             // 
             // textBox22
             // 
+            textBox22.BackColor = SystemColors.ButtonHighlight;
             textBox22.BorderStyle = BorderStyle.None;
             textBox22.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox22.Location = new Point(469, 463);
             textBox22.Name = "textBox22";
+            textBox22.ReadOnly = true;
             textBox22.Size = new Size(128, 20);
             textBox22.TabIndex = 48;
             textBox22.Text = "Mayor's Permit:";
@@ -517,7 +546,7 @@
             submitBttn.IconChar = FontAwesome.Sharp.IconChar.None;
             submitBttn.IconColor = Color.Black;
             submitBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            submitBttn.Location = new Point(33, 538);
+            submitBttn.Location = new Point(59, 538);
             submitBttn.Name = "submitBttn";
             submitBttn.Size = new Size(84, 42);
             submitBttn.TabIndex = 58;
@@ -530,7 +559,7 @@
             companyLogo.BackColor = SystemColors.ControlDark;
             companyLogo.ContextMenuStrip = logoMenuOpt;
             companyLogo.InitialImage = Properties.Resources.research;
-            companyLogo.Location = new Point(562, 90);
+            companyLogo.Location = new Point(608, 90);
             companyLogo.Name = "companyLogo";
             companyLogo.Size = new Size(189, 152);
             companyLogo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -549,13 +578,68 @@
             // 
             // textBox5
             // 
+            textBox5.BackColor = SystemColors.ButtonHighlight;
             textBox5.BorderStyle = BorderStyle.None;
             textBox5.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
             textBox5.Location = new Point(33, 252);
             textBox5.Name = "textBox5";
+            textBox5.ReadOnly = true;
             textBox5.Size = new Size(157, 20);
             textBox5.TabIndex = 60;
             textBox5.Text = "Website:";
+            // 
+            // textBox7
+            // 
+            textBox7.BackColor = SystemColors.ButtonHighlight;
+            textBox7.BorderStyle = BorderStyle.None;
+            textBox7.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
+            textBox7.Location = new Point(469, 134);
+            textBox7.Multiline = true;
+            textBox7.Name = "textBox7";
+            textBox7.ReadOnly = true;
+            textBox7.Size = new Size(95, 63);
+            textBox7.TabIndex = 77;
+            textBox7.Text = "Logo:\r\n(Right click\r\nfor options)";
+            // 
+            // requestUpdateBttn
+            // 
+            requestUpdateBttn.BackColor = Color.FromArgb(13, 59, 141);
+            requestUpdateBttn.FlatAppearance.BorderSize = 0;
+            requestUpdateBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            requestUpdateBttn.FlatStyle = FlatStyle.Flat;
+            requestUpdateBttn.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
+            requestUpdateBttn.ForeColor = SystemColors.ButtonHighlight;
+            requestUpdateBttn.IconChar = FontAwesome.Sharp.IconChar.None;
+            requestUpdateBttn.IconColor = Color.Black;
+            requestUpdateBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            requestUpdateBttn.Location = new Point(345, 538);
+            requestUpdateBttn.Name = "requestUpdateBttn";
+            requestUpdateBttn.Size = new Size(132, 42);
+            requestUpdateBttn.TabIndex = 78;
+            requestUpdateBttn.Text = "Request Update";
+            requestUpdateBttn.UseVisualStyleBackColor = false;
+            requestUpdateBttn.Visible = false;
+            requestUpdateBttn.Click += requestUpdateBttn_Click;
+            // 
+            // UpdateBttn
+            // 
+            UpdateBttn.BackColor = Color.FromArgb(13, 59, 141);
+            UpdateBttn.FlatAppearance.BorderSize = 0;
+            UpdateBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            UpdateBttn.FlatStyle = FlatStyle.Flat;
+            UpdateBttn.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
+            UpdateBttn.ForeColor = SystemColors.ButtonHighlight;
+            UpdateBttn.IconChar = FontAwesome.Sharp.IconChar.None;
+            UpdateBttn.IconColor = Color.Black;
+            UpdateBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            UpdateBttn.Location = new Point(525, 538);
+            UpdateBttn.Name = "UpdateBttn";
+            UpdateBttn.Size = new Size(84, 42);
+            UpdateBttn.TabIndex = 79;
+            UpdateBttn.Text = "Update";
+            UpdateBttn.UseVisualStyleBackColor = false;
+            UpdateBttn.Visible = false;
+            UpdateBttn.Click += UpdateBttn_Click;
             // 
             // ValidateCompanyForm
             // 
@@ -563,6 +647,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(859, 629);
+            Controls.Add(UpdateBttn);
+            Controls.Add(requestUpdateBttn);
+            Controls.Add(textBox7);
             Controls.Add(website);
             Controls.Add(textBox5);
             Controls.Add(clearInputsBttn);
@@ -662,5 +749,8 @@
         private PictureBox companyLogo;
         private TextBox website;
         private TextBox textBox5;
+        private TextBox textBox7;
+        private FontAwesome.Sharp.IconButton requestUpdateBttn;
+        private FontAwesome.Sharp.IconButton UpdateBttn;
     }
 }

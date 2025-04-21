@@ -11,12 +11,16 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class CalendarView : BaseControl //dli pani sure nga inheritance
+    public partial class CalendarView : BaseControl 
     {
         public static int _year, _month;
-        public CalendarView()
+        private static string? userType;
+        private int UserID;
+        public CalendarView(int userID, string user)
         {
             InitializeComponent();
+            UserID = userID;
+            userType = user;
         }
 
         private void CalendarView_Load(object sender, EventArgs e)
@@ -43,13 +47,13 @@ namespace Job_Application_Manager
             // Add empty placeholders for previous month days
             for (int i = 0; i < startDayOfWeek; i++)
             {
-                flowLayoutPanel1.Controls.Add(new calendarDays(string.Empty));
+                flowLayoutPanel1.Controls.Add(new calendarDays(UserID, string.Empty, userType));
             }
 
             // Add actual day controls
             for (int i = 1; i <= totalDaysInMonth; i++)
             {
-                flowLayoutPanel1.Controls.Add(new calendarDays(i.ToString()));
+                flowLayoutPanel1.Controls.Add(new calendarDays(UserID, i.ToString(), userType));
             }
 
             flowLayoutPanel1.ResumeLayout();

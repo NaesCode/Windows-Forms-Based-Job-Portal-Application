@@ -28,45 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Job_Hunt));
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             panel2 = new Panel();
+            profilePicture = new ReaLTaiizor.Controls.ParrotPictureBox();
             searchBar = new ReaLTaiizor.Controls.DungeonTextBox();
-            profilePicture = new SiticoneNetCoreUI.SiticonePictureBox();
             panel3 = new Panel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             label1 = new Label();
             flowPostsPanel = new FlowLayoutPanel();
             panel1 = new Panel();
             panel4 = new Panel();
-            filterSearch = new FontAwesome.Sharp.IconButton();
-            resetFilterSearch = new FontAwesome.Sharp.IconButton();
-            filterVacancy = new ComboBox();
-            label7 = new Label();
-            filterWorkMode = new CheckedListBox();
-            label6 = new Label();
-            filterLocation = new ComboBox();
-            label5 = new Label();
-            label4 = new Label();
-            filterJobType = new CheckedListBox();
             panel6 = new Panel();
+            SavedJobPostGridView = new ReaLTaiizor.Controls.PoisonDataGridView();
+            savingOpt = new ContextMenuStrip(components);
+            deleteSavedPostStripMenuItem = new ToolStripMenuItem();
             panel7 = new Panel();
             label3 = new Label();
+            panel8 = new Panel();
+            filterIndustry = new ComboBox();
+            label8 = new Label();
+            filterSearch = new FontAwesome.Sharp.IconButton();
+            label6 = new Label();
+            filterLocation = new ComboBox();
+            resetFilterSearch = new FontAwesome.Sharp.IconButton();
+            label5 = new Label();
+            filterWorkMode = new CheckedListBox();
+            filterVacancy = new ComboBox();
+            label4 = new Label();
+            filterJobType = new CheckedListBox();
+            label7 = new Label();
             panel5 = new Panel();
             label2 = new Label();
             FullTime = new ReaLTaiizor.Controls.MaterialCheckBox();
             PartTime = new ReaLTaiizor.Controls.MaterialCheckBox();
-            panel8 = new Panel();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SavedJobPostGridView).BeginInit();
+            savingOpt.SuspendLayout();
             panel7.SuspendLayout();
-            panel5.SuspendLayout();
             panel8.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // menuBarPanel2
@@ -93,13 +105,36 @@
             // panel2
             // 
             panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(searchBar);
             panel2.Controls.Add(profilePicture);
+            panel2.Controls.Add(searchBar);
             panel2.Dock = DockStyle.Right;
             panel2.Location = new Point(558, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(332, 51);
             panel2.TabIndex = 1;
+            // 
+            // profilePicture
+            // 
+            profilePicture.BackColor = Color.Transparent;
+            profilePicture.BackgroundImageLayout = ImageLayout.Zoom;
+            profilePicture.ColorLeft = Color.Transparent;
+            profilePicture.ColorRight = Color.Transparent;
+            profilePicture.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            profilePicture.FilterAlpha = 0;
+            profilePicture.FilterEnabled = false;
+            profilePicture.Image = Properties.Resources._482748566_677122558084783_2784408297271869644_n;
+            profilePicture.ImeMode = ImeMode.NoControl;
+            profilePicture.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            profilePicture.IsElipse = true;
+            profilePicture.IsParallax = false;
+            profilePicture.Location = new Point(268, 5);
+            profilePicture.Name = "profilePicture";
+            profilePicture.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            profilePicture.Size = new Size(40, 40);
+            profilePicture.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            profilePicture.TabIndex = 4;
+            profilePicture.Text = "parrotPictureBox1";
+            profilePicture.TextRenderingType = System.Drawing.Text.TextRenderingHint.AntiAlias;
             // 
             // searchBar
             // 
@@ -119,69 +154,44 @@
             searchBar.TextAlignment = HorizontalAlignment.Left;
             searchBar.UseSystemPasswordChar = false;
             searchBar.TextChanged += searchBar_TextChanged;
-            // 
-            // profilePicture
-            // 
-            profilePicture.BackColor = Color.Transparent;
-            profilePicture.BorderColor = Color.Black;
-            profilePicture.BorderWidth = 1;
-            profilePicture.Brightness = 1F;
-            profilePicture.Contrast = 1F;
-            profilePicture.CornerRadius = 15;
-            profilePicture.DraggingSpeed = 3.15F;
-            profilePicture.EnableAsyncLoading = false;
-            profilePicture.EnableCaching = false;
-            profilePicture.EnableDragDrop = false;
-            profilePicture.EnableExtendedImageSources = false;
-            profilePicture.EnableFilters = false;
-            profilePicture.EnableFlipping = false;
-            profilePicture.EnableGlow = false;
-            profilePicture.EnableHighDpiSupport = false;
-            profilePicture.EnableMouseInteraction = false;
-            profilePicture.EnablePlaceholder = false;
-            profilePicture.EnableRotation = false;
-            profilePicture.EnableShadow = false;
-            profilePicture.EnableSlideshow = false;
-            profilePicture.FlipHorizontal = false;
-            profilePicture.FlipVertical = false;
-            profilePicture.Grayscale = false;
-            profilePicture.Image = (Image)resources.GetObject("profilePicture.Image");
-            profilePicture.ImageOpacity = 1F;
-            profilePicture.Images = (List<Image>)resources.GetObject("profilePicture.Images");
-            profilePicture.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            profilePicture.IsCircular = true;
-            profilePicture.Location = new Point(268, 5);
-            profilePicture.MaintainAspectRatio = true;
-            profilePicture.Name = "profilePicture";
-            profilePicture.PlaceholderImage = null;
-            profilePicture.RotationAngle = 0F;
-            profilePicture.Saturation = 1F;
-            profilePicture.ShowBorder = true;
-            profilePicture.Size = new Size(40, 40);
-            profilePicture.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
-            profilePicture.TabIndex = 0;
-            profilePicture.Text = "siticonePictureBox1";
+            searchBar.Enter += searchBar_Enter;
+            searchBar.Leave += searchBar_Leave;
             // 
             // panel3
             // 
             panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(iconPictureBox1);
             panel3.Controls.Add(label1);
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(496, 51);
+            panel3.Size = new Size(562, 51);
             panel3.TabIndex = 2;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.Transparent;
+            iconPictureBox1.ForeColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.Suitcase;
+            iconPictureBox1.IconColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 40;
+            iconPictureBox1.Location = new Point(17, 8);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(40, 40);
+            iconPictureBox1.TabIndex = 4;
+            iconPictureBox1.TabStop = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(15, 15);
+            label1.Location = new Point(63, 13);
             label1.Name = "label1";
-            label1.Size = new Size(167, 25);
+            label1.Size = new Size(471, 25);
             label1.TabIndex = 1;
-            label1.Text = "DASHBOARD";
+            label1.Text = "HUNT AND APPLY TO YOUR DREAM JOB";
             // 
             // flowPostsPanel
             // 
@@ -220,6 +230,147 @@
             panel4.Size = new Size(284, 601);
             panel4.TabIndex = 0;
             // 
+            // panel6
+            // 
+            panel6.Controls.Add(SavedJobPostGridView);
+            panel6.Controls.Add(panel7);
+            panel6.Dock = DockStyle.Fill;
+            panel6.Location = new Point(0, 390);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(284, 211);
+            panel6.TabIndex = 2;
+            // 
+            // SavedJobPostGridView
+            // 
+            SavedJobPostGridView.AllowUserToAddRows = false;
+            SavedJobPostGridView.AllowUserToResizeRows = false;
+            SavedJobPostGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SavedJobPostGridView.BackgroundColor = SystemColors.Desktop;
+            SavedJobPostGridView.BorderStyle = BorderStyle.None;
+            SavedJobPostGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            SavedJobPostGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.Desktop;
+            dataGridViewCellStyle4.Font = new Font("Bahnschrift SemiCondensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            SavedJobPostGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            SavedJobPostGridView.ColumnHeadersHeight = 35;
+            SavedJobPostGridView.ContextMenuStrip = savingOpt;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Desktop;
+            dataGridViewCellStyle5.Font = new Font("Bahnschrift SemiCondensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.White;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            SavedJobPostGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            SavedJobPostGridView.Dock = DockStyle.Fill;
+            SavedJobPostGridView.EnableHeadersVisualStyles = false;
+            SavedJobPostGridView.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            SavedJobPostGridView.GridColor = Color.FromArgb(255, 255, 255);
+            SavedJobPostGridView.Location = new Point(0, 34);
+            SavedJobPostGridView.Name = "SavedJobPostGridView";
+            SavedJobPostGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(0, 174, 219);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(0, 198, 247);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            SavedJobPostGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            SavedJobPostGridView.RowHeadersVisible = false;
+            SavedJobPostGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            SavedJobPostGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            SavedJobPostGridView.Size = new Size(284, 177);
+            SavedJobPostGridView.TabIndex = 19;
+            SavedJobPostGridView.CellClick += SavedJobPostGridView_CellClick;
+            SavedJobPostGridView.CellDoubleClick += SavedJobPostGridView_CellDoubleClick;
+            SavedJobPostGridView.MouseDown += SavedJobPostGridView_MouseDown;
+            // 
+            // savingOpt
+            // 
+            savingOpt.BackColor = SystemColors.ButtonHighlight;
+            savingOpt.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            savingOpt.Items.AddRange(new ToolStripItem[] { deleteSavedPostStripMenuItem });
+            savingOpt.Name = "logoMenuOpt";
+            savingOpt.Size = new Size(180, 26);
+            // 
+            // deleteSavedPostStripMenuItem
+            // 
+            deleteSavedPostStripMenuItem.Image = Properties.Resources.delete;
+            deleteSavedPostStripMenuItem.Name = "deleteSavedPostStripMenuItem";
+            deleteSavedPostStripMenuItem.Size = new Size(179, 22);
+            deleteSavedPostStripMenuItem.Text = "Delete Saved Post";
+            deleteSavedPostStripMenuItem.Click += deleteSavedPostStripMenuItem_Click;
+            // 
+            // panel7
+            // 
+            panel7.BackColor = Color.FromArgb(64, 64, 64);
+            panel7.Controls.Add(label3);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(284, 34);
+            panel7.TabIndex = 2;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(9, 7);
+            label3.Name = "label3";
+            label3.Size = new Size(54, 19);
+            label3.TabIndex = 0;
+            label3.Text = "Saved";
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(filterIndustry);
+            panel8.Controls.Add(label8);
+            panel8.Controls.Add(filterSearch);
+            panel8.Controls.Add(label6);
+            panel8.Controls.Add(filterLocation);
+            panel8.Controls.Add(resetFilterSearch);
+            panel8.Controls.Add(label5);
+            panel8.Controls.Add(filterWorkMode);
+            panel8.Controls.Add(filterVacancy);
+            panel8.Controls.Add(label4);
+            panel8.Controls.Add(filterJobType);
+            panel8.Controls.Add(label7);
+            panel8.Dock = DockStyle.Top;
+            panel8.Location = new Point(0, 34);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(284, 356);
+            panel8.TabIndex = 3;
+            // 
+            // filterIndustry
+            // 
+            filterIndustry.FlatStyle = FlatStyle.Flat;
+            filterIndustry.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            filterIndustry.ForeColor = SystemColors.ControlDarkDark;
+            filterIndustry.FormattingEnabled = true;
+            filterIndustry.Items.AddRange(new object[] { "Advertising and Marketing", "Agriculture", "Computer and Technology", "Construction", "Education", "Energy", "Entertainment", "Fashion", "Finance and Economics", "Food and Beverage", "Healthcare", "Hospitality", "Legal", "Manufacturing", "Media and News", "Mining", "Outsourcing", "Pharmaceuticals", "Telecommunications", "Transportaion" });
+            filterIndustry.Location = new Point(20, 321);
+            filterIndustry.Name = "filterIndustry";
+            filterIndustry.Size = new Size(136, 24);
+            filterIndustry.TabIndex = 14;
+            filterIndustry.Text = " Industry";
+            filterIndustry.SelectedIndexChanged += filterIndustry_SelectedIndexChanged;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(9, 293);
+            label8.Name = "label8";
+            label8.Size = new Size(81, 19);
+            label8.TabIndex = 13;
+            label8.Text = "INDUSTRY";
+            // 
             // filterSearch
             // 
             filterSearch.FlatStyle = FlatStyle.Flat;
@@ -234,58 +385,6 @@
             filterSearch.Text = "Filter";
             filterSearch.UseVisualStyleBackColor = true;
             filterSearch.Click += filterSearch_Click;
-            // 
-            // resetFilterSearch
-            // 
-            resetFilterSearch.FlatStyle = FlatStyle.Flat;
-            resetFilterSearch.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            resetFilterSearch.IconChar = FontAwesome.Sharp.IconChar.None;
-            resetFilterSearch.IconColor = Color.Black;
-            resetFilterSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            resetFilterSearch.Location = new Point(196, 192);
-            resetFilterSearch.Name = "resetFilterSearch";
-            resetFilterSearch.Size = new Size(59, 31);
-            resetFilterSearch.TabIndex = 11;
-            resetFilterSearch.Text = "Reset";
-            resetFilterSearch.UseVisualStyleBackColor = true;
-            resetFilterSearch.Click += resetFilterSearch_Click;
-            // 
-            // filterVacancy
-            // 
-            filterVacancy.FlatStyle = FlatStyle.Flat;
-            filterVacancy.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            filterVacancy.ForeColor = SystemColors.ControlDarkDark;
-            filterVacancy.FormattingEnabled = true;
-            filterVacancy.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
-            filterVacancy.Location = new Point(20, 256);
-            filterVacancy.Name = "filterVacancy";
-            filterVacancy.Size = new Size(136, 24);
-            filterVacancy.TabIndex = 10;
-            filterVacancy.Text = "_ Available Post.";
-            filterVacancy.SelectedIndexChanged += filterVacancy_SelectedIndexChanged;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(9, 228);
-            label7.Name = "label7";
-            label7.Size = new Size(78, 19);
-            label7.TabIndex = 9;
-            label7.Text = "VACANCY:";
-            // 
-            // filterWorkMode
-            // 
-            filterWorkMode.BackColor = SystemColors.Desktop;
-            filterWorkMode.BorderStyle = BorderStyle.None;
-            filterWorkMode.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            filterWorkMode.ForeColor = SystemColors.ButtonHighlight;
-            filterWorkMode.FormattingEnabled = true;
-            filterWorkMode.Items.AddRange(new object[] { "On-site", "Remote", "Hybrid", "Flexible" });
-            filterWorkMode.Location = new Point(163, 43);
-            filterWorkMode.Name = "filterWorkMode";
-            filterWorkMode.Size = new Size(75, 72);
-            filterWorkMode.TabIndex = 8;
             // 
             // label6
             // 
@@ -311,6 +410,21 @@
             filterLocation.Text = "Country";
             filterLocation.SelectedIndexChanged += filterLocation_SelectedIndexChanged;
             // 
+            // resetFilterSearch
+            // 
+            resetFilterSearch.FlatStyle = FlatStyle.Flat;
+            resetFilterSearch.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            resetFilterSearch.IconChar = FontAwesome.Sharp.IconChar.None;
+            resetFilterSearch.IconColor = Color.Black;
+            resetFilterSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            resetFilterSearch.Location = new Point(196, 192);
+            resetFilterSearch.Name = "resetFilterSearch";
+            resetFilterSearch.Size = new Size(59, 31);
+            resetFilterSearch.TabIndex = 11;
+            resetFilterSearch.Text = "Reset";
+            resetFilterSearch.UseVisualStyleBackColor = true;
+            resetFilterSearch.Click += resetFilterSearch_Click;
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -320,6 +434,33 @@
             label5.Size = new Size(85, 19);
             label5.TabIndex = 5;
             label5.Text = "LOCATION:";
+            // 
+            // filterWorkMode
+            // 
+            filterWorkMode.BackColor = SystemColors.Desktop;
+            filterWorkMode.BorderStyle = BorderStyle.None;
+            filterWorkMode.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            filterWorkMode.ForeColor = SystemColors.ButtonHighlight;
+            filterWorkMode.FormattingEnabled = true;
+            filterWorkMode.Items.AddRange(new object[] { "On-site", "Remote", "Hybrid", "Flexible" });
+            filterWorkMode.Location = new Point(163, 43);
+            filterWorkMode.Name = "filterWorkMode";
+            filterWorkMode.Size = new Size(75, 72);
+            filterWorkMode.TabIndex = 8;
+            // 
+            // filterVacancy
+            // 
+            filterVacancy.FlatStyle = FlatStyle.Flat;
+            filterVacancy.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            filterVacancy.ForeColor = SystemColors.ControlDarkDark;
+            filterVacancy.FormattingEnabled = true;
+            filterVacancy.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+            filterVacancy.Location = new Point(20, 256);
+            filterVacancy.Name = "filterVacancy";
+            filterVacancy.Size = new Size(136, 24);
+            filterVacancy.TabIndex = 10;
+            filterVacancy.Text = "_ Available Post.";
+            filterVacancy.SelectedIndexChanged += filterVacancy_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -344,34 +485,15 @@
             filterJobType.Size = new Size(113, 108);
             filterJobType.TabIndex = 3;
             // 
-            // panel6
+            // label7
             // 
-            panel6.Controls.Add(panel7);
-            panel6.Dock = DockStyle.Fill;
-            panel6.Location = new Point(0, 339);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(284, 262);
-            panel6.TabIndex = 2;
-            // 
-            // panel7
-            // 
-            panel7.BackColor = Color.FromArgb(64, 64, 64);
-            panel7.Controls.Add(label3);
-            panel7.Dock = DockStyle.Top;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(284, 34);
-            panel7.TabIndex = 2;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(9, 7);
-            label3.Name = "label3";
-            label3.Size = new Size(54, 19);
-            label3.TabIndex = 0;
-            label3.Text = "Saved";
+            label7.AutoSize = true;
+            label7.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(9, 228);
+            label7.Name = "label7";
+            label7.Size = new Size(78, 19);
+            label7.TabIndex = 9;
+            label7.Text = "VACANCY:";
             // 
             // panel5
             // 
@@ -427,24 +549,6 @@
             PartTime.UseAccentColor = false;
             PartTime.UseVisualStyleBackColor = true;
             // 
-            // panel8
-            // 
-            panel8.Controls.Add(filterSearch);
-            panel8.Controls.Add(label6);
-            panel8.Controls.Add(filterLocation);
-            panel8.Controls.Add(resetFilterSearch);
-            panel8.Controls.Add(label5);
-            panel8.Controls.Add(filterWorkMode);
-            panel8.Controls.Add(filterVacancy);
-            panel8.Controls.Add(label4);
-            panel8.Controls.Add(filterJobType);
-            panel8.Controls.Add(label7);
-            panel8.Dock = DockStyle.Top;
-            panel8.Location = new Point(0, 34);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(284, 305);
-            panel8.TabIndex = 3;
-            // 
             // Job_Hunt
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -459,16 +563,19 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel4.ResumeLayout(false);
             panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)SavedJobPostGridView).EndInit();
+            savingOpt.ResumeLayout(false);
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -477,7 +584,6 @@
         private Panel menuBarPanel2;
         private Panel menuBarPanel3;
         private Panel panel2;
-        private SiticoneNetCoreUI.SiticonePictureBox profilePicture;
         private Panel panel3;
         private Label label1;
         private FlowLayoutPanel flowPostsPanel;
@@ -502,5 +608,12 @@
         private FontAwesome.Sharp.IconButton resetFilterSearch;
         private FontAwesome.Sharp.IconButton filterSearch;
         private Panel panel8;
+        private ReaLTaiizor.Controls.PoisonDataGridView SavedJobPostGridView;
+        private ContextMenuStrip savingOpt;
+        private ToolStripMenuItem deleteSavedPostStripMenuItem;
+        private ReaLTaiizor.Controls.ParrotPictureBox profilePicture;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private ComboBox filterIndustry;
+        private Label label8;
     }
 }

@@ -15,6 +15,8 @@ namespace Job_Application_Manager
     {
         private List<JobPostPanel> jobPosts = new List<JobPostPanel>();
         private List<string?> selectedFilters = new List<string?>();
+        private DataTable? SavedJobPosts;
+        private int indexRow;
 
         public Job_Hunt(int ID)
         {
@@ -26,40 +28,104 @@ namespace Job_Application_Manager
             filterWorkMode.ItemCheck += filterWorkMode_ItemCheck;
         }
 
-        public override void DisplayDetails()
+        public override async void DisplayDetails()
         {
-            imageData = dbSupport.DisplayProfilePicture(HunterID);
-            if (imageData != null)
+            (imageData, var jobPostDataList) = await Task.Run(() =>
             {
-                using (MemoryStream ms = new MemoryStream(imageData))
-                {
-                    profilePicture.Image = Image.FromStream(ms);
-                    profilePicture.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
-                }
-            }
+                var imageData = dbSupport.DisplayProfilePicture(HunterID);
+                var jobPosts = dbSupport.GetJobPosts(HunterID);
+                return (imageData, jobPosts);
+            });
 
-            flowPostsPanel.Controls.Clear();
-            jobPosts = dbSupport.GetJobPosts(HunterID);
-
-            if (jobPosts.Count == 0)
+            if (jobPostDataList.Count == 0)
             {
-                MessageBox.Show("No data found.");
+                MessageBox.Show("No job posts found.");
                 return;
             }
 
-            foreach (var jobPostPanel in jobPosts)
+            Form? parentForm = this.FindForm();
+            if (parentForm is JobHunterDashB form)
             {
-                flowPostsPanel.Controls.Add(jobPostPanel);
+                Panel? menuBar = form.Controls.Find("menuBarPanel0", true).FirstOrDefault() as Panel;
+                if (menuBar == null) return;
+
+                jobPosts.Clear();
+
+                foreach (var data in jobPostDataList)
+                {
+                    var jobPostPanel = new JobPostPanel(
+                        data.PostID, data.Closing, data.CompanyName, data.JobTitle, data.JobType,
+                        data.Location, data.WorkMode, data.StartingSalary, data.Vacancy, data.Logo, HunterID
+                    );
+
+                    if (form.WindowState == FormWindowState.Maximized && menuBar.Width > 200)
+                        jobPostPanel.Size = new Size(858, 117);
+                    else if (form.WindowState == FormWindowState.Maximized)
+                        jobPostPanel.Size = new Size(958, 117);
+                    else if (menuBar.Width > 200)
+                        jobPostPanel.Size = new Size(578, 117);
+                    else
+                        jobPostPanel.Size = new Size(678, 117);
+
+                    jobPostPanel.SaveJobPostClicked += SaveJobPost;
+
+                    jobPostPanel.Tag = new List<string>
+                    {
+                        data.CompanyName ?? "",
+                        data.JobTitle ?? "",
+                        data.JobType ?? "",
+                        data.Industry ?? "",
+                        data.Location ?? "",
+                        data.WorkMode ?? "",
+                        data.Vacancy.ToString()
+                    };
+
+                    jobPosts.Add(jobPostPanel);
+                }
             }
 
-            DisplayFilteredPosts("");
+            await LoadJobPostPanelsInChunks();
 
+            if (imageData != null)
+            {
+                using MemoryStream ms = new(imageData);
+                profilePicture.Image = Image.FromStream(ms);
+            }
+
+            LoadDataGrid();
+        }
+
+        private async Task LoadJobPostPanelsInChunks(int chunkSize = 10, int delayMs = 50) //One of the challenges in my Project (Optimizing performance)
+        {
+            flowPostsPanel.Controls.Clear();
+            for (int i = 0; i < jobPosts.Count; i += chunkSize)
+            {
+                var chunk = jobPosts.Skip(i).Take(chunkSize).ToList();
+                foreach (var panel in chunk)
+                {
+                    flowPostsPanel.Controls.Add(panel);
+                }
+                await Task.Delay(delayMs); //Letting the UI breathe
+            }
+        }
+
+        private void SaveJobPost(int jobPostID, int hunterID, string jobTitle)
+        {
+            dbSupport.SaveJobPost(jobPostID, hunterID, jobTitle);
+            LoadDataGrid();
+        }
+
+        public override async void LoadDataGrid()
+        {
+            SavedJobPostGridView.DataSource = null;
+            SavedJobPosts = await Task.Run(() => dbSupport.GetSavedJobPosts(HunterID));
+            SavedJobPostGridView.DataSource = SavedJobPosts;
         }
 
         private void searchBar_TextChanged(object? sender, EventArgs e)
         {
             string searchText = searchBar.Text.Trim();
-            if (string.IsNullOrEmpty(searchText))
+            if (string.IsNullOrEmpty(searchText) || searchText == "Type here to search...")
             {
                 DisplayFilteredPosts("");
             }
@@ -92,24 +158,6 @@ namespace Job_Application_Manager
 
             foreach (var jobPostPanel in filteredPosts)
             {
-                if (this.Parent is JobHunterDashB form) //checks if parent form is in maximized state or normal, and adjust the panels accordingly
-                {
-                    foreach(Panel controlPanel in form.Controls)
-                    {
-                        if(controlPanel.Name == "menuBarPanel0")
-                        {
-                            if (form.WindowState == FormWindowState.Maximized && controlPanel.Width > 200)
-                                jobPostPanel.Size = new Size(858, 117);
-                            else if (form.WindowState == FormWindowState.Maximized && controlPanel.Width < 200)
-                                jobPostPanel.Size = new Size(958, 117);
-                            else if (form.WindowState == FormWindowState.Normal && controlPanel.Width > 200)
-                                jobPostPanel.Size = new Size(578, 117);
-                            else if (form.WindowState == FormWindowState.Normal && controlPanel.Width < 200)
-                                jobPostPanel.Size = new Size(678, 117);
-                        }
-                    }
-
-                }
                 flowPostsPanel.Controls.Add(jobPostPanel);
             }
         }
@@ -178,6 +226,11 @@ namespace Job_Application_Manager
             selectedFilters.Add(filterVacancy.SelectedItem?.ToString());
         }
 
+        private void filterIndustry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedFilters.Add(filterIndustry.SelectedItem?.ToString());
+        }
+
         private void resetFilterSearch_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < filterJobType.Items.Count; i++)
@@ -189,16 +242,75 @@ namespace Job_Application_Manager
                 filterWorkMode.SetItemChecked(i, false);
             }
             filterLocation.SelectedIndex = -1;
-            filterLocation.Text = "Country";
+            filterLocation.Text = " Country";
             filterVacancy.SelectedIndex = -1;
             filterVacancy.Text = "_ Available Post";
-            searchBar.Text = "";
+            filterIndustry.SelectedIndex = -1;
+            filterIndustry.Text = " Industry";
+            searchBar.Text = "  Type here to search...";
             selectedFilters.Clear();
+        }
+
+        private void searchBar_Enter(object sender, EventArgs e)
+        {
+            if (searchBar.Text == "  Type here to search...")
+            {
+                searchBar.Text = "";
+            }
+        }
+
+        private void searchBar_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(searchBar.Text))
+            {
+                searchBar.Text = "  Type here to search...";
+            }
         }
 
         private void filterSearch_Click(object sender, EventArgs e)
         {
             searchBar.Text = string.Join(" - ", selectedFilters);
+        }
+
+        private void SavedJobPostGridView_CellClick(object sender, DataGridViewCellEventArgs e) //Gets index when clicked
+        {
+            indexRow = e.RowIndex;
+        }
+
+        private void SavedJobPostGridView_MouseDown(object sender, MouseEventArgs e) //Gets index when right-clicked
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo hit = SavedJobPostGridView.HitTest(e.X, e.Y);
+                if (hit.RowIndex >= 0)
+                {
+                    indexRow = hit.RowIndex;
+                    SavedJobPostGridView.ClearSelection();
+                    SavedJobPostGridView.Rows[hit.RowIndex].Selected = true;
+                }
+            }
+        }
+
+        private void SavedJobPostGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = SavedJobPostGridView.Rows[indexRow];
+                string? jobTitle = row.Cells[1].Value.ToString();
+                searchBar.Text = jobTitle;
+            }
+        }
+
+        private void deleteSavedPostStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                indexRow = SavedJobPostGridView.RowCount == 1 ? 0 : indexRow;
+                DataGridViewRow row = SavedJobPostGridView.Rows[indexRow];
+                int jobPostID = Convert.ToInt32(row.Cells[0].Value);
+                dbSupport.DeleteSavedJobPost(jobPostID, HunterID);
+            }
+            LoadDataGrid();
         }
     }
 }

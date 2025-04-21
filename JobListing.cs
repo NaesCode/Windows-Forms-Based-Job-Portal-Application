@@ -10,15 +10,11 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class JobListing : UserControl
+    public partial class JobListing : BaseControl
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
-        private int companyUserID;
-        private byte[]? imageData;
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Enter)
+            if (keyData == Keys.Enter && ModifierKeys == Keys.None)
             {
                 if (AreAllFieldsValid())
                 {
@@ -28,6 +24,8 @@ namespace Job_Application_Manager
                 {
                     MessageBox.Show("Please fill in all required fields correctly.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
+                return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -36,9 +34,15 @@ namespace Job_Application_Manager
         {
             InitializeComponent();
             checkedListBox1.ItemCheck += checkedListBox1_ItemCheck;
-            this.companyUserID = companyID;
+            CompanyID = companyID;
+        }
 
-            imageData = dbSupport.DisplayCompanyLogo(companyUserID);
+        public override async void DisplayDetails()
+        {
+            var logoData = await Task.Run(() => dbSupport.DisplayCompanyLogo(CompanyID));
+
+            imageData = logoData;
+
             if (imageData != null)
             {
                 using (MemoryStream ms = new MemoryStream(imageData))
@@ -62,7 +66,7 @@ namespace Job_Application_Manager
                 string.IsNullOrWhiteSpace(JobDescription.Text) ||
                 JobDescription.Text == "Enter job description and qualifications here..." ||
                 string.IsNullOrWhiteSpace(ApplicationDetails.Text) ||
-                ApplicationDetails.Text == "Enter application process details here...")
+                ApplicationDetails.Text == "Enter job application process details here...")
             {
                 return false;
             }
@@ -89,7 +93,7 @@ namespace Job_Application_Manager
             try
             {
 
-                dbSupport.InsertJobPostData(companyUserID, CompanyName.Text, JobTitle.Text, JobType.Text, JobCategory.Text, Industry.Text,
+                dbSupport.InsertJobPostData(CompanyID, CompanyName.Text, JobTitle.Text, JobType.Text, JobCategory.Text, Industry.Text,
                     JobLocation.Text, WorkMode.Text, startingSalary.Text, JobDescription.Text, ApplicationDetails.Text, jobVacancy, deadline, isPosted);
                 MessageBox.Show("Job added successfully.");
             }
@@ -193,7 +197,8 @@ namespace Job_Application_Manager
             {
                 checkedListBox1.SetItemChecked(i, false);
             }
-            JobLocation.Text = "";
+            JobLocation.Text = "Country, City";
+            JobLocation.ForeColor = SystemColors.InactiveCaption;
             WorkMode.Text = "";
             startingSalary.Text = "";
             jobVacancy.Text = "";
@@ -202,6 +207,10 @@ namespace Job_Application_Manager
             ApplicationDetails.Text = "Enter application process details here...";
             ApplicationDetails.ForeColor = SystemColors.ControlDarkDark;
             applicationDeadline.Value = DateTime.Now;
+            if (JobListingTabs.SelectedIndex > 0)
+            {
+                JobListingTabs.SelectedIndex = 0;
+            }
         }
 
         private void deleteLogoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -214,6 +223,22 @@ namespace Job_Application_Manager
         {
             FullPictureView fullPictureForm = new FullPictureView(imageData);
             fullPictureForm.Show();
+        }
+
+        private void nextTabBttn_Click(object sender, EventArgs e)
+        {
+            if (JobListingTabs.SelectedIndex == 0)
+            {
+                JobListingTabs.SelectedIndex++;
+            }
+        }
+
+        private void prevTabBttn_Click(object sender, EventArgs e)
+        {
+            if(JobListingTabs.SelectedIndex > 0)
+            {
+                JobListingTabs.SelectedIndex--;
+            }
         }
     }
 }

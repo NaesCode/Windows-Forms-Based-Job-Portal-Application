@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class changePass : Form
+    public partial class changePassHunter : Form
     {
         private LogInForm? logInFormInstance;
         string? UserEmail;
         DatabaseSupport dbSupport = new DatabaseSupport();
-        public changePass()
+        public changePassHunter()
         {
             InitializeComponent();
         }
 
-        public changePass(string Email)
+        public changePassHunter(string Email)
         {
             InitializeComponent();
             this.UserEmail = Email;
@@ -36,7 +36,7 @@ namespace Job_Application_Manager
                     if (UserPassword.Text.Length < 8)
                         throw new Exception("Password must be atleast 8 characters.Try again");
 
-                    dbSupport.ChangePassword(UserPassword.Text, UserEmail);
+                    dbSupport.ChangeHunterPassword(UserPassword.Text, UserEmail);
 
                     MessageBox.Show("Password changed!");
                     this.DialogResult = DialogResult.OK;

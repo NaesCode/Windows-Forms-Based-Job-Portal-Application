@@ -12,6 +12,7 @@ namespace Job_Application_Manager
 {
     public partial class TrackApplications : BaseControl
     {
+        private DateTime currentDate = DateTime.Now;
         private DataTable? jobApplication;
         private int indexRow;
 
@@ -23,18 +24,24 @@ namespace Job_Application_Manager
             searchBar.TextChanged += searchBar_TextChanged;
         }
 
-        public override void DisplayDetails()
+        public override async void DisplayDetails()
         {
-            imageData = dbSupport.DisplayProfilePicture(HunterID);
+            LoadDataGrid();
+            imageData = await Task.Run(() => dbSupport.DisplayProfilePicture(HunterID));
+
             if (imageData != null)
             {
                 using (MemoryStream ms = new MemoryStream(imageData))
                 {
                     profilePicture.Image = Image.FromStream(ms);
-                    profilePicture.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
                 }
             }
-            jobApplication = dbSupport.GetJobApplications(HunterID);
+        }
+
+        public override async void LoadDataGrid()
+        {
+            ApplicationsTable.DataSource = null;
+            jobApplication = await Task.Run(() => dbSupport.GetJobApplications(HunterID));
             ApplicationsTable.DataSource = jobApplication;
         }
 
@@ -82,18 +89,40 @@ namespace Job_Application_Manager
             indexRow = e.RowIndex;
         }
 
-        private void cancelAppStripMenuItem_Click(object sender, EventArgs e)
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = ApplicationsTable.Rows[indexRow];
+                int postID = (int)row.Cells[0].Value;
+                int applicationID = (int)row.Cells[1].Value;
+
+                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to cancel Application#: {applicationID}?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK)
+                {
+                    dbSupport.UpdateApplicationStatus(applicationID, "CANCELLED", currentDate);
+                    dbSupport.UpdateNumOfCancelledApplications(postID);
+                }
+            }
+            DisplayDetails();
+        }
+
+        private void deleteAppStripMenuItem_Click(object sender, EventArgs e)
         {
             if (indexRow >= 0)
             {
                 DataGridViewRow row = ApplicationsTable.Rows[indexRow];
                 int applicationID = (int)row.Cells[1].Value;
-
-                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete Application#: {applicationID}?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.OK)
+                if (row.Cells[4].Value.ToString() == "CANCELLED" || row.Cells[4].Value.ToString() == "REJECTED")
                 {
-                    dbSupport.DeleteJobApplication(applicationID);
+                    DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete Application#: {applicationID}?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        dbSupport.DeleteJobApplication(applicationID);
+                    }
                 }
+                else
+                    MessageBox.Show("You cannot delete an application that is not cancelled or is not rejected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             DisplayDetails();
         }

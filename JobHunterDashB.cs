@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using FontAwesome.Sharp;
 
 namespace Job_Application_Manager
 {
@@ -16,9 +17,11 @@ namespace Job_Application_Manager
         private BaseControl? currentChildForm;
         private SetUpProfileForm? setUpProfileForm;
 
-        private int hunterID;
-
+        private IconButton? currentBttn;
+        private Dictionary<string, BaseControl> cachedChildForms = new ();
         private DatabaseSupport dbSupport = new DatabaseSupport();
+
+        private int hunterID;
 
         public JobHunterDashB(int hunterID)
         {
@@ -119,6 +122,11 @@ namespace Job_Application_Manager
                     adjustJobPostPanelSize(958, 117);
                 else
                     adjustJobPostPanelSize(678, 117);
+                if(currentChildForm is CalendarView)
+                {
+                    desktopPanel.BackgroundImage = null;
+                    desktopPanel.BackColor = SystemColors.ButtonHighlight;
+                }
                 menuBarPanel0.Width = 100;
                 Logo1.Visible = false;
                 brandName.Visible = false;
@@ -143,12 +151,31 @@ namespace Job_Application_Manager
                 MenuBttn.Location = new Point(135, 20);
                 foreach (Button menuButton in menuBarPanel1.Controls.OfType<Button>())
                 {
-                    menuButton.Text = "     " + menuButton.Tag?.ToString();
+                    switch (menuButton.Name)
+                    {
+                        case "ProfileViewBttn":
+                        case "ApplyJobBttn":
+                        case "TableViewBttn":
+                            menuButton.Padding = new Padding(15);
+                            
+                            break;
+
+                        case "ChartViewBttn":
+                        case "CalendarViewBttn":
+                            menuButton.Padding = new Padding(22, 0, 0, 0);
+                            break;
+
+                        case "SignOutBttn":
+                            menuButton.Padding = new Padding(15, 0, 0, 5);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    menuButton.Text = menuButton.Tag?.ToString();
+                    menuButton.TextAlign = ContentAlignment.MiddleCenter;
                     menuButton.ImageAlign = ContentAlignment.MiddleCenter;
-                    menuButton.TextAlign = ContentAlignment.MiddleLeft;
-                    menuButton.Padding = new Padding(15);
                 }
-                signOutBttn.Padding = new Padding(15, 0, 0, 5);
             }
         }
 
@@ -164,7 +191,7 @@ namespace Job_Application_Manager
                         if (innerControl is FlowLayoutPanel flowLayoutPanel)
                         {
                             // Iterate through JobPostPanel inside the FlowLayoutPanel
-                            foreach (Control panelControl in flowLayoutPanel.Controls)
+                            foreach (var panelControl in flowLayoutPanel.Controls)
                             {
                                 if (panelControl is JobPostPanel jobPostPanel)
                                 {
@@ -210,110 +237,161 @@ namespace Job_Application_Manager
                 this.WindowState = FormWindowState.Minimized;
         }
 
+        private void ActivateButton(object senderBttn)
+        {
+            if (currentBttn != senderBttn)
+            {
+                if (currentBttn != null)
+                {
+                    currentBttn.BackColor = SystemColors.Desktop;
+                }
+                currentBttn = (IconButton)senderBttn;
+                currentBttn.BackColor = Color.FromArgb(13, 59, 141);
+            }
+        }
+
         private void ProfileViewBttn_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+            string key = "JobHunterProfile";
             // If currentChildForm is already a JobHunterProfile and is added, do nothing
-            if (currentChildForm is JobHunterProfile)
+            if (currentChildForm is JobHunterProfile && currentChildForm == cachedChildForms[key])
                 return;
 
             // Otherwise, create new profile form
             if (currentChildForm != null)
             {
                 desktopPanel.Controls.Remove(currentChildForm);
-                currentChildForm.Dispose();
             }
 
-            currentChildForm = new JobHunterProfile(hunterID);
-            currentChildForm.Dock = DockStyle.Fill;
+            if(!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new JobHunterProfile(hunterID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
-            currentChildForm.DisplayDetails();
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void ApplyJobBttn_Click(object sender, EventArgs e)
         {
-            if (currentChildForm is Job_Hunt)
+            ActivateButton(sender);
+            string key = "ApplyJob";
+
+            if (currentChildForm is Job_Hunt && currentChildForm == cachedChildForms[key])
                 return;
 
             if (currentChildForm != null)
             {
                 desktopPanel.Controls.Remove(currentChildForm);
-                currentChildForm.Dispose();
             }
 
-            currentChildForm = new Job_Hunt(hunterID);
-            currentChildForm.Dock = DockStyle.Fill;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new Job_Hunt(hunterID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
-            currentChildForm.DisplayDetails();
-            if (this.WindowState == FormWindowState.Maximized)
-            adjustJobPostPanelSize(878, 117);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void TableViewBttn_Click(object sender, EventArgs e)
         {
-            if (currentChildForm is TrackApplications)
+            ActivateButton(sender);
+            string key = "TrackApplications";
+
+            if (currentChildForm is TrackApplications && currentChildForm == cachedChildForms[key])
                 return;
 
             if (currentChildForm != null)
             {
                 desktopPanel.Controls.Remove(currentChildForm);
-                currentChildForm.Dispose();
             }
 
-            currentChildForm = new TrackApplications(hunterID);
-            currentChildForm.Dock = DockStyle.Fill;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new TrackApplications(hunterID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
+            desktopPanel.Controls.Add(currentChildForm);
+            currentChildForm.LoadDataGrid();
+            desktopPanel.Tag = currentChildForm;
+            desktopPanel.AutoScroll = true;
+        }
+
+        private void ChartViewBttn_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+            string key = "Analytics";
+
+            if (currentChildForm is BoardView && currentChildForm == cachedChildForms[key])
+                return;
+
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
+
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new BoardView(hunterID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
             currentChildForm.DisplayDetails();
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void ListViewBttn_Click(object sender, EventArgs e)
-        {
-            if (currentChildForm is ListView)
-                return;
-
-            if (currentChildForm != null)
-            {
-                desktopPanel.Controls.Remove(currentChildForm);
-                currentChildForm.Dispose();
-            }
-
-            currentChildForm = new ListView();
-            currentChildForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(currentChildForm);
-            desktopPanel.Tag = currentChildForm;
-            desktopPanel.AutoScroll = true;
-        }
-
         private void CalendarViewBttn_Click(object sender, EventArgs e)
         {
-            if (currentChildForm is ListView)
+            ActivateButton(sender);
+            string key = "Personal Calendar";
+            string userType = "Job Hunter";
+
+            if (currentChildForm is CalendarView && currentChildForm == cachedChildForms[key])
                 return;
 
             if (currentChildForm != null)
             {
                 desktopPanel.Controls.Remove(currentChildForm);
-                currentChildForm.Dispose();
             }
 
-            currentChildForm = new CalendarView();
-            currentChildForm.Dock = DockStyle.Fill;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new CalendarView(hunterID, userType);
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
             desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void signOutBttn_Click(object sender, EventArgs e)
+        private void SignOutBttn_Click(object sender, EventArgs e)
         {
             this.Hide();
             LogInForm loginForm = new LogInForm();
             loginForm.Show();
         }
-
-        
     }
 }

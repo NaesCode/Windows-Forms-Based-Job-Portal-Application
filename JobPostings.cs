@@ -14,11 +14,11 @@ namespace Job_Application_Manager
     public partial class JobPostings : BaseControl
     {
         private DataTable? jobList;
-
-        private DateTime currentDate = DateTime.Now.Date; //Used to check for deadlines
+        public event EventHandler? requestAddJobBttnClick;
 
         private int indexRow;
         private bool IsPosted = false;
+
         public JobPostings(int companyID)
         {
             InitializeComponent();
@@ -27,20 +27,25 @@ namespace Job_Application_Manager
             searchBar.TextChanged += searchBar_TextChanged;
         }
 
-        public override void DisplayDetails()
+        public override async void DisplayDetails()
         {
-            imageData = dbSupport.DisplayCompanyLogo(CompanyID);
+            LoadDataGrid();
+
+            imageData = await Task.Run(() => dbSupport.DisplayCompanyLogo(CompanyID));
+
             if (imageData != null)
             {
                 using (MemoryStream ms = new MemoryStream(imageData))
                 {
                     companyLogo2.Image = Image.FromStream(ms);
-                    companyLogo2.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
                 }
             }
+        }
 
-            jobList = dbSupport.GetCompanyJobList(CompanyID);
-
+        public override async void LoadDataGrid()
+        {
+            jobEntriesTable.Rows.Clear();
+            jobList = await Task.Run(() => dbSupport.GetCompanyJobList(CompanyID));
             if (jobList != null)
             {
                 jobEntriesTable.Rows.Clear();
@@ -56,7 +61,7 @@ namespace Job_Application_Manager
                         row["StartingSalary"],
                         row["Vacancy"],
                         row["IsPosted"],
-                        row["Application Deadline"]
+                        Convert.ToDateTime(row["Application Deadline"]).ToString("MM/dd/yyyy h:mm tt")
                     );
                 }
             }
@@ -84,38 +89,115 @@ namespace Job_Application_Manager
                 string? workMode = row.Cells[5].Value.ToString();
                 string? salary = row.Cells[6].Value.ToString();
                 int? vacancy = Convert.ToInt32(row.Cells[7].Value);
-                byte[]? imageData = dbSupport.DisplayCompanyLogo(CompanyID);
+                imageData = dbSupport.DisplayCompanyLogo(CompanyID);
                 flowLayoutPanel1.Controls.Add(new JobPostPreviewPanel(companyName, jobTitle, jobType, location, workMode, salary, vacancy, imageData));
             }
             DisplayDetails();
         }
 
+        private void deletePostBttn_Click(object sender, EventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = jobEntriesTable.Rows[indexRow];
+                int PostID = (int)row.Cells[0].Value;
+                string? jobTitle = row.Cells[2].Value.ToString();
+
+                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete Post#: {PostID} with Job Title: {jobTitle}?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK)
+                {
+                    dbSupport.DeleteJobPost(PostID);
+                    dbSupport.UpdateApplicationStatusForDeleted(PostID, "JOB POST DELETED");
+                }
+
+                for (int i = flowLayoutPanel1.Controls.Count - 1; i >= 0; i--)
+                {
+                    if (flowLayoutPanel1.Controls[i] is JobPostPreviewPanel jobPostPreviewPanel)
+                    {
+                        foreach (Control innerControl in jobPostPreviewPanel.Controls)
+                        {
+                            if (innerControl is Label label && label.Name == "jobTitleLabel" && label.Text == jobTitle)
+                            {
+                                flowLayoutPanel1.Controls.RemoveAt(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+            DisplayDetails();
+        }
+
+        private void updatePostBttn_Click(object sender, EventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = jobEntriesTable.Rows[indexRow];
+                int PostID = (int)row.Cells[0].Value;
+                JobFullDetails jobfullDetails = new JobFullDetails(PostID);
+                jobfullDetails.LoadJobDetails(imageData);
+                jobfullDetails.Show();
+            }
+        }
+
+        private void jobEntriesTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = jobEntriesTable.Rows[indexRow];
+                int PostID = (int)row.Cells[0].Value;
+                string? jobTitle = row.Cells[2].Value.ToString()?.Trim() ?? "No Title";
+                string? jobType = row.Cells[3].Value.ToString()?.Trim() ?? "Unknown";
+                string? location = row.Cells[4].Value.ToString()?.Trim() ?? "Not Specified";
+                string? workMode = row.Cells[5].Value.ToString()?.Trim() ?? "Not Specified";
+                string? salary = row.Cells[6].Value.ToString()?.Trim() ?? "0";
+                int? vacancy = row.Cells[7].Value != null ? Convert.ToInt32(row.Cells[7].Value) : 0;
+                bool isPosted = false;
+                string? date = row.Cells[9].Value.ToString()?.Trim() ?? null;
+                string[] formats = { "M/d/yyyy h:mm tt", "M/d/yyyy hh:mm tt", "MM/dd/yyyy h:mm tt", "MM/d/yyyy h:mm tt" };
+                if (!DateTime.TryParseExact(date?.Trim(), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime closing))
+                {
+                    MessageBox.Show("Please enter valid closing date.");
+                    return;
+                }
+                if (jobTitle == null || jobType == null || location == null || workMode == null || salary == null || vacancy == null)
+                {
+                    MessageBox.Show("Please fill all the fields");
+                    return;
+                }
+                else
+                    dbSupport.UpdateJobPost(PostID, jobTitle, jobType, location, workMode, salary, vacancy, isPosted, closing);
+            }
+        }
+
         private void searchBar_TextChanged(object? sender, EventArgs e)
         {
-            string searchKey = searchBar.Text.Trim();
-            if (string.IsNullOrEmpty(searchKey))
+            string searchKey = searchBar.Text;
+            if (searchKey == "  Type here to search...")
+            {
+                return;
+            }
+            else if (string.IsNullOrEmpty(searchKey))
             {
                 if (jobList != null)
                 {
                     jobList.DefaultView.RowFilter = "";
-                    if (jobList != null)
+                    jobEntriesTable.Rows.Clear();
+                    foreach (DataRow row in jobList.DefaultView.ToTable().Rows)
                     {
-                        jobEntriesTable.Rows.Clear();
-                        foreach (DataRow row in jobList.DefaultView.ToTable().Rows)
-                        {
-                            jobEntriesTable.Rows.Add(
-                                row["PostID"],
-                                row["CompanyName"],
-                                row["JobTitle"],
-                                row["JobType"],
-                                row["Location"],
-                                row["Work Mode"],
-                                row["StartingSalary"],
-                                row["Vacancy"],
-                                row["IsPosted"],
-                                row["Application Deadline"]
-                            );
-                        }
+                        jobEntriesTable.Rows.Add(
+                            row["PostID"],
+                            row["CompanyName"],
+                            row["JobTitle"],
+                            row["JobType"],
+                            row["Location"],
+                            row["Work Mode"],
+                            row["StartingSalary"],
+                            row["Vacancy"],
+                            row["IsPosted"],
+                            row["Application Deadline"]
+                        );
                     }
                 }
             }
@@ -134,7 +216,7 @@ namespace Job_Application_Manager
             if (jobList != null)
             {
                 string filterExpression = string.Format("[JobTitle] LIKE '%{0}%' OR [JobType] LIKE '%{0}%' OR [Location] LIKE '%{0}%' OR " +
-                                                        "[Work Mode] LIKE '%{0}%' OR [StartingSalary] LIKE '%{0}%' OR [Application Deadline] LIKE '%{0}%'", filter.Replace("'", "''"));
+                                                        "[Work Mode] LIKE '%{0}%' OR [StartingSalary] LIKE '%{0}%' OR CONVERT([Application Deadline], 'System.String') LIKE '%{0}%'", filter.Replace("'", "''"));
                 jobList.DefaultView.RowFilter = filterExpression;
                 if (jobList != null)
                 {
@@ -186,49 +268,19 @@ namespace Job_Application_Manager
             }
         }
 
-        private void deletePostBttn_Click(object sender, EventArgs e)
+        private void searchBar_Enter(object sender, EventArgs e)
         {
-            if (indexRow >= 0)
+            if (searchBar.Text == "  Type here to search...")
             {
-                DataGridViewRow row = jobEntriesTable.Rows[indexRow];
-                int PostID = (int)row.Cells[0].Value;
-
-                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete post#: {PostID}?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.OK)
-                {
-                    dbSupport.DeleteJobPost(PostID);
-                }
+                searchBar.Text = "";
             }
-            DisplayDetails();
         }
 
-        private void jobEntriesTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void searchBar_Leave(object sender, EventArgs e)
         {
-            if(indexRow >= 0)
+            if (string.IsNullOrEmpty(searchBar.Text))
             {
-                DataGridViewRow row = jobEntriesTable.Rows[indexRow];
-                int PostID = (int)row.Cells[0].Value;
-                string? jobTitle = row.Cells[2].Value.ToString()?.Trim() ?? "No Title";
-                string? jobType = row.Cells[3].Value.ToString()?.Trim() ?? "Unknown";
-                string? location = row.Cells[4].Value.ToString()?.Trim() ?? "Not Specified";
-                string? workMode = row.Cells[5].Value.ToString()?.Trim() ?? "Not Specified";
-                string? salary = row.Cells[6].Value.ToString()?.Trim() ?? "0";
-                int? vacancy = row.Cells[7].Value != null ? Convert.ToInt32(row.Cells[7].Value) : 0;
-                bool isPosted = false;
-                string? date = row.Cells[8].Value.ToString()?.Trim() ?? null;
-                string? format = "M/d/yyyy h:mm tt";
-                if(!DateTime.TryParseExact(date, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime closing))
-                {
-                    MessageBox.Show("Please enter valid closing date.");
-                    return;
-                }
-                if (jobTitle == null || jobType == null || location == null || workMode == null || salary == null || vacancy == null)
-                {
-                    MessageBox.Show("Please fill all the fields");
-                    return;
-                }
-                else
-                    dbSupport.UpdateJobPost(PostID, jobTitle, jobType, location, workMode, salary, vacancy, isPosted, closing);
+                searchBar.Text = "  Type here to search...";
             }
         }
     }

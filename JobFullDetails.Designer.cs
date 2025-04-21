@@ -61,6 +61,7 @@
             panel6 = new Panel();
             companyLogo = new PictureBox();
             panel2 = new Panel();
+            SendEmailBttn = new SiticoneNetCoreUI.SiticoneButton();
             iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             companyEmail = new Label();
             companyWeb = new Label();
@@ -296,6 +297,7 @@
             jobApplicationDetails.Size = new Size(718, 160);
             jobApplicationDetails.TabIndex = 32;
             jobApplicationDetails.Text = "This is the job application details.";
+            jobApplicationDetails.KeyDown += jobApplicationDetails_KeyDown;
             // 
             // label4
             // 
@@ -337,6 +339,7 @@
             jobDescription.Size = new Size(718, 176);
             jobDescription.TabIndex = 28;
             jobDescription.Text = "This is the job description and qualification.";
+            jobDescription.KeyDown += jobDescription_KeyDown;
             // 
             // panel12
             // 
@@ -465,6 +468,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(SendEmailBttn);
             panel2.Controls.Add(iconPictureBox3);
             panel2.Controls.Add(companyEmail);
             panel2.Controls.Add(companyWeb);
@@ -482,6 +486,83 @@
             panel2.Size = new Size(325, 659);
             panel2.TabIndex = 0;
             // 
+            // SendEmailBttn
+            // 
+            SendEmailBttn.AccessibleDescription = "The default button control that accept input though the mouse, touch and keyboard";
+            SendEmailBttn.AccessibleName = "Send Email";
+            SendEmailBttn.AutoSizeBasedOnText = false;
+            SendEmailBttn.BackColor = Color.Transparent;
+            SendEmailBttn.BadgeBackColor = Color.Red;
+            SendEmailBttn.BadgeFont = new Font("Segoe UI", 8F, FontStyle.Bold);
+            SendEmailBttn.BadgeValue = 0;
+            SendEmailBttn.BadgeValueForeColor = Color.White;
+            SendEmailBttn.BorderColor = Color.FromArgb(13, 59, 141);
+            SendEmailBttn.BorderWidth = 2;
+            SendEmailBttn.ButtonBackColor = Color.FromArgb(13, 59, 141);
+            SendEmailBttn.ButtonImage = null;
+            SendEmailBttn.CanBeep = true;
+            SendEmailBttn.CanGlow = false;
+            SendEmailBttn.CanShake = true;
+            SendEmailBttn.ContextMenuStripEx = null;
+            SendEmailBttn.CornerRadiusBottomLeft = 23;
+            SendEmailBttn.CornerRadiusBottomRight = 23;
+            SendEmailBttn.CornerRadiusTopLeft = 23;
+            SendEmailBttn.CornerRadiusTopRight = 23;
+            SendEmailBttn.CustomCursor = Cursors.Default;
+            SendEmailBttn.DisabledTextColor = Color.FromArgb(150, 150, 150);
+            SendEmailBttn.EnableLongPress = false;
+            SendEmailBttn.EnablePressAnimation = true;
+            SendEmailBttn.EnableRippleEffect = true;
+            SendEmailBttn.EnableShadow = false;
+            SendEmailBttn.EnableTextWrapping = false;
+            SendEmailBttn.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SendEmailBttn.GlowColor = Color.FromArgb(100, 255, 255, 255);
+            SendEmailBttn.GlowIntensity = 100;
+            SendEmailBttn.GlowRadius = 20F;
+            SendEmailBttn.GradientBackground = false;
+            SendEmailBttn.GradientColor = Color.FromArgb(114, 168, 255);
+            SendEmailBttn.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            SendEmailBttn.HintText = null;
+            SendEmailBttn.HoverBackColor = Color.FromArgb(13, 59, 141);
+            SendEmailBttn.HoverFontStyle = FontStyle.Regular;
+            SendEmailBttn.HoverTextColor = Color.FromArgb(5, 229, 148);
+            SendEmailBttn.HoverTransitionDuration = 250;
+            SendEmailBttn.ImageAlign = ContentAlignment.MiddleLeft;
+            SendEmailBttn.ImagePadding = 5;
+            SendEmailBttn.ImageSize = new Size(16, 16);
+            SendEmailBttn.IsRadial = true;
+            SendEmailBttn.IsReadOnly = false;
+            SendEmailBttn.IsToggleButton = false;
+            SendEmailBttn.IsToggled = false;
+            SendEmailBttn.Location = new Point(82, 569);
+            SendEmailBttn.LongPressDurationMS = 1000;
+            SendEmailBttn.Name = "SendEmailBttn";
+            SendEmailBttn.NormalFontStyle = FontStyle.Regular;
+            SendEmailBttn.ParticleColor = Color.FromArgb(200, 200, 200);
+            SendEmailBttn.ParticleCount = 15;
+            SendEmailBttn.PressAnimationScale = 0.97F;
+            SendEmailBttn.PressedBackColor = Color.FromArgb(74, 128, 235);
+            SendEmailBttn.PressedFontStyle = FontStyle.Regular;
+            SendEmailBttn.PressTransitionDuration = 150;
+            SendEmailBttn.ReadOnlyTextColor = Color.WhiteSmoke;
+            SendEmailBttn.RippleColor = Color.FromArgb(255, 255, 255);
+            SendEmailBttn.RippleOpacity = 0.3F;
+            SendEmailBttn.RippleRadiusMultiplier = 0.6F;
+            SendEmailBttn.ShadowBlur = 5;
+            SendEmailBttn.ShadowColor = Color.FromArgb(100, 0, 0, 0);
+            SendEmailBttn.ShadowOffset = new Point(2, 2);
+            SendEmailBttn.ShakeDuration = 500;
+            SendEmailBttn.ShakeIntensity = 5;
+            SendEmailBttn.Size = new Size(180, 50);
+            SendEmailBttn.TabIndex = 44;
+            SendEmailBttn.Text = "Send Email";
+            SendEmailBttn.TextAlign = ContentAlignment.MiddleCenter;
+            SendEmailBttn.TextColor = Color.White;
+            SendEmailBttn.TooltipText = null;
+            SendEmailBttn.UseAdvancedRendering = true;
+            SendEmailBttn.UseParticles = false;
+            SendEmailBttn.Click += SendEmailBttn_Click;
+            // 
             // iconPictureBox3
             // 
             iconPictureBox3.BackColor = SystemColors.ButtonHighlight;
@@ -491,7 +572,7 @@
             iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.None;
             iconPictureBox3.IconColor = SystemColors.ControlText;
             iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconPictureBox3.Location = new Point(17, 377);
+            iconPictureBox3.Location = new Point(7, 377);
             iconPictureBox3.Name = "iconPictureBox3";
             iconPictureBox3.Size = new Size(32, 32);
             iconPictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -503,7 +584,7 @@
             companyEmail.AutoSize = true;
             companyEmail.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyEmail.ForeColor = SystemColors.ControlDarkDark;
-            companyEmail.Location = new Point(72, 534);
+            companyEmail.Location = new Point(59, 534);
             companyEmail.Name = "companyEmail";
             companyEmail.Size = new Size(51, 19);
             companyEmail.TabIndex = 49;
@@ -514,7 +595,7 @@
             companyWeb.AutoSize = true;
             companyWeb.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyWeb.ForeColor = SystemColors.ControlDarkDark;
-            companyWeb.Location = new Point(82, 499);
+            companyWeb.Location = new Point(74, 498);
             companyWeb.Name = "companyWeb";
             companyWeb.Size = new Size(66, 19);
             companyWeb.TabIndex = 48;
@@ -525,7 +606,7 @@
             companyAddress.AutoSize = true;
             companyAddress.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyAddress.ForeColor = SystemColors.ControlDarkDark;
-            companyAddress.Location = new Point(82, 466);
+            companyAddress.Location = new Point(77, 466);
             companyAddress.Name = "companyAddress";
             companyAddress.Size = new Size(69, 19);
             companyAddress.TabIndex = 47;
@@ -536,7 +617,7 @@
             companyName.AutoSize = true;
             companyName.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyName.ForeColor = SystemColors.ControlDarkDark;
-            companyName.Location = new Point(82, 432);
+            companyName.Location = new Point(61, 432);
             companyName.Name = "companyName";
             companyName.Size = new Size(52, 19);
             companyName.TabIndex = 43;
@@ -546,7 +627,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Bahnschrift Light", 11.25F);
-            label14.Location = new Point(17, 535);
+            label14.Location = new Point(4, 535);
             label14.Name = "label14";
             label14.Size = new Size(49, 18);
             label14.TabIndex = 46;
@@ -556,7 +637,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Bahnschrift Light", 11.25F);
-            label13.Location = new Point(15, 499);
+            label13.Location = new Point(4, 499);
             label13.Name = "label13";
             label13.Size = new Size(64, 18);
             label13.TabIndex = 45;
@@ -566,7 +647,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Bahnschrift Light", 11.25F);
-            label12.Location = new Point(14, 467);
+            label12.Location = new Point(4, 467);
             label12.Name = "label12";
             label12.Size = new Size(67, 18);
             label12.TabIndex = 44;
@@ -576,7 +657,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Bahnschrift Light", 11.25F);
-            label11.Location = new Point(14, 432);
+            label11.Location = new Point(4, 432);
             label11.Name = "label11";
             label11.Size = new Size(51, 18);
             label11.TabIndex = 43;
@@ -586,7 +667,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(55, 382);
+            label10.Location = new Point(45, 382);
             label10.Name = "label10";
             label10.Size = new Size(125, 23);
             label10.TabIndex = 43;
@@ -618,7 +699,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.search;
-            pictureBox2.Location = new Point(17, 27);
+            pictureBox2.Location = new Point(7, 27);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(32, 32);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -643,12 +724,12 @@
             ApplyNowBttn.CanGlow = false;
             ApplyNowBttn.CanShake = true;
             ApplyNowBttn.ContextMenuStripEx = null;
-            ApplyNowBttn.CornerRadiusBottomLeft = 0;
-            ApplyNowBttn.CornerRadiusBottomRight = 0;
-            ApplyNowBttn.CornerRadiusTopLeft = 0;
-            ApplyNowBttn.CornerRadiusTopRight = 0;
+            ApplyNowBttn.CornerRadiusBottomLeft = 23;
+            ApplyNowBttn.CornerRadiusBottomRight = 23;
+            ApplyNowBttn.CornerRadiusTopLeft = 23;
+            ApplyNowBttn.CornerRadiusTopRight = 23;
             ApplyNowBttn.CustomCursor = Cursors.Default;
-            ApplyNowBttn.DisabledTextColor = Color.FromArgb(150, 150, 150);
+            ApplyNowBttn.DisabledTextColor = Color.White;
             ApplyNowBttn.EnableLongPress = false;
             ApplyNowBttn.EnablePressAnimation = true;
             ApplyNowBttn.EnableRippleEffect = true;
@@ -669,11 +750,11 @@
             ApplyNowBttn.ImageAlign = ContentAlignment.MiddleLeft;
             ApplyNowBttn.ImagePadding = 5;
             ApplyNowBttn.ImageSize = new Size(16, 16);
-            ApplyNowBttn.IsRadial = false;
+            ApplyNowBttn.IsRadial = true;
             ApplyNowBttn.IsReadOnly = false;
             ApplyNowBttn.IsToggleButton = false;
             ApplyNowBttn.IsToggled = false;
-            ApplyNowBttn.Location = new Point(82, 292);
+            ApplyNowBttn.Location = new Point(82, 286);
             ApplyNowBttn.LongPressDurationMS = 1000;
             ApplyNowBttn.Name = "ApplyNowBttn";
             ApplyNowBttn.NormalFontStyle = FontStyle.Regular;
@@ -683,7 +764,7 @@
             ApplyNowBttn.PressedBackColor = Color.FromArgb(74, 128, 235);
             ApplyNowBttn.PressedFontStyle = FontStyle.Regular;
             ApplyNowBttn.PressTransitionDuration = 150;
-            ApplyNowBttn.ReadOnlyTextColor = Color.LightGray;
+            ApplyNowBttn.ReadOnlyTextColor = Color.WhiteSmoke;
             ApplyNowBttn.RippleColor = Color.FromArgb(255, 255, 255);
             ApplyNowBttn.RippleOpacity = 0.3F;
             ApplyNowBttn.RippleRadiusMultiplier = 0.6F;
@@ -707,7 +788,7 @@
             applDeadline.AutoSize = true;
             applDeadline.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             applDeadline.ForeColor = SystemColors.ControlDarkDark;
-            applDeadline.Location = new Point(108, 251);
+            applDeadline.Location = new Point(70, 251);
             applDeadline.Name = "applDeadline";
             applDeadline.Size = new Size(43, 19);
             applDeadline.TabIndex = 41;
@@ -718,7 +799,7 @@
             workMode.AutoSize = true;
             workMode.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             workMode.ForeColor = SystemColors.ControlDarkDark;
-            workMode.Location = new Point(108, 149);
+            workMode.Location = new Point(93, 149);
             workMode.Name = "workMode";
             workMode.Size = new Size(48, 19);
             workMode.TabIndex = 40;
@@ -729,7 +810,7 @@
             industryOverview.AutoSize = true;
             industryOverview.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             industryOverview.ForeColor = SystemColors.ControlDarkDark;
-            industryOverview.Location = new Point(108, 118);
+            industryOverview.Location = new Point(74, 115);
             industryOverview.Name = "industryOverview";
             industryOverview.Size = new Size(68, 19);
             industryOverview.TabIndex = 39;
@@ -740,7 +821,7 @@
             jobCategory.AutoSize = true;
             jobCategory.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             jobCategory.ForeColor = SystemColors.ControlDarkDark;
-            jobCategory.Location = new Point(108, 81);
+            jobCategory.Location = new Point(79, 82);
             jobCategory.Name = "jobCategory";
             jobCategory.Size = new Size(75, 19);
             jobCategory.TabIndex = 38;
@@ -750,7 +831,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Bahnschrift Light", 11.25F);
-            label9.Location = new Point(14, 218);
+            label9.Location = new Point(4, 218);
             label9.Name = "label9";
             label9.Size = new Size(68, 18);
             label9.TabIndex = 36;
@@ -760,7 +841,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Bahnschrift Light", 11.25F);
-            label8.Location = new Point(14, 252);
+            label8.Location = new Point(4, 252);
             label8.Name = "label8";
             label8.Size = new Size(60, 18);
             label8.TabIndex = 35;
@@ -770,7 +851,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Bahnschrift Light", 11.25F);
-            label5.Location = new Point(14, 82);
+            label5.Location = new Point(4, 82);
             label5.Name = "label5";
             label5.Size = new Size(69, 18);
             label5.TabIndex = 33;
@@ -780,7 +861,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Bahnschrift Light", 11.25F);
-            label3.Location = new Point(14, 116);
+            label3.Location = new Point(4, 116);
             label3.Name = "label3";
             label3.Size = new Size(64, 18);
             label3.TabIndex = 32;
@@ -790,7 +871,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(55, 33);
+            label2.Location = new Point(45, 33);
             label2.Name = "label2";
             label2.Size = new Size(125, 23);
             label2.TabIndex = 31;
@@ -801,7 +882,7 @@
             initialSalaryLabel.AutoSize = true;
             initialSalaryLabel.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             initialSalaryLabel.ForeColor = SystemColors.ControlDarkDark;
-            initialSalaryLabel.Location = new Point(108, 183);
+            initialSalaryLabel.Location = new Point(98, 183);
             initialSalaryLabel.Name = "initialSalaryLabel";
             initialSalaryLabel.Size = new Size(127, 19);
             initialSalaryLabel.TabIndex = 29;
@@ -812,7 +893,7 @@
             vacancyLabel.AutoSize = true;
             vacancyLabel.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             vacancyLabel.ForeColor = SystemColors.ControlDarkDark;
-            vacancyLabel.Location = new Point(108, 217);
+            vacancyLabel.Location = new Point(78, 217);
             vacancyLabel.Name = "vacancyLabel";
             vacancyLabel.Size = new Size(129, 19);
             vacancyLabel.TabIndex = 30;
@@ -822,7 +903,7 @@
             // 
             salary.AutoSize = true;
             salary.Font = new Font("Bahnschrift Light", 11.25F);
-            salary.Location = new Point(14, 184);
+            salary.Location = new Point(4, 184);
             salary.Name = "salary";
             salary.Size = new Size(92, 18);
             salary.TabIndex = 27;
@@ -832,7 +913,7 @@
             // 
             workModeLabel.AutoSize = true;
             workModeLabel.Font = new Font("Bahnschrift Light", 11.25F);
-            workModeLabel.Location = new Point(14, 150);
+            workModeLabel.Location = new Point(4, 150);
             workModeLabel.Name = "workModeLabel";
             workModeLabel.Size = new Size(89, 18);
             workModeLabel.TabIndex = 28;
@@ -940,5 +1021,6 @@
         private RichTextBox jobApplicationDetails;
         private Label label4;
         private Panel panel14;
+        private SiticoneNetCoreUI.SiticoneButton SendEmailBttn;
     }
 }

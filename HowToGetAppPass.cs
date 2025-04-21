@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Job_Application_Manager
 {
-    public partial class ListView : BaseControl
+    public partial class HowToGetAppPass : Form
     {
-        public ListView()
+        public HowToGetAppPass()
         {
             InitializeComponent();
+            label7.ForeColor = Color.Firebrick;
+        }
+
+        private void exitBttn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

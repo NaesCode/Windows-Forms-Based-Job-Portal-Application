@@ -13,6 +13,8 @@ namespace Job_Application_Manager
         private CompanyDashB? companyDashBForm;
         private AdminDashB? adminDashBForm;
         private codeVerify? codeVerifyInstance;
+        private codeVerifyCompany? codeVerifyCompanyInstance;
+
         private bool valid;
         private int companyID;
         private int hunterID;
@@ -41,7 +43,7 @@ namespace Job_Application_Manager
             }
         }
 
-        private void Checkbox_CheckedChanged(object sender, EventArgs e)
+        private void Checkbox_CheckedChanged(object? sender, EventArgs e)
         {
             bool anyChecked = CompanyCheckbox.Checked || JobHunterCheckbox.Checked || AdminCheckBox.Checked;
             UserName.Enabled = anyChecked;
@@ -64,11 +66,6 @@ namespace Job_Application_Manager
             }
         }
 
-        private void guna2Button4_Click(object sender, EventArgs e) //can be removed
-        {
-            dbSupport.checkConnection();
-        }
-
         private void signUpButton_Click(object sender, EventArgs e)
         {
             if (accountTypeFormInstance == null || accountTypeFormInstance.IsDisposed)
@@ -86,7 +83,7 @@ namespace Job_Application_Manager
         {
             string username = UserName.Text;
             string password = UserPassword.Text;
-            string Cemail = UserName.Text;
+            string companyEmail = UserName.Text;
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -120,11 +117,10 @@ namespace Job_Application_Manager
 
                 else if (CompanyCheckbox.Checked == true)
                 {
-                    valid = dbSupport.AuthenticateCompany(Cemail, password);
-                    companyID = dbSupport.getCompanyID(Cemail);
+                    valid = dbSupport.AuthenticateCompany(companyEmail, password);
+                    companyID = dbSupport.getCompanyID(companyEmail);
                     if (valid)
-                    {
-                        //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    { 
                         if (companyDashBForm == null || companyDashBForm.IsDisposed)
                         {
                             this.Hide();
@@ -146,10 +142,8 @@ namespace Job_Application_Manager
                 else if (AdminCheckBox.Checked == true)
                 {
                     valid = dbSupport.AuthenticateAdmin(username, password);
-                    //companyID = dbSupport.getCompanyID(Cemail);
                     if (valid)
                     {
-                        //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (adminDashBForm == null || adminDashBForm.IsDisposed)
                         {
                             this.Hide();
@@ -187,15 +181,36 @@ namespace Job_Application_Manager
 
         private void forgotPassBttn_Click(object sender, EventArgs e)
         {
-            if (codeVerifyInstance == null || codeVerifyInstance.IsDisposed)
+            if (JobHunterCheckbox.Checked == true)
             {
-                codeVerifyInstance = new codeVerify();
-                codeVerifyInstance.Show();
-                this.Hide();
+                if (codeVerifyInstance == null || codeVerifyInstance.IsDisposed)
+                {
+                    codeVerifyInstance = new codeVerify();
+                    codeVerifyInstance.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    codeVerifyInstance.BringToFront();
+                }
+            }
+            else if (CompanyCheckbox.Checked == true)
+            {
+                if (codeVerifyCompanyInstance == null || codeVerifyCompanyInstance.IsDisposed)
+                {
+                    codeVerifyCompanyInstance = new codeVerifyCompany();
+                    codeVerifyCompanyInstance.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    codeVerifyCompanyInstance.BringToFront();
+                }
             }
             else
             {
-                codeVerifyInstance.BringToFront();
+                MessageBox.Show("Please specify first what type of user are you.");
+                return;
             }
         }
     }

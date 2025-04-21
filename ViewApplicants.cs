@@ -12,11 +12,11 @@ namespace Job_Application_Manager
 {
     public partial class ViewApplicants : BaseControl
     {
-        public int JobPostID;
+        private int JobPostID;
 
         public event Action<int>? ViewApplicantsClicked; //Defined an event that triggers when the job title button is clicked
 
-        public ViewApplicants(int postID, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, byte[]? logo)
+        public ViewApplicants(int postID, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, byte[]? logo)
         {
             InitializeComponent();
             JobPostID = postID;
@@ -25,8 +25,6 @@ namespace Job_Application_Manager
             jobTypeLabel.Text = "( " + jobType + " )";
             jobLocationLabel.Text = location;
             workModeLabel.Text = "( " + workMode + " )";
-            initialSalaryLabel.Text = salary + ".00 / Month";
-            vacancyLabel.Text = vacancy.ToString() + " Available Pos.";
             imageData = logo;
             if (imageData != null)
             {

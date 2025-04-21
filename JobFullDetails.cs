@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.DataFormats;
 using System.Globalization;
+using ReaLTaiizor.Controls;
 
 namespace Job_Application_Manager
 {
@@ -30,6 +31,19 @@ namespace Job_Application_Manager
             companyPostID = postID;
             HunterID = hunterID;
         }
+
+        public JobFullDetails(int postID)
+        {
+            InitializeComponent();
+            companyPostID = postID;
+            jobDescription.ReadOnly = false;
+            jobDescription.BackColor = SystemColors.Control;
+            jobApplicationDetails.ReadOnly = false;
+            jobApplicationDetails.BackColor = SystemColors.Control;
+            ApplyNowBttn.Visible = false;
+            SendEmailBttn.Visible = false;
+        }
+
 
         // Windows API to enable snapping
         protected override void WndProc(ref Message m)
@@ -95,6 +109,12 @@ namespace Job_Application_Manager
 
         public void LoadJobDetails(byte[]? logo)
         {
+            if (dbSupport.AleadyAppliedChecker(companyPostID, HunterID))
+            {
+                ApplyNowBttn.Enabled = false;
+                ApplyNowBttn.Text = "Already Applied";
+            }
+
             try
             {
                 // load job details
@@ -122,7 +142,6 @@ namespace Job_Application_Manager
                             companyLogo.Image = Image.FromStream(ms);
                         }
                     }
-                    MessageBox.Show($"{applDeadline.Text} \n {currentDate}");
                 }
                 else
                 {
@@ -148,7 +167,7 @@ namespace Job_Application_Manager
                 string? format = "M/d/yyyy h:mm:ss tt";
                 if (DateTime.TryParseExact(applDeadline.Text, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime closing))
                 {
-                    if(currentDate >= closing) //application deadline is met.
+                    if (currentDate >= closing || Convert.ToInt32(jobDetails["Vacancy"]) == 0) //application deadline is met or there are no more vacant positions.
                     {
                         ApplyNowBttn.Enabled = false;
                         ApplyNowBttn.Text = "Position Closed";
@@ -163,12 +182,65 @@ namespace Job_Application_Manager
 
         private void ApplyNowBttn_Click(object sender, EventArgs e)
         {
-            string applicationStatus = "FOR REVIEW";
+            string applicationStatus = "APPLIED";
             DateTime DateApplied = DateTime.Now.Date;
-            dbSupport.ApplyForAJob(companyPostID, HunterID, DateApplied, applicationStatus);
+            dbSupport.ApplyForAJob(companyPostID, companyID, HunterID, DateApplied, applicationStatus);
+            dbSupport.UpdateTotalNumOFApplicants(companyPostID);
             MessageBox.Show("Application sent successfully.");
             ApplyNowBttn.Text = "Applied";
             ApplyNowBttn.Enabled = false;
+        }
+
+        private void jobDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (jobDescription.Text == "This is the job description and qualification.")
+            {
+                jobDescription.Text = null;
+
+            }
+            string? description = jobDescription.Text;
+            if (e.KeyCode == Keys.Enter && ModifierKeys == Keys.None)
+            {
+                e.SuppressKeyPress = true;
+                try
+                {
+                    dbSupport.UpdateJobDescription(companyPostID, description);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex}");
+                }
+                MessageBox.Show("Job Desciption updated successfully");
+            }
+        }
+
+        private void jobApplicationDetails_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (jobApplicationDetails.Text == "This is the job application details.")
+            {
+                jobApplicationDetails.Text = null;
+
+            }
+            string? details = jobApplicationDetails.Text;
+            if (e.KeyCode == Keys.Enter && ModifierKeys == Keys.None)
+            {
+                e.SuppressKeyPress = true;
+                try
+                {
+                    dbSupport.UpdateJobApplicationDetails(companyPostID, details);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex}");
+                }
+                MessageBox.Show("Job Application Details updated successfully");
+            }
+        }
+
+        private void SendEmailBttn_Click(object sender, EventArgs e)
+        {
+            JobHunterEmailingForm emailForm = new JobHunterEmailingForm(companyID, HunterID);
+            emailForm.Show();
         }
     }
 }

@@ -20,11 +20,10 @@ namespace Job_Application_Manager
     {
         DatabaseSupport dbSupport = new DatabaseSupport();
 
-        private changePass? changePasswordInstance;
-        string? randomCode;
-        bool codeSent;
+        private changePassHunter? changePasswordInstance;
+        private string? randomCode;
+        private bool codeSent;
         private readonly string password = "pmah mimr xjds yhzm"; //DO NOT MODIFY LOL
-        private string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= D:\\Users\\titan\\OneDrive\\Documents\\C andC# files\\C programming\\C# Programming\\OOP 2\\Database\\JobApplicationManager_Database.accdb";
         public codeVerify()
         {
             InitializeComponent();
@@ -34,6 +33,7 @@ namespace Job_Application_Manager
         {
             sentCode.Enabled = false;
             verifyCode.Enabled = false;
+            MessageBox.Show("This is for Hunters");
         }
 
         private void sendVerifEmail_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace Job_Application_Manager
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (dbSupport.isValidEmail(email) == false)
+            if (dbSupport.isValidHunterEmail(email) == false)
             {
                 MessageBox.Show("Please enter a valid email address!", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -55,7 +55,7 @@ namespace Job_Application_Manager
             }
 
             //this is to check if the email is in the database or not
-            string? username = dbSupport.GetUserNameByEmail(email);
+            string? username = dbSupport.GetHunterNameByEmail(email);
             if (string.IsNullOrEmpty(username))
             {
                 MessageBox.Show("No account found with this email!", "Error",
@@ -156,7 +156,7 @@ namespace Job_Application_Manager
             {
                 if (changePasswordInstance == null || changePasswordInstance.IsDisposed)
                 {
-                    changePasswordInstance = new changePass(ToEmail.Text);
+                    changePasswordInstance = new changePassHunter(ToEmail.Text);
                     changePasswordInstance.Show();
                     this.Hide();
                 }

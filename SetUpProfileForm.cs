@@ -17,9 +17,7 @@ namespace Job_Application_Manager
         private int hunterID;
         private string? Degree = null;
         private string? University = null;
-        private string? websiteLink = null;
         private byte[]? imageData = null;
-        private Dictionary<string, object>? profileData;
 
         public SetUpProfileForm(int ID)
         {
@@ -35,7 +33,6 @@ namespace Job_Application_Manager
             updateBttn.Visible = true;
             submitBttn.Visible = false;
             updateBttn.Location = new Point(38, 593);
-            this.profileData = profileData;
             this.hunterID = ID;
 
             imageData = dbSupport.DisplayProfilePicture(hunterID);
@@ -85,22 +82,23 @@ namespace Job_Application_Manager
                 return;
             }
 
-            string? pfpTag = ProfilePicture.Tag.ToString() ?? null;
-            string? resumeTag = resumeDocx.Tag.ToString() ?? null;
+            string? pfpTag = ProfilePicture.Tag.ToString();
+            string? resumeTag = resumeDocx.Tag.ToString();
             string? coverLetterTag = coverLetter.Tag?.ToString() ?? null;
+            string? portfolioTag = portfolio.Tag?.ToString() ?? null;
 
             byte[]? pfpBytes = File.ReadAllBytes(pfpTag);
             byte[]? resumeBytes = File.ReadAllBytes(resumeTag);
-            byte[]? coverLetterBytes = coverLetter.Tag != null ? File.ReadAllBytes(coverLetterTag) : null;
-            byte[]? portfolioBytes = portfolio.Tag != null ? File.ReadAllBytes(portfolio.Tag.ToString()) : null;
+            byte[]? coverLetterBytes = coverLetterTag != null ? File.ReadAllBytes(coverLetterTag) : null;
+            byte[]? portfolioBytes = portfolioTag != null ? File.ReadAllBytes(portfolioTag) : null;
 
-            string? portfolioPath = hasWebsite.Checked ? null : portfolio.Text;
+            portfolioTag = hasWebsite.Checked ? null : portfolioTag;
             string? portfolioUrl = hasWebsite.Checked ? portfolioWeb.Text : null;
 
             try
             {
                 dbSupport.InsertHunterProfileDetails(hunterID, fullName.Text, BirthDate, gender, contactNumber.Text, hunterEmail.Text, hunterAddress.Text, hunterNationality.Text, educAttainment.Text, Degree, University,
-                                          pfpBytes, pfpTag, resumeBytes, resumeTag, coverLetterBytes, coverLetterTag, portfolioBytes, portfolioPath, portfolioUrl, currentDate, isSetUp);
+                                          pfpBytes, pfpTag, resumeBytes, resumeTag, coverLetterBytes, coverLetterTag, portfolioBytes, portfolioTag, portfolioUrl, currentDate, isSetUp);
             }
             catch (Exception ex)
             {
@@ -207,7 +205,7 @@ namespace Job_Application_Manager
                     string displayText = "Click Here";
                     string companyWebsite = portfolioWeb.Text;
                     string optionalSubAddress = "";
-                    websiteLink = $"{displayText}#{companyWebsite}#{optionalSubAddress}";
+                    string websiteLink = $"{displayText}#{companyWebsite}#{optionalSubAddress}";
                 }
                 else
                 {
@@ -238,26 +236,27 @@ namespace Job_Application_Manager
 
             if (ProfilePicture.Tag == null || resumeDocx.Tag == null)
             {
-                MessageBox.Show("Please upload both a profile picture and a resume.");
+                MessageBox.Show("Please REUPLOAD both a profile picture and at least your resume.");
                 return;
             }
 
-            string? pfpTag = ProfilePicture.Tag.ToString() ?? null;
-            string? resumeTag = resumeDocx.Tag.ToString() ?? null;
+            string? pfpTag = ProfilePicture.Tag.ToString();
+            string? resumeTag = resumeDocx.Tag.ToString();
             string? coverLetterTag = coverLetter.Tag?.ToString() ?? null;
+            string? portfolioTag = portfolio.Tag?.ToString() ?? null;
 
             byte[]? pfpBytes = File.ReadAllBytes(pfpTag);
             byte[]? resumeBytes = File.ReadAllBytes(resumeTag);
-            byte[]? coverLetterBytes = coverLetter.Tag != null ? File.ReadAllBytes(coverLetterTag) : null;
-            byte[]? portfolioBytes = portfolio.Tag != null ? File.ReadAllBytes(portfolio.Tag.ToString()) : null;
+            byte[]? coverLetterBytes = coverLetterTag != null ? File.ReadAllBytes(coverLetterTag) : null;
+            byte[]? portfolioBytes = portfolioTag != null ? File.ReadAllBytes(portfolioTag) : null;
 
-            string? portfolioPath = hasWebsite.Checked ? null : portfolio.Text;
+            portfolioTag = hasWebsite.Checked ? null : portfolioTag;
             string? portfolioUrl = hasWebsite.Checked ? portfolioWeb.Text : null;
 
             try
             {
                 dbSupport.UpdateHunterProfileDetails(hunterID, fullName.Text, BirthDate, gender, contactNumber.Text, hunterEmail.Text, hunterAddress.Text, hunterNationality.Text, educAttainment.Text, Degree, University,
-                                          pfpBytes, pfpTag, resumeBytes, resumeTag, coverLetterBytes, coverLetterTag, portfolioBytes, portfolioPath, portfolioUrl, currentDate);
+                                          pfpBytes, pfpTag, resumeBytes, resumeTag, coverLetterBytes, coverLetterTag, portfolioBytes, portfolioTag, portfolioUrl, currentDate);
             }
             catch (Exception ex)
             {

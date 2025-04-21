@@ -500,7 +500,7 @@
             ProfilePicture.BackColor = SystemColors.ControlDark;
             ProfilePicture.ContextMenuStrip = pfpMenuOpt;
             ProfilePicture.InitialImage = Properties.Resources.research;
-            ProfilePicture.Location = new Point(577, 90);
+            ProfilePicture.Location = new Point(586, 90);
             ProfilePicture.Name = "ProfilePicture";
             ProfilePicture.Size = new Size(189, 152);
             ProfilePicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -589,7 +589,7 @@
             educAttainment.Items.AddRange(new object[] { "High School", "Senior High School", "College Degree", "Masteral Degree", "Doctorate Degree" });
             educAttainment.Location = new Point(228, 461);
             educAttainment.Name = "educAttainment";
-            educAttainment.Size = new Size(178, 26);
+            educAttainment.Size = new Size(181, 26);
             educAttainment.TabIndex = 67;
             educAttainment.TextChanged += educAttainment_TextChanged;
             // 
@@ -694,12 +694,12 @@
             // 
             textBox7.BorderStyle = BorderStyle.None;
             textBox7.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox7.Location = new Point(466, 130);
+            textBox7.Location = new Point(466, 136);
             textBox7.Multiline = true;
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(95, 63);
+            textBox7.Size = new Size(118, 104);
             textBox7.TabIndex = 76;
-            textBox7.Text = "Logo:\r\n(Right click\r\nfor options)";
+            textBox7.Text = "Profile Picture:\r\n(Right click\r\nfor options)";
             // 
             // SetUpProfileForm
             // 

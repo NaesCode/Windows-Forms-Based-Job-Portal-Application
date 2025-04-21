@@ -34,6 +34,7 @@
             label1 = new Label();
             fullName = new Label();
             panel2 = new Panel();
+            EmailBttn = new FontAwesome.Sharp.IconButton();
             profilePic = new PictureBox();
             address = new Label();
             birthdate = new Label();
@@ -96,7 +97,7 @@
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(333, 51);
+            panel3.Size = new Size(283, 51);
             panel3.TabIndex = 2;
             // 
             // label1
@@ -122,6 +123,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(EmailBttn);
             panel2.Controls.Add(profilePic);
             panel2.Controls.Add(address);
             panel2.Controls.Add(birthdate);
@@ -144,6 +146,25 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(874, 335);
             panel2.TabIndex = 18;
+            // 
+            // EmailBttn
+            // 
+            EmailBttn.BackColor = Color.FromArgb(13, 59, 141);
+            EmailBttn.Cursor = Cursors.Hand;
+            EmailBttn.FlatAppearance.MouseDownBackColor = Color.FromArgb(5, 229, 148);
+            EmailBttn.FlatAppearance.MouseOverBackColor = Color.FromArgb(35, 168, 109);
+            EmailBttn.FlatStyle = FlatStyle.Flat;
+            EmailBttn.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            EmailBttn.IconChar = FontAwesome.Sharp.IconChar.Envelope;
+            EmailBttn.IconColor = Color.White;
+            EmailBttn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            EmailBttn.IconSize = 30;
+            EmailBttn.ImageAlign = ContentAlignment.BottomCenter;
+            EmailBttn.Location = new Point(747, 180);
+            EmailBttn.Name = "EmailBttn";
+            EmailBttn.Size = new Size(92, 40);
+            EmailBttn.TabIndex = 57;
+            EmailBttn.UseVisualStyleBackColor = false;
             // 
             // profilePic
             // 
@@ -437,5 +458,6 @@
         private PictureBox profilePic;
         private Panel panel1;
         private RichTextBox BioTextBox;
+        private FontAwesome.Sharp.IconButton EmailBttn;
     }
 }

@@ -59,6 +59,7 @@
             university = new Label();
             panel1 = new Panel();
             BioTextBox = new RichTextBox();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel3.SuspendLayout();
@@ -69,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // menuBarPanel2
@@ -94,11 +96,12 @@
             // panel3
             // 
             panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(iconPictureBox1);
             panel3.Controls.Add(label1);
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(208, 51);
+            panel3.Size = new Size(415, 51);
             panel3.TabIndex = 2;
             // 
             // label1
@@ -106,7 +109,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(15, 15);
+            label1.Location = new Point(67, 13);
             label1.Name = "label1";
             label1.Size = new Size(184, 25);
             label1.TabIndex = 1;
@@ -415,6 +418,20 @@
             BioTextBox.KeyDown += BioTextBox_KeyDown;
             BioTextBox.Leave += BioTextBox_Leave;
             // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.Transparent;
+            iconPictureBox1.ForeColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            iconPictureBox1.IconColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 40;
+            iconPictureBox1.Location = new Point(19, 7);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(40, 40);
+            iconPictureBox1.TabIndex = 4;
+            iconPictureBox1.TabStop = false;
+            // 
             // JobHunterProfile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -439,6 +456,7 @@
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -475,5 +493,6 @@
         private PictureBox profilePic;
         private Panel panel1;
         private RichTextBox BioTextBox;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

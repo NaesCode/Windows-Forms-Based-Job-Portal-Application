@@ -20,6 +20,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="changePassCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="codeVerifyCompany.cs" />
+    <Compile Update="SetEventORNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="JobHunterEmailingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="HowToGetAppPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CompanyEmailingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="JobApplicants.cs" />
     <Compile Update="ApplicantProfileView.cs" />
     <Compile Update="JobHunterProfile.cs" />
@@ -38,6 +54,9 @@
     <Compile Update="AdminDashB.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AdminAnalytics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="ViewApplicants.cs" />
     <Compile Update="JobPostPreviewPanel.cs">
       <SubType>UserControl</SubType>
@@ -47,7 +66,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="GenCompanyInfoTable.cs">
+    <Compile Update="GeneralUserInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="SetUpProfileForm.cs">

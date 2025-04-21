@@ -32,25 +32,27 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrackApplications));
             panel1 = new Panel();
             ApplicationsTable = new ReaLTaiizor.Controls.PoisonDataGridView();
+            applicationOpt = new ContextMenuStrip(components);
+            cancelApplicationToolStripMenuItem = new ToolStripMenuItem();
+            deleteAppStripMenuItem = new ToolStripMenuItem();
             menuBarPanel2 = new Panel();
             menuBarPanel3 = new Panel();
             panel2 = new Panel();
+            profilePicture = new ReaLTaiizor.Controls.ParrotPictureBox();
             searchBar = new ReaLTaiizor.Controls.DungeonTextBox();
-            profilePicture = new SiticoneNetCoreUI.SiticonePictureBox();
             panel3 = new Panel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             label1 = new Label();
-            applicationOpt = new ContextMenuStrip(components);
-            cancelAppStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ApplicationsTable).BeginInit();
+            applicationOpt.SuspendLayout();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            applicationOpt.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -113,6 +115,30 @@
             ApplicationsTable.TabIndex = 14;
             ApplicationsTable.CellClick += ApplicationsTable_CellClick;
             // 
+            // applicationOpt
+            // 
+            applicationOpt.BackColor = SystemColors.ButtonHighlight;
+            applicationOpt.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            applicationOpt.Items.AddRange(new ToolStripItem[] { cancelApplicationToolStripMenuItem, deleteAppStripMenuItem });
+            applicationOpt.Name = "logoMenuOpt";
+            applicationOpt.Size = new Size(180, 48);
+            // 
+            // cancelApplicationToolStripMenuItem
+            // 
+            cancelApplicationToolStripMenuItem.Image = Properties.Resources.papercancel;
+            cancelApplicationToolStripMenuItem.Name = "cancelApplicationToolStripMenuItem";
+            cancelApplicationToolStripMenuItem.Size = new Size(179, 22);
+            cancelApplicationToolStripMenuItem.Text = "Cancel Application";
+            cancelApplicationToolStripMenuItem.Click += cancelApplicationToolStripMenuItem_Click;
+            // 
+            // deleteAppStripMenuItem
+            // 
+            deleteAppStripMenuItem.Image = Properties.Resources.delete;
+            deleteAppStripMenuItem.Name = "deleteAppStripMenuItem";
+            deleteAppStripMenuItem.Size = new Size(179, 22);
+            deleteAppStripMenuItem.Text = "Delete Application";
+            deleteAppStripMenuItem.Click += deleteAppStripMenuItem_Click;
+            // 
             // menuBarPanel2
             // 
             menuBarPanel2.Controls.Add(menuBarPanel3);
@@ -137,13 +163,36 @@
             // panel2
             // 
             panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(searchBar);
             panel2.Controls.Add(profilePicture);
+            panel2.Controls.Add(searchBar);
             panel2.Dock = DockStyle.Right;
             panel2.Location = new Point(588, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(305, 51);
             panel2.TabIndex = 1;
+            // 
+            // profilePicture
+            // 
+            profilePicture.BackColor = Color.Transparent;
+            profilePicture.BackgroundImageLayout = ImageLayout.Zoom;
+            profilePicture.ColorLeft = Color.Transparent;
+            profilePicture.ColorRight = Color.Transparent;
+            profilePicture.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            profilePicture.FilterAlpha = 0;
+            profilePicture.FilterEnabled = false;
+            profilePicture.Image = Properties.Resources._482748566_677122558084783_2784408297271869644_n;
+            profilePicture.ImeMode = ImeMode.NoControl;
+            profilePicture.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            profilePicture.IsElipse = true;
+            profilePicture.IsParallax = false;
+            profilePicture.Location = new Point(250, 5);
+            profilePicture.Name = "profilePicture";
+            profilePicture.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            profilePicture.Size = new Size(40, 40);
+            profilePicture.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            profilePicture.TabIndex = 5;
+            profilePicture.Text = "parrotPictureBox1";
+            profilePicture.TextRenderingType = System.Drawing.Text.TextRenderingHint.AntiAlias;
             // 
             // searchBar
             // 
@@ -164,83 +213,41 @@
             searchBar.UseSystemPasswordChar = false;
             searchBar.TextChanged += searchBar_TextChanged;
             // 
-            // profilePicture
-            // 
-            profilePicture.BackColor = Color.Transparent;
-            profilePicture.BorderColor = Color.Black;
-            profilePicture.BorderWidth = 1;
-            profilePicture.Brightness = 1F;
-            profilePicture.Contrast = 1F;
-            profilePicture.CornerRadius = 15;
-            profilePicture.DraggingSpeed = 3.15F;
-            profilePicture.EnableAsyncLoading = false;
-            profilePicture.EnableCaching = false;
-            profilePicture.EnableDragDrop = false;
-            profilePicture.EnableExtendedImageSources = false;
-            profilePicture.EnableFilters = false;
-            profilePicture.EnableFlipping = false;
-            profilePicture.EnableGlow = false;
-            profilePicture.EnableHighDpiSupport = false;
-            profilePicture.EnableMouseInteraction = false;
-            profilePicture.EnablePlaceholder = false;
-            profilePicture.EnableRotation = false;
-            profilePicture.EnableShadow = false;
-            profilePicture.EnableSlideshow = false;
-            profilePicture.FlipHorizontal = false;
-            profilePicture.FlipVertical = false;
-            profilePicture.Grayscale = false;
-            profilePicture.Image = (Image)resources.GetObject("profilePicture.Image");
-            profilePicture.ImageOpacity = 1F;
-            profilePicture.Images = (List<Image>)resources.GetObject("profilePicture.Images");
-            profilePicture.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            profilePicture.IsCircular = true;
-            profilePicture.Location = new Point(250, 5);
-            profilePicture.MaintainAspectRatio = true;
-            profilePicture.Name = "profilePicture";
-            profilePicture.PlaceholderImage = null;
-            profilePicture.RotationAngle = 0F;
-            profilePicture.Saturation = 1F;
-            profilePicture.ShowBorder = true;
-            profilePicture.Size = new Size(40, 40);
-            profilePicture.SizeMode = SiticoneNetCoreUI.SiticonePictureBoxSizeMode.StretchImage;
-            profilePicture.TabIndex = 0;
-            // 
             // panel3
             // 
             panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(iconPictureBox1);
             panel3.Controls.Add(label1);
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(555, 51);
+            panel3.Size = new Size(414, 51);
             panel3.TabIndex = 2;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.Transparent;
+            iconPictureBox1.ForeColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.FileCircleCheck;
+            iconPictureBox1.IconColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 39;
+            iconPictureBox1.Location = new Point(15, 8);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(39, 42);
+            iconPictureBox1.TabIndex = 4;
+            iconPictureBox1.TabStop = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(15, 14);
+            label1.Location = new Point(57, 13);
             label1.Name = "label1";
-            label1.Size = new Size(167, 25);
+            label1.Size = new Size(291, 25);
             label1.TabIndex = 1;
-            label1.Text = "DASHBOARD";
-            // 
-            // applicationOpt
-            // 
-            applicationOpt.BackColor = SystemColors.ButtonHighlight;
-            applicationOpt.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            applicationOpt.Items.AddRange(new ToolStripItem[] { cancelAppStripMenuItem });
-            applicationOpt.Name = "logoMenuOpt";
-            applicationOpt.Size = new Size(180, 26);
-            // 
-            // cancelAppStripMenuItem
-            // 
-            cancelAppStripMenuItem.Image = Properties.Resources.deletePhoto;
-            cancelAppStripMenuItem.Name = "cancelAppStripMenuItem";
-            cancelAppStripMenuItem.Size = new Size(179, 22);
-            cancelAppStripMenuItem.Text = "Cancel Application";
-            cancelAppStripMenuItem.Click += cancelAppStripMenuItem_Click;
+            label1.Text = "MANAGE APPLICATIONS";
             // 
             // TrackApplications
             // 
@@ -252,12 +259,13 @@
             Size = new Size(893, 604);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ApplicationsTable).EndInit();
+            applicationOpt.ResumeLayout(false);
             menuBarPanel2.ResumeLayout(false);
             menuBarPanel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            applicationOpt.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -268,11 +276,13 @@
         private Panel menuBarPanel2;
         private Panel menuBarPanel3;
         private Panel panel2;
-        private SiticoneNetCoreUI.SiticonePictureBox profilePicture;
         private Panel panel3;
         private Label label1;
         private ReaLTaiizor.Controls.DungeonTextBox searchBar;
         private ContextMenuStrip applicationOpt;
-        private ToolStripMenuItem cancelAppStripMenuItem;
+        private ToolStripMenuItem deleteAppStripMenuItem;
+        private ToolStripMenuItem cancelApplicationToolStripMenuItem;
+        private ReaLTaiizor.Controls.ParrotPictureBox profilePicture;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

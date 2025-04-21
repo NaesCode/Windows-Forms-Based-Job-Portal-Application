@@ -8,22 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using FontAwesome.Sharp;
 
 namespace Job_Application_Manager
 {
     public partial class CompanyDashB : Form
     {
-        private Control? currentDisplayedForm = null;
-
         private BaseControl? currentChildForm;
-        private int companyUserID;
+        private ValidateCompanyForm? validateCompanyForm;
 
-        ValidateCompanyForm? validateCompanyForm;
-        JobListing? jobListingForm;
-        ChartView? chartViewForm;
-
-
+        private IconButton? currentBttn;
+        private Dictionary<string, BaseControl> cachedChildForms = new();
         private DatabaseSupport dbSupport = new DatabaseSupport();
+
+        private int companyUserID;
 
         public CompanyDashB(int companyID)
         {
@@ -70,7 +68,7 @@ namespace Job_Application_Manager
 
             string? approvalStatus = dbSupport.GetApprovalStatus(companyUserID);
 
-            if(approvalStatus == "APPROVED")
+            if (approvalStatus == "APPROVED")
             {
                 AddJobBttn.Enabled = true;
             }
@@ -119,10 +117,16 @@ namespace Job_Application_Manager
         {
             if (this.menuBarPanel0.Width > 200)
             {
+                if (currentChildForm is CalendarView)
+                {
+                    desktopPanel.BackgroundImage = null;
+                    desktopPanel.BackColor = SystemColors.ButtonHighlight;
+                }
                 menuBarPanel0.Width = 100;
                 Logo1.Visible = false;
                 brandName.Visible = false;
                 MenuBttn.Location = new Point(27, 20);
+                EditAccountRequest.Visible = false;
                 foreach (Button menuButton in menuBarPanel1.Controls.OfType<Button>())
                 {
                     menuButton.Text = "";
@@ -137,14 +141,42 @@ namespace Job_Application_Manager
                 brandName.Visible = true;
                 MenuBttn.Dock = DockStyle.None;
                 MenuBttn.Location = new Point(135, 20);
+                EditAccountRequest.Visible = true;
                 foreach (Button menuButton in menuBarPanel1.Controls.OfType<Button>())
                 {
-                    menuButton.Text = "     " + menuButton.Tag?.ToString();
+                    switch (menuButton.Name)
+                    {
+                        case "AddJobBttn":
+                            menuButton.Padding = new Padding(7);
+                            break;
+
+                        case "JobPostingsBttn":
+                            menuButton.Padding = new Padding(15);
+                            break;
+
+                        case "JobApplicantsBttn":
+                            menuButton.Padding = new Padding(12);
+                            break;
+
+                        case "ChartViewBttn":
+                            menuButton.Padding = new Padding(9);
+                            break;
+
+                        case "CalendarViewBttn":
+                            menuButton.Padding = new Padding(8);
+                            break;
+
+                        case "SignOutButton":
+                            menuButton.Padding = new Padding(15, 0, 0, 5);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    menuButton.Text = menuButton.Tag?.ToString();
                     menuButton.ImageAlign = ContentAlignment.MiddleCenter;
                     menuButton.TextAlign = ContentAlignment.MiddleLeft;
-                    menuButton.Padding = new Padding(15);
                 }
-                signOutBttn.Padding = new Padding(15, 0, 0, 5);
             }
         }
 
@@ -201,90 +233,169 @@ namespace Job_Application_Manager
                 this.WindowState = FormWindowState.Minimized;
         }
 
+        private void ActivateButton(object senderBttn)
+        {
+            if (currentBttn != senderBttn)
+            {
+                if (currentBttn != null)
+                {
+                    currentBttn.BackColor = SystemColors.Desktop;
+                }
+                currentBttn = (IconButton)senderBttn;
+                currentBttn.BackColor = Color.FromArgb(13, 59, 141);
+            }
+        }
+
         private void AddJobBttn_Click(object sender, EventArgs e)
         {
-            if (jobListingForm == null || jobListingForm.IsDisposed)
-                jobListingForm = new JobListing(companyUserID);
+            ActivateButton(sender);
+            string key = "Job Listing";
 
-            if (currentDisplayedForm == jobListingForm)
+            if (currentChildForm is JobListing && currentChildForm == cachedChildForms[key])
                 return;
 
-            desktopPanel.Controls.Clear();
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
 
-            jobListingForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(jobListingForm);
-            currentDisplayedForm = jobListingForm;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new JobListing(companyUserID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
+            desktopPanel.Controls.Add(currentChildForm);
+            desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void jobPostingsBttn_Click(object sender, EventArgs e)
+        private void JobPostingsBttn_Click(object sender, EventArgs e)
         {
-            if (currentDisplayedForm is JobPostings)
+            ActivateButton(sender);
+            string key = "Job Posting";
+
+            if (currentChildForm is JobPostings && currentChildForm == cachedChildForms[key])
                 return;
 
-            desktopPanel.Controls.Clear();
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
 
-            currentChildForm = new JobPostings(companyUserID);
-            currentChildForm.Dock = DockStyle.Fill;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new JobPostings(companyUserID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
-            currentChildForm.DisplayDetails();
-
-            currentDisplayedForm = currentChildForm;
+            currentChildForm.LoadDataGrid();
+            desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void ChartViewBttn_Click(object sender, EventArgs e)
         {
-            if (currentDisplayedForm == chartViewForm)
+            ActivateButton(sender);
+            string key = "Analytics";
+
+            if (currentChildForm is ChartView && currentChildForm == cachedChildForms[key])
                 return;
 
-            desktopPanel.Controls.Clear();
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
 
-            if (chartViewForm == null || chartViewForm.IsDisposed)
-                chartViewForm = new ChartView();
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new ChartView(companyUserID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
 
-            chartViewForm.Dock = DockStyle.Fill;
-            desktopPanel.Controls.Add(chartViewForm);
-            currentDisplayedForm = currentChildForm;
+            currentChildForm = cachedChildForms[key];
+            desktopPanel.Controls.Add(currentChildForm);
+            desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void JobApplicantsBttn_Click(object sender, EventArgs e)
         {
-            if (currentDisplayedForm is JobApplicants)
+            ActivateButton(sender);
+            string key = "Job Applicants";
+
+            if (currentChildForm is JobApplicants && currentChildForm == cachedChildForms[key])
                 return;
 
-            desktopPanel.Controls.Clear();
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
 
-            currentChildForm = new JobApplicants(companyUserID);
-            currentChildForm.Dock = DockStyle.Fill;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new JobApplicants(companyUserID);
+                currentChildForm.Dock = DockStyle.Fill;
+                currentChildForm.DisplayDetails();
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
-            currentChildForm.DisplayDetails();
-            if (this.WindowState == FormWindowState.Maximized)
-                AdjustJobApplicantsViewPanel_Size(1157, 120);
-            currentDisplayedForm = currentChildForm;
+            desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
         private void CalendarViewBttn_Click(object sender, EventArgs e)
         {
-            if (currentDisplayedForm is CalendarView)
+            ActivateButton(sender);
+            string key = "Personal Calendar";
+            string userType = "Company";
+
+            if (currentChildForm is CalendarView && currentChildForm == cachedChildForms[key])
                 return;
 
-            desktopPanel.Controls.Clear();
+            if (currentChildForm != null)
+            {
+                desktopPanel.Controls.Remove(currentChildForm);
+            }
 
-            currentChildForm = new CalendarView();
-            currentChildForm.Dock = DockStyle.Fill;
+            if (!cachedChildForms.ContainsKey(key))
+            {
+                currentChildForm = new CalendarView(companyUserID, userType);
+                cachedChildForms[key] = currentChildForm;
+            }
+
+            currentChildForm = cachedChildForms[key];
             desktopPanel.Controls.Add(currentChildForm);
-            currentDisplayedForm = currentChildForm;
+            desktopPanel.Tag = currentChildForm;
             desktopPanel.AutoScroll = true;
         }
 
-        private void signOutBttn_Click(object sender, EventArgs e)
+        private void SignOutBttn_Click(object sender, EventArgs e)
         {
             this.Hide();
             LogInForm loginForm = new LogInForm();
             loginForm.Show();
+        }
+
+        private async void EditAccountRequest_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, object?> companyDetails = await Task.Run(() => dbSupport.GetCompanyDetails(companyUserID));
+            if (companyDetails != null)
+            {
+                validateCompanyForm = new ValidateCompanyForm(companyDetails, companyUserID);
+                validateCompanyForm.Show();
+            }
         }
     }
 }
