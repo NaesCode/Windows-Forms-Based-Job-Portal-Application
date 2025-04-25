@@ -152,7 +152,7 @@ namespace Job_Application_Manager
 
         private void ApplicationDetails_Enter(object sender, EventArgs e)
         {
-            if (ApplicationDetails.Text == "Enter application process details here...")
+            if (ApplicationDetails.Text == "Enter job application process details here...")
             {
                 ApplicationDetails.Text = "";
                 ApplicationDetails.ForeColor = SystemColors.Desktop;
@@ -163,7 +163,7 @@ namespace Job_Application_Manager
         {
             if (string.IsNullOrWhiteSpace(ApplicationDetails.Text))
             {
-                ApplicationDetails.Text = "Enter application process details here...";
+                ApplicationDetails.Text = "Enter job application process details here...";
                 ApplicationDetails.ForeColor = SystemColors.ControlDarkDark;
             }
         }

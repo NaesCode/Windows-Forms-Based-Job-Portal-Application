@@ -149,7 +149,10 @@ namespace Job_Application_Manager
                             this.Hide();
                             adminDashBForm = new AdminDashB();
                             adminDashBForm.Show();
+                            adminDashBForm.WindowState = FormWindowState.Normal; //new
+                            adminDashBForm.Activate(); //new
                             adminDashBForm.BringToFront();
+                            adminDashBForm.Focus(); //new
                         }
                         else
                         {

@@ -79,8 +79,6 @@ namespace Job_Application_Manager
                 await Task.Delay(1000);
 
                 setUpProfileForm.Opacity = 0;
-                // Disable the main form to simulate modal behavior
-                this.Enabled = false;
 
                 // Start the form and animate it
                 setUpProfileForm.Show();
@@ -101,9 +99,10 @@ namespace Job_Application_Manager
                 fadeTimer.Start();
 
                 // Wait for the form to close using FormClosed event
-                setUpProfileForm.FormClosed += (s, ev) =>
+                setUpProfileForm.ProfileSetupCompleted += (s, ev) =>
                 {
                     this.Enabled = true; // Re-enable main form
+                    ApplyJobBttn.Enabled = true;
                 };
             }
 

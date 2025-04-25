@@ -156,7 +156,8 @@ namespace Job_Application_Manager
                     companyName.Text = companyDetails["Company Name"]?.ToString();
                     companyAddress.Text = companyDetails["Company Address"]?.ToString();
                     string[]? linkParts = companyDetails["Company Website"]?.ToString()?.Split("#");
-                    companyWeb.Text = (linkParts != null && linkParts.Length > 0) ? linkParts[1] : "";
+                    string[]? rawWebsiteName = (linkParts != null && linkParts.Length > 0) ? linkParts[1].Split("//") : null;
+                    companyWeb.Text = rawWebsiteName?[1];
                     companyEmail.Text = companyDetails["CompanyLog-In_Email"]?.ToString();
                 }
                 else

@@ -19,6 +19,8 @@ namespace Job_Application_Manager
         private string? University = null;
         private byte[]? imageData = null;
 
+        public event EventHandler? ProfileSetupCompleted; //A public event to indicate whether the user is done setting up
+
         public SetUpProfileForm(int ID)
         {
             InitializeComponent();
@@ -34,15 +36,6 @@ namespace Job_Application_Manager
             submitBttn.Visible = false;
             updateBttn.Location = new Point(38, 593);
             this.hunterID = ID;
-
-            imageData = dbSupport.DisplayProfilePicture(hunterID);
-            if (imageData != null)
-            {
-                using (MemoryStream ms = new MemoryStream(imageData))
-                {
-                    ProfilePicture.Image = Image.FromStream(ms);
-                }
-            }
 
             if (profileData != null)
             {
@@ -106,6 +99,9 @@ namespace Job_Application_Manager
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
+
+            ProfileSetupCompleted?.Invoke(this, EventArgs.Empty);
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

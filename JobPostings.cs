@@ -66,7 +66,6 @@ namespace Job_Application_Manager
                 }
             }
             jobEntriesTable.Columns["postID"].ReadOnly = true;
-            jobEntriesTable.Columns["companyName"].ReadOnly = true;
             jobEntriesTable.Columns["postStatus"].ReadOnly = true;
         }
 
@@ -79,7 +78,7 @@ namespace Job_Application_Manager
         {
             IsPosted = true;
             dbSupport.UpdateIsPostedStatus(CompanyID, IsPosted);
-            if (indexRow >= 0)
+            if (indexRow >= 0 && jobEntriesTable.Rows.Count > 0)
             {
                 DataGridViewRow row = jobEntriesTable.Rows[indexRow];
                 string? companyName = row.Cells[1].Value.ToString();
@@ -97,7 +96,7 @@ namespace Job_Application_Manager
 
         private void deletePostBttn_Click(object sender, EventArgs e)
         {
-            if (indexRow >= 0)
+            if (indexRow >= 0 && jobEntriesTable.Rows.Count > 0)
             {
                 DataGridViewRow row = jobEntriesTable.Rows[indexRow];
                 int PostID = (int)row.Cells[0].Value;
@@ -126,12 +125,14 @@ namespace Job_Application_Manager
                 }
 
             }
+            else
+                return;
             DisplayDetails();
         }
 
         private void updatePostBttn_Click(object sender, EventArgs e)
         {
-            if (indexRow >= 0)
+            if (indexRow >= 0 && jobEntriesTable.Rows.Count > 0)
             {
                 DataGridViewRow row = jobEntriesTable.Rows[indexRow];
                 int PostID = (int)row.Cells[0].Value;
@@ -147,13 +148,13 @@ namespace Job_Application_Manager
             {
                 DataGridViewRow row = jobEntriesTable.Rows[indexRow];
                 int PostID = (int)row.Cells[0].Value;
-                string? jobTitle = row.Cells[2].Value.ToString()?.Trim() ?? "No Title";
-                string? jobType = row.Cells[3].Value.ToString()?.Trim() ?? "Unknown";
-                string? location = row.Cells[4].Value.ToString()?.Trim() ?? "Not Specified";
-                string? workMode = row.Cells[5].Value.ToString()?.Trim() ?? "Not Specified";
-                string? salary = row.Cells[6].Value.ToString()?.Trim() ?? "0";
+                string? companyName = row.Cells[1].Value.ToString()?.Trim();
+                string? jobTitle = row.Cells[2].Value.ToString()?.Trim();
+                string? jobType = row.Cells[3].Value.ToString()?.Trim();
+                string? location = row.Cells[4].Value.ToString()?.Trim();
+                string? workMode = row.Cells[5].Value.ToString()?.Trim();
+                string? salary = row.Cells[6].Value.ToString()?.Trim();
                 int? vacancy = row.Cells[7].Value != null ? Convert.ToInt32(row.Cells[7].Value) : 0;
-                bool isPosted = false;
                 string? date = row.Cells[9].Value.ToString()?.Trim() ?? null;
                 string[] formats = { "M/d/yyyy h:mm tt", "M/d/yyyy hh:mm tt", "MM/dd/yyyy h:mm tt", "MM/d/yyyy h:mm tt" };
                 if (!DateTime.TryParseExact(date?.Trim(), formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime closing))
@@ -161,13 +162,13 @@ namespace Job_Application_Manager
                     MessageBox.Show("Please enter valid closing date.");
                     return;
                 }
-                if (jobTitle == null || jobType == null || location == null || workMode == null || salary == null || vacancy == null)
+                if (companyName == null || jobTitle == null || jobType == null || location == null || workMode == null || salary == null || vacancy == null)
                 {
                     MessageBox.Show("Please fill all the fields");
                     return;
                 }
                 else
-                    dbSupport.UpdateJobPost(PostID, jobTitle, jobType, location, workMode, salary, vacancy, isPosted, closing);
+                    dbSupport.UpdateJobPost(PostID, companyName, jobTitle, jobType, location, workMode, salary, vacancy, closing);
             }
         }
 

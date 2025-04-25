@@ -31,7 +31,10 @@ namespace Job_Application_Manager
             if (isSetUp == true)
                 setUpBttn.Enabled = false;
             else
+            {
+                editBttn.Enabled = false;
                 setUpBttn.Enabled = true;
+            }
         }
 
         public override async void DisplayDetails()
@@ -102,13 +105,13 @@ namespace Job_Application_Manager
         {
             if (BioTextBox.Text == "Say more about yourself here...")
             {
-                BioTextBox.Text = null;
-
+                BioTextBox.Text = string.Empty;
             }
-            string? profileBio = BioTextBox.Text;
-            if (e.KeyCode == Keys.Enter)
+
+            if (e.KeyCode == Keys.Enter && !e.Shift)
             {
                 e.SuppressKeyPress = true;
+                string? profileBio = BioTextBox.Text.Trim();
                 dbSupport.UpdateProfileBio(HunterID, profileBio);
             }
         }

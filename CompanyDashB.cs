@@ -71,6 +71,7 @@ namespace Job_Application_Manager
             if (approvalStatus == "APPROVED")
             {
                 AddJobBttn.Enabled = true;
+                EditAccountRequest.Visible = true;
             }
             else
             {
@@ -79,8 +80,6 @@ namespace Job_Application_Manager
                 await Task.Delay(1000);
 
                 validateCompanyForm.Opacity = 0;
-                // Disable the main form to simulate modal behavior
-                this.Enabled = false;
 
                 // Start the form and animate it
                 validateCompanyForm.Show();
@@ -101,9 +100,11 @@ namespace Job_Application_Manager
                 fadeTimer.Start();
 
                 // Wait for the form to close using FormClosed event
-                validateCompanyForm.FormClosed += (s, ev) =>
+                validateCompanyForm.AccountSetupCompleted += (s, ev) =>
                 {
                     this.Enabled = true; // Re-enable main form
+                    AddJobBttn.Enabled = true;
+                    EditAccountRequest.Visible = true;
                 };
             }
         }

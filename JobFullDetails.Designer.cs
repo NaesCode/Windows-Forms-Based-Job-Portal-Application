@@ -584,7 +584,7 @@
             companyEmail.AutoSize = true;
             companyEmail.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyEmail.ForeColor = SystemColors.ControlDarkDark;
-            companyEmail.Location = new Point(59, 534);
+            companyEmail.Location = new Point(53, 534);
             companyEmail.Name = "companyEmail";
             companyEmail.Size = new Size(51, 19);
             companyEmail.TabIndex = 49;
@@ -595,7 +595,7 @@
             companyWeb.AutoSize = true;
             companyWeb.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyWeb.ForeColor = SystemColors.ControlDarkDark;
-            companyWeb.Location = new Point(74, 498);
+            companyWeb.Location = new Point(68, 498);
             companyWeb.Name = "companyWeb";
             companyWeb.Size = new Size(66, 19);
             companyWeb.TabIndex = 48;
@@ -606,7 +606,7 @@
             companyAddress.AutoSize = true;
             companyAddress.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyAddress.ForeColor = SystemColors.ControlDarkDark;
-            companyAddress.Location = new Point(77, 466);
+            companyAddress.Location = new Point(71, 466);
             companyAddress.Name = "companyAddress";
             companyAddress.Size = new Size(69, 19);
             companyAddress.TabIndex = 47;
@@ -617,7 +617,7 @@
             companyName.AutoSize = true;
             companyName.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             companyName.ForeColor = SystemColors.ControlDarkDark;
-            companyName.Location = new Point(61, 432);
+            companyName.Location = new Point(55, 432);
             companyName.Name = "companyName";
             companyName.Size = new Size(52, 19);
             companyName.TabIndex = 43;
@@ -627,7 +627,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Bahnschrift Light", 11.25F);
-            label14.Location = new Point(4, 535);
+            label14.Location = new Point(0, 535);
             label14.Name = "label14";
             label14.Size = new Size(49, 18);
             label14.TabIndex = 46;
@@ -637,7 +637,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Bahnschrift Light", 11.25F);
-            label13.Location = new Point(4, 499);
+            label13.Location = new Point(0, 499);
             label13.Name = "label13";
             label13.Size = new Size(64, 18);
             label13.TabIndex = 45;
@@ -647,7 +647,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Bahnschrift Light", 11.25F);
-            label12.Location = new Point(4, 467);
+            label12.Location = new Point(0, 467);
             label12.Name = "label12";
             label12.Size = new Size(67, 18);
             label12.TabIndex = 44;
@@ -657,7 +657,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Bahnschrift Light", 11.25F);
-            label11.Location = new Point(4, 432);
+            label11.Location = new Point(0, 432);
             label11.Name = "label11";
             label11.Size = new Size(51, 18);
             label11.TabIndex = 43;
@@ -788,7 +788,7 @@
             applDeadline.AutoSize = true;
             applDeadline.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             applDeadline.ForeColor = SystemColors.ControlDarkDark;
-            applDeadline.Location = new Point(70, 251);
+            applDeadline.Location = new Point(66, 251);
             applDeadline.Name = "applDeadline";
             applDeadline.Size = new Size(43, 19);
             applDeadline.TabIndex = 41;
@@ -799,7 +799,7 @@
             workMode.AutoSize = true;
             workMode.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             workMode.ForeColor = SystemColors.ControlDarkDark;
-            workMode.Location = new Point(93, 149);
+            workMode.Location = new Point(89, 149);
             workMode.Name = "workMode";
             workMode.Size = new Size(48, 19);
             workMode.TabIndex = 40;
@@ -810,7 +810,7 @@
             industryOverview.AutoSize = true;
             industryOverview.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             industryOverview.ForeColor = SystemColors.ControlDarkDark;
-            industryOverview.Location = new Point(74, 115);
+            industryOverview.Location = new Point(70, 115);
             industryOverview.Name = "industryOverview";
             industryOverview.Size = new Size(68, 19);
             industryOverview.TabIndex = 39;
@@ -821,7 +821,7 @@
             jobCategory.AutoSize = true;
             jobCategory.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             jobCategory.ForeColor = SystemColors.ControlDarkDark;
-            jobCategory.Location = new Point(79, 82);
+            jobCategory.Location = new Point(75, 82);
             jobCategory.Name = "jobCategory";
             jobCategory.Size = new Size(75, 19);
             jobCategory.TabIndex = 38;
@@ -831,7 +831,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Bahnschrift Light", 11.25F);
-            label9.Location = new Point(4, 218);
+            label9.Location = new Point(0, 218);
             label9.Name = "label9";
             label9.Size = new Size(68, 18);
             label9.TabIndex = 36;
@@ -841,7 +841,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Bahnschrift Light", 11.25F);
-            label8.Location = new Point(4, 252);
+            label8.Location = new Point(0, 252);
             label8.Name = "label8";
             label8.Size = new Size(60, 18);
             label8.TabIndex = 35;
@@ -851,7 +851,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Bahnschrift Light", 11.25F);
-            label5.Location = new Point(4, 82);
+            label5.Location = new Point(0, 82);
             label5.Name = "label5";
             label5.Size = new Size(69, 18);
             label5.TabIndex = 33;
@@ -861,7 +861,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Bahnschrift Light", 11.25F);
-            label3.Location = new Point(4, 116);
+            label3.Location = new Point(0, 116);
             label3.Name = "label3";
             label3.Size = new Size(64, 18);
             label3.TabIndex = 32;
@@ -882,7 +882,7 @@
             initialSalaryLabel.AutoSize = true;
             initialSalaryLabel.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             initialSalaryLabel.ForeColor = SystemColors.ControlDarkDark;
-            initialSalaryLabel.Location = new Point(98, 183);
+            initialSalaryLabel.Location = new Point(94, 183);
             initialSalaryLabel.Name = "initialSalaryLabel";
             initialSalaryLabel.Size = new Size(127, 19);
             initialSalaryLabel.TabIndex = 29;
@@ -893,7 +893,7 @@
             vacancyLabel.AutoSize = true;
             vacancyLabel.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             vacancyLabel.ForeColor = SystemColors.ControlDarkDark;
-            vacancyLabel.Location = new Point(78, 217);
+            vacancyLabel.Location = new Point(74, 217);
             vacancyLabel.Name = "vacancyLabel";
             vacancyLabel.Size = new Size(129, 19);
             vacancyLabel.TabIndex = 30;
@@ -903,7 +903,7 @@
             // 
             salary.AutoSize = true;
             salary.Font = new Font("Bahnschrift Light", 11.25F);
-            salary.Location = new Point(4, 184);
+            salary.Location = new Point(0, 184);
             salary.Name = "salary";
             salary.Size = new Size(92, 18);
             salary.TabIndex = 27;
@@ -913,7 +913,7 @@
             // 
             workModeLabel.AutoSize = true;
             workModeLabel.Font = new Font("Bahnschrift Light", 11.25F);
-            workModeLabel.Location = new Point(4, 150);
+            workModeLabel.Location = new Point(0, 150);
             workModeLabel.Name = "workModeLabel";
             workModeLabel.Size = new Size(89, 18);
             workModeLabel.TabIndex = 28;

@@ -630,20 +630,20 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void UpdateJobPost(int? postID, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, bool? isPosted, DateTime closing)
+        internal void UpdateJobPost(int? postID, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, DateTime closing)
         {
-            string isPostedQuery = "UPDATE [Job Postings] SET [JobTitle] = ?, [JobType] = ?, [Location] = ?, [Work Mode] = ?, [StartingSalary] = ?, [Vacancy] = ?, [IsPosted] = ?, [Application Deadline] = ? WHERE [PostID] = ?";
+            string isPostedQuery = "UPDATE [Job Postings] SET [CompanyName] = ?, [JobTitle] = ?, [JobType] = ?, [Location] = ?, [Work Mode] = ?, [StartingSalary] = ?, [Vacancy] = ?, [Application Deadline] = ? WHERE [PostID] = ?";
 
             using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(isPostedQuery, myConn))
             {
+                cmd.Parameters.AddWithValue("?", companyName);
                 cmd.Parameters.AddWithValue("?", jobTitle);
                 cmd.Parameters.AddWithValue("?", jobType);
                 cmd.Parameters.AddWithValue("?", location);
                 cmd.Parameters.AddWithValue("?", workMode);
                 cmd.Parameters.AddWithValue("?", salary);
                 cmd.Parameters.AddWithValue("?", vacancy);
-                cmd.Parameters.AddWithValue("?", isPosted);
                 cmd.Parameters.Add("?", OleDbType.Date).Value = closing;
                 cmd.Parameters.AddWithValue("?", postID);
                 try
@@ -701,7 +701,7 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void UpdateJobVacancy(int postID)
+        internal void DecrementJobVacancy(int postID)
         {
             string vacancyQuery = "UPDATE [Job Postings] SET [Vacancy] = Vacancy - 1 WHERE [PostID] = ?";
             using (myConn = new OleDbConnection(connectionString))
@@ -720,9 +720,28 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void RequestUpdateCompanyDetails(int companyUserId, string companyName, string industry, string Address, string website, string contactPerson, string contactPosition, string contactNumber, string contactEmail)
+        internal void IncrementJobVacancy(int postID)
         {
-            string updateQuery = "INSERT INTO [Update Company Information Requests] ([companyUserID], [Company Name], [Industry], [Company Address], [Company Website], [Contact Person Name], [Contact Person Position], [Contact Number], [Contact Email]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            string vacancyQuery = "UPDATE [Job Postings] SET [Vacancy] = Vacancy + 1 WHERE [PostID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(vacancyQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", postID);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating job post: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        internal void RequestUpdateCompanyDetails(int companyUserId, string companyName, string industry, string Address, string website, string contactPerson, string contactPosition, string contactNumber, string contactEmail, string? logoFilePath, byte[] companyLogo)
+        {
+            string updateQuery = "INSERT INTO [Update Company Information Requests] ([companyUserID], [Company Name], [Industry], [Company Address], [Company Website], [Contact Person Name], [Contact Person Position], [Contact Number], [Contact Email], [Logo Path], [Logo Data]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(updateQuery, myConn))
             {
@@ -735,6 +754,9 @@ namespace Job_Application_Manager
                 cmd.Parameters.AddWithValue("?", contactPosition);
                 cmd.Parameters.AddWithValue("?", contactNumber);
                 cmd.Parameters.AddWithValue("?", contactEmail);
+                cmd.Parameters.AddWithValue("?", logoFilePath);
+                cmd.Parameters.Add("?", OleDbType.VarBinary).Value = companyLogo;
+
                 try
                 {
                     myConn.Open();
@@ -748,8 +770,11 @@ namespace Job_Application_Manager
             }
         }
 
-        internal void UpdateCompanyDetails(int companyUserId, string companyName, string industry, string Address, string website, string contactPerson, string contactPosition, string contactNumber, string contactEmail)
+        internal void UpdateCompanyDetails(int companyUserId, string companyName, string industry, string Address, string website, string contactPerson, string contactPosition, string contactNumber, string contactEmail, string? logoFilePath, byte[] companyLogo)
         {
+            string? logoFileName = Path.GetFileName(logoFilePath);
+            string? logoFileType = Path.GetExtension(logoFilePath);
+
             string updateQuery = "UPDATE [Company Information Validation] SET [Company Name] = ?, [Industry] = ?, [Company Address] = ?, [Company Website] = ?, [Contact Person Name] = ?, [Contact Person Position] = ?, [Contact Number] = ?, [Contact Email] = ? WHERE [companyUserID] = ?";
             using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(updateQuery, myConn))
@@ -767,13 +792,49 @@ namespace Job_Application_Manager
                 {
                     myConn.Open();
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Company details updated successfully!");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+
+            string filesQuery = "UPDATE [Company Supporting Documents] SET [Logo] = ? WHERE [companyUserID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(filesQuery, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", logoFileName);
+                cmd.Parameters.AddWithValue("?", companyUserId);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+            string filesDataQuery = "UPDATE [Company Documents Binary Data] SET [Logo Data] = ?, [Logo DataType] = ? WHERE [companyUserID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(filesDataQuery, myConn))
+            {
+                cmd.Parameters.Add("?", OleDbType.VarBinary).Value = companyLogo;
+                cmd.Parameters.AddWithValue("?", logoFileType);
+                cmd.Parameters.AddWithValue("?", companyUserId);
+                try
+                {
+                    myConn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+            MessageBox.Show("Company details updated successfully!");
         }
 
         internal void DeleteUpdateRequest(int requestID)
@@ -1206,7 +1267,7 @@ namespace Job_Application_Manager
 
         internal void InsertHunterProfileDetails(int hunterID, string name, DateTime bday, string? gender, string number, string email, string address, string nationality, string education, string? degree, string? univ,
                                                  byte[]? pfpData, string pfpFilePath, byte[]? resumeData, string resumeFilePath, byte[]? letterData, string? letterFilePath, byte[]? portfolioData,
-                                                 string? portfolioFilePath, string? website, DateTime currentDate, bool isSetUp)
+                                                 string? portfolioFilePath, string? website, DateTime currentDate, bool status)
         {
             string pfpFileName = Path.GetFileName(pfpFilePath);
             string resumeFileName = Path.GetFileName(resumeFilePath);
@@ -1223,7 +1284,7 @@ namespace Job_Application_Manager
                 {
                     myConn.Open();
 
-                    string profileQuery = "INSERT INTO [JobHunter Profile Information] ([userID], [Full Name], [Date of Birth], [Gender], [Contact Number], [Email], [Address], [Nationality], [Education], [Degree], [University / Institution], [isSetUp]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    string profileQuery = "INSERT INTO [JobHunter Profile Information] ([userID], [Full Name], [Date of Birth], [Gender], [Contact Number], [Email], [Address], [Nationality], [Education], [Degree], [University / Institution]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                     using (OleDbCommand cmd = new OleDbCommand(profileQuery, myConn))
                     {
@@ -1238,7 +1299,14 @@ namespace Job_Application_Manager
                         cmd.Parameters.AddWithValue("?", education);
                         cmd.Parameters.AddWithValue("?", degree);
                         cmd.Parameters.AddWithValue("?", univ);
-                        cmd.Parameters.AddWithValue("?", isSetUp);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    string isSetUpQuery = "UPDATE [JobHunter Accounts] SET [isSetUp] = ? WHERE [userID] = ?";
+                    using (OleDbCommand cmd = new OleDbCommand(isSetUpQuery, myConn))
+                    {
+                        cmd.Parameters.AddWithValue("?", status);
+                        cmd.Parameters.AddWithValue("?", hunterID);
                         cmd.ExecuteNonQuery();
                     }
 
@@ -1306,7 +1374,7 @@ namespace Job_Application_Manager
 
         internal bool GetProfileSetUpStatus(int hunterID)
         {
-            string query = "SELECT [isSetUp] FROM [JobHunter Profile Information] WHERE [userID] = ?";
+            string query = "SELECT [isSetUp] FROM [JobHunter Accounts] WHERE [userID] = ?";
 
             using (OleDbConnection myConn = new OleDbConnection(connectionString))
             using (OleDbCommand cmd = new OleDbCommand(query, myConn))
@@ -1764,7 +1832,7 @@ namespace Job_Application_Manager
                 using (OleDbConnection conn = new OleDbConnection(connectionString))
                 {
                     conn.Open();
-                    string insertQuery = "INSERT INTO [Hunter Event Plans And Notes] ([UserType], [userID], [EventORNotes], [Date Set]) VALUES (?, ?, ?, ?)";
+                    string insertQuery = "INSERT INTO [Event Plans And Notes] ([UserType], [userID], [EventORNotes], [Date Set]) VALUES (?, ?, ?, ?)";
                     using (OleDbCommand cmd = new OleDbCommand(insertQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("?", userType);
@@ -1789,7 +1857,7 @@ namespace Job_Application_Manager
                 using (OleDbConnection conn = new OleDbConnection(connectionString))
                 {
                     conn.Open();
-                    string selectQuery = "SELECT [EventORNotes] FROM [Hunter Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
+                    string selectQuery = "SELECT [EventORNotes] FROM [Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
                     using (OleDbCommand cmd = new OleDbCommand(selectQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("?", userID);
@@ -1819,7 +1887,7 @@ namespace Job_Application_Manager
                 using (OleDbConnection conn = new OleDbConnection(connectionString))
                 {
                     conn.Open();
-                    string selectQuery = "SELECT COUNT(*) FROM [Hunter Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
+                    string selectQuery = "SELECT COUNT(*) FROM [Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
                     using (OleDbCommand cmd = new OleDbCommand(selectQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("?", userID);
@@ -1844,7 +1912,7 @@ namespace Job_Application_Manager
                 using (OleDbConnection conn = new OleDbConnection(connectionString))
                 {
                     conn.Open();
-                    string deleteQuery = "DELETE FROM [Hunter Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
+                    string deleteQuery = "DELETE FROM [Event Plans And Notes] WHERE [userID] = ? AND [Date Set] = ? AND [UserType] = ?";
                     using (OleDbCommand cmd = new OleDbCommand(deleteQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("?", hunterID);

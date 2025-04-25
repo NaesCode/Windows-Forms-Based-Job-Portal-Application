@@ -43,6 +43,23 @@ namespace Job_Application_Manager
             ApplicationsTable.DataSource = null;
             jobApplication = await Task.Run(() => dbSupport.GetJobApplications(HunterID));
             ApplicationsTable.DataSource = jobApplication;
+
+            foreach (DataGridViewRow row in ApplicationsTable.Rows)
+            {
+                if (row.Cells["Status"].Value != null)
+                {
+                    string status = row.Cells["Status"].Value.ToString()?.ToLower() ?? "";
+
+                    if (status == "accepted")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 204, 255, 204);
+                    }
+                    else if (status == "rejected")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204);
+                    }
+                }
+            }
         }
 
         private void searchBar_TextChanged(object? sender, EventArgs e)
@@ -91,7 +108,7 @@ namespace Job_Application_Manager
 
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (indexRow >= 0)
+            if (indexRow >= 0 && ApplicationsTable.Rows.Count > 0)
             {
                 DataGridViewRow row = ApplicationsTable.Rows[indexRow];
                 int postID = (int)row.Cells[0].Value;
@@ -102,6 +119,8 @@ namespace Job_Application_Manager
                 {
                     dbSupport.UpdateApplicationStatus(applicationID, "CANCELLED", currentDate);
                     dbSupport.UpdateNumOfCancelledApplications(postID);
+                    dbSupport.IncrementJobVacancy(postID);
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204);
                 }
             }
             DisplayDetails();
@@ -109,7 +128,7 @@ namespace Job_Application_Manager
 
         private void deleteAppStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (indexRow >= 0)
+            if (indexRow >= 0 && ApplicationsTable.Rows.Count > 0)
             {
                 DataGridViewRow row = ApplicationsTable.Rows[indexRow];
                 int applicationID = (int)row.Cells[1].Value;

@@ -116,29 +116,41 @@ namespace Job_Application_Manager
 
         private void AcceptBttn_Click(object sender, EventArgs e)
         {
-            dbSupport.UpdateApplicationStatus(ApplicationID, "ACCEPTED", currentDate);
-            LoadApplicantsData(PostID);
-            dbSupport.UpdateJobVacancy(PostID);
-            dbSupport.UpdateNumOfAcceptedApplicants(PostID);
+            if (applicantsGridView.Rows.Count > 0)
+            {
+                dbSupport.UpdateApplicationStatus(ApplicationID, "ACCEPTED", currentDate);
+                LoadApplicantsData(PostID);
+                dbSupport.DecrementJobVacancy(PostID);
+                dbSupport.UpdateNumOfAcceptedApplicants(PostID);
+            }
         }
 
         private void RejectBttn_Click(object sender, EventArgs e)
         {
-            dbSupport.UpdateApplicationStatus(ApplicationID, "REJECTED", currentDate);
-            LoadApplicantsData(PostID);
-            dbSupport.UpdateNumOfRejectedApplicants(PostID);
+            if (applicantsGridView.Rows.Count > 0)
+            {
+                dbSupport.UpdateApplicationStatus(ApplicationID, "REJECTED", currentDate);
+                LoadApplicantsData(PostID);
+                dbSupport.UpdateNumOfRejectedApplicants(PostID);
+            }
         }
 
         private void ForInterviewBttn_Click(object sender, EventArgs e)
         {
-            dbSupport.UpdateApplicationStatus(ApplicationID, "FOR INTERVIEW", currentDate);
-            LoadApplicantsData(PostID);
+            if (applicantsGridView.Rows.Count > 0)
+            {
+                dbSupport.UpdateApplicationStatus(ApplicationID, "FOR INTERVIEW", currentDate);
+                LoadApplicantsData(PostID);
+            }
         }
 
         private void ShortlistBttn_Click(object sender, EventArgs e)
         {
-            dbSupport.UpdateApplicationStatus(ApplicationID, "FOR CONSIDERATION", currentDate);
-            LoadApplicantsData(PostID);
+            if (applicantsGridView.Rows.Count > 0)
+            {
+                dbSupport.UpdateApplicationStatus(ApplicationID, "FOR CONSIDERATION", currentDate);
+                LoadApplicantsData(PostID);
+            }
         }
 
         private void searchBar_TextChanged(object? sender, EventArgs e)
@@ -185,7 +197,7 @@ namespace Job_Application_Manager
 
         private void emailApplicantStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (indexRow >= 0)
+            if (indexRow >= 0 && applicantsGridView.Rows.Count > 0)
             {
                 CompanyEmailingForm emailForm = new CompanyEmailingForm(CompanyID, HunterID);
                 emailForm.Show();

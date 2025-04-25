@@ -408,6 +408,7 @@
             EditAccountRequest.Text = "Request to Edit Account";
             EditAccountRequest.TextImageRelation = TextImageRelation.ImageBeforeText;
             EditAccountRequest.UseVisualStyleBackColor = false;
+            EditAccountRequest.Visible = false;
             EditAccountRequest.Click += EditAccountRequest_Click;
             // 
             // MenuBttn

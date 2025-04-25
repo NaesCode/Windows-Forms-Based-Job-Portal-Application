@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.DotNet.DesignTools.Protocol.Endpoints;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,8 @@ namespace Job_Application_Manager
     {
         private ValidateCompanyForm? validateCompanyForm;
         private DataTable? Requests;
+        private int requestID;
+
         public UpdateRequests()
         {
             InitializeComponent();
@@ -29,12 +32,21 @@ namespace Job_Application_Manager
             requestsTable.DataSource = Requests;
         }
 
+        private void requestsTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && requestsTable.Rows.Count > 0)
+            {
+                requestID = Convert.ToInt32(requestsTable.Rows[e.RowIndex].Cells["RequestID"].Value);
+                CompanyID = Convert.ToInt32(requestsTable.Rows[e.RowIndex].Cells["CompanyUserID"].Value);
+            }
+        }
+
         private void requestsTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string user = "Admin";
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && requestsTable.Rows.Count > 0)
             {
-                int requestID = Convert.ToInt32(requestsTable.Rows[e.RowIndex].Cells["RequestID"].Value);
+                requestID = Convert.ToInt32(requestsTable.Rows[e.RowIndex].Cells["RequestID"].Value);
                 CompanyID = Convert.ToInt32(requestsTable.Rows[e.RowIndex].Cells["CompanyUserID"].Value);
 
                 Dictionary<string, object> rowData = new Dictionary<string, object>();
@@ -95,6 +107,12 @@ namespace Job_Application_Manager
                 string filterExpression = string.Format("[RequestID] = {0} OR [CompanyUserID] = {0}", filter);
                 Requests.DefaultView.RowFilter = filterExpression;
             }
+        }
+
+        private void deleteRequestStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dbSupport.DeleteUpdateRequest(requestID);
+            LoadDataGrid();
         }
     }
 }

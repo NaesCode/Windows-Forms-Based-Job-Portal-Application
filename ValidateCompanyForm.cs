@@ -16,14 +16,16 @@ namespace Job_Application_Manager
         private int companyUserID;
         private byte[]? imageData;
 
-        /// Constructor for the form when used to register a new company
+        public event EventHandler? AccountSetupCompleted; // A public event to indicate whether the user is done setting up
+
+        // Constructor for the form when used to register a new company
         public ValidateCompanyForm(int companyUserID)
         {
             InitializeComponent();
             this.companyUserID = companyUserID;
         }
 
-        /// Constructor for the form when used to request an update
+        // Constructor for the form when used to request an update
         public ValidateCompanyForm(Dictionary<string, object?> companyData, int companyID)
         {
             InitializeComponent();
@@ -45,24 +47,15 @@ namespace Job_Application_Manager
             BIRR.Enabled = false;
             MP.Enabled = false;
 
-            imageData = dbSupport.DisplayCompanyLogo(companyUserID);
-
-            if (imageData != null)
-            {
-                using (MemoryStream ms = new MemoryStream(imageData))
-                {
-                    companyLogo.Image = Image.FromStream(ms);
-                }
-            }
-
+            companyName.Text = companyData?["Company Name"]?.ToString();
+            Industry.Text = companyData?["Industry"]?.ToString();
+            companyAddress.Text = companyData?["Company Address"]?.ToString();
+            string []? linkParts = companyData?["Company Website"]?.ToString()?.Split('#');
+            website.Text = linkParts?[1];
+            contactPerson.Text = companyData?["Contact Person Name"]?.ToString();
+            contactPosition.Text = companyData?["Contact Person Position"]?.ToString();
             contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
-            contactNumber.Text = companyData?["Contact Number"]?.ToString();
+            contactEmail.Text = companyData?["Contact Email"]?.ToString();
 
             companyName.Enter += Cell_Enter;
             Industry.Enter += Cell_Enter;
@@ -74,7 +67,7 @@ namespace Job_Application_Manager
             contactEmail.Enter += Cell_Enter;
         }
 
-        /// Constructor for the form when used to update company details which is done by the Admin
+        // Constructor for the form when used to update company details which is done by the Admin
         public ValidateCompanyForm(Dictionary<string, object>? companyData, int companyID, string AdminUser)
         {
             InitializeComponent();
@@ -96,7 +89,7 @@ namespace Job_Application_Manager
             BIRR.Enabled = false;
             MP.Enabled = false;
 
-            imageData = dbSupport.DisplayCompanyLogo(companyUserID);
+            imageData = (byte[]) companyData?["Logo Data"];
 
             if (imageData != null)
             {
@@ -105,24 +98,26 @@ namespace Job_Application_Manager
                     companyLogo.Image = Image.FromStream(ms);
                 }
             }
+            companyLogo.Tag = companyData?["Logo Path"]?.ToString();
 
             companyName.Text = companyData?["Company Name"].ToString();
             Industry.Text = companyData?["Industry"].ToString();
             companyAddress.Text = companyData?["Company Address"].ToString();
-            website.Text = companyData?["Company Website"].ToString();
+            string []? linkParts = companyData?["Company Website"]?.ToString()?.Split('#');
+            website.Text = linkParts?[1];
             contactPerson.Text = companyData?["Contact Person Name"].ToString();
             contactPosition.Text = companyData?["Contact Person Position"].ToString();
             contactNumber.Text = companyData?["Contact Number"].ToString();
             contactEmail.Text = companyData?["Contact Email"].ToString();
 
-            companyName.Enter += Cell_Enter;
-            Industry.Enter += Cell_Enter;
-            companyAddress.Enter += Cell_Enter;
-            website.Enter += Cell_Enter;
-            contactPerson.Enter += Cell_Enter;
-            contactPosition.Enter += Cell_Enter;
-            contactNumber.Enter += Cell_Enter;
-            contactEmail.Enter += Cell_Enter;
+            companyName.ReadOnly = true;
+            Industry.ReadOnly = true;
+            companyAddress.ReadOnly = true;
+            website.ReadOnly = true;
+            contactPerson.ReadOnly = true;
+            contactPosition.ReadOnly = true;
+            contactNumber.ReadOnly = true;
+            contactEmail.ReadOnly = true;
         }
 
         private void submitBttn_Click(object sender, EventArgs e)
@@ -162,6 +157,8 @@ namespace Job_Application_Manager
 
                 dbSupport.InsertValidationData(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text,
                                         companyLogo.Tag.ToString(), logoBytes, COR.Tag.ToString(), corBytes, BIRR.Tag.ToString(), birrBytes, MP.Tag.ToString(), mpBytes, currentDate, status);
+
+                AccountSetupCompleted?.Invoke(this, EventArgs.Empty);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -252,7 +249,15 @@ namespace Job_Application_Manager
                     return;
                 }
 
-                dbSupport.RequestUpdateCompanyDetails(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text);
+                if (companyLogo.Tag == null)
+                {
+                    MessageBox.Show("You are required to upload Compnay Logo again.");
+                    return;
+                }
+
+                byte[]? logoBytes = File.ReadAllBytes(companyLogo.Tag.ToString());
+
+                dbSupport.RequestUpdateCompanyDetails(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text, companyLogo.Tag?.ToString(), logoBytes);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -292,7 +297,15 @@ namespace Job_Application_Manager
                     return;
                 }
 
-                dbSupport.UpdateCompanyDetails(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text);
+                if (companyLogo.Tag == null)
+                {
+                    MessageBox.Show("You are required to upload Compnay Logo again.");
+                    return;
+                }
+
+                byte[]? logoBytes = File.ReadAllBytes(companyLogo.Tag.ToString());
+
+                dbSupport.UpdateCompanyDetails(companyUserID, companyName.Text, Industry.Text, companyAddress.Text, hyperlink, contactPerson.Text, contactPosition.Text, contactNumber.Text, contactEmail.Text, companyLogo.Tag.ToString(), logoBytes);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

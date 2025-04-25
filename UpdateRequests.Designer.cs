@@ -42,11 +42,14 @@
             panel3 = new Panel();
             label1 = new Label();
             requestsTable = new ReaLTaiizor.Controls.PoisonDataGridView();
+            requestOpt = new ContextMenuStrip(components);
+            deleteRequestStripMenuItem = new ToolStripMenuItem();
             menuBarPanel2.SuspendLayout();
             menuBarPanel3.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)requestsTable).BeginInit();
+            requestOpt.SuspendLayout();
             SuspendLayout();
             // 
             // imageList1
@@ -188,6 +191,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             requestsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             requestsTable.ColumnHeadersHeight = 35;
+            requestsTable.ContextMenuStrip = requestOpt;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 255);
             dataGridViewCellStyle2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -216,7 +220,24 @@
             requestsTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             requestsTable.Size = new Size(891, 466);
             requestsTable.TabIndex = 10;
+            requestsTable.CellClick += requestsTable_CellClick;
             requestsTable.CellDoubleClick += requestsTable_CellDoubleClick;
+            // 
+            // requestOpt
+            // 
+            requestOpt.BackColor = SystemColors.ButtonHighlight;
+            requestOpt.Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            requestOpt.Items.AddRange(new ToolStripItem[] { deleteRequestStripMenuItem });
+            requestOpt.Name = "logoMenuOpt";
+            requestOpt.Size = new Size(163, 26);
+            // 
+            // deleteRequestStripMenuItem
+            // 
+            deleteRequestStripMenuItem.Image = Properties.Resources.delete;
+            deleteRequestStripMenuItem.Name = "deleteRequestStripMenuItem";
+            deleteRequestStripMenuItem.Size = new Size(162, 22);
+            deleteRequestStripMenuItem.Text = "Delete Request";
+            deleteRequestStripMenuItem.Click += deleteRequestStripMenuItem_Click;
             // 
             // UpdateRequests
             // 
@@ -232,6 +253,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)requestsTable).EndInit();
+            requestOpt.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -246,5 +268,7 @@
         private Label label1;
         private ReaLTaiizor.Controls.PoisonDataGridView requestsTable;
         private ReaLTaiizor.Controls.DungeonTextBox searchBar;
+        private ContextMenuStrip requestOpt;
+        private ToolStripMenuItem deleteRequestStripMenuItem;
     }
 }
