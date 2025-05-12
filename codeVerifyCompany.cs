@@ -18,12 +18,13 @@ namespace Job_Application_Manager
 {
     public partial class codeVerifyCompany : Form
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
 
         private changePassCompany? changePasswordInstance;
-        string? randomCode;
-        bool codeSent;
-        private readonly string password = "pmah mimr xjds yhzm"; //DO NOT MODIFY LOL
+        private string? randomCode;
+        private bool codeSent;
+        private Dictionary<string, object?>? AdminEmailData;
+
         public codeVerifyCompany()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace Job_Application_Manager
         {
             sentCode.Enabled = false;
             verifyCode.Enabled = false;
-            MessageBox.Show("This is for company");
+            AdminEmailData = dbSupport.GetAdminEmailData(1);
         }
 
         private void sendVerifEmail_Click(object sender, EventArgs e)
@@ -63,6 +64,16 @@ namespace Job_Application_Manager
                 return;
             }
 
+            // this is to check if the admin email is in the database or not
+            string? senderEmail = AdminEmailData?["AdminEmail"]?.ToString();
+            string? password = AdminEmailData?["GmailAppPassword"]?.ToString();
+            if (string.IsNullOrEmpty(senderEmail) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("App Administrator not found!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Random rand = new Random();
             randomCode = rand.Next(100000, 999999).ToString();
             DateTime expiryTime = DateTime.Now.AddMinutes(5);
@@ -71,7 +82,7 @@ namespace Job_Application_Manager
             using (MailMessage message = new MailMessage())
             {
                 message.To.Add(email);
-                message.From = new MailAddress("jobhuntapp2000@gmail.com"); // Your Gmail address
+                message.From = new MailAddress(senderEmail);
                 message.Subject = "Password Reset Request";
                 message.Subject = "🔐 Job-Hunt: Job Application Manager - Your Password Reset Code!";
 
@@ -120,10 +131,10 @@ namespace Job_Application_Manager
                     client.Port = 587;
                     client.EnableSsl = true;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.UseDefaultCredentials = false;
+                    client.UseDefaultCredentials = false;   
 
                     // Use App Password instead of real password
-                    client.Credentials = new NetworkCredential("jobhuntapp2000@gmail.com", password);
+                    client.Credentials = new NetworkCredential(senderEmail, password);
 
                     try
                     {

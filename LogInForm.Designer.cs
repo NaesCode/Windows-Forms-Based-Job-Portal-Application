@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInForm));
             exitButton1 = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
@@ -45,7 +45,7 @@
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
-            UserName = new TextBox();
+            UserNameOrEmail = new TextBox();
             UserPassword = new TextBox();
             LogInButton = new SiticoneNetCoreUI.SiticoneButton();
             signUpButton = new SiticoneNetCoreUI.SiticoneButton();
@@ -68,7 +68,7 @@
             // 
             // exitButton1
             // 
-            exitButton1.CustomizableEdges = customizableEdges1;
+            exitButton1.CustomizableEdges = customizableEdges3;
             exitButton1.DisabledState.BorderColor = Color.DarkGray;
             exitButton1.DisabledState.CustomBorderColor = Color.DarkGray;
             exitButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -80,7 +80,7 @@
             exitButton1.HoverState.ForeColor = Color.White;
             exitButton1.Location = new Point(822, 0);
             exitButton1.Name = "exitButton1";
-            exitButton1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            exitButton1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             exitButton1.Size = new Size(54, 38);
             exitButton1.TabIndex = 5;
             exitButton1.Text = "X";
@@ -229,17 +229,17 @@
             textBox4.TabIndex = 24;
             textBox4.Text = "Password:";
             // 
-            // UserName
+            // UserNameOrEmail
             // 
-            UserName.BorderStyle = BorderStyle.FixedSingle;
-            UserName.Cursor = Cursors.IBeam;
-            UserName.Enabled = false;
-            UserName.Font = new Font("Bahnschrift", 9.75F);
-            UserName.Location = new Point(527, 244);
-            UserName.Name = "UserName";
-            UserName.Size = new Size(275, 23);
-            UserName.TabIndex = 25;
-            UserName.KeyDown += Control_KeyDown;
+            UserNameOrEmail.BorderStyle = BorderStyle.FixedSingle;
+            UserNameOrEmail.Cursor = Cursors.IBeam;
+            UserNameOrEmail.Enabled = false;
+            UserNameOrEmail.Font = new Font("Bahnschrift", 9.75F);
+            UserNameOrEmail.Location = new Point(527, 244);
+            UserNameOrEmail.Name = "UserNameOrEmail";
+            UserNameOrEmail.Size = new Size(275, 23);
+            UserNameOrEmail.TabIndex = 25;
+            UserNameOrEmail.KeyDown += Control_KeyDown;
             // 
             // UserPassword
             // 
@@ -647,7 +647,7 @@
             Controls.Add(signUpButton);
             Controls.Add(LogInButton);
             Controls.Add(UserPassword);
-            Controls.Add(UserName);
+            Controls.Add(UserNameOrEmail);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
@@ -686,7 +686,7 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
-        private TextBox UserName;
+        private TextBox UserNameOrEmail;
         private TextBox UserPassword;
         private SiticoneNetCoreUI.SiticoneButton LogInButton;
         private SiticoneNetCoreUI.SiticoneButton signUpButton;

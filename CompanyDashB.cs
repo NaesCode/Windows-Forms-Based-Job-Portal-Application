@@ -18,7 +18,7 @@ namespace Job_Application_Manager
         private ValidateCompanyForm? validateCompanyForm;
 
         private IconButton? currentBttn;
-        private Dictionary<string, BaseControl> cachedChildForms = new();
+        private Dictionary<string, BaseControl> cachedChildForms = new(); //caching child forms for better perfromance
         private DatabaseSupport dbSupport = new DatabaseSupport();
 
         private int companyUserID;

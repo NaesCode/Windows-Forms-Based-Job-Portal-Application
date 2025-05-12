@@ -1,28 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Data.OleDb;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.ComponentModel.Design;
-using TheArtOfDevHtmlRenderer.Adapters;
-using Microsoft.VisualBasic;
-using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Collections;
-using static SkiaSharp.HarfBuzz.SKShaper;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Net;
-using System.Windows.Documents;
-using System.Runtime.ConstrainedExecution;
-using static QRCoder.PayloadGenerator;
-using System.Xml.Linq;
-using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices.JavaScript;
-using ListViewItem = System.Windows.Controls.ListViewItem;
 
 namespace Job_Application_Manager
 {
@@ -285,6 +262,34 @@ namespace Job_Application_Manager
                 }
             }
             return hunterEmailData;
+        }
+
+        internal Dictionary<string, object?> GetAdminEmailData(int adminID)
+        {
+            Dictionary<string, object?> adminEmailData = new Dictionary<string, object?>();
+            string query = "SELECT [Email], [Gmail App Password] FROM [Administrators] WHERE [adminID] = ?";
+            using (myConn = new OleDbConnection(connectionString))
+            using (cmd = new OleDbCommand(query, myConn))
+            {
+                cmd.Parameters.AddWithValue("?", adminID);
+                try
+                {
+                    myConn.Open();
+                    using (OleDbDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            adminEmailData["AdminEmail"] = reader["Email"].ToString();
+                            adminEmailData["GmailAppPassword"] = reader["Gmail App Password"].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return adminEmailData;
         }
 
         public byte[]? DisplayCompanyLogo(int companyId)
@@ -1165,7 +1170,7 @@ namespace Job_Application_Manager
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error fetching data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -1553,7 +1558,7 @@ namespace Job_Application_Manager
                 }
                 return jobPosts;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error fetching data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return jobPosts;
@@ -1865,7 +1870,7 @@ namespace Job_Application_Manager
                         cmd.Parameters.AddWithValue("?", userType);
                         using (OleDbDataReader reader = cmd.ExecuteReader())
                         {
-                            if(reader.Read())
+                            if (reader.Read())
                             {
                                 return reader["EventORNotes"].ToString();
                             }
@@ -1934,7 +1939,7 @@ namespace Job_Application_Manager
         internal void UpdateNumOfAcceptedApplicants(int postID)
         {
             string analyticsQuery = "UPDATE [Job Postings] SET [NumOfAccepted] = NumOfAccepted + 1 WHERE [PostID] = ?";
-            using ( myConn = new OleDbConnection(connectionString))
+            using (myConn = new OleDbConnection(connectionString))
             using (cmd = new OleDbCommand(analyticsQuery, myConn))
             {
                 cmd.Parameters.Add("?", OleDbType.Integer).Value = postID;
@@ -2029,7 +2034,7 @@ namespace Job_Application_Manager
                         analyticsList.Add(new JobPostAnalytics
                         {
                             JobTitle = reader["JobTitle"].ToString(),
-                            TotalApplicants  = reader["TotalApplicants"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TotalApplicants"]),
+                            TotalApplicants = reader["TotalApplicants"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TotalApplicants"]),
                             TargetHires = reader["Vacancy"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Vacancy"]),
                             NumOfAccepted = reader["NumOfAccepted"] == DBNull.Value ? 0 : Convert.ToInt32(reader["NumOfAccepted"]),
                             NumOfRejected = reader["NumOfRejected"] == DBNull.Value ? 0 : Convert.ToInt32(reader["NumOfRejected"]),
@@ -2058,14 +2063,14 @@ namespace Job_Application_Manager
                     while (reader.Read())
                     {
                         stats.Add(new TotalMonthlyApplicants
-                        { 
+                        {
                             Month = reader["Month"].ToString(),
                             TotalApplicants = Convert.ToInt32(reader["TotalApplicants"])
                         });
                     }
                 }
             }
-            return stats;                             
+            return stats;
         }
 
         internal DataTable? GetRejectedApplications(int hunterID)

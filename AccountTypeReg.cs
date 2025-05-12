@@ -14,9 +14,8 @@ namespace Job_Application_Manager
 {
     public partial class AccountTypeReg : Form
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
-        JobHunterSignUpForm? JobHunterTypeAccountRegister;
-        CompanySignUp? CompanyTypeAccountRegister;
+        private JobHunterSignUpForm? JobHunterTypeAccountRegister;
+        private CompanySignUp? CompanyTypeAccountRegister;
         public AccountTypeReg()
         {
             InitializeComponent();

@@ -1,6 +1,6 @@
 ﻿namespace Job_Application_Manager
 {
-    partial class codeVerify
+    partial class codeVerifyHunter
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(codeVerify));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(codeVerifyHunter));
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             siticoneCloseButton1 = new SiticoneNetCoreUI.SiticoneCloseButton();
             label2 = new Label();

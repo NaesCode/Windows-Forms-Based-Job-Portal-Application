@@ -12,7 +12,7 @@ namespace Job_Application_Manager
         private JobHunterDashB? jobHunterDashBForm;
         private CompanyDashB? companyDashBForm;
         private AdminDashB? adminDashBForm;
-        private codeVerify? codeVerifyInstance;
+        private codeVerifyHunter? codeVerifyInstance;
         private codeVerifyCompany? codeVerifyCompanyInstance;
 
         private bool valid;
@@ -46,7 +46,7 @@ namespace Job_Application_Manager
         private void Checkbox_CheckedChanged(object? sender, EventArgs e)
         {
             bool anyChecked = CompanyCheckbox.Checked || JobHunterCheckbox.Checked || AdminCheckBox.Checked;
-            UserName.Enabled = anyChecked;
+            UserNameOrEmail.Enabled = anyChecked;
             UserPassword.Enabled = anyChecked;
             forgotPassBttn.Enabled = anyChecked;
             LogInButton.Enabled = anyChecked;
@@ -55,14 +55,14 @@ namespace Job_Application_Manager
             {
                 textBox3.Text = "Company Email:";
                 textBox3.Size = new Size(120, 20);
-                UserName.Size = new Size(251, 23);
-                UserName.Location = new Point(568, 244);
+                UserNameOrEmail.Size = new Size(251, 23);
+                UserNameOrEmail.Location = new Point(568, 244);
             }
             else
             {
                 textBox3.Text = "Username:";
-                UserName.Size = new Size(275, 23);
-                UserName.Location = new Point(527, 244);
+                UserNameOrEmail.Size = new Size(275, 23);
+                UserNameOrEmail.Location = new Point(527, 244);
             }
         }
 
@@ -81,9 +81,9 @@ namespace Job_Application_Manager
 
         private void LogInButton_Click(object sender, EventArgs e)
         {
-            string username = UserName.Text;
+            string username = UserNameOrEmail.Text;
             string password = UserPassword.Text;
-            string companyEmail = UserName.Text;
+            string companyEmail = UserNameOrEmail.Text;
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -111,7 +111,7 @@ namespace Job_Application_Manager
                     }
                     else
                     {
-                        MessageBox.Show("Log -in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Login Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
@@ -135,7 +135,7 @@ namespace Job_Application_Manager
                     }
                     else
                     {
-                        MessageBox.Show("Log-in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Login Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
@@ -161,15 +161,10 @@ namespace Job_Application_Manager
                     }
                     else
                     {
-                        MessageBox.Show("Log-in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Login Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-        }
-
-        private void exitButton1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void showPassword_MouseUp(object sender, MouseEventArgs e)
@@ -188,7 +183,7 @@ namespace Job_Application_Manager
             {
                 if (codeVerifyInstance == null || codeVerifyInstance.IsDisposed)
                 {
-                    codeVerifyInstance = new codeVerify();
+                    codeVerifyInstance = new codeVerifyHunter();
                     codeVerifyInstance.Show();
                     this.Hide();
                 }
@@ -216,5 +211,11 @@ namespace Job_Application_Manager
                 return;
             }
         }
+
+        private void exitButton1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

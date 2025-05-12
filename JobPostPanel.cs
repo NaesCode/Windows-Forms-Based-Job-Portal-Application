@@ -18,7 +18,8 @@ namespace Job_Application_Manager
 
         public event Action<int, int, string>? SaveJobPostClicked;
 
-        public JobPostPanel(int postID, string? closing, string? companyName, string? jobTitle, string? jobType, string? location, string? workMode, string? salary, int? vacancy, byte[]? companyLogo, int hunterID)
+        public JobPostPanel(int postID, string? closing, string? companyName, string? jobTitle, string? jobType, string? location, 
+                            string? workMode, string? salary, int? vacancy, byte[]? companyLogo, int hunterID)
         {
             InitializeComponent();
             foreach (Label control in this.Controls.OfType<Label>())

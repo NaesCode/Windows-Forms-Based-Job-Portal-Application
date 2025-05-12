@@ -110,7 +110,7 @@ namespace Job_Application_Manager
 
         private void applicantsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            applicantProfileView = new ApplicantProfileView(HunterID);
+            applicantProfileView = new ApplicantProfileView(CompanyID, HunterID);
             applicantProfileView.Show();
         }
 

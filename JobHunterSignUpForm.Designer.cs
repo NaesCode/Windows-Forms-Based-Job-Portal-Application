@@ -44,7 +44,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
-            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -83,7 +82,6 @@
             // panel1
             // 
             panel1.BackColor = Color.Black;
-            panel1.Controls.Add(guna2HtmlLabel4);
             panel1.Controls.Add(guna2HtmlLabel3);
             panel1.Controls.Add(guna2HtmlLabel1);
             panel1.Controls.Add(guna2HtmlLabel2);
@@ -93,18 +91,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(371, 668);
             panel1.TabIndex = 0;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.AutoSize = false;
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Geoform", 11.9999981F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.ForeColor = SystemColors.HighlightText;
-            guna2HtmlLabel4.Location = new Point(12, 635);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(219, 21);
-            guna2HtmlLabel4.TabIndex = 11;
-            guna2HtmlLabel4.Text = "Project by: Sean Tadiamon\r\n";
             // 
             // guna2HtmlLabel3
             // 
@@ -498,7 +484,6 @@
         #endregion
 
         private Panel panel1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;

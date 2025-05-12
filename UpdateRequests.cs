@@ -95,7 +95,8 @@ namespace Job_Application_Manager
             {
                 string filterExpression = string.Format("[Company Name] LIKE '%{0}%' OR [Industry] LIKE '%{0}%' OR " +
                              "[Company Address] LIKE '%{0}%' OR [Company Website] LIKE '%{0}%' OR [Contact Person Name] LIKE '%{0}%' OR " +
-                             "[Contact Person Position] LIKE '%{0}%' OR [Contact Number] LIKE '%{0}%' OR [Contact Email] LIKE '%{0}%'", filter.Replace("'", "''"));
+                             "[Contact Person Position] LIKE '%{0}%' OR [Contact Number] LIKE '%{0}%' OR [Contact Email] LIKE '%{0}%'", 
+                             filter.Replace("'", "''"));
                 Requests.DefaultView.RowFilter = filterExpression;
             }
         }

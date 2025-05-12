@@ -14,7 +14,6 @@ namespace Job_Application_Manager
     public partial class JobPostings : BaseControl
     {
         private DataTable? jobList;
-        public event EventHandler? requestAddJobBttnClick;
 
         private int indexRow;
         private bool IsPosted = false;
@@ -217,7 +216,8 @@ namespace Job_Application_Manager
             if (jobList != null)
             {
                 string filterExpression = string.Format("[JobTitle] LIKE '%{0}%' OR [JobType] LIKE '%{0}%' OR [Location] LIKE '%{0}%' OR " +
-                                                        "[Work Mode] LIKE '%{0}%' OR [StartingSalary] LIKE '%{0}%' OR CONVERT([Application Deadline], 'System.String') LIKE '%{0}%'", filter.Replace("'", "''"));
+                                                        "[Work Mode] LIKE '%{0}%' OR [StartingSalary] LIKE '%{0}%' OR CONVERT([Application Deadline], " +
+                                                        "'System.String') LIKE '%{0}%'", filter.Replace("'", "''"));
                 jobList.DefaultView.RowFilter = filterExpression;
                 if (jobList != null)
                 {

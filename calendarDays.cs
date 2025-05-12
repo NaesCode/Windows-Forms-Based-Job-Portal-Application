@@ -32,6 +32,7 @@ namespace Job_Application_Manager
                 date = new DateTime(CalendarView._year, CalendarView._month, dayNumber);
                 Day.Text = day;
 
+                MarkToday();
                 MarkSunday();
                 CheckIfNoted();
             }
@@ -39,6 +40,14 @@ namespace Job_Application_Manager
             {
                 Day.Text = "";
                 this.Enabled = false; // disable interaction for blank days
+            }
+        }
+
+        private void MarkToday()
+        {
+            if (date.Day == DateTime.Now.Day)
+            {
+                this.BackColor = Color.DarkGray;
             }
         }
 

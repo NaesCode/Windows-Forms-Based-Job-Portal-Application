@@ -165,6 +165,7 @@
             EmailBttn.Size = new Size(92, 40);
             EmailBttn.TabIndex = 57;
             EmailBttn.UseVisualStyleBackColor = false;
+            EmailBttn.Click += EmailBttn_Click;
             // 
             // profilePic
             // 

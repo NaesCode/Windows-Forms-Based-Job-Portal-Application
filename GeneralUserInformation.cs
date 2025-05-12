@@ -157,7 +157,8 @@ namespace Job_Application_Manager
             if (JobHunterDetails != null)
             {
                 string filterExpression = string.Format("[Full Name] LIKE '%{0}%' OR [Gender] LIKE '%{0}%' OR [Email] LIKE '%{0}%' OR " +
-                             "[Nationality] LIKE '%{0}%' OR [Education] LIKE '%{0}%' OR [Degree] LIKE '%{0}%' OR [University / Institution] LIKE '%{0}%'", filter.Replace("'", "''"));
+                             "[Nationality] LIKE '%{0}%' OR [Education] LIKE '%{0}%' OR [Degree] LIKE '%{0}%' OR [University / Institution] " +
+                             "LIKE '%{0}%'", filter.Replace("'", "''"));
                 JobHunterDetails.DefaultView.RowFilter = filterExpression;
             }
         }
