@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInForm));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInForm));
             exitButton1 = new Guna.UI2.WinForms.Guna2Button();
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
-            guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,7 +45,7 @@
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
-            UserName = new TextBox();
+            UserNameOrEmail = new TextBox();
             UserPassword = new TextBox();
             LogInButton = new SiticoneNetCoreUI.SiticoneButton();
             signUpButton = new SiticoneNetCoreUI.SiticoneButton();
@@ -71,7 +68,7 @@
             // 
             // exitButton1
             // 
-            exitButton1.CustomizableEdges = customizableEdges1;
+            exitButton1.CustomizableEdges = customizableEdges3;
             exitButton1.DisabledState.BorderColor = Color.DarkGray;
             exitButton1.DisabledState.CustomBorderColor = Color.DarkGray;
             exitButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -83,7 +80,7 @@
             exitButton1.HoverState.ForeColor = Color.White;
             exitButton1.Location = new Point(822, 0);
             exitButton1.Name = "exitButton1";
-            exitButton1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            exitButton1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             exitButton1.Size = new Size(54, 38);
             exitButton1.TabIndex = 5;
             exitButton1.Text = "X";
@@ -92,7 +89,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(406, 217);
+            pictureBox2.Location = new Point(406, 238);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(30, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -102,29 +99,12 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(406, 269);
+            pictureBox3.Location = new Point(406, 290);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(32, 32);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 11;
             pictureBox3.TabStop = false;
-            // 
-            // guna2Button4
-            // 
-            guna2Button4.CustomizableEdges = customizableEdges3;
-            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button4.Font = new Font("Segoe UI", 9F);
-            guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(389, 611);
-            guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button4.Size = new Size(65, 45);
-            guna2Button4.TabIndex = 18;
-            guna2Button4.Text = "TEST";
-            guna2Button4.Click += guna2Button4_Click;
             // 
             // guna2HtmlLabel1
             // 
@@ -198,8 +178,9 @@
             // 
             // showPassword
             // 
+            showPassword.Cursor = Cursors.Hand;
             showPassword.Image = (Image)resources.GetObject("showPassword.Image");
-            showPassword.Location = new Point(808, 273);
+            showPassword.Location = new Point(808, 294);
             showPassword.Name = "showPassword";
             showPassword.Size = new Size(25, 23);
             showPassword.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -232,7 +213,7 @@
             // 
             textBox3.BorderStyle = BorderStyle.None;
             textBox3.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox3.Location = new Point(442, 224);
+            textBox3.Location = new Point(442, 245);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(120, 20);
             textBox3.TabIndex = 23;
@@ -242,32 +223,36 @@
             // 
             textBox4.BorderStyle = BorderStyle.None;
             textBox4.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox4.Location = new Point(442, 276);
+            textBox4.Location = new Point(442, 297);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(81, 20);
             textBox4.TabIndex = 24;
             textBox4.Text = "Password:";
             // 
-            // UserName
+            // UserNameOrEmail
             // 
-            UserName.BorderStyle = BorderStyle.FixedSingle;
-            UserName.Enabled = false;
-            UserName.Font = new Font("Bahnschrift", 9.75F);
-            UserName.Location = new Point(527, 223);
-            UserName.Name = "UserName";
-            UserName.Size = new Size(275, 23);
-            UserName.TabIndex = 25;
+            UserNameOrEmail.BorderStyle = BorderStyle.FixedSingle;
+            UserNameOrEmail.Cursor = Cursors.IBeam;
+            UserNameOrEmail.Enabled = false;
+            UserNameOrEmail.Font = new Font("Bahnschrift", 9.75F);
+            UserNameOrEmail.Location = new Point(527, 244);
+            UserNameOrEmail.Name = "UserNameOrEmail";
+            UserNameOrEmail.Size = new Size(275, 23);
+            UserNameOrEmail.TabIndex = 25;
+            UserNameOrEmail.KeyDown += Control_KeyDown;
             // 
             // UserPassword
             // 
             UserPassword.BorderStyle = BorderStyle.FixedSingle;
+            UserPassword.Cursor = Cursors.IBeam;
             UserPassword.Enabled = false;
             UserPassword.Font = new Font("Bahnschrift", 9.75F);
-            UserPassword.Location = new Point(527, 273);
+            UserPassword.Location = new Point(527, 294);
             UserPassword.Name = "UserPassword";
             UserPassword.Size = new Size(275, 23);
             UserPassword.TabIndex = 26;
             UserPassword.UseSystemPasswordChar = true;
+            UserPassword.KeyDown += Control_KeyDown;
             // 
             // LogInButton
             // 
@@ -291,6 +276,7 @@
             LogInButton.CornerRadiusBottomRight = 0;
             LogInButton.CornerRadiusTopLeft = 0;
             LogInButton.CornerRadiusTopRight = 0;
+            LogInButton.Cursor = Cursors.Hand;
             LogInButton.CustomCursor = Cursors.Default;
             LogInButton.DisabledTextColor = Color.FromArgb(150, 150, 150);
             LogInButton.Enabled = false;
@@ -318,7 +304,7 @@
             LogInButton.IsReadOnly = false;
             LogInButton.IsToggleButton = false;
             LogInButton.IsToggled = false;
-            LogInButton.Location = new Point(406, 357);
+            LogInButton.Location = new Point(406, 382);
             LogInButton.LongPressDurationMS = 1000;
             LogInButton.Name = "LogInButton";
             LogInButton.NormalFontStyle = FontStyle.Regular;
@@ -345,7 +331,7 @@
             LogInButton.TooltipText = null;
             LogInButton.UseAdvancedRendering = true;
             LogInButton.UseParticles = false;
-            LogInButton.Click += LogInButton_Click_1;
+            LogInButton.Click += LogInButton_Click;
             // 
             // signUpButton
             // 
@@ -369,6 +355,7 @@
             signUpButton.CornerRadiusBottomRight = 0;
             signUpButton.CornerRadiusTopLeft = 0;
             signUpButton.CornerRadiusTopRight = 0;
+            signUpButton.Cursor = Cursors.Hand;
             signUpButton.CustomCursor = Cursors.Default;
             signUpButton.DisabledTextColor = Color.FromArgb(150, 150, 150);
             signUpButton.EnableLongPress = false;
@@ -395,7 +382,7 @@
             signUpButton.IsReadOnly = false;
             signUpButton.IsToggleButton = false;
             signUpButton.IsToggled = false;
-            signUpButton.Location = new Point(583, 411);
+            signUpButton.Location = new Point(583, 436);
             signUpButton.LongPressDurationMS = 1000;
             signUpButton.Name = "signUpButton";
             signUpButton.NormalFontStyle = FontStyle.Regular;
@@ -428,7 +415,7 @@
             // 
             textBox5.BorderStyle = BorderStyle.None;
             textBox5.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold);
-            textBox5.Location = new Point(406, 417);
+            textBox5.Location = new Point(406, 442);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(172, 20);
             textBox5.TabIndex = 29;
@@ -486,11 +473,12 @@
             // 
             // forgotPassBttn
             // 
+            forgotPassBttn.Cursor = Cursors.Hand;
             forgotPassBttn.Enabled = false;
             forgotPassBttn.FlatAppearance.BorderSize = 0;
             forgotPassBttn.FlatStyle = FlatStyle.Flat;
             forgotPassBttn.Font = new Font("Bahnschrift", 9F);
-            forgotPassBttn.Location = new Point(693, 309);
+            forgotPassBttn.Location = new Point(693, 330);
             forgotPassBttn.Name = "forgotPassBttn";
             forgotPassBttn.Size = new Size(126, 23);
             forgotPassBttn.TabIndex = 32;
@@ -505,7 +493,7 @@
             CompanyCheckbox.CanBeep = true;
             CompanyCheckbox.CanShake = true;
             CompanyCheckbox.Checked = false;
-            CompanyCheckbox.CheckedColor = Color.FromArgb(0, 120, 215);
+            CompanyCheckbox.CheckedColor = Color.FromArgb(13, 59, 141);
             CompanyCheckbox.CircleSize = 18;
             CompanyCheckbox.ContainerBackColor = Color.FromArgb(20, 0, 0, 0);
             CompanyCheckbox.ContainerBorderColor = Color.FromArgb(50, 0, 0, 0);
@@ -522,6 +510,7 @@
             CompanyCheckbox.ContainerTopLeftRadius = 8;
             CompanyCheckbox.ContainerTopRightRadius = 8;
             CompanyCheckbox.ContextMenu = null;
+            CompanyCheckbox.Cursor = Cursors.Hand;
             CompanyCheckbox.EnableRipple = false;
             CompanyCheckbox.Font = new Font("Bahnschrift SemiCondensed", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CompanyCheckbox.HoverCursor = Cursors.Hand;
@@ -549,7 +538,7 @@
             AdminCheckBox.CanBeep = true;
             AdminCheckBox.CanShake = true;
             AdminCheckBox.Checked = false;
-            AdminCheckBox.CheckedColor = Color.FromArgb(0, 120, 215);
+            AdminCheckBox.CheckedColor = Color.FromArgb(13, 59, 141);
             AdminCheckBox.CircleSize = 18;
             AdminCheckBox.ContainerBackColor = Color.FromArgb(20, 0, 0, 0);
             AdminCheckBox.ContainerBorderColor = Color.FromArgb(50, 0, 0, 0);
@@ -566,6 +555,7 @@
             AdminCheckBox.ContainerTopLeftRadius = 8;
             AdminCheckBox.ContainerTopRightRadius = 8;
             AdminCheckBox.ContextMenu = null;
+            AdminCheckBox.Cursor = Cursors.Hand;
             AdminCheckBox.EnableRipple = false;
             AdminCheckBox.Font = new Font("Bahnschrift SemiCondensed", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             AdminCheckBox.HoverCursor = Cursors.Hand;
@@ -593,7 +583,7 @@
             JobHunterCheckbox.CanBeep = true;
             JobHunterCheckbox.CanShake = true;
             JobHunterCheckbox.Checked = false;
-            JobHunterCheckbox.CheckedColor = Color.FromArgb(0, 120, 215);
+            JobHunterCheckbox.CheckedColor = Color.FromArgb(13, 59, 141);
             JobHunterCheckbox.CircleSize = 18;
             JobHunterCheckbox.ContainerBackColor = Color.FromArgb(20, 0, 0, 0);
             JobHunterCheckbox.ContainerBorderColor = Color.FromArgb(50, 0, 0, 0);
@@ -610,6 +600,7 @@
             JobHunterCheckbox.ContainerTopLeftRadius = 8;
             JobHunterCheckbox.ContainerTopRightRadius = 8;
             JobHunterCheckbox.ContextMenu = null;
+            JobHunterCheckbox.Cursor = Cursors.Hand;
             JobHunterCheckbox.EnableRipple = false;
             JobHunterCheckbox.Font = new Font("Bahnschrift SemiCondensed", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             JobHunterCheckbox.HoverCursor = Cursors.Hand;
@@ -656,13 +647,12 @@
             Controls.Add(signUpButton);
             Controls.Add(LogInButton);
             Controls.Add(UserPassword);
-            Controls.Add(UserName);
+            Controls.Add(UserNameOrEmail);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(showPassword);
-            Controls.Add(guna2Button4);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(exitButton1);
@@ -686,7 +676,6 @@
         private Guna.UI2.WinForms.Guna2Button exitButton1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
@@ -697,7 +686,7 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
-        private TextBox UserName;
+        private TextBox UserNameOrEmail;
         private TextBox UserPassword;
         private SiticoneNetCoreUI.SiticoneButton LogInButton;
         private SiticoneNetCoreUI.SiticoneButton signUpButton;

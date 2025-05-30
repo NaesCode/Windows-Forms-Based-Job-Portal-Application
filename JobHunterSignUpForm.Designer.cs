@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JobHunterSignUpForm));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
-            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -65,19 +64,24 @@
             ConfirmPass = new Guna.UI2.WinForms.Guna2TextBox();
             signUpButton = new Guna.UI2.WinForms.Guna2Button();
             CancelButton = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            InstructionBttn = new Button();
+            pictureBox7 = new PictureBox();
+            guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            pictureBox6 = new PictureBox();
+            GmailAppPass = new Guna.UI2.WinForms.Guna2TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Black;
-            panel1.Controls.Add(guna2HtmlLabel4);
             panel1.Controls.Add(guna2HtmlLabel3);
             panel1.Controls.Add(guna2HtmlLabel1);
             panel1.Controls.Add(guna2HtmlLabel2);
@@ -87,18 +91,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(371, 668);
             panel1.TabIndex = 0;
-            // 
-            // guna2HtmlLabel4
-            // 
-            guna2HtmlLabel4.AutoSize = false;
-            guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Geoform", 11.9999981F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.ForeColor = SystemColors.HighlightText;
-            guna2HtmlLabel4.Location = new Point(12, 635);
-            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(219, 21);
-            guna2HtmlLabel4.TabIndex = 11;
-            guna2HtmlLabel4.Text = "Project by: Sean Tadiamon\r\n";
             // 
             // guna2HtmlLabel3
             // 
@@ -172,7 +164,7 @@
             // 
             // UserName
             // 
-            UserName.CustomizableEdges = customizableEdges15;
+            UserName.CustomizableEdges = customizableEdges1;
             UserName.DefaultText = "";
             UserName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             UserName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -186,13 +178,13 @@
             UserName.Name = "UserName";
             UserName.PlaceholderText = "";
             UserName.SelectedText = "";
-            UserName.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            UserName.ShadowDecoration.CustomizableEdges = customizableEdges2;
             UserName.Size = new Size(303, 38);
             UserName.TabIndex = 20;
             // 
             // UserEmail
             // 
-            UserEmail.CustomizableEdges = customizableEdges17;
+            UserEmail.CustomizableEdges = customizableEdges3;
             UserEmail.DefaultText = "";
             UserEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             UserEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -206,7 +198,7 @@
             UserEmail.Name = "UserEmail";
             UserEmail.PlaceholderText = "";
             UserEmail.SelectedText = "";
-            UserEmail.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            UserEmail.ShadowDecoration.CustomizableEdges = customizableEdges4;
             UserEmail.Size = new Size(303, 38);
             UserEmail.TabIndex = 19;
             // 
@@ -256,7 +248,7 @@
             // 
             // UserPassword
             // 
-            UserPassword.CustomizableEdges = customizableEdges19;
+            UserPassword.CustomizableEdges = customizableEdges5;
             UserPassword.DefaultText = "";
             UserPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             UserPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -270,7 +262,7 @@
             UserPassword.Name = "UserPassword";
             UserPassword.PlaceholderText = "";
             UserPassword.SelectedText = "";
-            UserPassword.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            UserPassword.ShadowDecoration.CustomizableEdges = customizableEdges6;
             UserPassword.Size = new Size(303, 38);
             UserPassword.TabIndex = 21;
             // 
@@ -320,7 +312,7 @@
             // 
             // ConfirmPass
             // 
-            ConfirmPass.CustomizableEdges = customizableEdges21;
+            ConfirmPass.CustomizableEdges = customizableEdges7;
             ConfirmPass.DefaultText = "";
             ConfirmPass.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             ConfirmPass.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -334,13 +326,13 @@
             ConfirmPass.Name = "ConfirmPass";
             ConfirmPass.PlaceholderText = "";
             ConfirmPass.SelectedText = "";
-            ConfirmPass.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            ConfirmPass.ShadowDecoration.CustomizableEdges = customizableEdges8;
             ConfirmPass.Size = new Size(303, 38);
             ConfirmPass.TabIndex = 27;
             // 
             // signUpButton
             // 
-            signUpButton.CustomizableEdges = customizableEdges23;
+            signUpButton.CustomizableEdges = customizableEdges9;
             signUpButton.DisabledState.BorderColor = Color.DarkGray;
             signUpButton.DisabledState.CustomBorderColor = Color.DarkGray;
             signUpButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -350,9 +342,9 @@
             signUpButton.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             signUpButton.ForeColor = Color.White;
             signUpButton.HoverState.ForeColor = Color.FromArgb(5, 229, 148);
-            signUpButton.Location = new Point(403, 473);
+            signUpButton.Location = new Point(403, 556);
             signUpButton.Name = "signUpButton";
-            signUpButton.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            signUpButton.ShadowDecoration.CustomizableEdges = customizableEdges10;
             signUpButton.Size = new Size(90, 36);
             signUpButton.TabIndex = 28;
             signUpButton.Text = "Sign Up";
@@ -361,7 +353,7 @@
             // 
             // CancelButton
             // 
-            CancelButton.CustomizableEdges = customizableEdges25;
+            CancelButton.CustomizableEdges = customizableEdges11;
             CancelButton.DisabledState.BorderColor = Color.DarkGray;
             CancelButton.DisabledState.CustomBorderColor = Color.DarkGray;
             CancelButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -371,30 +363,80 @@
             CancelButton.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CancelButton.ForeColor = Color.White;
             CancelButton.HoverState.ForeColor = Color.FromArgb(255, 128, 128);
-            CancelButton.Location = new Point(527, 473);
+            CancelButton.Location = new Point(527, 556);
             CancelButton.Name = "CancelButton";
-            CancelButton.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            CancelButton.ShadowDecoration.CustomizableEdges = customizableEdges12;
             CancelButton.Size = new Size(90, 36);
             CancelButton.TabIndex = 29;
             CancelButton.Text = "Cancel";
             CancelButton.Click += CancelButton_Click;
             // 
-            // guna2Button4
+            // InstructionBttn
             // 
-            guna2Button4.CustomizableEdges = customizableEdges27;
-            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button4.Font = new Font("Segoe UI", 9F);
-            guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(403, 598);
-            guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            guna2Button4.Size = new Size(65, 45);
-            guna2Button4.TabIndex = 30;
-            guna2Button4.Text = "TEST";
-            guna2Button4.Click += guna2Button4_Click;
+            InstructionBttn.Cursor = Cursors.Hand;
+            InstructionBttn.FlatAppearance.BorderSize = 0;
+            InstructionBttn.FlatStyle = FlatStyle.Flat;
+            InstructionBttn.Font = new Font("Bahnschrift", 9F);
+            InstructionBttn.Location = new Point(394, 492);
+            InstructionBttn.Name = "InstructionBttn";
+            InstructionBttn.Size = new Size(129, 23);
+            InstructionBttn.TabIndex = 43;
+            InstructionBttn.Text = "Confused? Click here.";
+            InstructionBttn.UseVisualStyleBackColor = true;
+            InstructionBttn.Click += InstructionBttn_Click;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new Point(419, 464);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(17, 17);
+            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox7.TabIndex = 42;
+            pictureBox7.TabStop = false;
+            // 
+            // guna2HtmlLabel11
+            // 
+            guna2HtmlLabel11.AutoSize = false;
+            guna2HtmlLabel11.BackColor = Color.Transparent;
+            guna2HtmlLabel11.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel11.ForeColor = SystemColors.Desktop;
+            guna2HtmlLabel11.Location = new Point(441, 456);
+            guna2HtmlLabel11.Name = "guna2HtmlLabel11";
+            guna2HtmlLabel11.Size = new Size(401, 23);
+            guna2HtmlLabel11.TabIndex = 41;
+            guna2HtmlLabel11.Text = "Gmail App Password: (Required for email operations.)";
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(403, 449);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(30, 30);
+            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox6.TabIndex = 40;
+            pictureBox6.TabStop = false;
+            // 
+            // GmailAppPass
+            // 
+            GmailAppPass.CustomizableEdges = customizableEdges13;
+            GmailAppPass.DefaultText = "";
+            GmailAppPass.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            GmailAppPass.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            GmailAppPass.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            GmailAppPass.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            GmailAppPass.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            GmailAppPass.Font = new Font("Bahnschrift", 11.25F);
+            GmailAppPass.HoverState.BorderColor = SystemColors.Desktop;
+            GmailAppPass.Location = new Point(527, 486);
+            GmailAppPass.Margin = new Padding(3, 4, 3, 4);
+            GmailAppPass.Name = "GmailAppPass";
+            GmailAppPass.PlaceholderText = "";
+            GmailAppPass.SelectedText = "";
+            GmailAppPass.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            GmailAppPass.Size = new Size(303, 38);
+            GmailAppPass.TabIndex = 39;
+            GmailAppPass.UseSystemPasswordChar = true;
             // 
             // JobHunterSignUpForm
             // 
@@ -402,7 +444,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(875, 668);
-            Controls.Add(guna2Button4);
+            Controls.Add(InstructionBttn);
+            Controls.Add(pictureBox7);
+            Controls.Add(guna2HtmlLabel11);
+            Controls.Add(pictureBox6);
+            Controls.Add(GmailAppPass);
             Controls.Add(CancelButton);
             Controls.Add(signUpButton);
             Controls.Add(ConfirmPass);
@@ -430,13 +476,14 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
@@ -457,6 +504,10 @@
         private Guna.UI2.WinForms.Guna2TextBox ConfirmPass;
         private Guna.UI2.WinForms.Guna2Button signUpButton;
         private Guna.UI2.WinForms.Guna2Button CancelButton;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
+        private Button InstructionBttn;
+        private PictureBox pictureBox7;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel11;
+        private PictureBox pictureBox6;
+        private Guna.UI2.WinForms.Guna2TextBox GmailAppPass;
     }
 }

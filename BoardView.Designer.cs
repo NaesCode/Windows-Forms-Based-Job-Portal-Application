@@ -28,360 +28,538 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            guna2DataGridView3 = new Guna.UI2.WinForms.Guna2DataGridView();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2DataGridView2 = new Guna.UI2.WinForms.Guna2DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
-            Company = new DataGridViewTextBoxColumn();
-            guna2CustomGradientPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView3).BeginInit();
-            guna2CustomGradientPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView2).BeginInit();
-            guna2CustomGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
+            panel1 = new Panel();
+            menuBarPanel3 = new Panel();
+            panel3 = new Panel();
+            profilePicture = new ReaLTaiizor.Controls.ParrotPictureBox();
+            panel4 = new Panel();
+            label7 = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            panel6 = new Panel();
+            OnGoingApplications = new ReaLTaiizor.Controls.PoisonDataGridView();
+            textBox3 = new TextBox();
+            panel2 = new Panel();
+            RejectedApplications = new ReaLTaiizor.Controls.PoisonDataGridView();
+            textBox1 = new TextBox();
+            panel5 = new Panel();
+            AcceptedApplications = new ReaLTaiizor.Controls.PoisonDataGridView();
+            textBox2 = new TextBox();
+            panel7 = new Panel();
+            pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+            textBox4 = new TextBox();
+            panel8 = new Panel();
+            percentage = new TextBox();
+            PureSuccessRating = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+            textBox5 = new TextBox();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            panel1.SuspendLayout();
+            menuBarPanel3.SuspendLayout();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)OnGoingApplications).BeginInit();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)RejectedApplications).BeginInit();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AcceptedApplications).BeginInit();
+            panel7.SuspendLayout();
+            panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // guna2CustomGradientPanel3
+            // panel1
             // 
-            guna2CustomGradientPanel3.Anchor = AnchorStyles.None;
-            guna2CustomGradientPanel3.BorderColor = Color.Black;
-            guna2CustomGradientPanel3.BorderRadius = 10;
-            guna2CustomGradientPanel3.BorderThickness = 2;
-            guna2CustomGradientPanel3.Controls.Add(guna2Button3);
-            guna2CustomGradientPanel3.Controls.Add(guna2DataGridView3);
-            guna2CustomGradientPanel3.CustomizableEdges = customizableEdges3;
-            guna2CustomGradientPanel3.FillColor3 = Color.Black;
-            guna2CustomGradientPanel3.Location = new Point(585, 47);
-            guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
-            guna2CustomGradientPanel3.Padding = new Padding(5, 8, 5, 5);
-            guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2CustomGradientPanel3.Size = new Size(238, 367);
-            guna2CustomGradientPanel3.TabIndex = 10;
+            panel1.Controls.Add(menuBarPanel3);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 2, 0, 2);
+            panel1.Size = new Size(893, 55);
+            panel1.TabIndex = 109;
             // 
-            // guna2Button3
+            // menuBarPanel3
             // 
-            guna2Button3.BackColor = Color.Transparent;
-            guna2Button3.BorderRadius = 10;
-            guna2Button3.BorderThickness = 2;
-            guna2Button3.CustomizableEdges = customizableEdges1;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.FromArgb(13, 59, 141);
-            guna2Button3.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(0, 0);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button3.Size = new Size(238, 48);
-            guna2Button3.TabIndex = 1;
-            guna2Button3.Text = "Applied";
+            menuBarPanel3.BackColor = SystemColors.Desktop;
+            menuBarPanel3.Controls.Add(panel3);
+            menuBarPanel3.Controls.Add(panel4);
+            menuBarPanel3.Dock = DockStyle.Fill;
+            menuBarPanel3.Location = new Point(0, 2);
+            menuBarPanel3.Name = "menuBarPanel3";
+            menuBarPanel3.Size = new Size(893, 51);
+            menuBarPanel3.TabIndex = 2;
             // 
-            // guna2DataGridView3
+            // panel3
             // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            guna2DataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(profilePicture);
+            panel3.Dock = DockStyle.Right;
+            panel3.Location = new Point(727, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(166, 51);
+            panel3.TabIndex = 1;
+            // 
+            // profilePicture
+            // 
+            profilePicture.BackColor = Color.Transparent;
+            profilePicture.BackgroundImageLayout = ImageLayout.Zoom;
+            profilePicture.ColorLeft = Color.Transparent;
+            profilePicture.ColorRight = Color.Transparent;
+            profilePicture.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            profilePicture.FilterAlpha = 0;
+            profilePicture.FilterEnabled = false;
+            profilePicture.Image = Properties.Resources._482748566_677122558084783_2784408297271869644_n;
+            profilePicture.ImeMode = ImeMode.NoControl;
+            profilePicture.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            profilePicture.IsElipse = true;
+            profilePicture.IsParallax = false;
+            profilePicture.Location = new Point(100, 5);
+            profilePicture.Name = "profilePicture";
+            profilePicture.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            profilePicture.Size = new Size(40, 40);
+            profilePicture.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            profilePicture.TabIndex = 6;
+            profilePicture.Text = "parrotPictureBox1";
+            profilePicture.TextRenderingType = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.Transparent;
+            panel4.Controls.Add(iconPictureBox1);
+            panel4.Controls.Add(label7);
+            panel4.Dock = DockStyle.Left;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(555, 51);
+            panel4.TabIndex = 2;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Geoform", 15.75F, FontStyle.Bold | FontStyle.Italic);
+            label7.ForeColor = SystemColors.ButtonHighlight;
+            label7.Location = new Point(67, 13);
+            label7.Name = "label7";
+            label7.Size = new Size(142, 25);
+            label7.TabIndex = 1;
+            label7.Text = "ANALYTICS";
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.BackColor = SystemColors.GradientInactiveCaption;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Controls.Add(panel6, 2, 0);
+            tableLayoutPanel1.Controls.Add(panel2, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel5, 1, 0);
+            tableLayoutPanel1.Controls.Add(panel7, 0, 1);
+            tableLayoutPanel1.Controls.Add(panel8, 2, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 55);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(893, 549);
+            tableLayoutPanel1.TabIndex = 110;
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(OnGoingApplications);
+            panel6.Controls.Add(textBox3);
+            panel6.Dock = DockStyle.Fill;
+            panel6.Location = new Point(597, 3);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(293, 268);
+            panel6.TabIndex = 6;
+            // 
+            // OnGoingApplications
+            // 
+            OnGoingApplications.AllowUserToAddRows = false;
+            OnGoingApplications.AllowUserToResizeRows = false;
+            OnGoingApplications.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            OnGoingApplications.BackgroundColor = SystemColors.ButtonHighlight;
+            OnGoingApplications.BorderStyle = BorderStyle.None;
+            OnGoingApplications.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            OnGoingApplications.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            OnGoingApplications.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            OnGoingApplications.ColumnHeadersHeight = 35;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            guna2DataGridView3.ColumnHeadersHeight = 40;
-            guna2DataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView3.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2 });
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle2.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            OnGoingApplications.DefaultCellStyle = dataGridViewCellStyle2;
+            OnGoingApplications.Dock = DockStyle.Fill;
+            OnGoingApplications.EnableHeadersVisualStyles = false;
+            OnGoingApplications.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            OnGoingApplications.GridColor = Color.FromArgb(255, 255, 255);
+            OnGoingApplications.Location = new Point(0, 30);
+            OnGoingApplications.Name = "OnGoingApplications";
+            OnGoingApplications.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView3.DefaultCellStyle = dataGridViewCellStyle3;
-            guna2DataGridView3.Dock = DockStyle.Fill;
-            guna2DataGridView3.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView3.Location = new Point(5, 8);
-            guna2DataGridView3.Name = "guna2DataGridView3";
-            guna2DataGridView3.RowHeadersVisible = false;
-            guna2DataGridView3.Size = new Size(228, 354);
-            guna2DataGridView3.TabIndex = 2;
-            guna2DataGridView3.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView3.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView3.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView3.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView3.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView3.ThemeStyle.BackColor = Color.White;
-            guna2DataGridView3.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView3.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView3.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView3.ThemeStyle.HeaderStyle.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2DataGridView3.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView3.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView3.ThemeStyle.HeaderStyle.Height = 40;
-            guna2DataGridView3.ThemeStyle.ReadOnly = false;
-            guna2DataGridView3.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView3.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView3.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView3.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            guna2DataGridView3.ThemeStyle.RowsStyle.Height = 25;
-            guna2DataGridView3.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView3.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(0, 174, 219);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(0, 198, 247);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            OnGoingApplications.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            OnGoingApplications.RowHeadersVisible = false;
+            OnGoingApplications.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            OnGoingApplications.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            OnGoingApplications.Size = new Size(293, 238);
+            OnGoingApplications.TabIndex = 19;
             // 
-            // dataGridViewTextBoxColumn2
+            // textBox3
             // 
-            dataGridViewTextBoxColumn2.HeaderText = "Company";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            textBox3.BackColor = Color.FromArgb(13, 59, 141);
+            textBox3.BorderStyle = BorderStyle.None;
+            textBox3.Dock = DockStyle.Top;
+            textBox3.Font = new Font("Bahnschrift SemiCondensed", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox3.ForeColor = SystemColors.ButtonHighlight;
+            textBox3.Location = new Point(0, 0);
+            textBox3.Multiline = true;
+            textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(293, 30);
+            textBox3.TabIndex = 18;
+            textBox3.Text = "On-Going";
+            textBox3.TextAlign = HorizontalAlignment.Center;
             // 
-            // guna2CustomGradientPanel2
+            // panel2
             // 
-            guna2CustomGradientPanel2.Anchor = AnchorStyles.None;
-            guna2CustomGradientPanel2.BorderColor = Color.Black;
-            guna2CustomGradientPanel2.BorderRadius = 10;
-            guna2CustomGradientPanel2.BorderThickness = 2;
-            guna2CustomGradientPanel2.Controls.Add(guna2Button2);
-            guna2CustomGradientPanel2.Controls.Add(guna2DataGridView2);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges7;
-            guna2CustomGradientPanel2.FillColor3 = Color.Black;
-            guna2CustomGradientPanel2.Location = new Point(325, 47);
-            guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
-            guna2CustomGradientPanel2.Padding = new Padding(5, 8, 5, 5);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2CustomGradientPanel2.Size = new Size(238, 367);
-            guna2CustomGradientPanel2.TabIndex = 9;
+            panel2.Controls.Add(RejectedApplications);
+            panel2.Controls.Add(textBox1);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(291, 268);
+            panel2.TabIndex = 5;
             // 
-            // guna2Button2
+            // RejectedApplications
             // 
-            guna2Button2.BackColor = Color.Transparent;
-            guna2Button2.BorderRadius = 10;
-            guna2Button2.BorderThickness = 2;
-            guna2Button2.CustomizableEdges = customizableEdges5;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(5, 229, 148);
-            guna2Button2.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(0, 0);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button2.Size = new Size(238, 48);
-            guna2Button2.TabIndex = 1;
-            guna2Button2.Text = "Accepted";
-            // 
-            // guna2DataGridView2
-            // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            guna2DataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            RejectedApplications.AllowUserToAddRows = false;
+            RejectedApplications.AllowUserToResizeRows = false;
+            RejectedApplications.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            RejectedApplications.BackgroundColor = SystemColors.ButtonHighlight;
+            RejectedApplications.BorderStyle = BorderStyle.None;
+            RejectedApplications.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            RejectedApplications.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            RejectedApplications.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            RejectedApplications.ColumnHeadersHeight = 35;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = Color.Black;
-            dataGridViewCellStyle5.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            guna2DataGridView2.ColumnHeadersHeight = 40;
-            guna2DataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1 });
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle5.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.White;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            RejectedApplications.DefaultCellStyle = dataGridViewCellStyle5;
+            RejectedApplications.Dock = DockStyle.Fill;
+            RejectedApplications.EnableHeadersVisualStyles = false;
+            RejectedApplications.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            RejectedApplications.GridColor = Color.FromArgb(255, 255, 255);
+            RejectedApplications.Location = new Point(0, 30);
+            RejectedApplications.Name = "RejectedApplications";
+            RejectedApplications.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView2.DefaultCellStyle = dataGridViewCellStyle6;
-            guna2DataGridView2.Dock = DockStyle.Fill;
-            guna2DataGridView2.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView2.Location = new Point(5, 8);
-            guna2DataGridView2.Name = "guna2DataGridView2";
-            guna2DataGridView2.RowHeadersVisible = false;
-            guna2DataGridView2.Size = new Size(228, 354);
-            guna2DataGridView2.TabIndex = 2;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView2.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView2.ThemeStyle.BackColor = Color.White;
-            guna2DataGridView2.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView2.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView2.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView2.ThemeStyle.HeaderStyle.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2DataGridView2.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView2.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView2.ThemeStyle.HeaderStyle.Height = 40;
-            guna2DataGridView2.ThemeStyle.ReadOnly = false;
-            guna2DataGridView2.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView2.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView2.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView2.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            guna2DataGridView2.ThemeStyle.RowsStyle.Height = 25;
-            guna2DataGridView2.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView2.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(0, 174, 219);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(0, 198, 247);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            RejectedApplications.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            RejectedApplications.RowHeadersVisible = false;
+            RejectedApplications.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            RejectedApplications.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            RejectedApplications.Size = new Size(291, 238);
+            RejectedApplications.TabIndex = 15;
             // 
-            // dataGridViewTextBoxColumn1
+            // textBox1
             // 
-            dataGridViewTextBoxColumn1.HeaderText = "Company";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            textBox1.BackColor = Color.Firebrick;
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Dock = DockStyle.Top;
+            textBox1.Font = new Font("Bahnschrift SemiCondensed", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.ForeColor = SystemColors.ButtonHighlight;
+            textBox1.Location = new Point(0, 0);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(291, 30);
+            textBox1.TabIndex = 16;
+            textBox1.Text = "Rejected";
+            textBox1.TextAlign = HorizontalAlignment.Center;
             // 
-            // guna2CustomGradientPanel1
+            // panel5
             // 
-            guna2CustomGradientPanel1.Anchor = AnchorStyles.None;
-            guna2CustomGradientPanel1.BorderColor = Color.Black;
-            guna2CustomGradientPanel1.BorderRadius = 10;
-            guna2CustomGradientPanel1.BorderThickness = 2;
-            guna2CustomGradientPanel1.Controls.Add(guna2Button1);
-            guna2CustomGradientPanel1.Controls.Add(guna2DataGridView1);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges11;
-            guna2CustomGradientPanel1.FillColor3 = Color.Black;
-            guna2CustomGradientPanel1.Location = new Point(65, 47);
-            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.Padding = new Padding(5, 8, 5, 5);
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2CustomGradientPanel1.Size = new Size(238, 367);
-            guna2CustomGradientPanel1.TabIndex = 8;
+            panel5.Controls.Add(AcceptedApplications);
+            panel5.Controls.Add(textBox2);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(300, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(291, 268);
+            panel5.TabIndex = 4;
             // 
-            // guna2Button1
+            // AcceptedApplications
             // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderRadius = 10;
-            guna2Button1.BorderThickness = 2;
-            guna2Button1.CustomizableEdges = customizableEdges9;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.IndianRed;
-            guna2Button1.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(0, 0);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button1.Size = new Size(238, 48);
-            guna2Button1.TabIndex = 1;
-            guna2Button1.Text = "Rejected";
-            // 
-            // guna2DataGridView1
-            // 
-            dataGridViewCellStyle7.BackColor = Color.White;
-            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            AcceptedApplications.AllowUserToAddRows = false;
+            AcceptedApplications.AllowUserToResizeRows = false;
+            AcceptedApplications.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AcceptedApplications.BackgroundColor = SystemColors.ButtonHighlight;
+            AcceptedApplications.BorderStyle = BorderStyle.None;
+            AcceptedApplications.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            AcceptedApplications.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle7.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle7.ForeColor = Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            AcceptedApplications.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            AcceptedApplications.ColumnHeadersHeight = 35;
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = Color.Black;
-            dataGridViewCellStyle8.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            guna2DataGridView1.ColumnHeadersHeight = 40;
-            guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { Company });
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle8.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlDarkDark;
+            dataGridViewCellStyle8.SelectionBackColor = Color.LightSlateGray;
+            dataGridViewCellStyle8.SelectionForeColor = Color.White;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            AcceptedApplications.DefaultCellStyle = dataGridViewCellStyle8;
+            AcceptedApplications.Dock = DockStyle.Fill;
+            AcceptedApplications.EnableHeadersVisualStyles = false;
+            AcceptedApplications.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            AcceptedApplications.GridColor = Color.FromArgb(255, 255, 255);
+            AcceptedApplications.Location = new Point(0, 30);
+            AcceptedApplications.Name = "AcceptedApplications";
+            AcceptedApplications.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.White;
-            dataGridViewCellStyle9.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle9;
-            guna2DataGridView1.Dock = DockStyle.Fill;
-            guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.Location = new Point(5, 8);
-            guna2DataGridView1.Name = "guna2DataGridView1";
-            guna2DataGridView1.RowHeadersVisible = false;
-            guna2DataGridView1.Size = new Size(228, 354);
-            guna2DataGridView1.TabIndex = 2;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Font = new Font("Bahnschrift", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Height = 40;
-            guna2DataGridView1.ThemeStyle.ReadOnly = false;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView1.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            guna2DataGridView1.ThemeStyle.RowsStyle.Height = 25;
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(0, 174, 219);
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Pixel);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(0, 198, 247);
+            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(17, 17, 17);
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            AcceptedApplications.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            AcceptedApplications.RowHeadersVisible = false;
+            AcceptedApplications.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            AcceptedApplications.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            AcceptedApplications.Size = new Size(291, 238);
+            AcceptedApplications.TabIndex = 18;
             // 
-            // Company
+            // textBox2
             // 
-            Company.HeaderText = "Company";
-            Company.Name = "Company";
+            textBox2.BackColor = Color.FromArgb(5, 229, 148);
+            textBox2.BorderStyle = BorderStyle.None;
+            textBox2.Dock = DockStyle.Top;
+            textBox2.Font = new Font("Bahnschrift SemiCondensed", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox2.ForeColor = SystemColors.ButtonHighlight;
+            textBox2.Location = new Point(0, 0);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(291, 30);
+            textBox2.TabIndex = 17;
+            textBox2.Text = "Accepted";
+            textBox2.TextAlign = HorizontalAlignment.Center;
+            // 
+            // panel7
+            // 
+            panel7.BackColor = SystemColors.ButtonHighlight;
+            tableLayoutPanel1.SetColumnSpan(panel7, 2);
+            panel7.Controls.Add(pieChart1);
+            panel7.Controls.Add(textBox4);
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(3, 277);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(588, 269);
+            panel7.TabIndex = 7;
+            // 
+            // pieChart1
+            // 
+            pieChart1.BackColor = SystemColors.ButtonHighlight;
+            pieChart1.Dock = DockStyle.Fill;
+            pieChart1.InitialRotation = 0D;
+            pieChart1.IsClockwise = true;
+            pieChart1.Location = new Point(0, 30);
+            pieChart1.MaxAngle = 360D;
+            pieChart1.MaxValue = double.NaN;
+            pieChart1.MinValue = 0D;
+            pieChart1.Name = "pieChart1";
+            pieChart1.Size = new Size(588, 239);
+            pieChart1.TabIndex = 0;
+            // 
+            // textBox4
+            // 
+            textBox4.BackColor = SystemColors.ButtonHighlight;
+            textBox4.BorderStyle = BorderStyle.None;
+            textBox4.Dock = DockStyle.Top;
+            textBox4.Font = new Font("Bahnschrift SemiCondensed", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox4.ForeColor = SystemColors.Desktop;
+            textBox4.Location = new Point(0, 0);
+            textBox4.Multiline = true;
+            textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
+            textBox4.Size = new Size(588, 30);
+            textBox4.TabIndex = 18;
+            textBox4.Text = "Job Applications Data Visuals:";
+            // 
+            // panel8
+            // 
+            panel8.BackColor = SystemColors.ButtonHighlight;
+            panel8.Controls.Add(percentage);
+            panel8.Controls.Add(PureSuccessRating);
+            panel8.Controls.Add(textBox5);
+            panel8.Dock = DockStyle.Fill;
+            panel8.Location = new Point(597, 277);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(293, 269);
+            panel8.TabIndex = 8;
+            // 
+            // percentage
+            // 
+            percentage.Anchor = AnchorStyles.None;
+            percentage.BackColor = SystemColors.ButtonHighlight;
+            percentage.BorderStyle = BorderStyle.None;
+            percentage.Font = new Font("Bahnschrift SemiCondensed", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            percentage.ForeColor = Color.FromArgb(5, 229, 148);
+            percentage.Location = new Point(121, 133);
+            percentage.Multiline = true;
+            percentage.Name = "percentage";
+            percentage.ReadOnly = true;
+            percentage.Size = new Size(71, 30);
+            percentage.TabIndex = 20;
+            percentage.Text = "00";
+            // 
+            // PureSuccessRating
+            // 
+            PureSuccessRating.Dock = DockStyle.Fill;
+            PureSuccessRating.InitialRotation = 0D;
+            PureSuccessRating.IsClockwise = true;
+            PureSuccessRating.Location = new Point(0, 30);
+            PureSuccessRating.MaxAngle = 360D;
+            PureSuccessRating.MaxValue = double.NaN;
+            PureSuccessRating.MinValue = 0D;
+            PureSuccessRating.Name = "PureSuccessRating";
+            PureSuccessRating.Size = new Size(293, 239);
+            PureSuccessRating.TabIndex = 0;
+            // 
+            // textBox5
+            // 
+            textBox5.BackColor = SystemColors.ButtonHighlight;
+            textBox5.BorderStyle = BorderStyle.None;
+            textBox5.Dock = DockStyle.Top;
+            textBox5.Font = new Font("Bahnschrift SemiCondensed", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox5.ForeColor = SystemColors.Desktop;
+            textBox5.Location = new Point(0, 0);
+            textBox5.Multiline = true;
+            textBox5.Name = "textBox5";
+            textBox5.ReadOnly = true;
+            textBox5.Size = new Size(293, 30);
+            textBox5.TabIndex = 19;
+            textBox5.Text = "Acceptance Rating:";
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.Transparent;
+            iconPictureBox1.ForeColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.ChartSimple;
+            iconPictureBox1.IconColor = SystemColors.ButtonHighlight;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 40;
+            iconPictureBox1.Location = new Point(17, 7);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(40, 40);
+            iconPictureBox1.TabIndex = 2;
+            iconPictureBox1.TabStop = false;
             // 
             // BoardView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(guna2CustomGradientPanel3);
-            Controls.Add(guna2CustomGradientPanel2);
-            Controls.Add(guna2CustomGradientPanel1);
+            BackColor = SystemColors.ButtonHighlight;
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(panel1);
             Name = "BoardView";
             Size = new Size(893, 604);
-            guna2CustomGradientPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView3).EndInit();
-            guna2CustomGradientPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView2).EndInit();
-            guna2CustomGradientPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).EndInit();
+            panel1.ResumeLayout(false);
+            menuBarPanel3.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)OnGoingApplications).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)RejectedApplications).EndInit();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AcceptedApplications).EndInit();
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
-        private DataGridViewTextBoxColumn Company;
+        private Panel panel1;
+        private Panel menuBarPanel3;
+        private Panel panel3;
+        private Panel panel4;
+        private Label label7;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Panel panel6;
+        private Panel panel2;
+        private Panel panel5;
+        private ReaLTaiizor.Controls.PoisonDataGridView RejectedApplications;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private ReaLTaiizor.Controls.PoisonDataGridView OnGoingApplications;
+        private ReaLTaiizor.Controls.PoisonDataGridView AcceptedApplications;
+        private Panel panel7;
+        private LiveChartsCore.SkiaSharpView.WinForms.PieChart pieChart1;
+        private Panel panel8;
+        private LiveChartsCore.SkiaSharpView.WinForms.PieChart PureSuccessRating;
+        private TextBox textBox4;
+        private TextBox textBox5;
+        private TextBox percentage;
+        private ReaLTaiizor.Controls.ParrotPictureBox profilePicture;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

@@ -14,17 +14,11 @@ namespace Job_Application_Manager
 {
     public partial class AccountTypeReg : Form
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
-        JobHunterSignUpForm? JobHunterTypeAccountRegister;
-        CompanySignUp? CompanyTypeAccountRegister;
+        private JobHunterSignUpForm? JobHunterTypeAccountRegister;
+        private CompanySignUp? CompanyTypeAccountRegister;
         public AccountTypeReg()
         {
             InitializeComponent();
-        }
-
-        private void guna2Button4_Click(object sender, EventArgs e)
-        {
-            dbSupport.checkConnection();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

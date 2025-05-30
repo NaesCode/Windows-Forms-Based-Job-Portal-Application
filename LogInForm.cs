@@ -6,13 +6,19 @@ namespace Job_Application_Manager
 {
     public partial class LogInForm : Form
     {
-        DatabaseSupport dbSupport = new DatabaseSupport();
+        private DatabaseSupport dbSupport = new DatabaseSupport();
 
         private AccountTypeReg? accountTypeFormInstance;
-        private mainApp? mainAppFormInstance;
-        private CompanyDashB? companyDashB;
-        private codeVerify? codeVerifyInstance;
+        private JobHunterDashB? jobHunterDashBForm;
+        private CompanyDashB? companyDashBForm;
+        private AdminDashB? adminDashBForm;
+        private codeVerifyHunter? codeVerifyInstance;
+        private codeVerifyCompany? codeVerifyCompanyInstance;
+
         private bool valid;
+        private int companyID;
+        private int hunterID;
+
         public LogInForm()
         {
             InitializeComponent();
@@ -28,10 +34,19 @@ namespace Job_Application_Manager
             Checkbox_CheckedChanged(sender, e);
         }
 
-        private void Checkbox_CheckedChanged(object sender, EventArgs e)
+        private void Control_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                LogInButton_Click(sender, e);
+            }
+        }
+
+        private void Checkbox_CheckedChanged(object? sender, EventArgs e)
         {
             bool anyChecked = CompanyCheckbox.Checked || JobHunterCheckbox.Checked || AdminCheckBox.Checked;
-            UserName.Enabled = anyChecked;
+            UserNameOrEmail.Enabled = anyChecked;
             UserPassword.Enabled = anyChecked;
             forgotPassBttn.Enabled = anyChecked;
             LogInButton.Enabled = anyChecked;
@@ -40,19 +55,15 @@ namespace Job_Application_Manager
             {
                 textBox3.Text = "Company Email:";
                 textBox3.Size = new Size(120, 20);
-                UserName.Size = new Size(251, 23);
-                UserName.Location = new Point(568, 223);
+                UserNameOrEmail.Size = new Size(251, 23);
+                UserNameOrEmail.Location = new Point(568, 244);
             }
             else
             {
                 textBox3.Text = "Username:";
-                UserName.Location = new Point(527, 223);
+                UserNameOrEmail.Size = new Size(275, 23);
+                UserNameOrEmail.Location = new Point(527, 244);
             }
-        }
-
-        private void guna2Button4_Click(object sender, EventArgs e) //can be removed
-        {
-            dbSupport.checkConnection();
         }
 
         private void signUpButton_Click(object sender, EventArgs e)
@@ -68,68 +79,92 @@ namespace Job_Application_Manager
             }
         }
 
-        private void LogInButton_Click_1(object sender, EventArgs e)
+        private void LogInButton_Click(object sender, EventArgs e)
         {
-            string username = UserName.Text;
+            string username = UserNameOrEmail.Text;
             string password = UserPassword.Text;
-            string Cemail = UserName.Text;
+            string companyEmail = UserNameOrEmail.Text;
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Please input your username and password before logging in.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill in all required fields correctly.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 if (JobHunterCheckbox.Checked == true)
                 {
                     valid = dbSupport.AuthenticateHunter(username, password);
+                    hunterID = dbSupport.getHunterID(username);
                     if (valid)
                     {
-                        if (mainAppFormInstance == null || mainAppFormInstance.IsDisposed)
+                        if (jobHunterDashBForm == null || jobHunterDashBForm.IsDisposed)
                         {
-                            mainAppFormInstance = new mainApp();
-                            mainAppFormInstance.Show();
                             this.Hide();
+                            jobHunterDashBForm = new JobHunterDashB(hunterID);
+                            jobHunterDashBForm.Show();
+                            jobHunterDashBForm.BringToFront();
                         }
                         else
                         {
-                            mainAppFormInstance.BringToFront();
+                            jobHunterDashBForm.BringToFront();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Log -in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Login Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
                 else if (CompanyCheckbox.Checked == true)
                 {
-                    valid = dbSupport.AuthenticateCompany(Cemail, password);
+                    valid = dbSupport.AuthenticateCompany(companyEmail, password);
+                    companyID = dbSupport.getCompanyID(companyEmail);
                     if (valid)
-                    {
-                        //MessageBox.Show("You are logged in!", "Welcome to Job-Hunt!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        if (companyDashB == null || companyDashB.IsDisposed)
+                    { 
+                        if (companyDashBForm == null || companyDashBForm.IsDisposed)
                         {
-                            companyDashB = new CompanyDashB();
-                            companyDashB.Show();
                             this.Hide();
+                            companyDashBForm = new CompanyDashB(companyID);
+                            companyDashBForm.Show();
+                            companyDashBForm.BringToFront();
                         }
                         else
                         {
-                            companyDashB.BringToFront();
+                            companyDashBForm.BringToFront();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Log-in Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Login Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                else if (AdminCheckBox.Checked == true)
+                {
+                    valid = dbSupport.AuthenticateAdmin(username, password);
+                    if (valid)
+                    {
+                        if (adminDashBForm == null || adminDashBForm.IsDisposed)
+                        {
+                            this.Hide();
+                            adminDashBForm = new AdminDashB();
+                            adminDashBForm.Show();
+                            adminDashBForm.WindowState = FormWindowState.Normal; //new
+                            adminDashBForm.Activate(); //new
+                            adminDashBForm.BringToFront();
+                            adminDashBForm.Focus(); //new
+                        }
+                        else
+                        {
+                            adminDashBForm.BringToFront();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login Unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-        }
-
-        private void exitButton1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void showPassword_MouseUp(object sender, MouseEventArgs e)
@@ -144,16 +179,43 @@ namespace Job_Application_Manager
 
         private void forgotPassBttn_Click(object sender, EventArgs e)
         {
-            if (codeVerifyInstance == null || codeVerifyInstance.IsDisposed)
+            if (JobHunterCheckbox.Checked == true)
             {
-                codeVerifyInstance = new codeVerify();
-                codeVerifyInstance.Show();
-                this.Hide();
+                if (codeVerifyInstance == null || codeVerifyInstance.IsDisposed)
+                {
+                    codeVerifyInstance = new codeVerifyHunter();
+                    codeVerifyInstance.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    codeVerifyInstance.BringToFront();
+                }
+            }
+            else if (CompanyCheckbox.Checked == true)
+            {
+                if (codeVerifyCompanyInstance == null || codeVerifyCompanyInstance.IsDisposed)
+                {
+                    codeVerifyCompanyInstance = new codeVerifyCompany();
+                    codeVerifyCompanyInstance.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    codeVerifyCompanyInstance.BringToFront();
+                }
             }
             else
             {
-                codeVerifyInstance.BringToFront();
+                MessageBox.Show("Please specify first what type of user are you.");
+                return;
             }
         }
+
+        private void exitButton1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }
